@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.aaloa.zb4osgi</groupId>
+    <artifactId>org.aaloa.zb4osgi.pom</artifactId>
+    <version>9-SNAPSHOT</version>
+    <relativePath>../pom/pom.xml</relativePath>
+  </parent>
+
+  <groupId>org.aaloa.zb4osgi</groupId>
+  <artifactId>org.aaloa.zb4osgi.zigbee.CC2530.driver</artifactId>
+  <version>0.2.0-SNAPSHOT</version>
+  <packaging>bundle</packaging>  
+
+  <name>ZIC CC2530 dongle</name>
+  <url>http://zb4osgi.aaloa.org/</url>
+  <description><![CDATA[
+  Implementation of the ZigBee Controller Interface API for a CC2530 based usb devices.
+ The firmware is based on the Z-Stack 2.x and the serial port communication protocol has been 
+  adapted to be complaint with the "CC2530 Serial Interface"
+  ]]></description>
+
+  <inceptionYear>2011</inceptionYear>
+  <organization>
+    <name><![CDATA[
+    ISTI-CNR, Institute of Information Science and Technologies of the Italian National Research Council and Instituto Tecnologico de Aplicaciones de Comunicacion Avanzadas - Grupo Tecnologias para la Salud y el Bienestar (TSB)
+    ]]></name>
+    <url><![CDATA[
+    http://isti.cnr.it   http://www.itaca.upv.es/
+    ]]></url>
+  </organization>
+  
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  
+  <developers>
+    <developer>
+      <id>stefano.lenzi</id>
+      <name>Stefano "Kismet" Lenzi</name>
+      <email>stefano.lenzi@isti.cnr.it</email>
+      <organization>Institute of Information Science and Technologies of the Italian National Research Council</organization>
+      <organizationUrl>http://www.isti.cnr.it/</organizationUrl>
+      <timezone>+1</timezone>
+    </developer>
+    <developer>
+      <id>michele.girolami</id>
+      <name>Michele Girolami</name>
+      <email>michele.girolami@isti.cnr.it</email>
+      <organization>Institute of Information Science and Technologies of the Italian National Research Council</organization>
+      <organizationUrl>http://www.isti.cnr.it/</organizationUrl>
+      <timezone>+1</timezone>
+    </developer>
+    <developer>
+      <id>alfiva</id>
+      <name>Álvaro Fides Valero</name>
+      <email>alfiva@aaa.upv.es</email>
+      <organization>Instituto Tecnologico de Aplicaciones de Comunicacion Avanzadas - Grupo Tecnologias para la Salud y el Bienestar (TSB)</organization>
+      <organizationUrl>http://www.itaca.upv.es//</organizationUrl>
+      <timezone>+1</timezone>
+    </developer>
+    <developer>
+      <id>manlio.bacco</id>
+      <name>Manlio Bacco</name>
+      <email>manlio.bacco@isti.cnr.it</email>
+      <organization>Instituto Tecnologico de Aplicaciones de Comunicacion Avanzadas - Grupo Tecnologias para la Salud y el Bienestar (TSB)</organization>
+      <organizationUrl>http://www.isti.cnr.it/</organizationUrl>
+      <timezone>+1</timezone>
+    </developer>
+  </developers>
+  
+  <repositories>
+    <repository>
+      <id>nexus.aaloa.org</id>
+      <url>http://nexus.aaloa.org/content/repositories/releases/</url>
+      <snapshots><enabled>false</enabled></snapshots>
+    </repository>
+  </repositories>
+
+  <scm>
+    <connection>scm:svn:https://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.CC2530.driver</connection>
+    <developerConnection>scm:svn:https://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.CC2530.driver</developerConnection>
+    <url>http://zb4osgi.aaloa.org/redmine/projects/zb4osgi/repository/show/trunk/zigbee.CC2530.driver</url>
+  </scm>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.osgi.core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.osgi.compendium</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.ops4j.pax.logging</groupId>
+      <artifactId>pax-logging-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.ops4j.pax.logging</groupId>
+      <artifactId>pax-logging-service</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.aaloa.zb4osgi</groupId>
+      <artifactId>org.aaloa.zb4osgi.zigbee.dongle.api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.aaloa.zb4osgi</groupId>
+      <artifactId>org.aaloa.zb4osgi.zigbee.common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.aaloa.zb4osgi</groupId>
+      <artifactId>org.aaloa.zb4osgi.zigbee.cc2480.datalink</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.aaloa.zb4osgi.bundle</groupId>
+      <artifactId>org.aaloa.zb4osgi.bundle.rxtx</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <bottom><![CDATA[
+   Copyright 2008-2010 <a href="http://isti.cnr.it">CNR-ISTI, 
+   Institute of Information Science and Technologies 
+   of the Italian National Research Council</a>
+<br>
+   Copyright 2008-2010 <a href="http://www.itaca.upv.es/"> 
+   Instituto Tecnologico de Aplicaciones de Comunicacion Avanzadas - Grupo Tecnologias para la Salud y el Bienestar (TSB)</a>
+          ]]></bottom>
+        </configuration>
+      </plugin>
+ 
+      <plugin>    
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Bundle-Author><![CDATA[
+              Stefano "Kismet" Lenzi <stefano.lenzi@isti.cnr.it>,
+              Álvaro Fides Valero <alfiva@aaa.upv.es>,
+              Michele Girolami <michele.girolami@isti.cnr.it>,
+              Manlio Bacco <manlio.bacco@isti.cnr.it>
+            ]]></Bundle-Author>
+            <Bundle-Name>${pom.name}</Bundle-Name>
+            <Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
+            <Bundle-Activator>it.cnr.isti.zigbee.dongle.CC2530.Activator</Bundle-Activator>
+            <Private-Package>
+              it.cnr.isti.zigbee.dongle.CC2530.*
+            </Private-Package>
+            <Import-Package>
+              org.osgi.*,	    
+              gnu.io.*,
+              com.itaca.ztool.*,
+              it.cnr.isti.zigbee.dongle.api*,
+              it.cnr.isti.cc2480.*, javax.swing,
+              it.cnr.isti.primitvetypes.util, it.cnr.isti.osgi.util,
+              org.slf4j.*;  provider=paxlogging     
+            </Import-Package>
+            <Export-Package>
+            </Export-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-changelog-plugin</artifactId>
+        <configuration>
+          <type>date</type>
+          <dates>
+            <date implementation="java.lang.String">2011-06-27</date>
+            <date implementation="java.lang.String">2031-06-24</date>
+          </dates>
+          <dateFormat>yyyy-MM-dd</dateFormat>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+  
+</project>

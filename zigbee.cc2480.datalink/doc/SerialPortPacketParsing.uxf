@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><umlet_diagram><help_text>// Uncomment the following line to change the fontsize:
+// fontsize=14
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Welcome to UMLet!
+//
+// Double-click on UML elements to add them to the diagram, or to copy them
+// Edit elements by modifying the text in this panel
+// Hold Ctrl to select multiple elements
+// Use Ctrl+mouse to select via lasso
+//
+// Use ± or Ctrl+mouse wheel to zoom
+// Drag a whole relation at its central square icon
+//
+// Press Ctrl+C to copy the whole diagram to the system clipboard (then just paste it to, eg, Word)
+// Edit the files in the "palettes" directory to create your own element palettes
+//
+// Select "Custom Elements &gt; New..." to create new element types
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// This text will be stored with each diagram;  use it for notes.</help_text><zoom_level>5</zoom_level><element><type>com.umlet.element.base.Class</type><coordinates><x>130</x><y>185</y><w>125</w><h>70</h></coordinates><panel_attributes>RxTxSerialComm
+--
++close()
+--
+#openSerialPort(String port, int boud)
+/#handleSerialData()/
+#getOutputStream()
+#getInputStream()
+</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>240</x><y>140</y><w>124</w><h>59</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>115;15;15;50</additional_attributes></element><element><type>com.umlet.element.base.Note</type><coordinates><x>100</x><y>110</y><w>180</w><h>35</h></coordinates><panel_attributes>handleSerialData viene invocato durante l'esecuzione della
+callback serialEvent, nel caso in cui vi siano nuovi dati da
+leggere</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>240</x><y>195</y><w>124</w><h>39</h></coordinates><panel_attributes>&lt;&lt;use&gt;&gt;
+lt=&lt;.</panel_attributes><additional_attributes>115;30;15;20</additional_attributes></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>175</x><y>130</y><w>34</w><h>64</h></coordinates><panel_attributes/><additional_attributes>25;15;15;55</additional_attributes></element><element><type>com.umlet.element.base.Class</type><coordinates><x>95</x><y>305</y><w>175</w><h>45</h></coordinates><panel_attributes>ZTool
+--
++sendPacket(ZToolPacket packet)
++sendAsynchronous(ZToolPacket packet)
++sendSynchronous(ZToolPacket packet):ZToolPacket
++getResponse(long time)
+</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Class</type><coordinates><x>355</x><y>140</y><w>120</w><h>35</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+/SerialPortListener/
+--
+/+serialEvent(SerialPortEvent e)/
+
+
+</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Note</type><coordinates><x>325</x><y>85</y><w>165</w><h>35</h></coordinates><panel_attributes>E' l'interfaccia di callback delle RXTX, viene invocato
+quando cambia lo stato della seriale, in particolare 
+quando vi sono nuovi dati</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Class</type><coordinates><x>355</x><y>205</y><w>120</w><h>50</h></coordinates><panel_attributes>/SerialPort/
+--
+/+addEventListener(SerialPortListener l)/
+/+getOutputStream()/
+/+getInputStream()/
+/+close()/</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>400</x><y>105</y><w>24</w><h>44</h></coordinates><panel_attributes/><additional_attributes>15;15;15;35</additional_attributes></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>395</x><y>160</y><w>62</w><h>54</h></coordinates><panel_attributes>&lt;&lt;notify&gt;&gt;
+lt=&lt;.</panel_attributes><additional_attributes>35;15;35;45</additional_attributes></element><element><type>com.umlet.element.base.Package</type><coordinates><x>305</x><y>65</y><w>235</w><h>195</h></coordinates><panel_attributes>RxTx</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Class</type><coordinates><x>125</x><y>515</y><w>235</w><h>30</h></coordinates><panel_attributes>ZToolPacketParser
+--
++ZToolPacketParser(InputStream in, ZToolPacketHandler handler, Object lock)</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Class</type><coordinates><x>225</x><y>560</y><w>60</w><h>30</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+Runnable
+--
++run()</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>225</x><y>530</y><w>34</w><h>39</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>25;30;15;15</additional_attributes></element><element><type>com.umlet.element.base.Class</type><coordinates><x>130</x><y>600</y><w>235</w><h>30</h></coordinates><panel_attributes>ZToolPacketStream
+--
++ZToolPacketStream(InputStream in)
++parsePacket():ZToolPacket</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>145</x><y>530</y><w>63</w><h>79</h></coordinates><panel_attributes>&lt;&lt;create&gt;&gt;
+lt=&lt;.</panel_attributes><additional_attributes>30;70;35;15</additional_attributes></element><element><type>com.umlet.element.base.Class</type><coordinates><x>410</x><y>500</y><w>120</w><h>45</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+ZToolPacketHandler
+--
++handlePacket(ZToolPacket packet)
++handleError(Throwable t)</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>345</x><y>505</y><w>74</w><h>35</h></coordinates><panel_attributes>&lt;&lt;notify&gt;&gt;
+lt=&lt;.</panel_attributes><additional_attributes>65;25;15;25</additional_attributes></element><element><type>com.umlet.element.base.Package</type><coordinates><x>80</x><y>475</y><w>470</w><h>170</h></coordinates><panel_attributes>Parsing</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>175</x><y>240</y><w>24</w><h>74</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>15;15;15;65</additional_attributes></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>55</x><y>315</y><w>384</w><h>354</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>375;230;375;345;15;345;15;15;40;15</additional_attributes></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>240</x><y>215</y><w>89</w><h>119</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>15;15;40;15;40;110;80;110</additional_attributes></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>425</x><y>430</y><w>24</w><h>79</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>15;70;15;40;15;15</additional_attributes></element><element><type>com.umlet.element.base.Class</type><coordinates><x>365</x><y>400</y><w>155</w><h>45</h></coordinates><panel_attributes>HWLowLevelDriver
+--
++addPacketListener(PacketListener l)
++removePacketListener(PacketListener l)
++sendPacket(ZToolPacket packet)
++open(String port, int boud)
++close()</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>505</x><y>340</y><w>87</w><h>95</h></coordinates><panel_attributes>&lt;&lt;notify&gt;&gt;
+lt=&lt;.</panel_attributes><additional_attributes>60;15;60;85;15;85</additional_attributes></element><element><type>com.umlet.element.base.Class</type><coordinates><x>510</x><y>310</y><w>155</w><h>45</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+PacketListener
+--
++packetRecieved(ZToolPacket packet)</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Package</type><coordinates><x>300</x><y>270</y><w>380</w><h>190</h></coordinates><panel_attributes>Driver</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Class</type><coordinates><x>320</x><y>290</y><w>155</w><h>45</h></coordinates><panel_attributes>RealSerialComm
+--
++open(String port, int boud)
++getOutputStream()
++close()</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>105</x><y>335</y><w>64</w><h>189</h></coordinates><panel_attributes>&lt;&lt;create&gt;&gt;
+lt=&lt;.</panel_attributes><additional_attributes>35;180;35;15</additional_attributes></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>305</x><y>320</y><w>64</w><h>204</h></coordinates><panel_attributes>&lt;&lt;create&gt;&gt;
+lt=&lt;.</panel_attributes><additional_attributes>35;195;35;15</additional_attributes></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>370</x><y>320</y><w>64</w><h>89</h></coordinates><panel_attributes>&lt;&lt;create&gt;&gt;
+lt=&lt;.</panel_attributes><additional_attributes>35;15;35;80</additional_attributes></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>415</x><y>320</y><w>56</w><h>89</h></coordinates><panel_attributes>&lt;&lt;use&gt;&gt;
+lt=&lt;.</panel_attributes><additional_attributes>30;15;30;80</additional_attributes></element></umlet_diagram>

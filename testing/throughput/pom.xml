@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <parent>   
+    <groupId>org.aal-persona.sail</groupId>
+    <artifactId>sail.pom</artifactId>
+    <version>5</version>
+    <relativePath>../../pom/pom.xml</relativePath>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.aal-persona.sail.samples</groupId>
+  <artifactId>org.aal-persona.zigbee.throughput.client</artifactId>
+  <packaging>bundle</packaging>
+  <name>PERSONA Throughput Client</name>
+  <version>0.3.0-SNAPSHOT</version>
+
+  <properties>
+    <bundles.configuration.location>../configurations</bundles.configuration.location>
+  </properties>
+  
+  <build>
+    <plugins>
+      <plugin>    
+        <groupId>org.ops4j</groupId>
+        <artifactId>maven-pax-plugin</artifactId>
+        <configuration>
+          <runner>1.1.1</runner>
+          <profiles>log,config</profiles>
+          <provision>
+            <param>--executor=script</param>
+            <param>--org.ops4j.pax.runner.platform.downloadFeedback=false</param>
+            <provision>mvn:org.aal-persona.sail/org.aal-persona.zigbee.basedriver@nostart</provision>
+            <provision>mvn:org.aal-persona.sail/org.aal-persona.zigbee.cc2480.driver</provision>
+            <provision>mvn:org.aal-persona.sail/org.aal-persona.zigbee.common</provision>
+            <provision>mvn:org.ops4j.pax.confman/pax-confman-propsloader/0.2.2</provision>
+	    
+            <provision>mvn:org.aal-persona.bundles/org.aal-persona.bundles.net.sourceforge.trove/2.0.4-0001</provision>
+            <provision>mvn:org.aal-persona.bundles/org.aal-persona.bundles.rxtx/2.1.7-0001</provision>
+          </provision>
+        </configuration>
+      </plugin>    
+	
+	
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>1.4.3</version>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Bundle-Name>${project.name}</Bundle-Name>
+            <Bundle-Vendor>The Apache Software Foundation</Bundle-Vendor>
+            <Bundle-Author><![CDATA[Alessandro Giari <alessandro.giari@isti.cnr.it>]]></Bundle-Author>
+            <Bundle-Description>${pom.description}</Bundle-Description>
+            <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+            <Bundle-Activator>
+              it.cnr.isti.zigbee.samples.throughput.client.Activator
+            </Bundle-Activator>
+            <Private-Package>
+                it.cnr.isti.zigbee.samples.throughput.client.*
+            </Private-Package>
+            <Import-Package>
+                it.cnr.isti.zigbee.ha.*,
+                it.cnr.isti.zigbee.zcl.*,
+                it.cnr.isti.zigbee.persona.*,
+                org.osgi.*,
+                org.slf4j; provider=paxlogging
+            </Import-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  
+  <dependencies> 
+    <dependency>
+      <groupId>org.aal-persona.sail</groupId>
+      <artifactId>org.aal-persona.zigbee.persona.driverx</artifactId>
+    </dependency>  
+    <dependency>
+      <groupId>org.aal-persona.sail</groupId>
+      <artifactId>org.aal-persona.zigbee.ha.driver</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.aal-persona.sail</groupId>
+      <artifactId>org.aal-persona.zigbee.basedriver.api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.aal-persona.sail</groupId>
+      <artifactId>org.aal-persona.zigbee.zcl.library</artifactId>
+    </dependency>
+
+
+    <dependency>
+      <groupId>org.ops4j.pax.logging</groupId>
+      <artifactId>pax-logging-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.ops4j.pax.logging</groupId>
+      <artifactId>pax-logging-service</artifactId>
+    </dependency>    
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.osgi.core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.osgi.compendium</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymock</artifactId>
+    </dependency>
+  </dependencies>
+</project>
+

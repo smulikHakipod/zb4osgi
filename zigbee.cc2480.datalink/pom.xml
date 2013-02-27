@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.aaloa.zb4osgi</groupId>
+    <artifactId>org.aaloa.zb4osgi.pom</artifactId>
+    <version>9-SNAPSHOT</version>
+    <relativePath>../pom/pom.xml</relativePath>
+  </parent>
+
+  <groupId>org.aaloa.zb4osgi</groupId>
+  <artifactId>org.aaloa.zb4osgi.zigbee.cc2480.datalink</artifactId>
+  <version>0.8.0-SNAPSHOT</version>
+  <packaging>bundle</packaging>  
+
+  <name>CC2480 Data Link protocol library</name>
+  <url>http://zb4osgi.aaloa.org/</url>
+  <description><![CDATA[
+  	A Java library that implementats the Texas Instrument CC2480 Interface Specification. 
+	In particular, it provides the implementation of data link protocol over the serial port and 
+	a class model that represents the message specified by the Specification
+  ]]></description>
+  
+  <inceptionYear>2008</inceptionYear>
+  <organization>
+    <name><![CDATA[
+    ISTI-CNR, Institute of Information Science and Technologies of the Italian National Research Council
+    Instituto Tecnologico de Aplicaciones de Comunicacion Avanzadas - Grupo Tecnologias para la Salud y el Bienestar (TSB)
+    ]]></name>
+    <url><![CDATA[
+    http://isti.cnr.it/
+    http://www.itaca.upv.es/
+    ]]></url>
+  </organization> 
+  
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  
+  <developers>
+    <developer>
+      <id>slenzi</id>
+      <name>Stefano "Kismet" Lenzi</name>
+      <email>stefano.lenzi@isti.cnr.it</email>
+      <organization>Institute of Information Science and Technologies of the Italian National Research Council</organization>
+      <organizationUrl>http://www.isti.cnr.it/</organizationUrl>
+      <timezone>+1</timezone>
+    </developer>
+    <developer>
+      <id>alfiva</id>
+      <name>Álvaro Fides Valero</name>
+      <email>alfiva@aaa.upv.es</email>
+      <organization>Instituto Tecnologico de Aplicaciones de Comunicacion Avanzadas - Grupo Tecnologias para la Salud y el Bienestar (TSB)</organization>
+      <organizationUrl>http://www.itaca.upv.es//</organizationUrl>
+      <timezone>+1</timezone>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.cc2480.datalink</connection>
+    <developerConnection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.cc2480.datalink</developerConnection>
+    <url>http://zb4osgi.aaloa.org/projects/zb4osgi/repository/show/trunk/zigbee.cc2480.datalink</url>
+  </scm>
+
+  <repositories>
+    <repository>
+      <id>nexus.aaloa.org</id>
+      <url>http://nexus.aaloa.org/content/repositories/releases/</url>
+      <snapshots><enabled>false</enabled></snapshots>
+    </repository>
+  </repositories>
+  
+  <dependencies>
+    <dependency>
+      <groupId>org.aaloa.zb4osgi</groupId>
+      <artifactId>org.aaloa.zb4osgi.zigbee.common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.aaloa.zb4osgi.bundle</groupId>
+      <artifactId>org.aaloa.zb4osgi.bundle.rxtx</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.ops4j.pax.logging</groupId>
+      <artifactId>pax-logging-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.ops4j.pax.logging</groupId>
+      <artifactId>pax-logging-service</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <groups>
+	    <group>
+	      <title><![CDATA[Core CC2480 Frames & Utility]]></title>
+	      <packages>com.itaca.ztool.api</packages>
+	    </group>
+	    <group>
+	      <title>Raw Byte Handling Utility</title>
+	      <packages>com.itaca.ztool.util</packages>
+	    </group>
+	    <group>
+	      <title>CC2480 Frames representation</title>
+	      <packages>com.itaca.ztool.api.*</packages>
+	    </group>
+	    <group>
+	      <title>CC2480 Data Link Protocol implementation</title>
+	      <packages>it.cnr.isti.cc2480.*</packages>
+	    </group>
+          </groups>
+          <bottom><![CDATA[
+   Copyright 2008-2010 <a href="http://isti.cnr.it">CNR-ISTI, 
+   Institute of Information Science and Technologies 
+   of the Italian National Research Council</a>
+<br>
+   Copyright 2008-2010 <a href="http://www.itaca.upv.es/"> 
+   Instituto Tecnologico de Aplicaciones de Comunicacion Avanzadas - Grupo Tecnologias para la Salud y el Bienestar (TSB)</a>
+          ]]></bottom>
+        </configuration>
+      </plugin>
+ 
+      <plugin>    
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Bundle-Author><![CDATA[
+              Andrew Rapp <andrew.rapp@gmail.com>,
+              Stefano "Kismet" Lenzi <stefano.lenzi@isti.cnr.it>,
+              Álvaro Fides Valero <alfiva@aaa.upv.es>
+            ]]></Bundle-Author>
+            <Bundle-Name>${project.name}</Bundle-Name>
+            <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+            <Bundle-Activator />
+            <Import-Package>
+              org.osgi.*,
+              it.cnr.isti.thread, 
+              it.cnr.isti.io,
+              it.cnr.isti.collections,
+              it.cnr.isti.primitvetypes.util, it.cnr.isti.osgi.util,
+              gnu.io.*, javax.swing.*,
+              org.slf4j.*; provider=paxlogging      
+            </Import-Package>
+            <Export-Package>
+              com.itaca.ztool.*;version=${pom.version},
+              it.cnr.isti.cc2480.*;version=${pom.version}
+            </Export-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-changelog-plugin</artifactId>
+        <configuration>
+          <type>date</type>
+          <dates>
+            <date implementation="java.lang.String">2010-10-24</date>
+            <date implementation="java.lang.String">2029-12-31</date>
+          </dates>
+          <dateFormat>yyyy-MM-dd</dateFormat>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+  
+</project>

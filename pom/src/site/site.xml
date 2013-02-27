@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/DECORATION/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+  <bannerLeft>
+    <name>ZigBee 4 OSGi</name>
+    <src>http://zb4osgi.aaloa.org/LogoZB4OSGsmall.png</src>
+    <href>http://zb4osgi.aaloa.org/</href>
+  </bannerLeft>
+  <bannerRight>
+    <name>AALOA</name>
+    <src>http://aaloa.org/images/stories/logos/aaloa.logo2.png</src>
+    <href>http://aaloa.org/</href>
+  </bannerRight>
+  <publishDate format="yyyy-MM-dd" position="right" />
+  <version position="right" />
+  <body>
+    <breadcrumbs>
+      <item name="ZigBee 4 OSGi" href="http://zb4osgi.aaloa.org/maven/"/>
+    </breadcrumbs>
+    <links>
+      <item name="Developer Site" href="http://zb4osgi.aaloa.org/redmine/"/>
+      <item name="Advertisement Site" href="http://zb4osgi.aaloa.org/index.html"/>
+    </links>
+    <menu ref="reports" inherit="bottom" />
+    <menu ref="modules" />
+  </body>
+  <poweredBy>
+    <logo name="Maven" href="http://maven.apache.org/"
+          img="http://maven.apache.org/images/logos/maven-feather.png"/>
+  </poweredBy>
+  <skin>
+    <groupId>org.apache.maven.skins</groupId>
+    <artifactId>maven-default-skin</artifactId>
+    <version>1.0</version>
+  </skin>
+</project>
+

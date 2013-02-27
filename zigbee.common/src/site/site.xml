@@ -1,0 +1,59 @@
+<project xmlns="http://maven.apache.org/DECORATION/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+  <bannerLeft>
+    <name>ZigBee 4 OSGi</name>
+    <src>http://zb4osgi.aaloa.org/LogoZB4OSGsmall.png</src>
+    <href>http://zb4osgi.aaloa.org/</href>
+  </bannerLeft>
+  <bannerRight>
+    <name>AALOA</name>
+    <src>http://aaloa.org/images/stories/logos/aaloa.logo2.png</src>
+    <href>http://aaloa.org/</href>
+  </bannerRight>
+  <publishDate format="yyyy-MM-dd" position="right" />
+  <version position="right" />
+  <body>
+    <breadcrumbs>
+      <item name="${project.name}" href="http://zb4osgi.aaloa.org/maven/${project.artifactId}"/>
+    </breadcrumbs>
+    <menu name="ZigBee 4 OSGi">
+      <item name="Back to parent" href="http://zb4osgi.aaloa.org/maven/" />
+      <!--item name="Version 1.0" href="http://mojo.codehaus.org/gwt-maven-plugin-1.0"/>
+      <item name="Version 1.1" href="http://mojo.codehaus.org/gwt-maven-plugin-1.1"/-->
+    </menu>
+    <menu name="Overview">
+      <item name="Index" href="index.html"/>
+      <!--item name="Usage" href="usage.html"/-->
+      <item name="FAQ" href="faq.html"/>
+    </menu>
+    <!--menu name="User Guide">
+      <item name="Introduction" href="user-guide/introduction.html"/>
+      <item name="Setup" href="user-guide/setup.html"/>
+      <item name="the /war folder" href="user-guide/war-folder.html"/>
+      <item name="Using the archetype" href="user-guide/archetype.html"/>
+      <item name="Run Hosted Mode" href="user-guide/hosted.html"/>
+      <item name="Generate Async" href="user-guide/async.html"/>
+      <item name="Internationalization" href="user-guide/i18n.html"/>
+      <item name="Testing" href="user-guide/testing.html"/>
+      <item name="Compile and Package" href="user-guide/compiler.html"/>
+      <item name="Multi-project setup" href="user-guide/multiproject.html"/>
+      <item name="Writing a GWT library" href="user-guide/library.html"/>
+    </menu>
+    <menu name="Examples">
+      <item name="compile a GWT module" href="examples/compile.html"/>
+      <item name="generate async interfaces" href="examples/asyn.html"/>
+      <item name="generate i18n bundles interfaces" href="examples/i18n.html"/>
+    </menu -->
+    <menu ref="reports" inherit="bottom" />
+  </body>
+  <poweredBy>
+    <logo name="Maven" href="http://maven.apache.org/"
+          img="http://maven.apache.org/images/logos/maven-feather.png"/>
+  </poweredBy>
+  <skin>
+    <groupId>org.apache.maven.skins</groupId>
+    <artifactId>maven-default-skin</artifactId>
+    <version>1.0</version>
+  </skin>
+
+</project>
+

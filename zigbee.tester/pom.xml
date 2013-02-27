@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <parent>
+    <groupId>org.aaloa.zb4osgi</groupId>
+    <artifactId>org.aaloa.zb4osgi.pom</artifactId>
+    <version>9-SNAPSHOT</version>
+    <relativePath>../pom/pom.xml</relativePath>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.aaloa.zb4osgi</groupId>
+  <artifactId>org.aaloa.zb4osgi.zigbee.tester</artifactId>
+  <version>0.4.0-SNAPSHOT</version>
+  <packaging>bundle</packaging>
+
+  <name>Zigbee Tester</name>
+  <url>http://zb4osgi.aaloa.org/</url>
+  <description><![CDATA[
+    A simple Java Swing application for controlling the ZigBee Device service, and its refined version.
+    This application aims at be a tool for testing the whole ZigBee 4 OSGi suite, but it also allows
+    the user to start to play with the ZigBee network
+  ]]></description>
+  
+  <inceptionYear>2008</inceptionYear>
+  <organization>
+    <name>Institute of Information Science and Technologies of the Italian National Research Council</name>
+    <url>http://isti.cnr.it/</url>
+  </organization> 
+  
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  
+  <developers>
+    <developer>
+      <id>stefano.lenzi</id>
+      <name>Stefano "Kismet" Lenzi</name>
+      <email>stefano.lenzi@isti.cnr.it</email>
+      <organization>Institute of Information Science and Technologies of the Italian National Research Council</organization>
+      <organizationUrl>http://www.isti.cnr.it/</organizationUrl>
+      <timezone>+1</timezone>
+    </developer>
+    <developer>
+      <id>francesco.furfari</id>
+      <name>Francesco Furfari</name>
+      <email>francesco.furfari@isti.cnr.it</email>
+      <organization>Institute of Information Science and Technologies of the Italian National Research Council</organization>
+      <organizationUrl>http://www.isti.cnr.it/</organizationUrl>
+      <timezone>+1</timezone>
+    </developer>
+    <developer>
+      <id>manlio.bacco</id>
+      <name>Manlio Bacco</name>
+      <email>manlio.bacco@isti.cnr.it</email>
+      <organization>Institute of Information Science and Technologies of the Italian National Research Council</organization>
+      <organizationUrl>http://www.isti.cnr.it/</organizationUrl>
+      <timezone>+1</timezone>
+    </developer>
+  </developers> 
+
+  <scm>
+    <connection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.tester</connection>
+    <developerConnection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.tester</developerConnection>
+    <url>http://zb4osgi.aaloa.org/projects/zb4osgi/repository/show/trunk/zigbee.tester</url>
+  </scm>
+    
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Bundle-Name>${project.name}</Bundle-Name>
+            <Bundle-Vendor>The Apache Software Foundation</Bundle-Vendor>
+            <Bundle-Author><![CDATA[
+	    Francesco Furfari <francesco.furfari@isti.cnr.it>,
+	    Stefano "Kismet" Lenzi <stefano.lenzi@isti.cnr.it>
+            ]]></Bundle-Author>
+            <Bundle-Description>
+               	OSGi Generic Control Point to control ZigBeeDevice services
+            </Bundle-Description>
+            <Bundle-SymbolicName>org.aal-persona.zigbee.tester</Bundle-SymbolicName>
+            <Bundle-Activator>org.persona.zigbee.tester.Activator</Bundle-Activator>
+            <Export-Package>
+              org.persona.zigbee.tester.event.api.*
+            </Export-Package>
+            <Private-Package>
+              org.persona.zigbee.tester.*,
+              org.persona.zigbee.util.*,
+              com.itaca.ztool.util
+            </Private-Package>
+            <Import-Package>
+                !com.itaca.ztool.api,
+                javax.swing.*,
+                it.cnr.isti.zigbee.api.*,
+                it.cnr.isti.zigbee.ha.*,
+                it.cnr.isti.zigbee.zcl.*,
+                org.osgi.*,
+                org.slf4j; provider=paxlogging                
+            </Import-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-changelog-plugin</artifactId>
+        <configuration>
+          <type>date</type>
+          <dates>
+            <date implementation="java.lang.String">2010-10-24</date>
+            <date implementation="java.lang.String">2029-12-31</date>
+          </dates>
+          <dateFormat>yyyy-MM-dd</dateFormat>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+
+
+  <repositories>
+    <repository>
+      <id>nexus.aaloa.org</id>
+      <url>http://nexus.aaloa.org/content/repositories/releases/</url>
+      <snapshots><enabled>false</enabled></snapshots>
+    </repository>
+  </repositories>
+  
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.osgi.core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.aaloa.zb4osgi</groupId>
+      <artifactId>org.aaloa.zb4osgi.zigbee.ha.driver</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.aaloa.zb4osgi</groupId>
+      <artifactId>org.aaloa.zb4osgi.zigbee.zcl.library</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.aaloa.zb4osgi</groupId>
+      <artifactId>org.aaloa.zb4osgi.zigbee.basedriver.api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.aaloa.zb4osgi</groupId>
+      <artifactId>org.aaloa.zb4osgi.zigbee.cc2480.datalink</artifactId>
+    </dependency>
+
+
+    <!-- 
+    	*NOTE*
+    	The following dependencies are used only for JUnit purpose, 
+    	but they will be resolved from OSGi enviroment at run-time 
+   	-->
+    <dependency>
+    	<groupId>org.slf4j</groupId>
+    	<artifactId>nlog4j</artifactId>
+    	<version>1.2.25</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.aaloa.zb4osgi</groupId>
+    	<artifactId>org.aaloa.zb4osgi.zigbee.common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>    
+  </dependencies>
+
+  <properties>
+    <bundles.configuration.location>../configurations</bundles.configuration.location>
+  </properties>
+</project>
+

@@ -1,0 +1,40 @@
+Packages:
+
+com.itaca.ztool.api:		Classes that implement the driver
+com.itaca.ztool.api.system:	Classes representing the ZTool SYS messages
+com.itaca.ztool.api.af:		Classes representing the ZTool AF messages
+com.itaca.ztool.api.zdo:	Classes representing the ZTool ZDO messages
+com.itaca.ztool.api.simple:	Classes representing the ZB simple API messages
+com.itaca.ztool.api.old:	Classes representing messages from the previous version not present in current documentation(not supported).
+com.itaca.ztool.util:		Utilities adapted for ZTool characteristics
+
+How To Use:
+
+Instantiate class "ZTool". Use its methods:
+
+-sendAsynchronous(message)
+	Sends a previously constructed message (sys/zdo/af) through the serial port.
+-sendSynchronous(message)
+	Sends a previously constructed message through the serial port and waits for the appropriate response.
+-getResponse()
+	Receives a message from the serial. The returned message should be properly casted
+	to the appropiate message according to its CMD field.
+
+***OR***
+
+Create a class that implements interface ZToolHandler and pass it to ZTool when calling:
+
+	ZToolInstance.open(COM,Rate,*YourHandlerHere*);
+
+instead of:
+
+	ZToolInstance.open(COM,Rate);
+
+Response packets will be sent to method handlePacket of the interface as they arrive. Handle them as you please.
+Requests should still be sent via ZTool with sendAsynchronous as shown above.
+
+
+
+EXAMPLE
+See an example with a template for these three ways of using the driver (Sync, Async and Handler) in:
+sandboxes/alfiva/ZigBeeTester/maven/ZTool.Tester/

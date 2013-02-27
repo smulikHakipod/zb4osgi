@@ -1,0 +1,24 @@
+#
+# PAX-RUNNER OPTIONS
+#
+--profiles=log,config
+--executor=script
+--org.ops4j.pax.runner.platform.downloadFeedback=false
+--startLevel=10
+
+#<!-- OSGi Tool -->
+mvn:org.ops4j.pax.confman/pax-confman-propsloader/0.2.2@nostart    
+
+#<!-- ZigBee Stack General Dependencies & Tool -->
+mvn:org.aaloa.zb4osgi.bundle/org.aaloa.zb4osgi.bundle.net.sf.trove4j/2.0.4-1
+mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.tester
+
+#<!-- ZigBee Hardware Access Layer -->
+mvn:org.aaloa.zb4osgi/org.aal-persona.zigbee.dongle.api
+mvn:org.aaloa.zb4osgi/org.aal-persona.zigbee.common
+
+# ZigBee Base Driver ( STUB )
+mvn:org.aaloa.zb4osgi/org.aal-persona.zigbee.basedriver.stub
+
+# ZigBee Refinement Architecture 
+mvn:org.aaloa.zb4osgi/org.aal-persona.zigbee.ha.driver

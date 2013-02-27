@@ -1,0 +1,44 @@
+CC2480 Data Link protocol library
+
+Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
+Institute of Information Science and Technologies  of the 
+Italian National Research Council 
+
+Copyright 2008-2010 ITACA-TSB, http://www.tsb.upv.es/
+Instituto Tecnologico de Aplicaciones de Comunicacion 
+Avanzadas - Grupo Tecnologias para la Salud y el 
+Bienestar (TSB)
+
+
+I. Included Software
+
+This product includes software developed by
+Andrew Rapp from the project XBee-API (http://code.google.com/p/xbee-api/)
+Licensed to CNR-ISTI under the ASL License (CNR-ISTI protocol 0002638 17/11/2009)
+
+
+II. Used Software
+
+This product uses software developed at
+The OPS4J (http://www.ops4j.org)
+Licensed under the Apache License 2.0.
+
+This product uses software developed at
+The RXTX (http://users.frii.com/jarvi/rxtx)
+RXTX License v 2.1 - LGPL v 2.1 + Linking Over 
+Controlled Interface (see LICENSE.RxTx file ).
+
+
+III. Specification used
+
+Part of this software is based on the specification 
+provided by The ZigBee Alliance (http://www.zigbee.org) 
+Licensed under ZigBee specific license for non-member 
+of the ZigBee Allinace (see LICENSE.ZigBee file )
+
+
+IV. License Summary
+
+- Apache License 2.0
+- ZigBee Non-Member License
+- RXTX License v 2.1 - LGPL v 2.1 + Linking Over Controlled Interface

@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+    
+  <parent>
+    <groupId>org.aaloa.zb4osgi</groupId>
+    <artifactId>org.aaloa.zb4osgi.pom</artifactId>
+    <version>9-SNAPSHOT</version>
+    <relativePath>../../../pom/pom.xml</relativePath>
+  </parent>
+
+  <properties>
+    <pkgArtifactId>net.sf.trove4j</pkgArtifactId>
+    <pkgVersion>2.0.4</pkgVersion>
+    <pomVersion>2-SNAPSHOT</pomVersion>
+    <osgiVersion>${pkgVersion}</osgiVersion>
+  </properties>
+
+  <groupId>org.aaloa.zb4osgi.bundle</groupId>
+  <artifactId>${project.groupId}.${pkgArtifactId}</artifactId>
+  <version>${osgiVersion}-${pomVersion}</version>
+  <packaging>bundle</packaging>
+  <name>${pkgArtifactId} Bundle Wrapper</name>
+  <description>
+A wrapping of the ${pkgArtifactId} version ${pkgVersion} 
+as OSGi bundle
+  </description>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.aaloa.zb4osgi.library</groupId>
+      <artifactId>${pkgArtifactId}</artifactId>
+      <version>${pkgVersion}</version>
+    </dependency>   
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>2.0.0</version>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Bundle-Name>${project.name}</Bundle-Name>
+            <Bundle-Description>${project.description}</Bundle-Description>
+            <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+            <Export-Package>
+              gnu.trove.*;version=${pkgVersion}
+            </Export-Package>
+            <Import-Package>*</Import-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

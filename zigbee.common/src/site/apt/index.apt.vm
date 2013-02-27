@@ -1,0 +1,13 @@
+ ------
+ Introduction
+ ------
+ Stefano 'Kismet' Lenzi <stefano.lenzi@ist.cnr.it>
+ ------
+ October 29 2010
+ ------
+
+OSGi and Primitive Types Utility
+
+  A set of utility classes for Java primitive types and OSGi enviroment
+
+
