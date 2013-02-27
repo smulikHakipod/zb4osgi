@@ -1,10 +1,10 @@
 /*
    Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,79 +22,36 @@
 
 package it.cnr.isti.zigbee.ha.device.api.generic;
 
-import it.cnr.isti.zigbee.ha.cluster.glue.general.Groups;
-import it.cnr.isti.zigbee.ha.cluster.glue.general.Identify;
-import it.cnr.isti.zigbee.ha.cluster.glue.general.LevelControl;
-import it.cnr.isti.zigbee.ha.cluster.glue.general.OnOff;
 import it.cnr.isti.zigbee.ha.cluster.glue.general.OnOffSwitchConfiguration;
-import it.cnr.isti.zigbee.ha.cluster.glue.general.Scenes;
 import it.cnr.isti.zigbee.ha.driver.ArraysUtil;
 import it.cnr.isti.zigbee.ha.driver.core.HADevice;
 import it.cnr.isti.zigbee.ha.driver.core.HAProfile;
 
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  *
  */
-public interface LevelControlSwitch extends HADevice{
-	
+public interface LevelControlSwitch extends HADevice {
+
 	public static final int DEVICE_ID = 0x0001;
 	public static final String NAME = "Level Control Switch";
-	
-	
+
+
 	public static final int[] MANDATORY = ArraysUtil.append(HADevice.MANDATORY, new int[]{
-		HAProfile.ON_OFF_SWITCH_CONFIGURATION,HAProfile.ON_OFF,HAProfile.GROUPS,HAProfile.SCENES,HAProfile.LEVEL_CONTROL,HAProfile.IDENTIFY
+		HAProfile.ON_OFF_SWITCH_CONFIGURATION
 	});
 	public static final int[] OPTIONAL = HADevice.OPTIONAL;
 	public static final int[] STANDARD = ArraysUtil.append(MANDATORY, OPTIONAL);
 	public static final int[] CUSTOM = {};
-	
+
 
 	/**
-	 * Access method for the <b>Mandatory</b> cluster: {@link OnOff} 
-	 *  
-	 * @return the {@link OnOff} cluster object
-	 */
-	public OnOff getOnOff();
-
-	/**
-	 * Access method for the <b>Mandatory</b> cluster: {@link Scenes} 
-	 *  
-	 * @return the {@link Scenes} cluster object
-	 */
-	public Scenes getScenes();
-
-	/**
-	 * Access method for the <b>Mandatory</b> cluster: {@link OnOffSwitchConfiguration} 
-	 *  
+	 * Access method for the <b>Mandatory</b> cluster: {@link OnOffSwitchConfiguration}
+	 *
 	 * @return the {@link OnOffSwitchConfiguration} cluster object
 	 */
 	public OnOffSwitchConfiguration getOnOffSwitchConfiguration();
-
-	/**
-	 * Access method for the <b>Mandatory</b> cluster: {@link Identify} 
-	 *  
-	 * @return the {@link Identify} cluster object
-	 */
-	public Identify getIdentify();
-	
-	/**
-	 * Access method for the <b>Mandatory</b> cluster: {@link Groups} 
-	 *  
-	 * @return the {@link Groups} cluster object
-	 */
-	public Groups getGroups();
-	
-	/**
-	 * Access method for the <b>Mandatory</b> cluster: {@link LevelControl} 
-	 *  
-	 * @return the {@link LevelControl} cluster object
-	 */
-	public LevelControl getLevelControl();
-
-	
-	
 }
