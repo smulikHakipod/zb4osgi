@@ -77,6 +77,7 @@ import com.itaca.ztool.api.zdo.ZDO_IEEE_ADDR_REQ;
 import com.itaca.ztool.api.zdo.ZDO_IEEE_ADDR_REQ_SRSP;
 import com.itaca.ztool.api.zdo.ZDO_IEEE_ADDR_RSP;
 import com.itaca.ztool.api.zdo.ZDO_MGMT_LQI_REQ;
+import com.itaca.ztool.api.zdo.ZDO_MGMT_LQI_REQ_SRSP;
 import com.itaca.ztool.api.zdo.ZDO_MGMT_LQI_RSP;
 import com.itaca.ztool.api.zdo.ZDO_NODE_DESC_REQ;
 import com.itaca.ztool.api.zdo.ZDO_NODE_DESC_REQ_SRSP;
@@ -1447,8 +1448,22 @@ public class DriverEZ430_RF2480 implements Runnable, SimpleDriver{
 	}
 
 	public ZDO_MGMT_LQI_RSP sendLQIRequest(ZDO_MGMT_LQI_REQ request) {
-		//XXX Implement this method if it is possible
-		return null;
+        if( waitForNetwork() == false ) return null;
+        ZDO_MGMT_LQI_RSP result = null;
+
+        waitAndLock3WayConversation(request);
+        final WaitForCommand waiter = new WaitForCommand(ZToolCMD.ZDO_MGMT_LQI_RSP, high);
+
+        logger.debug("Sending ZDO_MGMT_LQI_REQ {}", request);
+        ZDO_MGMT_LQI_REQ_SRSP response = (ZDO_MGMT_LQI_REQ_SRSP) sendSynchrouns(high, request);
+        if ( response == null || response.Status != 0 ) {
+            logger.debug("ZDO_MGMT_LQI_REQ failed, received {}", response);
+            waiter.cleanup();
+        } else {
+            result = (ZDO_MGMT_LQI_RSP) waiter.getCommand(TIMEOUT);
+        }
+        unLock3WayConversation(request);
+        return result;
 	}
 
 	public void addCustomDevice(String arg0, String arg1, String arg2,
