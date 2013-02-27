@@ -131,6 +131,20 @@ as defined by the ZigBee OSGi Base Driver, using the OSGi Device Access Specific
       <groupId>org.aaloa.zb4osgi</groupId>
       <artifactId>org.aaloa.zb4osgi.zigbee.common</artifactId>
     </dependency>
+    
+	<!-- TESTING -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymockclassextension</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymock</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
