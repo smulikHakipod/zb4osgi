@@ -1,10 +1,10 @@
 /*
    Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -60,6 +60,8 @@ import it.cnr.isti.zigbee.ha.driver.HAImporter;
 import it.cnr.isti.zigbee.ha.driver.core.GenericHADeviceFactory;
 import it.cnr.isti.zigbee.ha.driver.core.HADeviceFactoryBase;
 import it.cnr.isti.zigbee.ha.driver.core.ReportingConfiguration;
+import it.cnr.isti.zigbee.ha.driver.core.UnknowHADevice;
+import it.cnr.isti.zigbee.ha.driver.core.UnknowHADeviceFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -75,7 +77,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.cm.ManagedService;
 
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
@@ -83,36 +85,36 @@ import org.osgi.service.cm.ManagedService;
  */
 public class Activator implements BundleActivator {
 
-	private static final String HA_CONFIG_PID = "it.cnr.isti.zigbee.ha.configuration";
+    private static final String HA_CONFIG_PID = "it.cnr.isti.zigbee.ha.configuration";
 
-	private HAImporter haImporter;
+    private HAImporter haImporter;
 
-	private final ArrayList<HADeviceFactoryBase> factories = new ArrayList<HADeviceFactoryBase>();
+    private final ArrayList<HADeviceFactoryBase> factories = new ArrayList<HADeviceFactoryBase>();
 
-	private ServiceRegistration configRegistration;
+    private ServiceRegistration configRegistration;
 
-	private static HADriverConfiguration configuration = null;
+    private static HADriverConfiguration configuration = null;
 
 
-	private void doRegisterConfigurationService(BundleContext ctx){
-		Properties properties = new Properties();
+    private void doRegisterConfigurationService(BundleContext ctx){
+        Properties properties = new Properties();
 
-		properties.setProperty(Constants.SERVICE_PID, HA_CONFIG_PID);
+        properties.setProperty(Constants.SERVICE_PID, HA_CONFIG_PID);
 
-		configuration = new HADriverConfiguration(ctx);
-		configRegistration = ctx.registerService(
-				new String[]{ManagedService.class.getName(), ReportingConfiguration.class.getName()}, 
-				configuration, 
-				null
-				);
-	}
+        configuration = new HADriverConfiguration(ctx);
+        configRegistration = ctx.registerService(
+                new String[]{ManagedService.class.getName(), ReportingConfiguration.class.getName()},
+                configuration,
+                null
+                );
+    }
 
-	public void start(BundleContext ctx) throws Exception {
-		doRegisterConfigurationService(ctx);
+    public void start(BundleContext ctx) throws Exception {
+        doRegisterConfigurationService(ctx);
         new HAClustersFactory(ctx).register();
-		doRegisterDeviceFactories(ctx);
-		haImporter = new HAImporter(ctx);
-	}
+        doRegisterDeviceFactories(ctx);
+        haImporter = new HAImporter(ctx);
+    }
 
     private void doRegisterDeviceFactories(final BundleContext bc) throws Exception {
         Map< Class<?>, Class<?> > refinedAvailables = new HashMap< Class<?>, Class<?> >();
@@ -133,24 +135,26 @@ public class Activator implements BundleActivator {
         refinedAvailables.put( Pump.class, PumpDevice.class );
         refinedAvailables.put( TemperatureSensor.class, TemperatureSensorDevice.class );
         refinedAvailables.put( IAS_Warning.class, IAS_Warning_Device.class );
-        
+
         final Iterator< Entry<Class<?>, Class<?>> > i = refinedAvailables.entrySet().iterator();
         while ( i.hasNext() ) {
             Entry<Class<?>, Class<?>> refining = i.next();
             factories.add( new GenericHADeviceFactory( bc, refining.getKey(), refining.getValue() ).register() );
         }
+
+        factories.add( new UnknowHADeviceFactory( bc ).register() );
     }
 
     public void stop(BundleContext context) throws Exception {
-		haImporter.close();
+        haImporter.close();
 
-		for (HADeviceFactoryBase factory : factories) {
-			factory.unregister();
-		}
+        for (HADeviceFactoryBase factory : factories) {
+            factory.unregister();
+        }
 
-	}
+    }
 
-	public static HADriverConfiguration getConfiguration(){
-		return configuration;
+    public static HADriverConfiguration getConfiguration(){
+        return configuration;
     }
 }

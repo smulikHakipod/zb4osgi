@@ -27,7 +27,6 @@
     <relativePath>../pom/pom.xml</relativePath>
   </parent>
 
-  <groupId>org.aaloa.zb4osgi</groupId>
   <artifactId>org.aaloa.zb4osgi.zigbee.ha.driver</artifactId>
   <packaging>bundle</packaging>
   <version>0.7.0-SNAPSHOT</version>
@@ -131,8 +130,8 @@ as defined by the ZigBee OSGi Base Driver, using the OSGi Device Access Specific
       <groupId>org.aaloa.zb4osgi</groupId>
       <artifactId>org.aaloa.zb4osgi.zigbee.common</artifactId>
     </dependency>
-    
-	<!-- TESTING -->
+
+  <!-- TESTING -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -154,27 +153,27 @@ as defined by the ZigBee OSGi Base Driver, using the OSGi Device Access Specific
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
           <groups>
-	  <group>
-	    <title>ZigBee Refinement Driver Extendible Architecture</title>
-	    <packages>it.cnr.isti.zigbee.ha.driver*:it.cnr.isti.zigbee.ha.cluster.factory:it.cnr.isti.zigbee.ha</packages>
-	  </group>
-	  <group>
-	    <title>Simple ZigBee Cluster API</title>
-	    <packages>it.cnr.isti.zigbee.ha.cluster.glue*</packages>
-	  </group>
-	  <group>
-	    <title>Home Automation Device API</title>
-	    <packages>it.cnr.isti.zigbee.ha.device.api*</packages>
-	  </group>
-	  <group>
-	    <title>Default Simple ZigBee Cluster implementation</title>
-	    <packages>it.cnr.isti.zigbee.ha.cluster.impl*</packages>
-	  </group>
-	  <group>
-	    <title>Default Home Automation Device implementation</title>
-	    <packages>it.cnr.isti.zigbee.ha.device.factory:it.cnr.isti.zigbee.ha.device.impl*</packages>
-	  </group>
-	</groups>
+    <group>
+      <title>ZigBee Refinement Driver Extendible Architecture</title>
+      <packages>it.cnr.isti.zigbee.ha.driver*:it.cnr.isti.zigbee.ha.cluster.factory:it.cnr.isti.zigbee.ha</packages>
+    </group>
+    <group>
+      <title>Simple ZigBee Cluster API</title>
+      <packages>it.cnr.isti.zigbee.ha.cluster.glue*</packages>
+    </group>
+    <group>
+      <title>Home Automation Device API</title>
+      <packages>it.cnr.isti.zigbee.ha.device.api*</packages>
+    </group>
+    <group>
+      <title>Default Simple ZigBee Cluster implementation</title>
+      <packages>it.cnr.isti.zigbee.ha.cluster.impl*</packages>
+    </group>
+    <group>
+      <title>Default Home Automation Device implementation</title>
+      <packages>it.cnr.isti.zigbee.ha.device.factory:it.cnr.isti.zigbee.ha.device.impl*</packages>
+    </group>
+  </groups>
         </configuration>
       </plugin>
       <plugin>
@@ -184,10 +183,10 @@ as defined by the ZigBee OSGi Base Driver, using the OSGi Device Access Specific
         <configuration>
           <instructions>
             <Bundle-Author><![CDATA[
-	    Stefano "Kismet" Lenzi <stefano.lenzi@isti.cnr.it>,
-	    Francesco Furfari <francesco.furfari@isti.cnr.it>,
-	    Alessandro Giari <alessandro.giari@isti.cnr.it>,
-	    Manlio Bacco <manlio.bacco@isti.cnr.it>
+      Stefano "Kismet" Lenzi <stefano.lenzi@isti.cnr.it>,
+      Francesco Furfari <francesco.furfari@isti.cnr.it>,
+      Alessandro Giari <alessandro.giari@isti.cnr.it>,
+      Manlio Bacco <manlio.bacco@isti.cnr.it>
             ]]></Bundle-Author>
             <Bundle-Name>${project.name}</Bundle-Name>
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>

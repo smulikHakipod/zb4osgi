@@ -1,10 +1,10 @@
 /*
    Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,82 +39,82 @@ import org.osgi.framework.ServiceRegistration;
  *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
- *         
+ *
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.4.0
  *
  */
 public class ClusterFactoryBase implements ClusterFactory{
 
-	private BundleContext ctx;
-	private ServiceRegistration registration;
-	private Dictionary dictionary;
-	private Hashtable<String, Class> clusters;
+    private BundleContext ctx;
+    private ServiceRegistration registration;
+    private Dictionary dictionary;
+    private Hashtable<String, Class> clusters;
 
-	
+
     public ClusterFactoryBase(BundleContext ctx){
-    	this.ctx = ctx;
-    	dictionary = new Properties();
-    	clusters = new Hashtable<String, Class>();
+        this.ctx = ctx;
+        dictionary = new Properties();
+        clusters = new Hashtable<String, Class>();
     }
-    
 
-	
-	public void addProperty(String key, Object value){
-    	dictionary.put(key, value);
-	}
 
-	
-	public void register(){
-		Enumeration<String> keys = clusters.keys();
-		String[] clusterIDs = new String[clusters.size()];
-		int i =0;
-		while (keys.hasMoreElements()) {
-			String key = (String) keys.nextElement();
-			clusterIDs[i++]=key;
-		}
-			
-		dictionary.put(Cluster.PROFILE_CLUSTER_IDs,clusterIDs);
-		registration = ctx.registerService(ClusterFactory.class.getName(), this, dictionary);
-	}
-	
-	public void unregister(){
-		registration.unregister();
-	}
 
-	
-	protected void addCluster(String key, Class clazz) {
-		clusters.put(key,clazz);		
-	}
+    public void addProperty(String key, Object value){
+        dictionary.put(key, value);
+    }
 
-	public Cluster getInstance(String key, ZigBeeDevice zbDevice) {
-		Class clazz = clusters.get(key);	
-		if (clazz != null) {
-			try {
-				Constructor<?> constructor = clazz.getConstructor(ZigBeeDevice.class);
-				Cluster cluster =  (Cluster) constructor.newInstance(zbDevice);
-				return cluster;
-			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return null;
-	}
+
+    public void register(){
+        Enumeration<String> keys = clusters.keys();
+        String[] clusterIDs = new String[clusters.size()];
+        int i =0;
+        while (keys.hasMoreElements()) {
+            String key = (String) keys.nextElement();
+            clusterIDs[i++]=key;
+        }
+
+        dictionary.put(Cluster.PROFILE_CLUSTER_IDs,clusterIDs);
+        registration = ctx.registerService(ClusterFactory.class.getName(), this, dictionary);
+    }
+
+    public void unregister(){
+        registration.unregister();
+    }
+
+
+    protected void addCluster(String key, Class clazz) {
+        clusters.put(key,clazz);
+    }
+
+    public Cluster getInstance(String key, ZigBeeDevice zbDevice) {
+        Class clazz = clusters.get(key);
+        if (clazz != null) {
+            try {
+                Constructor<?> constructor = clazz.getConstructor(ZigBeeDevice.class);
+                Cluster cluster =  (Cluster) constructor.newInstance(zbDevice);
+                return cluster;
+            } catch (SecurityException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IllegalArgumentException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
 
 }
