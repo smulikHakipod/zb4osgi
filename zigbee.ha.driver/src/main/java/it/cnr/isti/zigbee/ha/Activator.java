@@ -40,7 +40,6 @@ import it.cnr.isti.zigbee.ha.device.api.security_safety.IASAncillaryControlEquip
 import it.cnr.isti.zigbee.ha.device.api.security_safety.IASControlAndIndicatingEquipment;
 import it.cnr.isti.zigbee.ha.device.api.security_safety.IAS_Warning;
 import it.cnr.isti.zigbee.ha.device.api.security_safety.IAS_Zone;
-import it.cnr.isti.zigbee.ha.device.factory.SimpleSensorFactory;
 import it.cnr.isti.zigbee.ha.device.impl.ColorDimmableLightDevice;
 import it.cnr.isti.zigbee.ha.device.impl.DimmableLightDevice;
 import it.cnr.isti.zigbee.ha.device.impl.IASAncillaryControlEquipmentDevice;
@@ -63,15 +62,14 @@ import it.cnr.isti.zigbee.ha.driver.HAImporter;
 import it.cnr.isti.zigbee.ha.driver.core.GenericHADeviceFactory;
 import it.cnr.isti.zigbee.ha.driver.core.HADeviceFactoryBase;
 import it.cnr.isti.zigbee.ha.driver.core.ReportingConfiguration;
-import it.cnr.isti.zigbee.ha.driver.core.UnknowHADevice;
 import it.cnr.isti.zigbee.ha.driver.core.UnknowHADeviceFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Map.Entry;
+import java.util.Properties;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
