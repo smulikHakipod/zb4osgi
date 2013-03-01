@@ -91,25 +91,6 @@ public interface ReportingConfiguration extends ManagedService {
      * The default value for the property {@link #CONFIGURE_REPORTING_OVERWRITE_KEY}, that is true
      */
     public static final boolean DEFAULT_CONFIGURE_REPORTING_OVERWRITE = true;   
-
-	/**  //TODO Delete the next two declaration because they are duplicates of @link {@link HADriverConfiguration#PROVIDED_CLUSTER_MODE_KEY
-	/* */
-	public static final String CLUSTER_DISCOVERY_MODE_KEY = "it.isti.cnr.zigbee.ha.driver.cluster.discovery.mode";
-
-    /**
-     * The default value for the property {@link #CLUSTER_DISCOVERY_MODE_KEY}, that is true
-     * @since 0.7.0
-     */
-	public static final String DEFAULT_CLUSTER_DISCOVERY_MODE = "HomeAutomationProfileStrict";   
-
-	//public static final String FORCE_DEVICE_COMPLIANCE_KEY = "it.isti.cnr.zigbee.ha.driver.device.compliance";
-
-	//public static final String DEFAULT_FORCE_DEVICE_COMPLIANCE = "OnlyCompliantDevices";   
-
-	//public abstract String getClusterDiscoveryMode();
-
-	//public abstract String getDeviceCompliance();
-	/* */
 	
 	public abstract int getReportingMinimum();
 

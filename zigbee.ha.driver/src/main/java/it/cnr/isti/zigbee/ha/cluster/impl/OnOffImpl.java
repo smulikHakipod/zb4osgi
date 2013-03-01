@@ -1,10 +1,10 @@
 /*
    Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,88 +46,88 @@ import it.cnr.isti.zigbee.zcl.library.impl.general.OnOffCluster;
  *
  */
 public class OnOffImpl implements OnOff{
-	
-	private final Attribute onOff;
-	private final OnOffCluster onOffCluster;
-	private OnOffBridgeListeners eventBridge;
-		
-	public OnOffImpl(ZigBeeDevice zbDevice){
-		onOffCluster = new OnOffCluster(zbDevice);
-		onOff = onOffCluster.getAttributeOnOff();
-		eventBridge = new OnOffBridgeListeners(Activator.getConfiguration(), onOff, this);
-	}
 
-	public boolean getOnOff() throws ZigBeeHAException {
-		try {
-			Boolean value = (Boolean) onOff.getValue();
-			return value.booleanValue();
-		} catch (ZigBeeClusterException e) {
-			throw new ZigBeeHAException(e);
-		}
-	}
-	
-	public boolean subscribe(OnOffListener listener) {
-		return eventBridge.subscribe(listener);
-	}
+    private final Attribute onOff;
+    private final OnOffCluster onOffCluster;
+    private OnOffBridgeListeners eventBridge;
 
-	public boolean unsubscribe(OnOffListener listener) {
-		return eventBridge.unsubscribe(listener);
-	}
-	
-	public void off() throws ZigBeeHAException {
-		try {
-			DefaultResponse response = onOffCluster.off();
-			if (response.getStatus() != Status.SUCCESS)
-				throw new ZigBeeHAException(response.getStatus().toString());
-		} catch (ZigBeeClusterException e) {
-			throw new ZigBeeHAException(e);
-		}
-	}
+    public OnOffImpl(ZigBeeDevice zbDevice){
+        onOffCluster = new OnOffCluster(zbDevice);
+        onOff = onOffCluster.getAttributeOnOff();
+        eventBridge = new OnOffBridgeListeners(Activator.getConfiguration(), onOff, this);
+    }
 
-	public void on() throws ZigBeeHAException {
-		try {
-			DefaultResponse response = onOffCluster.on();
-			if (response.getStatus() != Status.SUCCESS)
-				throw new ZigBeeHAException(response.getStatus().toString());
-		} catch (ZigBeeClusterException e) {
-			throw new ZigBeeHAException(e);
-		}
-	}
+    public boolean getOnOff() throws ZigBeeHAException {
+        try {
+            Boolean value = (Boolean) onOff.getValue();
+            return value.booleanValue();
+        } catch (ZigBeeClusterException e) {
+            throw new ZigBeeHAException(e);
+        }
+    }
 
-	public void toggle() throws ZigBeeHAException {
-		try {
-			DefaultResponse response = onOffCluster.toggle();
-			if (response.getStatus() != Status.SUCCESS)
-				throw new ZigBeeHAException(response.getStatus().toString());
-		} catch (ZigBeeClusterException e) {
-			throw new ZigBeeHAException(e);
-		}
-	}
+    public boolean subscribe(OnOffListener listener) {
+        return eventBridge.subscribe(listener);
+    }
 
-	public Subscription[] getActiveSubscriptions() {
-		return onOffCluster.getActiveSubscriptions();
-	}
+    public boolean unsubscribe(OnOffListener listener) {
+        return eventBridge.unsubscribe(listener);
+    }
 
-	public int getId() {
-		return onOffCluster.getId();
-	}
+    public void off() throws ZigBeeHAException {
+        try {
+            DefaultResponse response = onOffCluster.off();
+            if (response.getStatus() != Status.SUCCESS)
+                throw new ZigBeeHAException(response.getStatus().toString());
+        } catch (ZigBeeClusterException e) {
+            throw new ZigBeeHAException(e);
+        }
+    }
 
-	public String getName() {
-		return onOffCluster.getName();
-	}
+    public void on() throws ZigBeeHAException {
+        try {
+            DefaultResponse response = onOffCluster.on();
+            if (response.getStatus() != Status.SUCCESS)
+                throw new ZigBeeHAException(response.getStatus().toString());
+        } catch (ZigBeeClusterException e) {
+            throw new ZigBeeHAException(e);
+        }
+    }
 
-	public Attribute getAttribute(int id) {		
-		Attribute[] attributes = onOffCluster.getAvailableAttributes();
-		for (int i = 0; i < attributes.length; i++) {
-			if( attributes[i].getId() == id ) 
-				return attributes[i];
-		}
-		return null;
-	}
+    public void toggle() throws ZigBeeHAException {
+        try {
+            DefaultResponse response = onOffCluster.toggle();
+            if (response.getStatus() != Status.SUCCESS)
+                throw new ZigBeeHAException(response.getStatus().toString());
+        } catch (ZigBeeClusterException e) {
+            throw new ZigBeeHAException(e);
+        }
+    }
 
-	public Attribute[] getAttributes() {
-		return onOffCluster.getAvailableAttributes();
-	}
+    public Subscription[] getActiveSubscriptions() {
+        return onOffCluster.getActiveSubscriptions();
+    }
 
-	
+    public int getId() {
+        return onOffCluster.getId();
+    }
+
+    public String getName() {
+        return onOffCluster.getName();
+    }
+
+    public Attribute getAttribute(int id) {
+        Attribute[] attributes = onOffCluster.getAvailableAttributes();
+        for (int i = 0; i < attributes.length; i++) {
+            if( attributes[i].getId() == id )
+                return attributes[i];
+        }
+        return null;
+    }
+
+    public Attribute[] getAttributes() {
+        return onOffCluster.getAvailableAttributes();
+    }
+
+
 }

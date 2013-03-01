@@ -853,4 +853,45 @@ public class Attributes  {
     .setZigBeeType(ZigBeeType.Boolean)
     .setWritable(true);
 
+    final static public  AttributeDescriptor APPLICATION_TYPE = new AbstractAttribute()
+    .setId(0x0100)
+    .setName("ApplicationType")
+    .setReportable(false)
+    .setZigBeeType(ZigBeeType.UnsignedInteger32bit)
+    .setWritable(true);
+
+    final static public  AttributeDescriptor RELIABILITY = new AbstractAttribute()
+    .setId(0x0067)
+    .setName("Reliability")
+    .setReportable(false)
+    .setZigBeeType(ZigBeeType.Enumeration8bit)
+    .setWritable(true);
+
+    final static public  AttributeDescriptor POLARITY = new AbstractAttribute()
+    .setId(0x0054)
+    .setName("Polarity")
+    .setReportable(false)
+    .setZigBeeType(ZigBeeType.Enumeration8bit)
+    .setWritable(false);
+
+    final static public  AttributeDescriptor INACTIVE_TEXT = new AbstractAttribute()
+    .setId(0x002E)
+    .setName("InactiveText")
+    .setReportable(false)
+    .setZigBeeType(ZigBeeType.CharacterString)
+    .setWritable(true);
+
+    final static public  AttributeDescriptor ACTIVE_TEXT = new AbstractAttribute()
+    .setId(0x0004)
+    .setName("ActiveText")
+    .setReportable(false)
+    .setZigBeeType(ZigBeeType.CharacterString)
+    .setWritable(true);
+
+    final static public  AttributeDescriptor DESCRIPTION = new AbstractAttribute()
+    .setId(0x001C)
+    .setName("Description")
+    .setReportable(false)
+    .setZigBeeType(ZigBeeType.CharacterString)
+    .setWritable(true);
 }

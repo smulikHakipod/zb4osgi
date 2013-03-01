@@ -27,6 +27,7 @@ import it.cnr.isti.zigbee.ha.device.api.generic.LevelControlSwitch;
 import it.cnr.isti.zigbee.ha.device.api.generic.MainsPowerOutlet;
 import it.cnr.isti.zigbee.ha.device.api.generic.OnOffOutput;
 import it.cnr.isti.zigbee.ha.device.api.generic.OnOffSwitch;
+import it.cnr.isti.zigbee.ha.device.api.generic.SimpleSensor;
 import it.cnr.isti.zigbee.ha.device.api.hvac.Pump;
 import it.cnr.isti.zigbee.ha.device.api.hvac.TemperatureSensor;
 import it.cnr.isti.zigbee.ha.device.api.lighting.ColorDimmableLight;
@@ -39,6 +40,7 @@ import it.cnr.isti.zigbee.ha.device.api.security_safety.IASAncillaryControlEquip
 import it.cnr.isti.zigbee.ha.device.api.security_safety.IASControlAndIndicatingEquipment;
 import it.cnr.isti.zigbee.ha.device.api.security_safety.IAS_Warning;
 import it.cnr.isti.zigbee.ha.device.api.security_safety.IAS_Zone;
+import it.cnr.isti.zigbee.ha.device.factory.SimpleSensorFactory;
 import it.cnr.isti.zigbee.ha.device.impl.ColorDimmableLightDevice;
 import it.cnr.isti.zigbee.ha.device.impl.DimmableLightDevice;
 import it.cnr.isti.zigbee.ha.device.impl.IASAncillaryControlEquipmentDevice;
@@ -54,6 +56,7 @@ import it.cnr.isti.zigbee.ha.device.impl.OnOffLightSwitchDevice;
 import it.cnr.isti.zigbee.ha.device.impl.OnOffOutputDevice;
 import it.cnr.isti.zigbee.ha.device.impl.OnOffSwitchDevice;
 import it.cnr.isti.zigbee.ha.device.impl.PumpDevice;
+import it.cnr.isti.zigbee.ha.device.impl.SimpleSensorDevice;
 import it.cnr.isti.zigbee.ha.device.impl.TemperatureSensorDevice;
 import it.cnr.isti.zigbee.ha.driver.HADriverConfiguration;
 import it.cnr.isti.zigbee.ha.driver.HAImporter;
@@ -135,6 +138,7 @@ public class Activator implements BundleActivator {
         refinedAvailables.put( Pump.class, PumpDevice.class );
         refinedAvailables.put( TemperatureSensor.class, TemperatureSensorDevice.class );
         refinedAvailables.put( IAS_Warning.class, IAS_Warning_Device.class );
+        refinedAvailables.put( SimpleSensor.class, SimpleSensorDevice.class );
 
         final Iterator< Entry<Class<?>, Class<?>> > i = refinedAvailables.entrySet().iterator();
         while ( i.hasNext() ) {

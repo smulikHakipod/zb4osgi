@@ -145,15 +145,15 @@ A set of Java classes reppresenting the ZigBee Common Cluster library
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
           <groups>
-	  <group>
-	    <title>ZigBee Cluster Library API</title>
-	    <packages>it.cnr.isti.zigbee.zcl.library.api*</packages>
-	  </group>
-	  <group>
-	    <title>Default ZigBee Cluster Library implementation</title>
-	    <packages>it.cnr.isti.zigbee.zcl.library.impl*</packages>
-	  </group>
-	</groups>
+    <group>
+      <title>ZigBee Cluster Library API</title>
+      <packages>it.cnr.isti.zigbee.zcl.library.api*</packages>
+    </group>
+    <group>
+      <title>Default ZigBee Cluster Library implementation</title>
+      <packages>it.cnr.isti.zigbee.zcl.library.impl*</packages>
+    </group>
+  </groups>
         </configuration>
       </plugin>
       <plugin>
@@ -167,7 +167,8 @@ A set of Java classes reppresenting the ZigBee Common Cluster library
               Stefano "Kismet" Lenzi <stefano.lenzi@isti.cnr.it>,
               Francesco Furfari <francesco.furfari@isti.cnr.it>,
               Alessandro Giari <alessandro.giari@isti.cnr.it>,
-              Manlio Bacco <manlio.bacco@isti.cnr.it>
+              Manlio Bacco <manlio.bacco@isti.cnr.it>,
+              Han Alink <h.alink1@chello.nl>
             ]]></Bundle-Author>
             <Bundle-Name>${project.name}</Bundle-Name>
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
