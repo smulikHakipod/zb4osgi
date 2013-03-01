@@ -23,10 +23,10 @@
 package it.cnr.isti.zigbee.zcl.library.impl.general.groups;
 
 import it.cnr.isti.zigbee.zcl.library.api.core.ZBSerializer;
+import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeType;
 import it.cnr.isti.zigbee.zcl.library.api.general.Groups;
 import it.cnr.isti.zigbee.zcl.library.impl.core.AbstractCommand;
 import it.cnr.isti.zigbee.zcl.library.impl.core.ByteArrayOutputStreamSerializer;
-import it.cnr.isti.zigbee.zcl.library.impl.core.ZigBeeType;
 
 
 /**

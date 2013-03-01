@@ -23,8 +23,8 @@
 package it.cnr.isti.zigbee.zcl.library.impl.global.reporting;
 
 import it.cnr.isti.zigbee.zcl.library.api.core.ZBDeserializer;
+import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeType;
 import it.cnr.isti.zigbee.zcl.library.api.global.AttributeReport;
-import it.cnr.isti.zigbee.zcl.library.impl.core.ZigBeeType;
 
 /**
  * 

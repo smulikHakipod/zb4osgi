@@ -35,13 +35,13 @@ import it.cnr.isti.zigbee.zcl.library.api.core.Command;
  */
 public class ZCLFrame {
 
-	private ZCLHeader header;
+	private ZCLHeaderImpl header;
 	private byte[] payload;
 	private byte[] frame;
 	
 	public ZCLFrame(Cluster cluster) {
 		byte[] frame = cluster.getClusterMsg();
-		header = new ZCLHeader(frame);
+		header = new ZCLHeaderImpl(frame);
 		
 		int srcPos = header.size(); 
 		int lenght = frame.length - header.size();
@@ -50,12 +50,12 @@ public class ZCLFrame {
 	}
 
 	public ZCLFrame(Command cmd, boolean isEnableddefaultResponse) {
-		header = new ZCLHeader(cmd, isEnableddefaultResponse);
+		header = new ZCLHeaderImpl(cmd, isEnableddefaultResponse);
 		payload = cmd.getPayload();
 		frame = createFrame();
 	}
 	
-	public ZCLHeader getHeader(){
+	public ZCLHeaderImpl getHeader(){
 		return header;
 	}
 	

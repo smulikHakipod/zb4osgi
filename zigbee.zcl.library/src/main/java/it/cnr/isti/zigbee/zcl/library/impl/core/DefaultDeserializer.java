@@ -24,6 +24,7 @@ package it.cnr.isti.zigbee.zcl.library.impl.core;
 
 import it.cnr.isti.primitvetypes.util.Integers;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZBDeserializer;
+import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeType;
 
 /**
  * 

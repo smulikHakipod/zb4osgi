@@ -20,7 +20,7 @@
    limitations under the License.
 */
 
-package it.cnr.isti.zigbee.zcl.library.impl.core;
+package it.cnr.isti.zigbee.zcl.library.api.core;
 
 import java.util.Hashtable;
 

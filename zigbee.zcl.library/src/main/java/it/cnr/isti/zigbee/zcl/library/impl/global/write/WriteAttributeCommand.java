@@ -23,11 +23,11 @@
 package it.cnr.isti.zigbee.zcl.library.impl.global.write;
 
 import it.cnr.isti.zigbee.zcl.library.api.core.ZBSerializer;
+import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeType;
 import it.cnr.isti.zigbee.zcl.library.api.global.WriteAttributeRecord;
 import it.cnr.isti.zigbee.zcl.library.impl.core.AbstractCommand;
 import it.cnr.isti.zigbee.zcl.library.impl.core.ByteArrayOutputStreamSerializer;
 import it.cnr.isti.zigbee.zcl.library.impl.core.DefaultSerializer;
-import it.cnr.isti.zigbee.zcl.library.impl.core.ZigBeeType;
 /**
  * 
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>

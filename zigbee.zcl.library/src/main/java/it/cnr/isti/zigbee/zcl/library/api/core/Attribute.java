@@ -1,10 +1,10 @@
 /*
    Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,11 +22,10 @@
 
 package it.cnr.isti.zigbee.zcl.library.api.core;
 
-import it.cnr.isti.zigbee.zcl.library.impl.core.ZigBeeType;
 
 /**
  * This class represent an Attribute as defined by the <i>ZigBee Cluster Library</i> specification
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
@@ -35,52 +34,52 @@ import it.cnr.isti.zigbee.zcl.library.impl.core.ZigBeeType;
  */
 public interface Attribute {
 
-	/**
-	 * @return the <b>16-bit</b> identifier of the attribute as specified by the cluster
-	 */
-	public int getId();
-	
-	/**
-	 * @return the {@link String} associated to this attribute as specified by the cluster
-	 */
-	public String getName();
-	
-	/**
-	 * @return the java {@link Class} used to represent the attribute value
-	 */
-	@SuppressWarnings("unchecked")
-	public Class getType();
-	
-	/**
-	 * @return the {@link ZigBeeType} that describes the attribute type
-	 */
-	public ZigBeeType getZigBeeType();
-			
-	/**
-	 * @return the true if and only if the attribute can be written
-	 */
-	public boolean isWritable();
-	
-	/**
-	 * @return the true if and only if the attribute support the {@link Subscription}
-	 */
-	public boolean isReportable();	
-	
-	/**
-	 * @return the current value of the attribute 
-	 */
-	public Object getValue() throws ZigBeeClusterException;
-	
-	/**
-	 * If the attribute can be written ({@link #isWritable()} this method set its value.
-	 * 
-	 * @param o the value of to set the attribute to
-	 */
-	public void setValue(Object o) throws ZigBeeClusterException;
-	
-	/**
-	 * @return the {@link Subscription}
-	 */
-	public Subscription getSubscription();
+    /**
+     * @return the <b>16-bit</b> identifier of the attribute as specified by the cluster
+     */
+    public int getId();
+
+    /**
+     * @return the {@link String} associated to this attribute as specified by the cluster
+     */
+    public String getName();
+
+    /**
+     * @return the java {@link Class} used to represent the attribute value
+     */
+    @SuppressWarnings("unchecked")
+    public Class getType();
+
+    /**
+     * @return the {@link ZigBeeType} that describes the attribute type
+     */
+    public ZigBeeType getZigBeeType();
+
+    /**
+     * @return the true if and only if the attribute can be written
+     */
+    public boolean isWritable();
+
+    /**
+     * @return the true if and only if the attribute support the {@link Subscription}
+     */
+    public boolean isReportable();
+
+    /**
+     * @return the current value of the attribute
+     */
+    public Object getValue() throws ZigBeeClusterException;
+
+    /**
+     * If the attribute can be written ({@link #isWritable()} this method set its value.
+     *
+     * @param o the value of to set the attribute to
+     */
+    public void setValue(Object o) throws ZigBeeClusterException;
+
+    /**
+     * @return the {@link Subscription}
+     */
+    public Subscription getSubscription();
 
 }

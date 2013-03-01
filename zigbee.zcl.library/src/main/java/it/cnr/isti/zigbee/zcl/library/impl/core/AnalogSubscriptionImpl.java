@@ -1,10 +1,10 @@
 /*
    Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,6 +29,7 @@ import it.cnr.isti.zigbee.zcl.library.api.core.AnalogSubscription;
 import it.cnr.isti.zigbee.zcl.library.api.core.Attribute;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZCLCluster;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeClusterException;
+import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeType;
 import it.cnr.isti.zigbee.zcl.library.api.global.AttributeReportingConfigurationRecord;
 import it.cnr.isti.zigbee.zcl.library.api.global.AttributeStatusRecord;
 import it.cnr.isti.zigbee.zcl.library.impl.ClusterImpl;
@@ -49,81 +50,81 @@ import org.slf4j.LoggerFactory;
  */
 public class AnalogSubscriptionImpl extends SubscriptionBase implements AnalogSubscription {
 
-	private final Logger log = LoggerFactory.getLogger(AnalogSubscriptionImpl.class);
-	
-	private Object minimumChange = null;
-		
-	public AnalogSubscriptionImpl(final ZigBeeDevice zb, final ZCLCluster c, final Attribute attrib) {
-		super(zb, c, attrib);
-		final ZigBeeType type = attrib.getZigBeeType();
-		if ( type.isAnalog() == false ) {
-			throw new IllegalArgumentException(
-					"AnalogSubscription applies only to Attribute with analog data type, " +
-					"the attribute " + attrib.getName() + " ("+attrib.getId()+") of type "+type.toString() +
-					" is DISCRETE"
-			);
-		}
-		setReportableChangeValue(new Double(AnalogSubscription.DEFAULT_REPORTABLE_CHANGE_INTERVAL));
-	}
-	
-	protected boolean doConfigureServer() throws ZigBeeClusterException {
-		
-		log.debug(
-				"Subscring to analog attribute {} ( {} )with the following parameter min = {}, max = {}, change = {}",
-				new Object[]{attribute.getName(), attribute.getId(), min, max, minimumChange}
-		);
-		
-		AttributeReportingConfigurationRecordImpl config = new AttributeReportingConfigurationRecordImpl(
-				attribute, 0x00, max, min, minimumChange, max 
-		);
-		ConfigureReportingCommand cmd = new ConfigureReportingCommand(
-				new AttributeReportingConfigurationRecord[]{config}
-		);
+    private final Logger log = LoggerFactory.getLogger(AnalogSubscriptionImpl.class);
 
-		final ZCLFrame frame = new ZCLFrame(cmd, true);
-		final ClusterImpl input = new ClusterImpl(cluster.getId(),frame);
-		Cluster cluster = null;
-		try {
-			cluster = device.invoke(input);
-			final ConfigureReportingResponseImpl response = new ConfigureReportingResponseImpl(
-					new ResponseImpl(cluster,cluster.getId()), new Attribute[]{attribute}
-			);
-			final AttributeStatusRecord[] results = response.getAttributeStatusRecord();
-			if ( results[0].getStatus() != 0 ) {
-				throw new ZigBeeClusterException("ConfigureReporting answered with a Failed status: {} "+results[0].getStatus());
-			}
-		} catch (ZigBeeBasedriverException e) {
-			throw new ZigBeeClusterException(e);
-		}
-		
-		return true;		
-	}
-		
-	public Object getReportableChange() {
-		return minimumChange;
-	}
+    private Object minimumChange = null;
 
-	private void setReportableChangeValue(Number n) {
-		final ZigBeeType type = attribute.getZigBeeType();
-		if( type.getJavaClass() == Long.class ) {
-			minimumChange = new Long(n.longValue());
-		}else if( type.getJavaClass() == Integer.class ){
-			minimumChange = new Integer(n.intValue());
-		}else if( type.getJavaClass() == Float.class ){
-			minimumChange = new Float(n.floatValue());
-		}else if( type.getJavaClass() == Double.class ){
-			minimumChange = new Double(n.doubleValue());
-		} else {
-			throw new IllegalArgumentException(
-					"Java class used for the interpretation of the " +
-					"the attribute " + attribute.getName() + " ("+attribute.getId()+") of type "+type.toString() +
-					" is not recognized "
-			);
-		}
-	}
-	
-	public void setReportableChange(Object value) {
-		setReportableChangeValue((Number) value);
-	}
+    public AnalogSubscriptionImpl(final ZigBeeDevice zb, final ZCLCluster c, final Attribute attrib) {
+        super(zb, c, attrib);
+        final ZigBeeType type = attrib.getZigBeeType();
+        if ( type.isAnalog() == false ) {
+            throw new IllegalArgumentException(
+                    "AnalogSubscription applies only to Attribute with analog data type, " +
+                    "the attribute " + attrib.getName() + " ("+attrib.getId()+") of type "+type.toString() +
+                    " is DISCRETE"
+            );
+        }
+        setReportableChangeValue(new Double(AnalogSubscription.DEFAULT_REPORTABLE_CHANGE_INTERVAL));
+    }
+
+    protected boolean doConfigureServer() throws ZigBeeClusterException {
+
+        log.debug(
+                "Subscring to analog attribute {} ( {} )with the following parameter min = {}, max = {}, change = {}",
+                new Object[]{attribute.getName(), attribute.getId(), min, max, minimumChange}
+        );
+
+        AttributeReportingConfigurationRecordImpl config = new AttributeReportingConfigurationRecordImpl(
+                attribute, 0x00, max, min, minimumChange, max
+        );
+        ConfigureReportingCommand cmd = new ConfigureReportingCommand(
+                new AttributeReportingConfigurationRecord[]{config}
+        );
+
+        final ZCLFrame frame = new ZCLFrame(cmd, true);
+        final ClusterImpl input = new ClusterImpl(cluster.getId(),frame);
+        Cluster cluster = null;
+        try {
+            cluster = device.invoke(input);
+            final ConfigureReportingResponseImpl response = new ConfigureReportingResponseImpl(
+                    new ResponseImpl(cluster,cluster.getId()), new Attribute[]{attribute}
+            );
+            final AttributeStatusRecord[] results = response.getAttributeStatusRecord();
+            if ( results[0].getStatus() != 0 ) {
+                throw new ZigBeeClusterException("ConfigureReporting answered with a Failed status: {} "+results[0].getStatus());
+            }
+        } catch (ZigBeeBasedriverException e) {
+            throw new ZigBeeClusterException(e);
+        }
+
+        return true;
+    }
+
+    public Object getReportableChange() {
+        return minimumChange;
+    }
+
+    private void setReportableChangeValue(Number n) {
+        final ZigBeeType type = attribute.getZigBeeType();
+        if( type.getJavaClass() == Long.class ) {
+            minimumChange = new Long(n.longValue());
+        }else if( type.getJavaClass() == Integer.class ){
+            minimumChange = new Integer(n.intValue());
+        }else if( type.getJavaClass() == Float.class ){
+            minimumChange = new Float(n.floatValue());
+        }else if( type.getJavaClass() == Double.class ){
+            minimumChange = new Double(n.doubleValue());
+        } else {
+            throw new IllegalArgumentException(
+                    "Java class used for the interpretation of the " +
+                    "the attribute " + attribute.getName() + " ("+attribute.getId()+") of type "+type.toString() +
+                    " is not recognized "
+            );
+        }
+    }
+
+    public void setReportableChange(Object value) {
+        setReportableChangeValue((Number) value);
+    }
 
 }

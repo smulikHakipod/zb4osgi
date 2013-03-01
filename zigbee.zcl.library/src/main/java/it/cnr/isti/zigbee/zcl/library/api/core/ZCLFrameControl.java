@@ -22,18 +22,21 @@
 
 package it.cnr.isti.zigbee.zcl.library.api.core;
 
-
 /**
  *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
- * @since 0.1.0
+ * @since 0.8.0
  *
  */
-public interface Response extends Message{
+public interface ZCLFrameControl {
 
-    public boolean isDefaultResponseEnabled();
+    public abstract boolean isClusterSpecificCommand();
 
-    public ZCLHeader getZCLHeader();
+    public abstract boolean  isManufacturerExtension();
+
+    public abstract boolean isClientServerDirection();
+
+    public abstract boolean isDefaultResponseEnabled();
 }

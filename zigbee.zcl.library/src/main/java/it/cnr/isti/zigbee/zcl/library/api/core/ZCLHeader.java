@@ -19,7 +19,6 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-
 package it.cnr.isti.zigbee.zcl.library.api.core;
 
 
@@ -28,12 +27,19 @@ package it.cnr.isti.zigbee.zcl.library.api.core;
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
- * @since 0.1.0
+ * @since 0.8.0
  *
  */
-public interface Response extends Message{
+public interface ZCLHeader {
 
-    public boolean isDefaultResponseEnabled();
+    public abstract ZCLFrameControl getFramecontrol();
 
-    public ZCLHeader getZCLHeader();
+    public abstract byte[] getManufacturerId();
+
+    public abstract byte getTransactionId();
+
+    public abstract byte getCommandId();
+
+    public abstract byte[] toByte();
+
 }

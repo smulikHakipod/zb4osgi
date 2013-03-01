@@ -23,10 +23,10 @@
 package it.cnr.isti.zigbee.zcl.library.impl.global.reporting;
 
 import it.cnr.isti.zigbee.zcl.library.api.core.ZBSerializer;
+import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeType;
 import it.cnr.isti.zigbee.zcl.library.api.global.AttributeReportingConfigurationRecord;
 import it.cnr.isti.zigbee.zcl.library.impl.core.AbstractCommand;
 import it.cnr.isti.zigbee.zcl.library.impl.core.DefaultSerializer;
-import it.cnr.isti.zigbee.zcl.library.impl.core.ZigBeeType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

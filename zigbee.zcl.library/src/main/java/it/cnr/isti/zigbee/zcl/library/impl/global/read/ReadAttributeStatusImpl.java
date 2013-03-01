@@ -24,9 +24,9 @@ package it.cnr.isti.zigbee.zcl.library.impl.global.read;
 
 import it.cnr.isti.zigbee.zcl.library.api.core.Status;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZBDeserializer;
+import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeType;
 import it.cnr.isti.zigbee.zcl.library.api.global.ReadAttributesStatus;
 import it.cnr.isti.zigbee.zcl.library.impl.attribute.AttributeDescriptor;
-import it.cnr.isti.zigbee.zcl.library.impl.core.ZigBeeType;
 /**
  * 
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>

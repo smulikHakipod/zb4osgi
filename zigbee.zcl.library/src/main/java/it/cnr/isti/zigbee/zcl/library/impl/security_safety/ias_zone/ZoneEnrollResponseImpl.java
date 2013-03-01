@@ -4,10 +4,10 @@ import it.cnr.isti.zigbee.api.Cluster;
 import it.cnr.isti.zigbee.zcl.library.api.core.Response;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZBDeserializer;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeClusterException;
+import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeType;
 import it.cnr.isti.zigbee.zcl.library.api.security_safety.ias_zone.ZoneEnrollResponse;
 import it.cnr.isti.zigbee.zcl.library.impl.core.DefaultDeserializer;
 import it.cnr.isti.zigbee.zcl.library.impl.core.ResponseImpl;
-import it.cnr.isti.zigbee.zcl.library.impl.core.ZigBeeType;
 
 public class ZoneEnrollResponseImpl extends ResponseImpl implements ZoneEnrollResponse {
 

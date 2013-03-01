@@ -1,10 +1,10 @@
 /*
    Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,32 +24,31 @@ package it.cnr.isti.zigbee.zcl.library.api.global;
 
 import it.cnr.isti.zigbee.zcl.library.api.core.Response;
 import it.cnr.isti.zigbee.zcl.library.api.core.Status;
-import it.cnr.isti.zigbee.zcl.library.api.general.identify.IdentifyQueryResponse;
 
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.1.0
  *
  */
-public interface DefaultResponse extends Response{
+public interface DefaultResponse extends Response {
 
 
-	public static final byte ID = 0x0b;
-	
-	/**
-	 * 
-	 * @return the short representing the id of the invoking command that generated as result<br>
-	 * 		this {@link IdentifyQueryResponse}
-	 */
-	public byte getCommandId();
-	
-	/**
-	 * 
-	 * @return the {@link Status} of result of the invoked command
-	 */
-	
-	public Status getStatus();
+    public static final byte ID = 0x0b;
+
+    /**
+     *
+     * @return the short representing the id of the invoking command that generated as result<br>
+     * 		this {@link IdentifyQueryResponse}
+     */
+    public byte getCommandId();
+
+    /**
+     *
+     * @return the {@link Status} of result of the invoked command
+     */
+
+    public Status getStatus();
 }

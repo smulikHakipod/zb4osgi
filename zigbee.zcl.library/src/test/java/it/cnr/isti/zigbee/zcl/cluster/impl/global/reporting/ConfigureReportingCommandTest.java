@@ -25,8 +25,8 @@ import static org.junit.Assert.assertNotNull;
 import it.cnr.isti.zigbee.zcl.library.api.core.Attribute;
 import it.cnr.isti.zigbee.zcl.library.api.core.Subscription;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeClusterException;
+import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeType;
 import it.cnr.isti.zigbee.zcl.library.api.global.AttributeReportingConfigurationRecord;
-import it.cnr.isti.zigbee.zcl.library.impl.core.ZigBeeType;
 import it.cnr.isti.zigbee.zcl.library.impl.global.reporting.AttributeReportingConfigurationRecordImpl;
 import it.cnr.isti.zigbee.zcl.library.impl.global.reporting.ConfigureReportingCommand;
 

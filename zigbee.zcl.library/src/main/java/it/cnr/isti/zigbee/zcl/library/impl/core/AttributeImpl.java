@@ -31,6 +31,7 @@ import it.cnr.isti.zigbee.zcl.library.api.core.Status;
 import it.cnr.isti.zigbee.zcl.library.api.core.Subscription;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZCLCluster;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeClusterException;
+import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeType;
 import it.cnr.isti.zigbee.zcl.library.api.global.DefaultResponse;
 import it.cnr.isti.zigbee.zcl.library.api.global.ReadAttributesResponse;
 import it.cnr.isti.zigbee.zcl.library.api.global.ReadAttributesStatus;

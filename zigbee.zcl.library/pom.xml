@@ -53,7 +53,7 @@ A set of Java classes reppresenting the ZigBee Common Cluster library
 
   <developers>
     <developer>
-      <id>slenzi</id>
+      <id>stefano.lenzi</id>
       <name>Stefano "Kismet" Lenzi</name>
       <email>stefano.lenzi@isti.cnr.it</email>
       <organization>Institute of Information Science and Technologies of the Italian National Research Council</organization>
@@ -61,7 +61,15 @@ A set of Java classes reppresenting the ZigBee Common Cluster library
       <timezone>+1</timezone>
     </developer>
     <developer>
-      <id>ffurfari</id>
+      <id>manlio.bacco</id>
+      <name>Manlio Bacco</name>
+      <email>manlio.bacco@isti.cnr.it</email>
+      <organization>Institute of Information Science and Technologies of the Italian National Research Council</organization>
+      <organizationUrl>http://www.isti.cnr.it/</organizationUrl>
+      <timezone>+1</timezone>
+    </developer>
+    <developer>
+      <id>francesco.furfari</id>
       <name>Francesco Furfari</name>
       <email>francesco.furfari@isti.cnr.it</email>
       <organization>Institute of Information Science and Technologies of the Italian National Research Council</organization>
@@ -96,6 +104,7 @@ A set of Java classes reppresenting the ZigBee Common Cluster library
     <dependency>
       <groupId>org.aaloa.zb4osgi</groupId>
       <artifactId>org.aaloa.zb4osgi.zigbee.cc2480.datalink</artifactId>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.aaloa.zb4osgi</groupId>
@@ -113,19 +122,20 @@ A set of Java classes reppresenting the ZigBee Common Cluster library
       <groupId>org.ops4j.pax.logging</groupId>
       <artifactId>pax-logging-service</artifactId>
     </dependency>
-	<!-- TESTING -->
+
+    <!-- TESTING -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
     </dependency>
-	  <dependency>
-		<groupId>org.easymock</groupId>
-		<artifactId>easymockclassextension</artifactId>
-	  </dependency>
-	  <dependency>
-		<groupId>org.easymock</groupId>
-		<artifactId>easymock</artifactId>
-	  </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymockclassextension</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymock</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
@@ -154,23 +164,25 @@ A set of Java classes reppresenting the ZigBee Common Cluster library
         <configuration>
           <instructions>
             <Bundle-Author><![CDATA[
-	    Stefano "Kismet" Lenzi <stefano.lenzi@isti.cnr.it>,
-	    Francesco Furfari <francesco.furfari@isti.cnr.it>,
-	    Alessandro Giari <alessandro.giari@isti.cnr.it>
+              Stefano "Kismet" Lenzi <stefano.lenzi@isti.cnr.it>,
+              Francesco Furfari <francesco.furfari@isti.cnr.it>,
+              Alessandro Giari <alessandro.giari@isti.cnr.it>,
+              Manlio Bacco <manlio.bacco@isti.cnr.it>
             ]]></Bundle-Author>
             <Bundle-Name>${project.name}</Bundle-Name>
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Bundle-Activator />
             <Private-Package>
+              com.itaca.ztool.util
             </Private-Package>
             <Import-Package>
               it.cnr.isti.primitvetypes.util,
-              com.itaca.ztool.util,
               it.cnr.isti.zigbee.api,
               org.slf4j; provider=paxlogging
             </Import-Package>
             <Export-Package>
-              it.cnr.isti.zigbee.zcl.*;version=${pom.version}
+              it.cnr.isti.zigbee.zcl.library.api.*;version=${pom.version},
+              it.cnr.isti.zigbee.zcl.library.impl.*;version=${pom.version}
             </Export-Package>
           </instructions>
         </configuration>
