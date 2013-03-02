@@ -30,7 +30,7 @@ import it.cnr.isti.zigbee.zcl.library.api.core.Attribute;
 import it.cnr.isti.zigbee.zcl.library.api.core.ReportListener;
 import it.cnr.isti.zigbee.zcl.library.api.core.Subscription;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeClusterException;
-import it.cnr.isti.zigbee.zcl.library.impl.core.ZigBeeType;
+import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeType;
 
 import java.awt.Color;
 import java.awt.GridBagLayout;

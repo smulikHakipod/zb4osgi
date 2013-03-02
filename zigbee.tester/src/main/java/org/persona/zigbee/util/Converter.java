@@ -23,7 +23,7 @@
 
 package org.persona.zigbee.util;
 
-import it.cnr.isti.zigbee.zcl.library.impl.core.ZigBeeType;
+import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeType;
 
 /**
  * 
