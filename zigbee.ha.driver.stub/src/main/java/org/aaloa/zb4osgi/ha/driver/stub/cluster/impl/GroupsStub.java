@@ -46,15 +46,6 @@ public class GroupsStub implements Groups {
     private static final Logger logger = LoggerFactory.getLogger( GroupsStub.class );
 
     /* (non-Javadoc)
-     * @see it.cnr.isti.zigbee.ha.cluster.glue.general.Groups#addGroup(int)
-     */
-    public AddGroupResponse addGroup( int groupId )
-        throws ZigBeeHAException {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /* (non-Javadoc)
      * @see it.cnr.isti.zigbee.ha.cluster.glue.general.Groups#addGroupIfIdentifying(int, java.lang.String)
      */
     public void addGroupIfIdentifying( int groupId, String name )
@@ -143,6 +134,15 @@ public class GroupsStub implements Groups {
      * @see it.cnr.isti.zigbee.ha.cluster.glue.Cluster#getName()
      */
     public String getName() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /* (non-Javadoc)
+     * @see it.cnr.isti.zigbee.ha.cluster.glue.general.Groups#addGroup(int, java.lang.String)
+     */
+    public AddGroupResponse addGroup( int groupId, String name )
+        throws ZigBeeHAException {
         // TODO Auto-generated method stub
         return null;
     }

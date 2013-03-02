@@ -225,6 +225,13 @@ public class ConfigurationService implements ManagedService {
 	}
 
 	private void updateDriverConfiguration() {
+        if ( driver == null ) {
+            logger.info( 
+                "No ZigBee Interface Controller configured because the is no {} registered", 
+                driver.getClass() 
+            );
+            return;
+        }
 		if ( driver != null && driver.getDriverStatus() != DriverStatus.CLOSED ){
 			logger.info("{} not configured nor started because its status is not equal to CLOSED", driver);
 			return;

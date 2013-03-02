@@ -61,13 +61,20 @@ public class UnknowHADeviceFactory extends HADeviceFactoryBase   {
 
     public int[] getDeviceClusters() {
         String filter = "(" + Cluster.PROFILE_CLUSTER_IDs + "=*)";
+        final int CLUSTER_INDEX = ( HAProfile.ID + ":" ).length();        
         int[] ids = new int[]{};
         ServiceReference[] srClusterFactory;
         try {
             srClusterFactory = ctx.getServiceReferences(ClusterFactory.class.getName(), filter);
-            if ( srClusterFactory == null ) return ids;
+            if ( srClusterFactory == null ) return ids;            
             for (int j = 0; j < srClusterFactory.length; j++) {
-                ids = ArraysUtil.append(ids, (int[]) srClusterFactory[j].getProperty(Cluster.PROFILE_CLUSTER_IDs) );
+                final String[] stringIDs = (String[]) srClusterFactory[j].getProperty(Cluster.PROFILE_CLUSTER_IDs);
+                final int[] clusterIDs = new int[stringIDs.length];
+                for ( int i = 0; i < clusterIDs.length; i++ ) {
+                    if ( stringIDs[i].startsWith( HAProfile.ID + ":"  ) == false ) continue;
+                    clusterIDs[i] = Integer.parseInt( stringIDs[i].substring( CLUSTER_INDEX ) );
+                }
+                ids = ArraysUtil.append(ids, clusterIDs );
             }
         } catch (InvalidSyntaxException e) {
         }

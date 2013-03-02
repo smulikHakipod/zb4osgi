@@ -57,7 +57,7 @@ import org.osgi.framework.BundleContext;
 public class HAClustersFactory extends ClusterFactoryBase {
 
     //General
-    final static String BASIC_KEY = HAProfile.ID + ":"+ HAProfile.BASIC;
+    final static String BASIC_KEY = HAProfile.ID + ":" + HAProfile.BASIC;
     final static String POWER_CONFIGURATION_KEY = HAProfile.ID + ":"+ HAProfile.POWER_CONFIGURATION;
     final static String DEVICE_TEMPERATURE_CONFIGURATION_KEY = HAProfile.ID + ":"+ HAProfile.DEVICE_TEMPERATURE_CONFIGURATION;
     final static String IDENTIFY_KEY = HAProfile.ID + ":"+ HAProfile.IDENTIFY;

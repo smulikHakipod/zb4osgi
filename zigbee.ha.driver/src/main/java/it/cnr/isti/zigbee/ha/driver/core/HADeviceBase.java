@@ -98,6 +98,15 @@ public abstract class HADeviceBase implements HADevice  {
             size = zbDevice.getInputClusters().length + zbDevice.getOutputClusters().length;
         }
         clusters = new Cluster[size];
+		
+        for ( int i = 0; i < zbDevice.getInputClusters().length; i++ ) {
+            addCluster( zbDevice.getInputClusters()[i] );
+        }
+		if( Activator.getConfiguration().getClusterMode() != ProvidedClusterMode.HomeAutomationProfileStrict ){
+		    for ( int i = 0; i < zbDevice.getOutputClusters().length; i++ ) {
+                addCluster( zbDevice.getOutputClusters()[i] );
+            }
+		} 
 
         basic = (Basic) addCluster(HAProfile.BASIC);
         identify = (Identify) addCluster(HAProfile.IDENTIFY);

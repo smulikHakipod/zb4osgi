@@ -36,8 +36,7 @@ import org.slf4j.LoggerFactory;
  * @since 0.1.0
  *
  */
-public class BasicStub
-    implements Basic {
+public class BasicStub implements Basic {
 
     private static final Logger logger = LoggerFactory.getLogger( BasicStub.class );
 
@@ -184,6 +183,22 @@ public class BasicStub
      * @see it.cnr.isti.zigbee.ha.cluster.glue.Cluster#getName()
      */
     public String getName() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /* (non-Javadoc)
+     * @see it.cnr.isti.zigbee.ha.cluster.glue.general.Basic#getDisableLocalConfig()
+     */
+    public Attribute getDisableLocalConfig() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /* (non-Javadoc)
+     * @see it.cnr.isti.zigbee.ha.cluster.glue.general.Basic#getPhysicalEnvironment()
+     */
+    public Attribute getPhysicalEnvironment() {
         // TODO Auto-generated method stub
         return null;
     }

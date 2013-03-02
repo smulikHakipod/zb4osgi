@@ -27,7 +27,7 @@ import it.cnr.isti.zigbee.zcl.library.api.core.Subscription;
 import it.cnr.isti.zigbee.zcl.library.api.general.scenes.AddScenePayload;
 import it.cnr.isti.zigbee.zcl.library.api.general.scenes.AddSceneResponse;
 import it.cnr.isti.zigbee.zcl.library.api.general.scenes.GetSceneMembershipResponse;
-import it.cnr.isti.zigbee.zcl.library.api.general.scenes.RemoveAllSceneResponse;
+import it.cnr.isti.zigbee.zcl.library.api.general.scenes.RemoveAllScenesResponse;
 import it.cnr.isti.zigbee.zcl.library.api.general.scenes.RemoveSceneResponse;
 import it.cnr.isti.zigbee.zcl.library.api.general.scenes.StoreSceneResponse;
 import it.cnr.isti.zigbee.zcl.library.api.general.scenes.ViewSceneResponse;
@@ -43,8 +43,7 @@ import org.slf4j.LoggerFactory;
  * @since 0.1.0
  *
  */
-public class ScenesStub
-    implements Scenes {
+public class ScenesStub implements Scenes {
 
     private static final Logger logger = LoggerFactory.getLogger( ScenesStub.class );
 
@@ -140,15 +139,6 @@ public class ScenesStub
     }
 
     /* (non-Javadoc)
-     * @see it.cnr.isti.zigbee.ha.cluster.glue.general.Scenes#removeAllScene()
-     */
-    public RemoveAllSceneResponse removeAllScene()
-        throws ZigBeeHAException {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /* (non-Javadoc)
      * @see it.cnr.isti.zigbee.ha.cluster.glue.general.Scenes#removeScene(int, short)
      */
     public RemoveSceneResponse removeScene( int groupId, short sceneId )
@@ -195,6 +185,15 @@ public class ScenesStub
      * @see it.cnr.isti.zigbee.ha.cluster.glue.Cluster#getAttributes()
      */
     public Attribute[] getAttributes() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /* (non-Javadoc)
+     * @see it.cnr.isti.zigbee.ha.cluster.glue.general.Scenes#removeAllScene(int)
+     */
+    public RemoveAllScenesResponse removeAllScene( int groupId )
+        throws ZigBeeHAException {
         // TODO Auto-generated method stub
         return null;
     }
