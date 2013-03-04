@@ -45,6 +45,7 @@ import org.osgi.service.cm.ManagedService;
  * 
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
+ * @author <a href="mailto:michele.girolami@isti.cnr.it">Michele Girolami</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.1.0
  *
@@ -119,14 +120,14 @@ public class Activator implements BundleActivator {
 	}
 	
 	public static void unregisterAllDeviceService() {
-	    synchronized ( devices ) {
-	        for (ArrayList<ServiceRegistration> registrations : devices.values()) {
-	            for ( ServiceRegistration registration : registrations ) {
-	                registration.unregister();
-	            }
-	        }
-	        devices.clear();
-        }
+		synchronized ( devices ) {
+			for (ArrayList<ServiceRegistration> registrations : devices.values()) {
+				for ( ServiceRegistration registration : registrations ) {
+					registration.unregister();
+				}
+			}
+			devices.clear();
+        	}
 	}
 	
 	public void stop(BundleContext bc) throws Exception {

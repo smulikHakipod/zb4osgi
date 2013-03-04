@@ -54,6 +54,14 @@
 			<timezone>+1</timezone>
 		</developer>
 		<developer>
+			<id>michele.girolami</id>
+			<name>Michele Girolami</name>
+			<email>michele.girolami@isti.cnr.it</email>
+			<organization>Institute of Information Science and Technologies of the Italian National Research Council</organization>
+			<organizationUrl>http://www.isti.cnr.it/</organizationUrl>
+			<timezone>+1</timezone>
+		</developer>
+		<developer>
 			<id>francesco.furfari</id>
 			<name>Francesco Furfari</name>
 			<email>francesco.furfari@isti.cnr.it</email>
@@ -154,6 +162,7 @@
 						<Bundle-Author><![CDATA[
 							Stefano "Kismet" Lenzi <stefano.lenzi@isti.cnr.it>,
 							Francesco Furfari <francesco.furfari@isti.cnr.it>,
+							Michele Girolami <michele.girolami@isti.cnr.it>,
 							Manlio Bacco <manlio.bacco@isti.cnr.it>
 						]]></Bundle-Author>
 						<Bundle-Name>${project.name}</Bundle-Name>
