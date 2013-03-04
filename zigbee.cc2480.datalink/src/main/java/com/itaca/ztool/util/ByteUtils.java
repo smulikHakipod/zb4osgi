@@ -353,8 +353,8 @@ public class ByteUtils {
 	 */
 	public static boolean isByteValue(int b) {
 		final boolean valid = ( (b & 0xffffff00) == 0 || (b & 0xffffff00) == 0xffffff00);
-		if ( valid && ( b < -128 || b > 127 ) ) {
-			logger.debug(
+		if ( logger.isTraceEnabled() && valid && ( b < -128 || b > 127 ) ) {
+			logger.trace(
 					"The value {} ({}) is considered a byte because only the 8 least significant bits are set" +
 					", but its value is outside signed byte that is between -128 and 127", b, Integer.toHexString(b) 
 			);
