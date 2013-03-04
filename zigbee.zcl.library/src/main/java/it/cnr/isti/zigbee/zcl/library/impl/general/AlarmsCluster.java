@@ -194,6 +194,7 @@ public class AlarmsCluster extends ZCLClusterBase implements Alarms{
 	}
 
 	public Response resetAlarm(int clusterId, int attributeId) throws ZigBeeClusterException {
+		enableDefaultResponse();
     	ResetAlarmCommand resetAlarmCmd = new ResetAlarmCommand((byte)clusterId,(short)attributeId);
     	Response response = invoke(resetAlarmCmd);
     	return  new DefaultResponseImpl(response);	    
