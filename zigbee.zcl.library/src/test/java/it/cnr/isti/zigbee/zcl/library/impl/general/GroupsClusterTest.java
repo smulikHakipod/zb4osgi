@@ -22,6 +22,7 @@
 */
 package it.cnr.isti.zigbee.zcl.library.impl.general;
 
+
 import static org.easymock.EasyMock.*;
 
 import static org.junit.Assert.*;
@@ -33,6 +34,7 @@ import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeClusterException;
 import it.cnr.isti.zigbee.zcl.library.api.general.Groups;
 import it.cnr.isti.zigbee.zcl.library.api.general.groups.AddGroupResponse;
 import it.cnr.isti.zigbee.zcl.library.impl.RawClusterImpl;
+import it.cnr.isti.zigbee.zcl.library.api.general.groups.GetGroupMembershipResponse;
 
 import org.junit.Test;
 
@@ -45,14 +47,11 @@ import org.junit.Test;
  */
 public class GroupsClusterTest {
 
-	private ZigBeeDevice createMockDevice() throws ZigBeeBasedriverException {
+	private ZigBeeDevice createMockDevice(final byte[] response) throws ZigBeeBasedriverException {
 		ZigBeeDevice mock = createMock(ZigBeeDevice.class);
 		
 		expect(mock.invoke( (Cluster) anyObject()))
-			.andReturn( new RawClusterImpl(
-							Groups.ID, 
-							new byte[]{0x09, 0x18, 0x00, 0x00, 0x00, (byte) 0xf0 }
-			) );
+			.andReturn( new RawClusterImpl( Groups.ID, response ) );
 		replay( mock );
 		return mock;
 	}
@@ -62,7 +61,7 @@ public class GroupsClusterTest {
 		GroupsCluster cluster = null;
 		ZigBeeDevice device = null;
 		try {
-			device = createMockDevice();
+			device = createMockDevice( new byte[]{0x09, 0x18, Groups.ADD_GROUP_ID, 0x00, 0x00, (byte) 0xf0 } );
 			cluster = new GroupsCluster(device);
 		} catch (ZigBeeBasedriverException ignored) {
 		}
@@ -76,4 +75,28 @@ public class GroupsClusterTest {
 		}
 	}
 
+	@Test
+	public void testGetGroupMembership() {
+		GroupsCluster cluster = null;
+		ZigBeeDevice device = null;
+		try {
+			device = device = createMockDevice( 
+				new byte[]{0x09, 0x18, Groups.GET_GROUP_MEMBERSHIP_ID, 
+						0x10, 0x04, //Capacity, Group Count
+						0x10, 0x00, 0x00, 0x02, (byte) 0xF0, 0x00, 0x00, (byte) 0xFF //Group List
+				} 
+			);;
+			cluster = new GroupsCluster(device);
+		} catch (ZigBeeBasedriverException ignored) {
+		}
+		try {
+			GetGroupMembershipResponse response = (GetGroupMembershipResponse) cluster.getGroupMembership(new int[]{0x03, 0x0A});
+			assertEquals( 0x10, response.getCapacity() );
+			assertEquals( 0x04, response.getGroupList().length );
+			assertArrayEquals( new int[]{ 0x0010, 0x0200, 0x00F0, 0xFF00 } , response.getGroupList() );
+		} catch (ZigBeeClusterException ex) {
+			fail("Unexpected exception "+ex);
+			ex.printStackTrace();
+		}
+	}	
 }

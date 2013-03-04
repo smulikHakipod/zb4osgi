@@ -35,8 +35,7 @@ import it.cnr.isti.zigbee.zcl.library.impl.core.ResponseImpl;
  * @version $LastChangedRevision$ ($LastChangedDate$)
  *
  */
-public class GetGroupMembershipResponseImpl extends ResponseImpl implements
-		GetGroupMembershipResponse {
+public class GetGroupMembershipResponseImpl extends ResponseImpl implements GetGroupMembershipResponse {
 	
 	private short capacity;
 	private int[] groupList;
@@ -50,7 +49,7 @@ public class GetGroupMembershipResponseImpl extends ResponseImpl implements
 		int count = deserializer.read_uint8bit();
 		groupList = new int[count];
 		for (int i = 0; i < count; i++) {
-			groupList[i] = deserializer.read_short(); 
+			groupList[i] = deserializer.read_uint16bit(); 
 		}	
 	}
 	

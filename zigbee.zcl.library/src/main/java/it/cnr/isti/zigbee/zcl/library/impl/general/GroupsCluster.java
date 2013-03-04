@@ -90,7 +90,7 @@ public class GroupsCluster extends ZCLClusterBase implements Groups {
 		return  new AddGroupResponseImpl(response);
 	}
 
-	public Response addGroupIfIdentifying(int groupId, String name) throws ZigBeeClusterException{
+	public Response addGroupIfIdentifying(int groupId, String name) throws ZigBeeClusterException {
 		enableDefaultResponse();
 		AddGroupIfIdentyfingCommand addGroupIfIdCMD = new AddGroupIfIdentyfingCommand(groupId,name);
 		Response response = invoke(addGroupIfIdCMD);
@@ -101,7 +101,8 @@ public class GroupsCluster extends ZCLClusterBase implements Groups {
 		return nameSupport;
 	}
 
-	public Response getGroupMembership(int[] groupList) throws ZigBeeClusterException{
+	public Response getGroupMembership(int[] groupList) throws ZigBeeClusterException {
+		enableDefaultResponse();
 		GetGroupMembershipCommand getGroupMemCmd = new GetGroupMembershipCommand(groupList);
 		Response response = invoke(getGroupMemCmd); 
 		return  new GetGroupMembershipResponseImpl(response);
