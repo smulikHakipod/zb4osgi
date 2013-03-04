@@ -36,6 +36,7 @@ import it.cnr.isti.zigbee.zcl.library.impl.general.groups.AddGroupCommand;
 import it.cnr.isti.zigbee.zcl.library.impl.general.groups.AddGroupIfIdentyfingCommand;
 import it.cnr.isti.zigbee.zcl.library.impl.general.groups.AddGroupResponseImpl;
 import it.cnr.isti.zigbee.zcl.library.impl.general.groups.GetGroupMembershipCommand;
+import it.cnr.isti.zigbee.zcl.library.impl.general.groups.GetGroupMembershipResponseImpl;
 import it.cnr.isti.zigbee.zcl.library.impl.general.groups.RemoveGroupCommand;
 import it.cnr.isti.zigbee.zcl.library.impl.general.groups.RemoveGroupResponseImpl;
 import it.cnr.isti.zigbee.zcl.library.impl.general.groups.ViewGroupCommand;
@@ -103,7 +104,7 @@ public class GroupsCluster extends ZCLClusterBase implements Groups {
 	public Response getGroupMembership(int[] groupList) throws ZigBeeClusterException{
 		GetGroupMembershipCommand getGroupMemCmd = new GetGroupMembershipCommand(groupList);
 		Response response = invoke(getGroupMemCmd); 
-		return  new AddGroupResponseImpl(response);
+		return  new GetGroupMembershipResponseImpl(response);
 	}
 
 	public Response removeAllGroup() throws ZigBeeClusterException{
