@@ -1,10 +1,10 @@
 /*
    Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,8 +22,6 @@
 
 package it.cnr.isti.zigbee.zcl.library.api.general;
 
-import it.cnr.isti.zigbee.zcl.library.api.core.Attribute;
-import it.cnr.isti.zigbee.zcl.library.api.core.Response;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZCLCluster;
 
 /**
@@ -37,31 +35,8 @@ import it.cnr.isti.zigbee.zcl.library.api.core.ZCLCluster;
  *
  */
 public interface RSSILocation extends ZCLCluster {
-	
-	//TODO Generate this class
-	
-	public Attribute getAttributeOnOff();
-	
-	public Response on(boolean disableDefatultResponse);
-	public Response off(boolean disableDefatultResponse);
-	public Response toggle(boolean disableDefatultResponse);
 
-	
-	/**
-	 * Alias for the method {@link #on(true)}
-	 * @see #on(boolean)
-	 */
-	public void on();
-	
-	/**
-	 * Alias for the method {@link #off(true)}
-	 * @see #off(boolean)
-	 */
-	public void off();
-	
-	/**
-	 * Alias for the method {@link #toggle(true)}
-	 * @see #toggle(boolean)
-	 */
-	public void toggle();
+    //TODO Generate this class
+
+
 }

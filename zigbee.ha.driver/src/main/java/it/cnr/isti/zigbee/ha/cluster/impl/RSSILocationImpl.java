@@ -20,19 +20,45 @@
    limitations under the License.
 */
 
-package it.cnr.isti.zigbee.ha.cluster.glue.general;
+package it.cnr.isti.zigbee.ha.cluster.impl;
 
-import it.cnr.isti.zigbee.ha.cluster.glue.Cluster;
+import it.cnr.isti.zigbee.ha.cluster.glue.general.RSSILocation;
 import it.cnr.isti.zigbee.zcl.library.api.core.Attribute;
-import it.cnr.isti.zigbee.zcl.library.api.core.Response;
+import it.cnr.isti.zigbee.zcl.library.api.core.Subscription;
 /**
  * PLACEHOLDER TO IMPLEMENT
  *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
+ * @since 0.7.0
  *
  */
-public interface RSSILocation extends Cluster {
+public class RSSILocationImpl implements RSSILocation {
+
+    public int getId() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    public String getName() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    public Subscription[] getActiveSubscriptions() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    public Attribute[] getAttributes() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    public Attribute getAttribute(int id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 
 }

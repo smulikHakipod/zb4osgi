@@ -20,19 +20,47 @@
    limitations under the License.
 */
 
-package it.cnr.isti.zigbee.ha.cluster.glue.general;
+package it.cnr.isti.zigbee.zcl.library.impl.general;
 
-import it.cnr.isti.zigbee.ha.cluster.glue.Cluster;
+import it.cnr.isti.zigbee.api.ZigBeeDevice;
 import it.cnr.isti.zigbee.zcl.library.api.core.Attribute;
-import it.cnr.isti.zigbee.zcl.library.api.core.Response;
+import it.cnr.isti.zigbee.zcl.library.api.general.RSSILocation;
+import it.cnr.isti.zigbee.zcl.library.impl.core.ZCLClusterBase;
+
 /**
- * PLACEHOLDER TO IMPLEMENT
+ * <b>NOTE: THIS CLASS IS ONLY A PLACEHOLDER THE INTERFACE IS WRONG</b>
  *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
+ * @since 0.8.0
  *
  */
-public interface RSSILocation extends Cluster {
+public class RSSILocationCluster extends ZCLClusterBase  implements RSSILocation {
+
+    public RSSILocationCluster(ZigBeeDevice zbDevice) {
+        super(zbDevice);
+        // TODO Auto-generated constructor stub
+    }
+
+    @Override
+    public short getId() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public String getName() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Attribute[] getStandardAttributes() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    //TODO Generate this class
 
 
 }
