@@ -24,14 +24,14 @@
 
 package it.cnr.isti.zigbee.hc;
 
-import it.cnr.isti.zigbee.ha.device.api.generic.SimpleSensor;
-import it.cnr.isti.zigbee.ha.device.impl.SimpleSensorDevice;
 import it.cnr.isti.zigbee.hc.core.GenericHCDeviceFactory;
 import it.cnr.isti.zigbee.hc.core.HCClustersFactory;
 import it.cnr.isti.zigbee.hc.core.HCDeviceFactoryBase;
 import it.cnr.isti.zigbee.hc.core.UnknowHADeviceFactory;
-import it.cnr.isti.zigbee.hc.driver.HCImporter;
+import it.cnr.isti.zigbee.hc.device.api.aging_independetly.DosageSensor;
+import it.cnr.isti.zigbee.hc.device.impl.aging_independetly.DosageSensorDevice;
 import it.cnr.isti.zigbee.hc.driver.HCDriverConfiguration;
+import it.cnr.isti.zigbee.hc.driver.HCImporter;
 import it.cnr.isti.zigbee.hc.driver.HCReportingConfiguration;
 
 import java.util.ArrayList;
@@ -88,7 +88,7 @@ public class Activator implements BundleActivator {
 
     private void doRegisterDeviceFactories(final BundleContext bc) throws Exception {
         Map< Class<?>, Class<?> > refinedAvailables = new HashMap< Class<?>, Class<?> >();
-        refinedAvailables.put( SimpleSensor.class, SimpleSensorDevice.class );
+        refinedAvailables.put( DosageSensor.class, DosageSensorDevice.class );
 
         final Iterator< Entry<Class<?>, Class<?>> > i = refinedAvailables.entrySet().iterator();
         while ( i.hasNext() ) {
