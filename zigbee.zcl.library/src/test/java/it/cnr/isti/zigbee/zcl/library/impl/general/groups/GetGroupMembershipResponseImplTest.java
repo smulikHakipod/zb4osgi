@@ -71,7 +71,7 @@ public class GetGroupMembershipResponseImplTest {
 			);
 			assertEquals(240, response.getCapacity());
 			assertEquals(3, response.getGroupList().length);
-			assertArrayEquals(new int[]{0x0f, 0xfffff000, 0x1234}, response.getGroupList());
+			assertArrayEquals(new int[]{0x0f, 0xf000, 0x1234}, response.getGroupList());
 		} catch (ZigBeeClusterException e) {
 			e.printStackTrace();
 			fail("Exception thrwon "+e.getMessage());
