@@ -40,13 +40,13 @@
     This application aims at be a tool for testing the whole ZigBee 4 OSGi suite, but it also allows
     the user to start to play with the ZigBee network
   ]]></description>
-  
+
   <inceptionYear>2008</inceptionYear>
   <organization>
     <name>Institute of Information Science and Technologies of the Italian National Research Council</name>
     <url>http://isti.cnr.it/</url>
-  </organization> 
-  
+  </organization>
+
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -54,7 +54,7 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
-  
+
   <developers>
     <developer>
       <id>stefano.lenzi</id>
@@ -72,14 +72,14 @@
       <organizationUrl>http://www.isti.cnr.it/</organizationUrl>
       <timezone>+1</timezone>
     </developer>
-  </developers> 
+  </developers>
 
   <scm>
     <connection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.tester</connection>
     <developerConnection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.tester</developerConnection>
     <url>http://zb4osgi.aaloa.org/projects/zb4osgi/repository/show/trunk/zigbee.tester</url>
   </scm>
-    
+
   <build>
     <plugins>
       <plugin>
@@ -91,11 +91,11 @@
             <Bundle-Name>${project.name}</Bundle-Name>
             <Bundle-Vendor>The Apache Software Foundation</Bundle-Vendor>
             <Bundle-Author><![CDATA[
-	    Francesco Furfari <francesco.furfari@isti.cnr.it>,
-	    Stefano "Kismet" Lenzi <stefano.lenzi@isti.cnr.it>
+      Francesco Furfari <francesco.furfari@isti.cnr.it>,
+      Stefano "Kismet" Lenzi <stefano.lenzi@isti.cnr.it>
             ]]></Bundle-Author>
             <Bundle-Description>
-               	OSGi Generic Control Point to control ZigBeeDevice services
+                 OSGi Generic Control Point to control ZigBeeDevice services
             </Bundle-Description>
             <Bundle-SymbolicName>org.aal-persona.zigbee.tester</Bundle-SymbolicName>
             <Bundle-Activator>org.persona.zigbee.tester.Activator</Bundle-Activator>
@@ -114,7 +114,7 @@
                 it.cnr.isti.zigbee.ha.*,
                 it.cnr.isti.zigbee.zcl.*,
                 org.osgi.*,
-                org.slf4j; provider=paxlogging                
+                org.slf4j; provider=paxlogging
             </Import-Package>
           </instructions>
         </configuration>
@@ -147,7 +147,7 @@
       <snapshots><enabled>false</enabled></snapshots>
     </repository>
   </repositories>
-  
+
   <dependencies>
     <dependency>
       <groupId>org.apache.felix</groupId>
@@ -171,24 +171,27 @@
     </dependency>
 
 
-    <!-- 
-    	*NOTE*
-    	The following dependencies are used only for JUnit purpose, 
-    	but they will be resolved from OSGi enviroment at run-time 
-   	-->
+    <!--
+      *NOTE*
+      The following dependencies are used only for JUnit purpose,
+      but they will be resolved from OSGi enviroment at run-time
+     -->
     <dependency>
-    	<groupId>org.slf4j</groupId>
-    	<artifactId>nlog4j</artifactId>
-    	<version>1.2.25</version>
+      <groupId>org.ops4j.pax.logging</groupId>
+      <artifactId>pax-logging-api</artifactId>
     </dependency>
     <dependency>
-    	<groupId>org.aaloa.zb4osgi</groupId>
-    	<artifactId>org.aaloa.zb4osgi.zigbee.common</artifactId>
+      <groupId>org.ops4j.pax.logging</groupId>
+      <artifactId>pax-logging-service</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.aaloa.zb4osgi</groupId>
+      <artifactId>org.aaloa.zb4osgi.zigbee.common</artifactId>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-    </dependency>    
+    </dependency>
   </dependencies>
 
   <properties>
