@@ -25,6 +25,8 @@ package it.cnr.isti.zigbee.basedriver.discovery;
 import it.cnr.isti.zigbee.api.ZigBeeNode;
 import it.cnr.isti.zigbee.basedriver.Activator;
 import it.cnr.isti.zigbee.basedriver.api.impl.ZigBeeNodeImpl;
+import it.cnr.isti.zigbee.basedriver.configuration.BaseDriverProperties;
+import it.cnr.isti.zigbee.basedriver.configuration.BaseDriverProperties.DiscoveryMode;
 import it.cnr.isti.zigbee.dongle.api.AnnunceListner;
 import it.cnr.isti.zigbee.dongle.api.SimpleDriver;
 
@@ -69,12 +71,10 @@ public class AnnunceListnerThread implements AnnunceListner{
 	public void notify(ZToolAddress16 senderAddress,
 			ZToolAddress64 ieeeAddress, ZToolAddress16 destinationAddress,
 			int capabilitiesBitmask) {
-		
+	    		
 		logger.info("received an ANNUNCE from {} {}", senderAddress, ieeeAddress);		
 		queue.push(senderAddress, ieeeAddress);	
 		annuncedNode( new ZigBeeNodeImpl( senderAddress.get16BitValue(), ieeeAddress ) );
-		
-		
 	}
 
 	private void annuncedNode(ZigBeeNode node) {

@@ -26,12 +26,14 @@ import it.cnr.isti.osgi.util.DictionaryHelper;
 import it.cnr.isti.osgi.util.OSGiProperties;
 import it.cnr.isti.zigbee.api.Constants;
 import it.cnr.isti.zigbee.basedriver.Activator;
+import it.cnr.isti.zigbee.basedriver.configuration.BaseDriverProperties.DiscoveryMode;
 import it.cnr.isti.zigbee.dongle.api.ConfigurationProperties;
 import it.cnr.isti.zigbee.dongle.api.DriverStatus;
 import it.cnr.isti.zigbee.dongle.api.NetworkMode;
 import it.cnr.isti.zigbee.dongle.api.SimpleDriver;
 
 import java.util.Dictionary;
+import java.util.EnumSet;
 import java.util.HashMap;
 
 import org.osgi.service.cm.ConfigurationException;
@@ -57,7 +59,7 @@ public class ConfigurationService implements ManagedService {
 	private SimpleDriver driver;
 
 	public ConfigurationService(){
-		synchronized (configuration) {
+		synchronized (this) {
 			configuration.put(ConfigurationProperties.PAN_ID_KEY, OSGiProperties.getInt(Activator.getBundleContext(), ConfigurationProperties.PAN_ID_KEY, ConfigurationProperties.PAN_ID) );
 			configuration.put(ConfigurationProperties.CHANNEL_ID_KEY, OSGiProperties.getInt(Activator.getBundleContext(), ConfigurationProperties.CHANNEL_ID_KEY, ConfigurationProperties.CHANNEL_ID) );
 			configuration.put(ConfigurationProperties.COM_BOUDRATE_KEY, OSGiProperties.getInt(Activator.getBundleContext(), ConfigurationProperties.COM_BOUDRATE_KEY, ConfigurationProperties.COM_BOUDRATE) );
@@ -74,6 +76,8 @@ public class ConfigurationService implements ManagedService {
 
             configuration.put(ConfigurationProperties.AUTOMATIC_ENDPOINT_ADDRESS_RETRY_KEY, OSGiProperties.getInt(Activator.getBundleContext(), ConfigurationProperties.AUTOMATIC_ENDPOINT_ADDRESS_RETRY_KEY, ConfigurationProperties.AUTOMATIC_ENDPOINT_ADDRESS_RETRY) );
             configuration.put(ConfigurationProperties.FIRST_ENDPOINT_ADDRESS_KEY, OSGiProperties.getInt(Activator.getBundleContext(), ConfigurationProperties.FIRST_ENDPOINT_ADDRESS_KEY, ConfigurationProperties.FIRST_ENDPOINT_ADDRESS) );
+
+            configuration.put(BaseDriverProperties.DISCOVERY_MODE_KEY, OSGiProperties.getInt(Activator.getBundleContext(), BaseDriverProperties.DISCOVERY_MODE_KEY, BaseDriverProperties.DISCOVERY_MODE) );            
 		}
 
 		logger.debug("Initialized {} with {}", this, configuration);
@@ -228,7 +232,7 @@ public class ConfigurationService implements ManagedService {
         if ( driver == null ) {
             logger.info( 
                 "No ZigBee Interface Controller configured because the is no {} registered", 
-                driver.getClass() 
+                SimpleDriver.class.getName() 
             );
             return;
         }
@@ -269,4 +273,12 @@ public class ConfigurationService implements ManagedService {
         return getInt(ConfigurationProperties.FIRST_ENDPOINT_ADDRESS_KEY);
 	}
 
+    /**
+     *
+     * @return
+     * @since 0.7.0
+     */
+    public synchronized EnumSet<DiscoveryMode> getDiscoveryMode() {
+        return DiscoveryMode.toEnumSet( getInt( BaseDriverProperties.DISCOVERY_MODE_KEY ) );
+    }
 }

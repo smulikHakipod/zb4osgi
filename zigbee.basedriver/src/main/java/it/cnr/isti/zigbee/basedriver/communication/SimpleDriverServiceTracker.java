@@ -23,6 +23,8 @@
 package it.cnr.isti.zigbee.basedriver.communication;
 
 import it.cnr.isti.zigbee.basedriver.Activator;
+import it.cnr.isti.zigbee.basedriver.configuration.BaseDriverProperties;
+import it.cnr.isti.zigbee.basedriver.configuration.BaseDriverProperties.DiscoveryMode;
 import it.cnr.isti.zigbee.basedriver.discovery.AnnunceListnerThread;
 import it.cnr.isti.zigbee.basedriver.discovery.DeviceBuilderThread;
 import it.cnr.isti.zigbee.basedriver.discovery.ImportingQueue;
@@ -55,8 +57,8 @@ public class SimpleDriverServiceTracker implements ServiceListener{
 	private ServiceReference driverReference;
 	private SimpleDriver driverService;
 	private final AnnunceListnerThread annunceListener;
-	private NetworkBrowserThread networkBrowser;
-	private LQINetworkBrowserThread networkLQIBrowser;
+	private NetworkBrowserThread networkBrowser = null ;
+	private LQINetworkBrowserThread networkLQIBrowser = null;
 	private DeviceBuilderThread deviceBuilder;
 	private final ImportingQueue importingQueue;
 
@@ -83,9 +85,9 @@ public class SimpleDriverServiceTracker implements ServiceListener{
 		logger.info("Driver used left:clean up all the data and closing all the threads");
 
 		Activator.getCurrentConfiguration().setDriver(null);
-		networkBrowser.end();
+		if( networkBrowser != null ) networkBrowser.end();
+        if( networkLQIBrowser != null ) networkLQIBrowser.end();
 		deviceBuilder.end();
-		networkLQIBrowser.end();
 		Activator.unregisterAllDeviceService();
 	}
 
@@ -104,25 +106,35 @@ public class SimpleDriverServiceTracker implements ServiceListener{
 		setDownZigBeeImporter();
 	}
 
-	private void setUpZigBeeImporter() {
+	private void setUpZigBeeImporter() {	   
 		logger.info("Setting up all the importer data and threads");
 		Activator.getCurrentConfiguration().setDriver(driverService);
 		importingQueue.clear();
 		AFLayer.getAFLayer(driverService);
-		driverService.addAnnunceListener(annunceListener);
+        if ( Activator.getCurrentConfiguration().getDiscoveryMode().contains( DiscoveryMode.Announce ) ) {
+            driverService.addAnnunceListener(annunceListener);
+        } else {
+            logger.debug( "ANNUNCE discovery disabled due to {}", BaseDriverProperties.DISCOVERY_MODE_KEY );
+        }		
 
-		networkBrowser = new NetworkBrowserThread(importingQueue,  driverService );
-		networkLQIBrowser = new LQINetworkBrowserThread(importingQueue,  driverService );
+        if ( Activator.getCurrentConfiguration().getDiscoveryMode().contains( DiscoveryMode.Addressing ) ) {
+            networkBrowser = new NetworkBrowserThread(importingQueue,  driverService );
+            new Thread(networkBrowser, "NetworkBrowser["+driverService+"]").start();
+        } else {
+            logger.debug( "{} discovery disabled due to {}", 
+                NetworkBrowserThread.class, BaseDriverProperties.DISCOVERY_MODE_KEY );
+        }
+        
+        if ( Activator.getCurrentConfiguration().getDiscoveryMode().contains( DiscoveryMode.LinkQuality ) ) {
+            networkLQIBrowser = new LQINetworkBrowserThread(importingQueue,  driverService );
+            new Thread(networkLQIBrowser, "LQINetworkBrowser["+driverService+"]").start();
+        } else {
+            logger.debug( "{} discovery disabled due to {}", 
+                LQINetworkBrowserThread.class, BaseDriverProperties.DISCOVERY_MODE_KEY );
+        }
+		
 		deviceBuilder = new DeviceBuilderThread( importingQueue, driverService);
-
-		Thread[] importing = new Thread[]{
-				new Thread(networkBrowser, "NetworkBrowser["+driverService+"]"),
-				new Thread(deviceBuilder, "DeviceBuilder["+driverService+"]"),
-				new Thread(networkLQIBrowser, "LQINetworkBrowser["+driverService+"]")
-		};
-		for (int i = 0; i < importing.length; i++) {
-			importing[i].start();
-		}
+		new Thread(deviceBuilder, "DeviceBuilder["+driverService+"]").start();
 	}
 
 	private void addingSimpleDriver(ServiceReference sr) {
