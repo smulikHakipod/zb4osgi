@@ -27,6 +27,7 @@ package com.itaca.ztool.api;
 
 import it.cnr.isti.primitvetypes.util.Integers;
 
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 /**
@@ -36,6 +37,7 @@ import java.util.StringTokenizer;
  * 
  * @author <a href="mailto:andrew.rapp@gmail.com">Andrew Rapp</a>
  * @author <a href="mailto:alfiva@aaa.upv.es">Alvaro Fides Valero</a>
+ * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  *
  */
@@ -102,7 +104,7 @@ public class ZToolAddress64 extends ZToolAddress  {
 	}
 
 	public ZToolAddress64(byte[] address) {
-		this.address = address;
+		this.address = Arrays.copyOf( address, address.length );
 	}
 	
 	public ZToolAddress64() {
@@ -110,7 +112,7 @@ public class ZToolAddress64 extends ZToolAddress  {
 	}
 
 	public void setAddress(byte[] address) {
-		this.address = address;
+	    this.address = Arrays.copyOf( address, address.length );
 	}
 	
 	public boolean equals(Object o) {
@@ -135,6 +137,6 @@ public class ZToolAddress64 extends ZToolAddress  {
 
 	@Override
 	public byte[] getAddress() {
-		return address;
+		return Arrays.copyOf( address, address.length );
 	}
 }

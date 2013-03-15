@@ -33,18 +33,20 @@ import com.itaca.ztool.util.DoubleByte;
 /**
  *
  * @author <a href="mailto:alfiva@aaa.upv.es">Alvaro Fides Valero</a>
+ * @author <a href="mailto:manlio.bacco@isti.cnr.it">Manlio Bacco</a>
+ * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  */
 public class ZDO_MGMT_LQI_RSP extends ZToolPacket /*implements IRESPONSE_CALLBACK,IZDo*/ {
     /// <name>TI.ZPI1.ZDO_MGMT_LQI_RSP.NeighborLQICount</name>
     /// <summary>Number of entries in this response.</summary>
-    public int NeighborLQICount;
+    public int NeighborLQICount; //TODO we should remove this
     /// <name>TI.ZPI1.ZDO_MGMT_LQI_RSP.NeighborLQIEntries</name>
     /// <summary>Total number of entries available in the device.</summary>
     public int NeighborLQIEntries;
     /// <name>TI.ZPI1.ZDO_MGMT_LQI_RSP.NeighborLqiList</name>
     /// <summary>Dynamic array, Number of entries in this response.</summary>
-    public Object[] NeighborLqiList;
+    public NeighborLqiListItemClass[] NeighborLqiList;
     //private NeighborLqiListItemClass NeighborLqiListItemClassDummyObj;
     /// <name>TI.ZPI1.ZDO_MGMT_LQI_RSP.SrcAddress</name>
     /// <summary>Source address of the message</summary>
@@ -59,7 +61,7 @@ public class ZDO_MGMT_LQI_RSP extends ZToolPacket /*implements IRESPONSE_CALLBAC
     /// <name>TI.ZPI1.ZDO_MGMT_LQI_RSP</name>
     /// <summary>Constructor</summary>
     public ZDO_MGMT_LQI_RSP() {
-        this.NeighborLqiList = new Object[0xff];
+        this.NeighborLqiList = new NeighborLqiListItemClass[]{};
     }
 
     public ZDO_MGMT_LQI_RSP(int[] framedata) {
@@ -68,33 +70,28 @@ public class ZDO_MGMT_LQI_RSP extends ZToolPacket /*implements IRESPONSE_CALLBAC
         this.NeighborLQIEntries = framedata[3];
         this.StartIndex = framedata[4];
         this.NeighborLQICount = framedata[5];
-        this.NeighborLqiList = new NeighborLqiListItemClass[this.NeighborLQICount];
+        this.NeighborLqiList = new NeighborLqiListItemClass[ framedata[5] ];
         
-        ZToolAddress16 NNetworkAddress = null;
-        ZToolAddress64 NExtAddress = null;
-        long NPanID;
-        int NLQI;
-        int NDepth;
         int NOpt1;
         int NOpt2;
         
         int k = 0;
         byte[] bytes = new byte[8];
-        for (int z = 0; z < this.NeighborLQICount; z++) {
+        for (int z = 0; z < this.NeighborLqiList.length; z++) {
             for (int j = 0; j < 8; j++) {
                 bytes[7-j] = (byte) framedata[6 + k + j];///MSB><LSB?
             }
-            NPanID = ByteUtils.convertMultiByteToLong(bytes);
+            final long panId = ByteUtils.convertMultiByteToLong(bytes);
             for (int j = 0; j < 8; j++) {
                 bytes[7-j] = (byte) framedata[14 + k + j];///MSB><LSB?
             }
-            NExtAddress = new ZToolAddress64(bytes);
-            NNetworkAddress = new ZToolAddress16(framedata[23 + k], framedata[22 + k]);///MSB><LSB?
+            final ZToolAddress64 ieeeAddr = new ZToolAddress64(bytes);
+            final ZToolAddress16 nwkAddr = new ZToolAddress16(framedata[23 + k], framedata[22 + k]);///MSB><LSB?
             NOpt1=framedata[24 + k];
             NOpt2=framedata[25 + k];
-            NLQI = framedata[26 + k];
-            NDepth = framedata[27 + k];
-            this.NeighborLqiList[z] = new NeighborLqiListItemClass(NPanID,NExtAddress,NNetworkAddress,NOpt1,NOpt2,NLQI, NDepth);
+            final int lqi = framedata[26 + k];
+            final int depth = framedata[27 + k];
+            this.NeighborLqiList[z] = new NeighborLqiListItemClass(panId,ieeeAddr,nwkAddr,NOpt1,NOpt2,lqi, depth);
             k += 22;
         }
         super.buildPacket(new DoubleByte(ZToolCMD.ZDO_MGMT_LQI_RSP), framedata);
@@ -186,9 +183,32 @@ public class ZDO_MGMT_LQI_RSP extends ZToolPacket /*implements IRESPONSE_CALLBAC
         }
     }
 
-public int getNeighborLQICount(){ return this.NeighborLQICount; }
+    /**
+     * 
+     * @return the number of Neighbor LQI entries present on the message
+     */
+    public int getNeighborLQICount(){ 
+        return this.NeighborLqiList.length; 
+    }
 
-public int getNeighborLQIEntries(){ return this.NeighborLQIEntries; }
+    /**
+     * 
+     * @return the index of the first entries available on the message with respect 
+     *      to the Neighbor LQI Tables on the device
+     */
+    public int getStartIndex() {
+        return StartIndex;
+    }
+    
+    /**
+     * 
+     * @return the number of Neighbor LQI entries available on the device
+     */
+    public int getNeighborLQIEntries(){ 
+        return this.NeighborLQIEntries; 
+    }
 
-public Object[] getNeighborLqiList(){ return NeighborLqiList; }
+    public NeighborLqiListItemClass[] getNeighborLqiList(){ 
+        return NeighborLqiList; 
+    }
 }
