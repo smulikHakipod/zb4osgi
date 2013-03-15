@@ -160,6 +160,7 @@ public class DriverCC2530 implements Runnable, SimpleDriver{
 		public void receivedAsynchrounsCommand(ZToolPacket packet) {
 			if(packet.isError()) return;
 			if(packet.getCMD().get16BitValue() == ZToolCMD.ZDO_END_DEVICE_ANNCE_IND){
+			    logger.debug( "Recieved announce message {} value is {}", packet.getClass(), packet );
 				ZDO_END_DEVICE_ANNCE_IND annunce = (ZDO_END_DEVICE_ANNCE_IND) packet;
 				for (AnnunceListner l : listners) {
 					l.notify(annunce.SrcAddr, annunce.IEEEAddr, annunce.NwkAddr, annunce.Capabilities);
