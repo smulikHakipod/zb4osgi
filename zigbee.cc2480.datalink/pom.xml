@@ -62,7 +62,23 @@
   
   <developers>
     <developer>
-      <id>slenzi</id>
+      <id>michele.girolami</id>
+      <name>Michele Girolami</name>
+      <email>michele.girolami@isti.cnr.it</email>
+      <organization>Institute of Information Science and Technologies of the Italian National Research Council</organization>
+      <organizationUrl>http://www.isti.cnr.it/</organizationUrl>
+      <timezone>+1</timezone>
+    </developer>
+    <developer>
+      <id>manlio.bacco</id>
+      <name>Manlio Bacco</name>
+      <email>manlio.bacco@isti.cnr.it</email>
+      <organization>Institute of Information Science and Technologies of the Italian National Research Council</organization>
+      <organizationUrl>http://www.isti.cnr.it/</organizationUrl>
+      <timezone>+1</timezone>
+    </developer>
+    <developer>
+      <id>stefano.lenzi</id>
       <name>Stefano "Kismet" Lenzi</name>
       <email>stefano.lenzi@isti.cnr.it</email>
       <organization>Institute of Information Science and Technologies of the Italian National Research Council</organization>
@@ -160,6 +176,8 @@
             <Bundle-Author><![CDATA[
               Andrew Rapp <andrew.rapp@gmail.com>,
               Stefano "Kismet" Lenzi <stefano.lenzi@isti.cnr.it>,
+              Michele Girolami <michele.girolami@isti.cnr.it>,
+              Manlio Bacco <manlio.bacco@isti.cnr.it>,
               Álvaro Fides Valero <alfiva@aaa.upv.es>
             ]]></Bundle-Author>
             <Bundle-Name>${project.name}</Bundle-Name>

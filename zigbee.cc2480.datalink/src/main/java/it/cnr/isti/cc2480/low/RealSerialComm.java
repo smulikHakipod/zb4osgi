@@ -36,9 +36,7 @@ import com.itaca.ztool.api.ZToolPacketParser;
  * @since 0.6.0
  * 
  */
-public class RealSerialComm
-    extends RxTxSerialComm 
-	implements SerialHandler{
+public class RealSerialComm extends RxTxSerialComm implements SerialHandler{
 
     private Object parserLock = new Object();
 

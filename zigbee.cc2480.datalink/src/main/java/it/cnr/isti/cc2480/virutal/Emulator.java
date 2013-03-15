@@ -21,6 +21,7 @@
  */
 package it.cnr.isti.cc2480.virutal;
 
+import it.cnr.isti.cc2480.low.HWLowLevelDriver;
 import it.cnr.isti.cc2480.low.SerialHandler;
 import it.cnr.isti.thread.ThreadUtils;
 
@@ -38,6 +39,7 @@ import org.slf4j.LoggerFactory;
 
 import com.itaca.ztool.api.ZToolPacketHandler;
 import com.itaca.ztool.api.ZToolPacketParser;
+import com.itaca.ztool.api.system.SYS_VERSION;
 
 /**
  * 
@@ -46,7 +48,7 @@ import com.itaca.ztool.api.ZToolPacketParser;
  * @since 0.6.0
  * 
  */
-public class Emulator implements SerialHandler{
+public class Emulator implements SerialHandler {
 
     private final static Logger logger = LoggerFactory.getLogger(Emulator.class);
     
@@ -81,8 +83,7 @@ public class Emulator implements SerialHandler{
     class EmulatorOutputStream extends OutputStream {
 
         @Override
-        public synchronized void write( int b )
-            throws IOException {            
+        public synchronized void write( int b ) throws IOException {            
         	final StreamItem item;
         	synchronized (emulatorIO) {
                 if( fromJavaIdx >= fromJava.size() ) return;
@@ -130,8 +131,7 @@ public class Emulator implements SerialHandler{
         }
         
         @Override
-        public synchronized int available()
-            throws IOException {
+        public synchronized int available() throws IOException {
         	synchronized (emulatorIO) {
                 if( toJavaIdx < 0  || toJavaIdx >= toJava.size() ) return 0;
                 
@@ -141,8 +141,7 @@ public class Emulator implements SerialHandler{
         }
 
         @Override
-        public synchronized int read()
-            throws IOException {
+        public synchronized int read() throws IOException {
         	StreamItem item;
         	synchronized (emulatorIO) {
         		if ( toJavaIdx >= toJava.size() ) {

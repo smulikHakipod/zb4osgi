@@ -42,6 +42,7 @@ import com.itaca.ztool.util.ByteUtils;
  * @author <a href="mailto:andrew.rapp@gmail.com">Andrew Rapp</a>
  * @author <a href="mailto:alfiva@aaa.upv.es">Alvaro Fides Valero</a>
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
+ * @author <a href="mailto:michele.girolami@isti.cnr.it">Michele Girolami</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.1.0
  *

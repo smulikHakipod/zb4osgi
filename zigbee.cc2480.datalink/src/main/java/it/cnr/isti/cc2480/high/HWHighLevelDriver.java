@@ -45,6 +45,7 @@ import com.itaca.ztool.util.DoubleByte;
 /**
  * 
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
+ * @author <a href="mailto:michele.girolami@isti.cnr.it">Michele Girolami</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.1.0
  *

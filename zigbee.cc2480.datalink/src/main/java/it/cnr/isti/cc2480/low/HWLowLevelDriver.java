@@ -107,8 +107,7 @@ public class HWLowLevelDriver
 
     //private final byte[] buffer = new byte[256];
 
-    public void open( String port, int baudRate)
-        throws ZToolException {
+    public void open( String port, int baudRate) throws ZToolException {
     	
     	if ( ! ( status == HWLowLevelDriverState.LOADED || status == HWLowLevelDriverState.CLOSED ) ) {
     		throw new IllegalStateException("Driver already opened, current status is " + status);
