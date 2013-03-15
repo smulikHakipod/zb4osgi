@@ -76,6 +76,8 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.Constants;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.cm.ManagedService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -86,6 +88,8 @@ import org.osgi.service.cm.ManagedService;
  */
 public class Activator implements BundleActivator {
 
+    private final static Logger logger = LoggerFactory.getLogger(Activator.class);
+    
     private static final String HA_CONFIG_PID = "it.cnr.isti.zigbee.ha.configuration";
 
     private HAImporter haImporter;
@@ -112,7 +116,11 @@ public class Activator implements BundleActivator {
 
     public void start(BundleContext ctx) throws Exception {
         doRegisterConfigurationService(ctx);
-        new HAClustersFactory(ctx).register();
+        try {
+            new HAClustersFactory(ctx).register();
+        } catch( Exception ex ) {
+            logger.debug( "Failed to register HAClustersFactory ", ex );
+        }
         doRegisterDeviceFactories(ctx);
         haImporter = new HAImporter(ctx);
     }
@@ -141,10 +149,18 @@ public class Activator implements BundleActivator {
         final Iterator< Entry<Class<?>, Class<?>> > i = refinedAvailables.entrySet().iterator();
         while ( i.hasNext() ) {
             Entry<Class<?>, Class<?>> refining = i.next();
-            factories.add( new GenericHADeviceFactory( bc, refining.getKey(), refining.getValue() ).register() );
+            try {
+                factories.add( new GenericHADeviceFactory( bc, refining.getKey(), refining.getValue() ).register() );
+            } catch ( Exception ex) {
+                logger.error( "Failed to register GenericHADeviceFactory for " + refining.getKey(), ex );
+            }
         }
 
-        factories.add( new UnknowHADeviceFactory( bc ).register() );
+        try {
+            factories.add( new UnknowHADeviceFactory( bc ).register() );
+        } catch ( Exception ex) {
+            logger.error( "Failed to register UnknowHADeviceFactory", ex );
+        }
     }
 
     public void stop(BundleContext context) throws Exception {
