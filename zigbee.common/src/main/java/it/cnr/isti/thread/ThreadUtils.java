@@ -35,6 +35,11 @@ public class ThreadUtils {
 	
     private final static Logger logger = LoggerFactory.getLogger(ThreadUtils.class);
     
+    /**
+     * Wait for x ms even if interrupt are sent to the thread waiting
+     * 
+     * @param time the number of ms to wait
+     */
 	public static final void waitNonPreemptive(long time){
 		final long end = System.currentTimeMillis() + time;
 		do{
@@ -48,7 +53,9 @@ public class ThreadUtils {
 	}
 	
 	/**
-	 * 
+     * Wait for up to x ms, in fact if interrupt is received it will end before the expected time
+     * 
+     * @param time the number of ms to wait
 	 * @since 0.4.0
 	 */
     public static final void waitingUntil(long time){
@@ -58,6 +65,7 @@ public class ThreadUtils {
                 logger.info( "{} waiting for {}ms", Thread.currentThread(), delta );
                 Thread.sleep( delta );
             } catch (InterruptedException ignored) {
+                break;
             }
         }while(time > System.currentTimeMillis());
     }
