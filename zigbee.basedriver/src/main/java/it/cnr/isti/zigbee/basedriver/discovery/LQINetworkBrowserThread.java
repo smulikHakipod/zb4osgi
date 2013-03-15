@@ -24,6 +24,7 @@ package it.cnr.isti.zigbee.basedriver.discovery;
 
 import gnu.trove.TShortObjectHashMap;
 import it.cnr.isti.primitvetypes.util.Integers;
+import it.cnr.isti.thread.RunnableThread;
 import it.cnr.isti.thread.Stoppable;
 import it.cnr.isti.thread.ThreadUtils;
 import it.cnr.isti.zigbee.api.ZigBeeNode;
@@ -57,7 +58,7 @@ import com.itaca.ztool.api.zdo.ZDO_MGMT_LQI_RSP.NeighborLqiListItemClass;
  * @since 0.7.0
  *
  */
-public class LQINetworkBrowserThread implements Stoppable {
+public class LQINetworkBrowserThread extends RunnableThread {
 
 	private static final Logger logger = LoggerFactory.getLogger(LQINetworkBrowserThread.class);
 
@@ -66,7 +67,6 @@ public class LQINetworkBrowserThread implements Stoppable {
 
 	private final ImportingQueue queue;
 	final SimpleDriver driver;
-	private boolean end = false;
 
 	final ArrayList<NetworkAddressNodeItem> toInspect = new ArrayList<NetworkAddressNodeItem>();
 	final TShortObjectHashMap<NetworkAddressNodeItem> alreadyInspected = new TShortObjectHashMap<NetworkAddressNodeItem>();
@@ -163,8 +163,7 @@ public class LQINetworkBrowserThread implements Stoppable {
 			if( lqi_resp == null) {
 				logger.debug("No LQI answer from #{}", nwk);
 				return null;
-			}
-			else {
+			} else {
 				logger.debug(
 						"Found {} neighbors on node {}",
 						lqi_resp.getNeighborLQICount(), node.address);
@@ -228,13 +227,13 @@ public class LQINetworkBrowserThread implements Stoppable {
 		}
 	}
 
-	public void run(){
+	public void task(){
 
 		final String threadName = Thread.currentThread().getName();
 
 		logger.info("{} STARTED Succesfully", threadName);
 
-		while(!isEnd()){
+        while( ! isDone() ){
 			cleanUpWalkingTree();
 
 			logger.info("Inspecting ZigBee network for new nodes");
@@ -264,7 +263,7 @@ public class LQINetworkBrowserThread implements Stoppable {
 				}
 
 				long wakeUpTime = System.currentTimeMillis() + Activator.getCurrentConfiguration().getNetworkBrowsingPeriod();
-				ThreadUtils.waitingUntil( wakeUpTime );
+				if ( ! isDone() ) ThreadUtils.waitingUntil( wakeUpTime );
 				logger.info("Network browsing completed, waiting until {}", wakeUpTime);
 				//gt.run();
 			}
@@ -405,13 +404,5 @@ public class LQINetworkBrowserThread implements Stoppable {
 				logger.error("Handled excepetion during notification", ex);
 			}
 		}
-	}
-
-	private synchronized boolean isEnd() {
-		return end;
-	}
-
-	public synchronized void end() {
-		end = true;
 	}
 }

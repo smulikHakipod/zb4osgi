@@ -26,14 +26,50 @@ package it.cnr.isti.thread;
 /**
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
- * @since 0.1.0
+ * @since 0.6.0
  *
  */
-public interface Stoppable extends Runnable {
+public abstract class RunnableThread implements Stoppable,Threaded {
 	
-    /**
-     * This method when invoked will ask the {@link Runnable} to terminate
-     */
-    public void end();
+    private final Object threadLock = new Object();
+    private boolean done = false;
+    
+    private Thread executor = null;
+     
+    public Thread getExecutorThread() {
+        synchronized ( threadLock ) {        
+            return executor;
+        }
+    }
+    
+	public void end(){
+	    synchronized ( threadLock ) {
+	        done = true;
+        }
+	}
 	
+	protected boolean isDone() {
+	    synchronized ( threadLock ) {
+            return done;
+        }
+	}
+	
+	public void run(){
+	    synchronized ( threadLock ) {
+	        executor = Thread.currentThread();
+        }
+	    task();
+        synchronized ( threadLock ) {
+            executor = null;
+        }
+	}
+	
+	public void interrupt() {
+        synchronized ( threadLock ) {
+    	    if ( executor == null ) return;
+    	    executor.interrupt();
+        }
+	}
+	
+	protected abstract void task();
 }

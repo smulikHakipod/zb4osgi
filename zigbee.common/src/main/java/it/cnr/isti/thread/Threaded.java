@@ -26,14 +26,18 @@ package it.cnr.isti.thread;
 /**
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
- * @since 0.1.0
+ * @since 0.6.0
  *
  */
-public interface Stoppable extends Runnable {
+public interface Threaded extends Runnable {
 	
     /**
-     * This method when invoked will ask the {@link Runnable} to terminate
+     * @return the {@link Thread} if any that is executing this {@link Runnable} object
      */
-    public void end();
+    public Thread getExecutorThread();
 	
+    /**
+     * Sent an {@link InterruptedException} to the {@link Thread} executing the {@link Runnable} if any
+     */
+    public void interrupt();
 }

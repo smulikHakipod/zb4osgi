@@ -24,6 +24,7 @@ package it.cnr.isti.zigbee.basedriver.discovery;
 
 import gnu.trove.TShortObjectHashMap;
 import it.cnr.isti.primitvetypes.util.Integers;
+import it.cnr.isti.thread.RunnableThread;
 import it.cnr.isti.thread.Stoppable;
 import it.cnr.isti.thread.ThreadUtils;
 import it.cnr.isti.zigbee.api.ZigBeeNode;
@@ -54,7 +55,7 @@ import com.itaca.ztool.api.zdo.ZDO_IEEE_ADDR_RSP;
  * @since 0.1.0
  *
  */
-public class NetworkBrowserThread implements Stoppable {
+public class NetworkBrowserThread extends RunnableThread {
 
     private static final Logger logger = LoggerFactory.getLogger(NetworkBrowserThread.class);
 
@@ -62,7 +63,6 @@ public class NetworkBrowserThread implements Stoppable {
 
     private final ImportingQueue queue;
     final SimpleDriver driver;
-    private boolean end = false;
 
     final ArrayList<NetworkAddressNodeItem> toInspect = new ArrayList<NetworkAddressNodeItem>();
     final TShortObjectHashMap<NetworkAddressNodeItem> alreadyInspected = new TShortObjectHashMap<NetworkAddressNodeItem>();
@@ -92,12 +92,12 @@ public class NetworkBrowserThread implements Stoppable {
         this.driver = driver;
     }
 
-    public void run(){
+    public void task(){
         final String threadName = Thread.currentThread().getName();
 
         logger.info("{} STARTED Succesfully", threadName);
 
-        while(!isEnd()){
+        while( ! isDone() ){
             long wakeUpTime = System.currentTimeMillis() + Activator.getCurrentConfiguration().getNetworkBrowsingPeriod();
             cleanUpWalkingTree();
 
@@ -138,7 +138,7 @@ public class NetworkBrowserThread implements Stoppable {
                 e.printStackTrace();
             }
             logger.info("Network browsing completed, waiting until {}", wakeUpTime);
-            ThreadUtils.waitingUntil( wakeUpTime );
+            if ( ! isDone() ) ThreadUtils.waitingUntil( wakeUpTime );
         }
         logger.info("{} TERMINATED Succesfully", threadName);
     }
@@ -224,13 +224,5 @@ public class NetworkBrowserThread implements Stoppable {
                 logger.error("Handled excepetion during notification", ex);
             }
         }
-    }
-
-    private synchronized boolean isEnd() {
-        return end;
-    }
-
-    public synchronized void end() {
-        end = true;
     }
 }

@@ -116,6 +116,7 @@ public class Activator implements BundleActivator {
 
 	private void unregisterSimpleDriverTracker() {
 		Activator.getBundleContext().removeServiceListener(tracker);
+		tracker.cleanUp();
 		tracker = null;
 	}
 	
@@ -127,11 +128,10 @@ public class Activator implements BundleActivator {
 				}
 			}
 			devices.clear();
-        	}
+        }
 	}
 	
 	public void stop(BundleContext bc) throws Exception {
-		unregisterAllDeviceService();
 		unregisterSimpleDriverTracker();
 		synchronized (singelton) {
 			Activator.context = null;

@@ -291,6 +291,7 @@ public class DeviceBuilderThread implements Stoppable{
     private void inspectNewlyDevice(){
         nextInspectionSlot = Activator.getCurrentConfiguration().getDeviceInspectionPeriod() + System.currentTimeMillis();
         final ZigBeeNodeAddress dev = queue.pop();
+        if ( dev == null ) return ;
         logger.info("Trying to register a node extracted from ImportingQueue");
         final ZToolAddress16 nwk = dev.getNetworkAddress();
         final ZToolAddress64 ieee = dev.getIEEEAddress();

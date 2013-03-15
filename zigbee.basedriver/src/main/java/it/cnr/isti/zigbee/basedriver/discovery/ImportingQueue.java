@@ -22,6 +22,8 @@
 
 package it.cnr.isti.zigbee.basedriver.discovery;
 
+import it.cnr.isti.thread.ThreadUtils;
+
 import java.util.ArrayList;
 
 import org.slf4j.Logger;
@@ -41,7 +43,9 @@ import com.itaca.ztool.api.ZToolAddress64;
 public class ImportingQueue {
 
 	private static final Logger logger = LoggerFactory.getLogger(ImportingQueue.class);
-
+	private int waitingThread = 0;
+	private boolean closing = false;
+	
 	public class ZigBeeNodeAddress {
 
 		private final ZToolAddress16 networkAddress;
@@ -64,6 +68,7 @@ public class ImportingQueue {
 
 	public void clear() {
 		synchronized (addresses) {
+		    if ( closing ) return;
 			addresses.clear();
 		}
 	}
@@ -80,11 +85,11 @@ public class ImportingQueue {
 		}
 	}
 
-
 	public void push(ZToolAddress16 nwkAddress, ZToolAddress64 ieeeAddress){
-		ZigBeeNodeAddress inserting = new ZigBeeNodeAddress(nwkAddress, ieeeAddress);
+        ZigBeeNodeAddress inserting = new ZigBeeNodeAddress(nwkAddress, ieeeAddress);
 		logger.debug("Adding {} ({})",nwkAddress,ieeeAddress);
 		synchronized (addresses) {
+	        if ( closing ) return;
 			addresses.add(inserting);
 			addresses.notify();
 		}
@@ -95,15 +100,34 @@ public class ImportingQueue {
 		ZigBeeNodeAddress result = null;
 		logger.debug("Removing element");
 		synchronized (addresses) {
+		    if ( closing ) return null;
+            waitingThread++;
 			while( addresses.isEmpty() ){
 				try {
 					addresses.wait();
 				} catch (InterruptedException ignored) {
 				}
 			}
+			waitingThread--;
 			result = addresses.remove(addresses.size() - 1);
 		}
-		logger.debug("Removed {} {}", result.networkAddress, result.ieeeAddress);
+		if ( result != null ) {
+		    logger.debug("Removed {} {}", result.networkAddress, result.ieeeAddress);
+		} else {
+		    logger.debug("Removed null value from the queue it means that queue is closing down");
+		}
 		return result;
+	}
+	
+	public void close() {
+	    do {
+	        synchronized ( addresses ) {
+	            if ( waitingThread <= 0 ) return;
+                closing = true;
+                addresses.add( null );
+                addresses.notify();                
+            }
+	        Thread.yield();
+	    } while ( true );
 	}
 }

@@ -22,6 +22,8 @@
 
 package it.cnr.isti.zigbee.basedriver.communication;
 
+import java.util.EnumSet;
+
 import it.cnr.isti.zigbee.basedriver.Activator;
 import it.cnr.isti.zigbee.basedriver.configuration.BaseDriverProperties;
 import it.cnr.isti.zigbee.basedriver.configuration.BaseDriverProperties.DiscoveryMode;
@@ -57,8 +59,10 @@ public class SimpleDriverServiceTracker implements ServiceListener{
 	private ServiceReference driverReference;
 	private SimpleDriver driverService;
 	private final AnnunceListnerThread annunceListener;
+	
 	private NetworkBrowserThread networkBrowser = null ;
 	private LQINetworkBrowserThread networkLQIBrowser = null;
+	
 	private DeviceBuilderThread deviceBuilder;
 	private final ImportingQueue importingQueue;
 
@@ -81,13 +85,24 @@ public class SimpleDriverServiceTracker implements ServiceListener{
 		}
 	}
 
+	public void cleanUp() {
+	    setDownZigBeeImporter();
+	}
+	
 	private void setDownZigBeeImporter() {
 		logger.info("Driver used left:clean up all the data and closing all the threads");
 
 		Activator.getCurrentConfiguration().setDriver(null);
-		if( networkBrowser != null ) networkBrowser.end();
-        if( networkLQIBrowser != null ) networkLQIBrowser.end();
-		deviceBuilder.end();
+		if( networkBrowser != null ) {
+		    networkBrowser.end();		    
+		    networkBrowser.interrupt();
+		}
+        if( networkLQIBrowser != null ) {
+            networkLQIBrowser.end();
+            networkLQIBrowser.interrupt();
+        }
+        deviceBuilder.end();
+        importingQueue.close();
 		Activator.unregisterAllDeviceService();
 	}
 
@@ -111,13 +126,14 @@ public class SimpleDriverServiceTracker implements ServiceListener{
 		Activator.getCurrentConfiguration().setDriver(driverService);
 		importingQueue.clear();
 		AFLayer.getAFLayer(driverService);
-        if ( Activator.getCurrentConfiguration().getDiscoveryMode().contains( DiscoveryMode.Announce ) ) {
+		final EnumSet<DiscoveryMode> enabledDiscoveries = Activator.getCurrentConfiguration().getDiscoveryMode();
+        if ( enabledDiscoveries.contains( DiscoveryMode.Announce ) ) {
             driverService.addAnnunceListener(annunceListener);
         } else {
             logger.debug( "ANNUNCE discovery disabled due to {}", BaseDriverProperties.DISCOVERY_MODE_KEY );
         }		
 
-        if ( Activator.getCurrentConfiguration().getDiscoveryMode().contains( DiscoveryMode.Addressing ) ) {
+        if ( enabledDiscoveries .contains( DiscoveryMode.Addressing ) ) {
             networkBrowser = new NetworkBrowserThread(importingQueue,  driverService );
             new Thread(networkBrowser, "NetworkBrowser["+driverService+"]").start();
         } else {
@@ -125,7 +141,7 @@ public class SimpleDriverServiceTracker implements ServiceListener{
                 NetworkBrowserThread.class, BaseDriverProperties.DISCOVERY_MODE_KEY );
         }
         
-        if ( Activator.getCurrentConfiguration().getDiscoveryMode().contains( DiscoveryMode.LinkQuality ) ) {
+        if ( enabledDiscoveries .contains( DiscoveryMode.LinkQuality ) ) {
             networkLQIBrowser = new LQINetworkBrowserThread(importingQueue,  driverService );
             new Thread(networkLQIBrowser, "LQINetworkBrowser["+driverService+"]").start();
         } else {
