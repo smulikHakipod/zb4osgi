@@ -181,10 +181,7 @@
 							it.cnr.isti.thread.*,
 							gnu.trove.*,
 							org.osgi.*,
-							<!-- it.cnr.isti.event.publisher.*, -->
 							org.slf4j; provider=paxlogging,
-							it.cnr.isti.zigbee.ha.driver.core,
-							<!-- it.cnr.isti.zb4osgi.api -->
 						</Import-Package>
 					</instructions>
 				</configuration>
