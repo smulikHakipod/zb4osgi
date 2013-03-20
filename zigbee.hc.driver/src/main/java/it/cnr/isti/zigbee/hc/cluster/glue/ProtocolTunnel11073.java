@@ -25,6 +25,7 @@ package it.cnr.isti.zigbee.hc.cluster.glue;
 import it.cnr.isti.zigbee.ha.cluster.glue.Cluster;
 import it.cnr.isti.zigbee.zcl.library.api.core.Attribute;
 import it.cnr.isti.zigbee.zcl.library.api.core.Response;
+import it.cnr.isti.zigbee.zhccl.library.api.ProtocolTunnel11073.ConnectStatus;
 /**
  * PLACEHOLDER TO IMPLEMENT
  *
@@ -35,5 +36,22 @@ import it.cnr.isti.zigbee.zcl.library.api.core.Response;
  */
 public interface ProtocolTunnel11073 extends Cluster {
 
+    public int[] getDeviceIDList();    
+    public long getManagerTarget();
+    public int getManagerEndPoint();    
+    public boolean isConnected();
+    public boolean isPreemptible();
+    public int getIdleTimeout();
+    
+    
+    public void transferAPDU(String apdu);
 
+    public ConnectStatus connectRequest(boolean preemptible, int idleTimeout, long targetIEEE, int ep);
+
+    public ConnectStatus disconnectRequest(long targetIEEE);
+
+    public ConnectStatus connectStatusNotification(ConnectStatus status);
+    
 }
+
+
