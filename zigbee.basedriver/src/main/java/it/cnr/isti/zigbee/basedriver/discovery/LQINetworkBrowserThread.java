@@ -109,8 +109,7 @@ public class LQINetworkBrowserThread extends RunnableThread {
 		if( ieee_addr_resp == null) {
 			logger.debug("No ZDO_IEEE_ADDR_RSP from #{}", nwkAddress);
 			return null;
-		}
-		else {
+		} else {
 			logger.debug(
 					"ZDO_IEEE_ADDR_RSP from {} with {} associated",
 					ieee_addr_resp.getIEEEAddress(), ieee_addr_resp.getAssociatedDeviceCount()
@@ -176,7 +175,7 @@ public class LQINetworkBrowserThread extends RunnableThread {
 
 						logger.info("Node #{} visible from node #{} with LQI value {}", new Object[]{neighbor.NetworkAddress.get16BitValue(), nwk, neighbor.RxLQI});
 
-						NetworkAddressNodeItem result = getIEEEAddress((short)neighbor.NetworkAddress.get16BitValue());
+						NetworkAddressNodeItem result = getIEEEAddress( (short) neighbor.NetworkAddress.get16BitValue() );
 						NetworkAddressNodeItem newNode;
 						if(result != null){
 							newNode = new NetworkAddressNodeItem(node, result.address);

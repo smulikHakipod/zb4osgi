@@ -116,7 +116,7 @@ public class NetworkBrowserThread extends RunnableThread {
                     if( result == null) {
                         logger.debug("No answer from #{} ({})", inspecting.address, ((int) inspecting.address & 0xFFFF));
                         continue;
-                    } else {
+                    } else if ( result.Status == 0 ){
                         logger.debug(
                                 "Answer from {} with {} associated",
                                 result.getIEEEAddress(), result.getAssociatedDeviceCount()
@@ -124,12 +124,12 @@ public class NetworkBrowserThread extends RunnableThread {
                         inspecting.node = new ZigBeeNodeImpl( inspecting.address, result.getIEEEAddress());
 
                         ZToolAddress16 nwk = new ZToolAddress16(
-                                Integers.getByteAsInteger(inspecting.address, 1),
-                                Integers.getByteAsInteger(inspecting.address, 0)
+                                Integers.getByteAsInteger( inspecting.address, 1 ),
+                                Integers.getByteAsInteger( inspecting.address, 0 )
                         );
-                        queue.push(nwk, result.getIEEEAddress());
+                        queue.push( nwk, result.getIEEEAddress() );
 
-                        notifyBrowsedNode(inspecting);
+                        notifyBrowsedNode( inspecting );
                     }
                     toInspect.addAll( addChildrenNodesToInspectingQueue( inspecting, result ) );
                 }
@@ -153,13 +153,12 @@ public class NetworkBrowserThread extends RunnableThread {
         int start = 0;
         final ArrayList<NetworkAddressNodeItem> adding = new ArrayList<NetworkAddressNodeItem>();
         do{
-
             short[] toAdd = result.getAssociatedDeviceList();
             for (int i = 0; i < toAdd.length; i++) {
-                logger.info("Found node #{} associated to node #{}",toAdd[i],inspecting.address);
-                final NetworkAddressNodeItem next = new NetworkAddressNodeItem(inspecting, toAdd[i]);
-                final NetworkAddressNodeItem found = alreadyInspected.get(toAdd[i]);
-                if( found != null ) {
+                logger.info( "Found node #{} associated to node #{}", toAdd[i], inspecting.address );
+                final NetworkAddressNodeItem next = new NetworkAddressNodeItem( inspecting, toAdd[i] );
+                final NetworkAddressNodeItem found = alreadyInspected.get( toAdd[i] );
+                if ( found != null ) {
                     //NOTE Logging this wrong behavior but doing nothing
                     logger.error(
                             "BROKEN ZIGBEE UNDERSTANDING (while walking address-tree): " +
@@ -167,7 +166,7 @@ public class NetworkBrowserThread extends RunnableThread {
                     );
                     logger.debug("Previus node data was {} while current has parent {}", found, inspecting);
                 } else {
-                    adding.add(next);
+                    adding.add( next );
                 }
             }
             if( toAdd.length + result.getStartIndex() >= result.getAssociatedDeviceCount() ) {
@@ -177,7 +176,7 @@ public class NetworkBrowserThread extends RunnableThread {
             start += toAdd.length;
 
             logger.info(
-                    "Node #{} as many too many device connected to it received only {} out of {}, " +
+                    "Node #{} as too many device connected to it received only {} out of {}, " +
                     "we need to inspect it once more", new Object[]{
                     inspecting.address, toAdd.length, result.getAssociatedDeviceCount()
             });
@@ -187,7 +186,7 @@ public class NetworkBrowserThread extends RunnableThread {
             if ( result == null ){
                 logger.error("Faild to further inspect connected device to node #{}", inspecting.address);
             }
-        }while(result != null);
+        } while( result != null );
 
         return adding;
     }
