@@ -19,27 +19,26 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+package it.cnr.isti.zigbee.ha.cluster.glue.general;
 
-package it.cnr.isti.zigbee.ha.cluster.glue.protocol_interfaces;
 
-import it.cnr.isti.zigbee.ha.cluster.glue.Cluster;
 /**
- *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.7.0
- *
  */
-public interface GenericTunnel extends Cluster {
-
-    public int getMaximumIncomingTransferSize();
-    public int getMaximumOutgoingTransferSize();
-    public int getProtocolAddress();
-    public void setProtocolAddress(int address);
+public enum LocationMethod {
+    Lateration(0x00,"A method based on RSSI measurements from three or more sources"),
+    Signposting(0x01,"The location reported is the location of the neighboring device"),
+    RF_Fingerprinting(0x02,"RSSI signatures are collected into a database at commissioning time"),
+    OutOfBand(0x03,"The location is obtained by accessing an out-of-band device"),
+    Centralized(0x04,"The location is performed by a centralized device");
     
-    public MatchProtocolAddressResponse matchProtocolAddress(String protocolAddress);
-    
-    public boolean addAdvertiseProtocolAddressListener(AdvertiseProtocolAddressListener listener);
-    public boolean removeAdvertiseProtocolAddressListener(AdvertiseProtocolAddressListener listener);
+    public final byte value;
+    public final String description;
 
+    private LocationMethod(int value, String description){
+        this.value = (byte) value;
+        this.description = description;
+    }
 }

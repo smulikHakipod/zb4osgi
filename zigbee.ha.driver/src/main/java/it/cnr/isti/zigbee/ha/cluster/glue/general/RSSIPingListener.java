@@ -19,27 +19,16 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+package it.cnr.isti.zigbee.ha.cluster.glue.general;
 
-package it.cnr.isti.zigbee.ha.cluster.glue.protocol_interfaces;
 
-import it.cnr.isti.zigbee.ha.cluster.glue.Cluster;
 /**
- *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.7.0
- *
  */
-public interface GenericTunnel extends Cluster {
+public interface RSSIPingListener {
 
-    public int getMaximumIncomingTransferSize();
-    public int getMaximumOutgoingTransferSize();
-    public int getProtocolAddress();
-    public void setProtocolAddress(int address);
-    
-    public MatchProtocolAddressResponse matchProtocolAddress(String protocolAddress);
-    
-    public boolean addAdvertiseProtocolAddressListener(AdvertiseProtocolAddressListener listener);
-    public boolean removeAdvertiseProtocolAddressListener(AdvertiseProtocolAddressListener listener);
+    public void rssiPing(LocationType type);
 
 }

@@ -19,27 +19,26 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+package it.cnr.isti.zigbee.ha.cluster.glue.general;
 
-package it.cnr.isti.zigbee.ha.cluster.glue.protocol_interfaces;
 
-import it.cnr.isti.zigbee.ha.cluster.glue.Cluster;
 /**
- *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.7.0
- *
  */
-public interface GenericTunnel extends Cluster {
-
-    public int getMaximumIncomingTransferSize();
-    public int getMaximumOutgoingTransferSize();
-    public int getProtocolAddress();
-    public void setProtocolAddress(int address);
+public enum LocationType {
+    AbsoluteLocation(1,0),
+    MeasuredLocation(0,0),
+    TwoDimensional(1,1),
+    ThreeDimensional(0,1),
+    Rectangular(0,2);
     
-    public MatchProtocolAddressResponse matchProtocolAddress(String protocolAddress);
-    
-    public boolean addAdvertiseProtocolAddressListener(AdvertiseProtocolAddressListener listener);
-    public boolean removeAdvertiseProtocolAddressListener(AdvertiseProtocolAddressListener listener);
+    public final byte value;
+    public final byte bit;
 
+    private LocationType(int value, int bit){
+        this.value = (byte) value;
+        this.bit = (byte) bit;
+    }
 }
