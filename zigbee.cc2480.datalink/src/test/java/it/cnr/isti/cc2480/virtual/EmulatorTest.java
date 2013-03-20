@@ -1,6 +1,8 @@
-package it.cnr.isti.cc2480.virutal;
+package it.cnr.isti.cc2480.virtual;
 
 import static org.junit.Assert.*;
+
+import it.cnr.isti.cc2480.virtual.Emulator;
 
 import java.io.BufferedReader;
 import java.io.IOException;

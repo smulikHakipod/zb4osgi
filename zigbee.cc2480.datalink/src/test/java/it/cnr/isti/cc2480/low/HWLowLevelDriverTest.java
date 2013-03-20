@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
-import it.cnr.isti.cc2480.virutal.Emulator;
+import it.cnr.isti.cc2480.virtual.Emulator;
 
 import org.junit.Test;
 import org.slf4j.Logger;

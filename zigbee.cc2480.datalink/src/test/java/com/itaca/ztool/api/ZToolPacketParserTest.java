@@ -7,7 +7,7 @@ import java.security.GuardedObject;
 
 import it.cnr.isti.cc2480.low.HWLowLevelDriver;
 import it.cnr.isti.cc2480.low.PacketListener;
-import it.cnr.isti.cc2480.virutal.Emulator;
+import it.cnr.isti.cc2480.virtual.Emulator;
 
 import org.junit.Test;
 import org.slf4j.Logger;

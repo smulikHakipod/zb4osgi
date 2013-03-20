@@ -19,9 +19,8 @@
    See the License for the specific language governing permissions and
    limitations under the License.
  */
-package it.cnr.isti.cc2480.virutal;
+package it.cnr.isti.cc2480.virtual;
 
-import it.cnr.isti.cc2480.low.HWLowLevelDriver;
 import it.cnr.isti.cc2480.low.SerialHandler;
 import it.cnr.isti.thread.ThreadUtils;
 
@@ -39,7 +38,6 @@ import org.slf4j.LoggerFactory;
 
 import com.itaca.ztool.api.ZToolPacketHandler;
 import com.itaca.ztool.api.ZToolPacketParser;
-import com.itaca.ztool.api.system.SYS_VERSION;
 
 /**
  * 
