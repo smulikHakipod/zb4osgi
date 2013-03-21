@@ -23,8 +23,6 @@ package it.cnr.isti.zigbee.ha.device.impl;
 
 import it.cnr.isti.zigbee.api.ZigBeeDevice;
 import it.cnr.isti.zigbee.ha.cluster.glue.general.BinaryInput;
-import it.cnr.isti.zigbee.ha.cluster.glue.general.Groups;
-import it.cnr.isti.zigbee.ha.cluster.glue.general.Scenes;
 import it.cnr.isti.zigbee.ha.device.api.generic.SimpleSensor;
 import it.cnr.isti.zigbee.ha.driver.core.HADeviceBase;
 import it.cnr.isti.zigbee.ha.driver.core.HAProfile;
@@ -46,14 +44,10 @@ import org.osgi.framework.BundleContext;
 public class SimpleSensorDevice extends HADeviceBase implements SimpleSensor {
 
     private BinaryInput binaryInput;
-    private Scenes scenes;
-    private Groups groups;
 
     public SimpleSensorDevice(BundleContext ctx,ZigBeeDevice zbDevice) throws ZigBeeHAException{
         super(ctx,zbDevice);
         binaryInput = (BinaryInput) addCluster(HAProfile.BINARY_INPUT);
-        scenes = (Scenes) addCluster(HAProfile.SCENES);
-        groups = (Groups) addCluster(HAProfile.GROUPS);
     }
 
     final static DeviceDescription DEVICE_DESCRIPTOR =  new AbstractDeviceDescription(){
@@ -90,11 +84,4 @@ public class SimpleSensorDevice extends HADeviceBase implements SimpleSensor {
         return binaryInput;
     }
 
-    public Groups getGroups() {
-        return groups;
-    }
-
-    public Scenes getScenes() {
-        return scenes;
-    }
 }

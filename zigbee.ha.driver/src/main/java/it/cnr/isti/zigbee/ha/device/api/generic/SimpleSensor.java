@@ -23,36 +23,26 @@ package it.cnr.isti.zigbee.ha.device.api.generic;
 
 
 import it.cnr.isti.zigbee.ha.cluster.glue.general.BinaryInput;
-import it.cnr.isti.zigbee.ha.cluster.glue.general.Groups;
-import it.cnr.isti.zigbee.ha.cluster.glue.general.Scenes;
 import it.cnr.isti.zigbee.ha.driver.ArraysUtil;
 import it.cnr.isti.zigbee.ha.driver.core.HADevice;
 import it.cnr.isti.zigbee.ha.driver.core.HAProfile;
 
 
-public interface SimpleSensor extends HADevice{
+/**
+ * @author <a href="mailto:h.alink1@chello.nl">Han Alink</a>
+ * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
+ * @version $LastChangedRevision$ ($LastChangedDate$)
+ * @since 0.7.0
+ *
+ */
+public interface SimpleSensor extends HADevice {
 
     public static final int DEVICE_ID = 0x000C;
     public static final String NAME = "Simple Sensor";
-    public static final int[] MANDATORY = ArraysUtil.append(HADevice.MANDATORY, new int[]{
-        HAProfile.BINARY_INPUT,HAProfile.GROUPS,HAProfile.SCENES});
+    public static final int[] MANDATORY = ArraysUtil.append( HADevice.MANDATORY, new int[] { HAProfile.BINARY_INPUT } );
     public static final int[] OPTIONAL = HADevice.OPTIONAL;
     public static final int[] STANDARD = ArraysUtil.append(MANDATORY, OPTIONAL);
     public static final int[] CUSTOM = {};
-
-    /**
-     * Access method for the <b>Mandatory</b> cluster: {@link Scenes}
-     *
-     * @return the {@link Scenes} cluster object
-     */
-    public Scenes getScenes();
-
-    /**
-     * Access method for the <b>Mandatory</b> cluster: {@link Groups}
-     *
-     * @return the {@link Groups} cluster object
-     */
-    public Groups getGroups();
 
     /**
      * Access method for the <b>Mandatory</b> cluster: {@link BinaryInput}
