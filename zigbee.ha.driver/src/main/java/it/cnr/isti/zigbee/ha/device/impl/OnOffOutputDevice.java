@@ -1,10 +1,10 @@
 /*
    Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,71 +37,71 @@ import it.cnr.isti.zigbee.ha.driver.core.reflection.DeviceDescription;
 import org.osgi.framework.BundleContext;
 
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
- *         
+ *
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.2.0
  *
  */
 public class OnOffOutputDevice extends HADeviceBase implements OnOffOutput {
-	
-	private OnOff onOff;
-	private Scenes scenes;
-	private Groups groups;
-	
-	public  OnOffOutputDevice(BundleContext ctx,ZigBeeDevice zbDevice) throws ZigBeeHAException {
-		super(ctx,zbDevice);
-		onOff = (OnOff) addCluster(HAProfile.ON_OFF);
-		groups = (Groups) addCluster(HAProfile.GROUPS);
-		scenes = (Scenes) addCluster(HAProfile.SCENES);
-	}
+
+    private OnOff onOff;
+    private Scenes scenes;
+    private Groups groups;
+
+    public  OnOffOutputDevice(BundleContext ctx,ZigBeeDevice zbDevice) throws ZigBeeHAException {
+        super(ctx,zbDevice);
+        onOff = (OnOff) addCluster(HAProfile.ON_OFF);
+        groups = (Groups) addCluster(HAProfile.GROUPS);
+        scenes = (Scenes) addCluster(HAProfile.SCENES);
+    }
 
 
-	public Groups getGroups() {
-		return groups;
-	}
+    public Groups getGroups() {
+        return groups;
+    }
 
-	public OnOff getOnOff() {
-		return onOff;
-	}
+    public OnOff getOnOff() {
+        return onOff;
+    }
 
-	public Scenes getScenes() {
-		return scenes;
-	}
+    public Scenes getScenes() {
+        return scenes;
+    }
 
-	
 
-	@Override
-	public String getName() {
-		return OnOffLight.NAME;
-	}
 
-	public final static DeviceDescription DEVICE_DESCRIPTOR =  new AbstractDeviceDescription(){
+    @Override
+    public String getName() {
+        return OnOffOutput.NAME;
+    }
 
-		public int[] getCustomClusters() {
-			return OnOffLight.CUSTOM;
-		}
+    public final static DeviceDescription DEVICE_DESCRIPTOR =  new AbstractDeviceDescription(){
 
-		public int[] getMandatoryCluster() {
-			return OnOffLight.MANDATORY;
-		}
+        public int[] getCustomClusters() {
+            return OnOffLight.CUSTOM;
+        }
 
-		public int[] getOptionalCluster() {
-			return OnOffLight.OPTIONAL;
-		}
+        public int[] getMandatoryCluster() {
+            return OnOffLight.MANDATORY;
+        }
 
-		public int[] getStandardClusters() {
-			return OnOffLight.STANDARD;
-		}
-		
-	};
+        public int[] getOptionalCluster() {
+            return OnOffLight.OPTIONAL;
+        }
 
-	@Override
-	public DeviceDescription getDescription() {
-		return DEVICE_DESCRIPTOR;
-	}
+        public int[] getStandardClusters() {
+            return OnOffLight.STANDARD;
+        }
+
+    };
+
+    @Override
+    public DeviceDescription getDescription() {
+        return DEVICE_DESCRIPTOR;
+    }
 
 
 }
