@@ -29,7 +29,7 @@
 
   <groupId>org.aaloa.zb4osgi</groupId>
   <artifactId>org.aaloa.zb4osgi.zigbee.cc2480.datalink</artifactId>
-  <version>0.8.0-SNAPSHOT</version>
+  <version>0.8.0</version>
   <packaging>bundle</packaging>  
 
   <name>CC2480 Data Link protocol library</name>
@@ -96,9 +96,9 @@
   </developers>
 
   <scm>
-    <connection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.cc2480.datalink</connection>
-    <developerConnection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.cc2480.datalink</developerConnection>
-    <url>http://zb4osgi.aaloa.org/projects/zb4osgi/repository/show/trunk/zigbee.cc2480.datalink</url>
+    <connection>scm:svn:https://svn.aaloa.org/projects/zb4osgi/releases/org.aaloa.zb4osgi.zigbee.cc2480.datalink-0.8.0</connection>
+    <developerConnection>scm:svn:https://svn.aaloa.org/projects/zb4osgi/releases/org.aaloa.zb4osgi.zigbee.cc2480.datalink-0.8.0</developerConnection>
+    <url>scm:svn:https://svn.aaloa.org/projects/zb4osgi/releases/org.aaloa.zb4osgi.zigbee.cc2480.datalink-0.8.0</url>
   </scm>
 
   <repositories>
