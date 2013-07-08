@@ -73,8 +73,9 @@ on the JAR package of this artifact.
   </build>
 
   <scm>
-    <connection>scm:svn:https://svn.aaloa.org/projects/zb4osgi/externals/bundles/rxtx</connection>
-    <developerConnection>>scm:svn:https://svn.aaloa.org/projects/zb4osgi/externals/bundles/rxtx</developerConnection>
-    <url>https://svn.aaloa.org/projects/zb4osgi/externals/bundles/rxtx</url>
+    <connection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/externals/bundles/rxtx</connection>
+    <developerConnection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/externals/bundles/rxtx</developerConnection>
+    <url>http://zb4osgi.aaloa.org/projects/zb4osgi/repository/show/trunk/externals/bundles/rxtx</url>
   </scm>
+
 </project>
