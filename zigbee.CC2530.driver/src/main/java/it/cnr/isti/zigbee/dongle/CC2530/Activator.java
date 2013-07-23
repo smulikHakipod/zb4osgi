@@ -1,10 +1,10 @@
 /*
    Copyright 2008-2011 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,7 +34,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi - ISTI-CNR</a>
  * @author <a href="mailto:manlio.bacco@isti.cnr.it">Manlio Bacco - ISTI-CNR</a>
  * @version $LastChangedRevision: 229 $ ($LastChangedDate: 2011-05-20 11:42:58 +0200 (ven, 20 mag 2011) $)
@@ -43,31 +43,31 @@ import org.osgi.framework.ServiceRegistration;
  */
 public class Activator implements BundleActivator {
 
-	private DriverCC2530 driver;
-	private ServiceRegistration service;
-	
-	public void start(BundleContext bc) throws Exception {
-		driver = new DriverCC2530(
-				OSGiProperties.getString(bc, ConfigurationProperties.COM_NAME_KEY, ConfigurationProperties.COM_NAME),
-				OSGiProperties.getInt(bc, ConfigurationProperties.COM_BOUDRATE_KEY, ConfigurationProperties.COM_BOUDRATE), 
-				NetworkMode.valueOf(OSGiProperties.getString(
-						bc, ConfigurationProperties.NETWORK_MODE_KEY, ConfigurationProperties.NETWORK_MODE
-				)),
-				OSGiProperties.getInt(bc, ConfigurationProperties.PAN_ID_KEY, ConfigurationProperties.PAN_ID),
-				OSGiProperties.getInt(bc, ConfigurationProperties.CHANNEL_ID_KEY, ConfigurationProperties.CHANNEL_ID),
-				OSGiProperties.getBoolean(bc, ConfigurationProperties.NETWORK_FLUSH_KEY, ConfigurationProperties.NETWORK_FLUSH),
-				OSGiProperties.getLong(bc, ConfigurationProperties.APPLICATION_MSG_TIMEOUT_KEY, ConfigurationProperties.APPLICATION_MSG_TIMEOUT)
-		);
-		Properties properties = new Properties();
-		properties.put("zigbee.driver.id", DriverCC2530.class.getName());
-		properties.put("zigbee.supported.devices", new String[]{"tsb"});
-		properties.put("zigbee.driver.type", "hardware");
-		properties.put("zigbee.driver.mode", "real");
-		service = bc.registerService(SimpleDriver.class.getName(), driver, properties);	}
+    private DriverCC2530 driver;
+    private ServiceRegistration service;
 
-	public void stop(BundleContext bc) throws Exception {
-		service.unregister();
-		driver.close();
-	}
+    public void start(BundleContext bc) throws Exception {
+        driver = new DriverCC2530(
+                OSGiProperties.getString(bc, ConfigurationProperties.COM_NAME_KEY, ConfigurationProperties.COM_NAME),
+                OSGiProperties.getInt(bc, ConfigurationProperties.COM_BOUDRATE_KEY, ConfigurationProperties.COM_BOUDRATE),
+                NetworkMode.valueOf(OSGiProperties.getString(
+                        bc, ConfigurationProperties.NETWORK_MODE_KEY, ConfigurationProperties.NETWORK_MODE
+                )),
+                OSGiProperties.getInt(bc, ConfigurationProperties.PAN_ID_KEY, ConfigurationProperties.PAN_ID),
+                OSGiProperties.getInt(bc, ConfigurationProperties.CHANNEL_ID_KEY, ConfigurationProperties.CHANNEL_ID),
+                OSGiProperties.getBoolean(bc, ConfigurationProperties.NETWORK_FLUSH_KEY, ConfigurationProperties.NETWORK_FLUSH),
+                OSGiProperties.getLong(bc, ConfigurationProperties.APPLICATION_MSG_TIMEOUT_KEY, ConfigurationProperties.APPLICATION_MSG_TIMEOUT)
+        );
+        Properties properties = new Properties();
+        properties.put("zigbee.driver.id", DriverCC2530.class.getName());
+        properties.put("zigbee.supported.devices", new String[]{"tsb","CC2531EMK","Open2530"});
+        properties.put("zigbee.driver.type", "hardware");
+        properties.put("zigbee.driver.mode", "real");
+        service = bc.registerService(SimpleDriver.class.getName(), driver, properties);	}
+
+    public void stop(BundleContext bc) throws Exception {
+        service.unregister();
+        driver.close();
+    }
 
 }

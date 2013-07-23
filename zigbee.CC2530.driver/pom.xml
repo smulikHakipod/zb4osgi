@@ -32,12 +32,14 @@
   <version>0.2.0-SNAPSHOT</version>
   <packaging>bundle</packaging>  
 
-  <name>ZIC CC2530 dongle</name>
+  <name>ZIC for CC253x devices</name>
   <url>http://zb4osgi.aaloa.org/</url>
   <description><![CDATA[
-  Implementation of the ZigBee Controller Interface API for a CC2530 based usb devices.
- The firmware is based on the Z-Stack 2.x and the serial port communication protocol has been 
-  adapted to be complaint with the "CC2530 Serial Interface"
+  Implementation of the ZigBee Controller Interface API for a CC2530/CC2531 chip based devices.
+  The firmware is based on the Z-Stack 2.x and the serial port communication protocol has been 
+  adapted to be complaint with the "Z-Stack Monitor and Test API"
+  This driver has been tested with the following device: TSB Dongle, CC2531EMK, SmartRF05EB 
+  with CC2530EMK, and Open2530
   ]]></description>
 
   <inceptionYear>2011</inceptionYear>
