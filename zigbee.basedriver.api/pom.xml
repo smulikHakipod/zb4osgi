@@ -29,7 +29,7 @@
    
   <groupId>org.aaloa.zb4osgi</groupId>
   <artifactId>org.aaloa.zb4osgi.zigbee.basedriver.api</artifactId>
-  <version>0.6.0-SNAPSHOT</version>
+  <version>0.6.0</version>
   <packaging>bundle</packaging>
    
   <name>ZigBee Base Driver API for OSGi</name>
@@ -51,9 +51,9 @@
   </licenses>
 
   <scm>
-    <connection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.basedriver.api</connection>
-    <developerConnection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.basedriver.api</developerConnection>
-    <url>http://zb4osgi.aaloa.org/projects/zb4osgi/repository/show/trunk/zigbee.basedriver.api</url>
+    <connection>svn://svn.aaloa.org/projects/zb4osgi/releases/org.aaloa.zb4osgi.zigbee.basedriver.api-0.6.0</connection>
+    <developerConnection>svn://svn.aaloa.org/projects/zb4osgi/releases/org.aaloa.zb4osgi.zigbee.basedriver.api-0.6.0</developerConnection>
+    <url>svn://svn.aaloa.org/projects/zb4osgi/releases/org.aaloa.zb4osgi.zigbee.basedriver.api-0.6.0</url>
   </scm>
   
   <developers>
