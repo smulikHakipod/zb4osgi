@@ -29,7 +29,7 @@
 
   <artifactId>org.aaloa.zb4osgi.zigbee.zcl.library</artifactId>
   <packaging>bundle</packaging>
-  <version>0.8.0</version>
+  <version>0.9.0-SNAPSHOT</version>
 
   <name>ZigBee Common Cluster Library</name>
   <url>http://zb4osgi.aaloa.org/</url>
@@ -87,9 +87,9 @@ A set of Java classes reppresenting the ZigBee Common Cluster library
   </developers>
 
   <scm>
-    <connection>svn://svn.aaloa.org/projects/zb4osgi/releases/org.aaloa.zb4osgi.zigbee.zcl.library-0.8.0</connection>
-    <developerConnection>svn://svn.aaloa.org/projects/zb4osgi/releases/org.aaloa.zb4osgi.zigbee.zcl.library-0.8.0</developerConnection>
-    <url>svn://svn.aaloa.org/projects/zb4osgi/releases/org.aaloa.zb4osgi.zigbee.zcl.library-0.8.0</url>
+    <connection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.zcl.library</connection>
+    <developerConnection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.zcl.library</developerConnection>
+    <url>http://zb4osgi.aaloa.org/projects/zb4osgi/repository/show/trunk/zigbee.zcl.library</url>
   </scm>
 
   <repositories>
