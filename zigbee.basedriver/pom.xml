@@ -20,7 +20,7 @@
 	</parent>
 
 	<artifactId>org.aaloa.zb4osgi.zigbee.basedriver</artifactId>
-	<version>0.7.0</version>
+	<version>0.8.0-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 
 	<name>ZigBee Base Driver</name>
@@ -79,9 +79,9 @@
 	</developers>
 
 	<scm>
-		<connection>svn://svn.aaloa.org/projects/zb4osgi/releases/org.aaloa.zb4osgi.zigbee.basedriver-0.7.0</connection>
-		<developerConnection>svn://svn.aaloa.org/projects/zb4osgi/releases/org.aaloa.zb4osgi.zigbee.basedriver-0.7.0</developerConnection>
-		<url>svn://svn.aaloa.org/projects/zb4osgi/releases/org.aaloa.zb4osgi.zigbee.basedriver-0.7.0</url>
+		<connection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.basedriver</connection>
+		<developerConnection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.basedriver</developerConnection>
+		<url>http://zb4osgi.aaloa.org/projects/zb4osgi/repository/show/trunk/zigbee.basedriver</url>
 	</scm>
 
 	<repositories>
