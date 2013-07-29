@@ -29,7 +29,7 @@
 
   <artifactId>org.aaloa.zb4osgi.zigbee.ha.driver</artifactId>
   <packaging>bundle</packaging>
-  <version>0.7.0-SNAPSHOT</version>
+  <version>0.7.0</version>
 
   <name>ZigBee Home Automation Profile Driver</name>
   <url>http://zb4osgi.aaloa.org/</url>
@@ -88,9 +88,9 @@ as defined by the ZigBee OSGi Base Driver, using the OSGi Device Access Specific
   </developers>
 
   <scm>
-    <connection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.ha.driver</connection>
-    <developerConnection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.ha.driver</developerConnection>
-    <url>http://zb4osgi.aaloa.org/projects/zb4osgi/repository/show/trunk/zigbee.ha.driver</url>
+    <connection>svn://svn.aaloa.org/projects/zb4osgi/releases/org.aaloa.zb4osgi.zigbee.ha.driver-0.7.0</connection>
+    <developerConnection>svn://svn.aaloa.org/projects/zb4osgi/releases/org.aaloa.zb4osgi.zigbee.ha.driver-0.7.0</developerConnection>
+    <url>svn://svn.aaloa.org/projects/zb4osgi/releases/org.aaloa.zb4osgi.zigbee.ha.driver-0.7.0</url>
   </scm>
 
   <repositories>
