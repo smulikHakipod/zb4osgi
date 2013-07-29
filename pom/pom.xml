@@ -16,7 +16,7 @@
 	<groupId>org.aaloa.zb4osgi</groupId>
 	<artifactId>org.aaloa.zb4osgi.pom</artifactId>
 	<packaging>pom</packaging>
-	<version>9</version>
+	<version>9-SNAPSHOT</version>
 
 	<name>Suite of bundle for integrating ZigBee device in OSGi</name>
 	<url>http://zb4osgi.aaloa.org/</url>
@@ -63,6 +63,13 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
+		</repository>
+		<repository>
+			<id>snap.nexus.aaloa.org</id>
+			<url>http://nexus.aaloa.org/content/repositories/snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
 		</repository>
 	</repositories>
 
