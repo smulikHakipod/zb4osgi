@@ -131,6 +131,11 @@
       <url>http://nexus.aaloa.org/content/repositories/releases/</url>
       <snapshots><enabled>false</enabled></snapshots>
     </repository>
+    <repository>
+      <id>snapshots.nexus.aaloa.org</id>
+      <url>http://nexus.aaloa.org/content/repositories/snapshots/</url>
+      <releases><enabled>false</enabled></releases>
+    </repository>
   </repositories>
   
   <dependencies>
