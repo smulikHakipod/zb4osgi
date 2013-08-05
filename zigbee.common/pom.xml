@@ -23,7 +23,7 @@
   <parent>
     <groupId>org.aaloa.zb4osgi</groupId>
     <artifactId>org.aaloa.zb4osgi.pom</artifactId>
-    <version>9</version>
+    <version>10-SNAPSHOT</version>
     <relativePath>../pom/pom.xml</relativePath>
   </parent>
 
@@ -64,9 +64,9 @@
   </developers>
   
   <scm>
-    <connection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.common</connection>
-    <developerConnection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.common</developerConnection>
-    <url>http://zb4osgi.aaloa.org/projects/zb4osgi/repository/show/trunk/zigbee.common</url>
+    <connection>scm:svn:https://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.common</connection>
+    <developerConnection>scm:svn:https://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.common</developerConnection>
+    <url>http://zb4osgi.aaloa.org/redmine/projects/zb4osgi/repository/show/trunk/zigbee.common</url>
   </scm>
 
   <repositories>
@@ -149,8 +149,8 @@
         <configuration>
           <type>date</type>
           <dates>
-            <date implementation="java.lang.String">2010-10-24</date>
-            <date implementation="java.lang.String">2029-12-31</date>
+            <date implementation="java.lang.String">2013-08-04</date>
+            <date implementation="java.lang.String">2030-12-31</date>
           </dates>
           <dateFormat>yyyy-MM-dd</dateFormat>
         </configuration>

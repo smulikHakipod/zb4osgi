@@ -23,23 +23,23 @@
   <parent>
     <groupId>org.aaloa.zb4osgi</groupId>
     <artifactId>org.aaloa.zb4osgi.pom</artifactId>
-    <version>9</version>
+    <version>10-SNAPSHOT</version>
     <relativePath>../pom/pom.xml</relativePath>
   </parent>
 
   <groupId>org.aaloa.zb4osgi</groupId>
   <artifactId>org.aaloa.zb4osgi.zigbee.cc2480.datalink</artifactId>
   <version>0.9.0-SNAPSHOT</version>
-  <packaging>bundle</packaging>  
+  <packaging>bundle</packaging>
 
   <name>CC2480 Data Link protocol library</name>
   <url>http://zb4osgi.aaloa.org/</url>
   <description><![CDATA[
-  	A Java library that implementats the Texas Instrument CC2480 Interface Specification. 
-	In particular, it provides the implementation of data link protocol over the serial port and 
-	a class model that represents the message specified by the Specification
+    A Java library that implementats the Texas Instrument CC2480 Interface Specification.
+  In particular, it provides the implementation of data link protocol over the serial port and
+  a class model that represents the message specified by the Specification
   ]]></description>
-  
+
   <inceptionYear>2008</inceptionYear>
   <organization>
     <name><![CDATA[
@@ -50,8 +50,8 @@
     http://isti.cnr.it/
     http://www.itaca.upv.es/
     ]]></url>
-  </organization> 
-  
+  </organization>
+
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -59,7 +59,7 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
-  
+
   <developers>
     <developer>
       <id>michele.girolami</id>
@@ -108,11 +108,12 @@
       <snapshots><enabled>false</enabled></snapshots>
     </repository>
   </repositories>
-  
+
   <dependencies>
     <dependency>
       <groupId>org.aaloa.zb4osgi</groupId>
       <artifactId>org.aaloa.zb4osgi.zigbee.common</artifactId>
+      <version>0.5.0</version>
     </dependency>
     <dependency>
       <groupId>org.aaloa.zb4osgi.bundle</groupId>
@@ -139,35 +140,35 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
           <groups>
-	    <group>
-	      <title><![CDATA[Core CC2480 Frames & Utility]]></title>
-	      <packages>com.itaca.ztool.api</packages>
-	    </group>
-	    <group>
-	      <title>Raw Byte Handling Utility</title>
-	      <packages>com.itaca.ztool.util</packages>
-	    </group>
-	    <group>
-	      <title>CC2480 Frames representation</title>
-	      <packages>com.itaca.ztool.api.*</packages>
-	    </group>
-	    <group>
-	      <title>CC2480 Data Link Protocol implementation</title>
-	      <packages>it.cnr.isti.cc2480.*</packages>
-	    </group>
+      <group>
+        <title><![CDATA[Core CC2480 Frames & Utility]]></title>
+        <packages>com.itaca.ztool.api</packages>
+      </group>
+      <group>
+        <title>Raw Byte Handling Utility</title>
+        <packages>com.itaca.ztool.util</packages>
+      </group>
+      <group>
+        <title>CC2480 Frames representation</title>
+        <packages>com.itaca.ztool.api.*</packages>
+      </group>
+      <group>
+        <title>CC2480 Data Link Protocol implementation</title>
+        <packages>it.cnr.isti.cc2480.*</packages>
+      </group>
           </groups>
           <bottom><![CDATA[
-   Copyright 2008-2010 <a href="http://isti.cnr.it">CNR-ISTI, 
-   Institute of Information Science and Technologies 
+   Copyright 2008-2010 <a href="http://isti.cnr.it">CNR-ISTI,
+   Institute of Information Science and Technologies
    of the Italian National Research Council</a>
 <br>
-   Copyright 2008-2010 <a href="http://www.itaca.upv.es/"> 
+   Copyright 2008-2010 <a href="http://www.itaca.upv.es/">
    Instituto Tecnologico de Aplicaciones de Comunicacion Avanzadas - Grupo Tecnologias para la Salud y el Bienestar (TSB)</a>
           ]]></bottom>
         </configuration>
       </plugin>
- 
-      <plugin>    
+
+      <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
         <extensions>true</extensions>
@@ -185,12 +186,12 @@
             <Bundle-Activator />
             <Import-Package>
               org.osgi.*,
-              it.cnr.isti.thread, 
+              it.cnr.isti.thread,
               it.cnr.isti.io,
               it.cnr.isti.collections,
               it.cnr.isti.primitvetypes.util, it.cnr.isti.osgi.util,
               gnu.io.*, javax.swing.*,
-              org.slf4j.*; provider=paxlogging      
+              org.slf4j.*; provider=paxlogging
             </Import-Package>
             <Export-Package>
               com.itaca.ztool.*;version=${pom.version},
@@ -201,7 +202,7 @@
       </plugin>
     </plugins>
   </build>
-  
+
   <reporting>
     <plugins>
       <plugin>
@@ -210,7 +211,7 @@
         <configuration>
           <type>date</type>
           <dates>
-            <date implementation="java.lang.String">2011-03-25</date>
+            <date implementation="java.lang.String">2013-08-04</date>
             <date implementation="java.lang.String">2030-12-31</date>
           </dates>
           <dateFormat>yyyy-MM-dd</dateFormat>
@@ -218,5 +219,5 @@
       </plugin>
     </plugins>
   </reporting>
-  
+
 </project>

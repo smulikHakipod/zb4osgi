@@ -23,7 +23,7 @@
   <parent>
     <groupId>org.aaloa.zb4osgi</groupId>
     <artifactId>org.aaloa.zb4osgi.pom</artifactId>
-    <version>9</version>
+    <version>10-SNAPSHOT</version>
     <relativePath>../pom/pom.xml</relativePath>
   </parent>
 
@@ -204,8 +204,8 @@
         <configuration>
           <type>date</type>
           <dates>
-            <date implementation="java.lang.String">2013-07-25</date>
-            <date implementation="java.lang.String">2033-06-24</date>
+            <date implementation="java.lang.String">2013-08-04</date>
+            <date implementation="java.lang.String">2030-12-31</date>
           </dates>
           <dateFormat>yyyy-MM-dd</dateFormat>
         </configuration>
