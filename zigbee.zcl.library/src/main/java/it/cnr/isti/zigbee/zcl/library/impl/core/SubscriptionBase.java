@@ -1,10 +1,10 @@
 /*
    Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -43,7 +43,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
 
@@ -53,178 +53,179 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class SubscriptionBase implements Subscription {
 
-	private final Logger log = LoggerFactory.getLogger(SubscriptionBase.class);
-	
-	protected final ArrayList<ReportListener> listeners = new ArrayList<ReportListener>();
-	protected final ReportListenerNotifier bridge = new ReportListenerNotifier(); 
-	protected final ZigBeeDevice device;
-	protected final ZCLCluster cluster;
-	protected final Attribute attribute;
-	
-	protected int max =  Subscription.DEFAULT_MAX_REPORTING_INTERVAL; 
-	protected int min =  Subscription.DEFAULT_MIN_REPORTING_INTERVAL; 
-		
-	protected class ReportListenerNotifier implements ClusterListner {
+    private final Logger log = LoggerFactory.getLogger(SubscriptionBase.class);
 
-		public void handleCluster(ZigBeeDevice device, Cluster c) {
-			try {
-				ResponseImpl response = new ResponseImpl(c, cluster.getId());
-				AttributeReport[] reports = new ReportAttributesCommand(response).getAttributeReports();
-				Dictionary<Attribute, Object> event = new Hashtable<Attribute, Object>();
-				for (int i = 0; i < reports.length; i++) {
-					event.put(
-							cluster.getAttribute(reports[i].getAttributeId()), 
-							reports[i].getAttributeData() 
-					);
-				}
-				ArrayList<ReportListener> localCopy;
-				synchronized (listeners) {
-					localCopy = new ArrayList<ReportListener>(listeners);					
-				}
-				log.debug("Notifying {} ReportListener", localCopy.size());
-				for (ReportListener reportListner : localCopy) {
-					try{
-						log.debug("Notifying {}:{}", reportListner.getClass().getName(), reportListner);
-						reportListner.receivedReport(event);
-					}catch(Exception e){
-						log.error("Error while notifying {}:{} caused by {}",new Object[]{
-								reportListner.getClass().getName(), reportListner, e.getStackTrace() 
-						});
-					}
-				}
-				
-			} catch (ZigBeeClusterException e) {
-				e.printStackTrace();
-			}
-		}
+    protected final ArrayList<ReportListener> listeners = new ArrayList<ReportListener>();
+    protected final ReportListenerNotifier bridge = new ReportListenerNotifier();
+    protected final ZigBeeDevice device;
+    protected final ZCLCluster cluster;
+    protected final Attribute attribute;
 
-		public ClusterFilter getClusterFilter() {
-			return SubscriptionClusterFilter.FILTER;
-		}
+    protected int max =  Subscription.DEFAULT_MAX_REPORTING_INTERVAL;
+    protected int min =  Subscription.DEFAULT_MIN_REPORTING_INTERVAL;
 
-		public void setClusterFilter(ClusterFilter filter) {			
-		}
-		
-	}
-	
-	public SubscriptionBase(final ZigBeeDevice zb, final ZCLCluster c, final Attribute attrib) {
-		device = zb;
-		cluster = c;
-		attribute = attrib;
-	}
-	
-	private boolean doBindToDevice() {
-		try {
-			return device.bind( cluster.getId() );
-		} catch (ZigBeeBasedriverException e) {
-			log.debug("Unable to bind to device {} on cluster {}", device, cluster.getId());
-			log.error("Binding failed", e);
-			return false;
-		}
-	}
+    protected class ReportListenerNotifier implements ClusterListner {
 
-	private boolean doUnbindToDevice() {
-		try {
-			return device.unbind( cluster.getId() );
-		} catch (ZigBeeBasedriverException e) {
-			log.debug("Unable to bind to device {} on cluster {}", device, cluster.getId());
-			log.error("Binding failed", e);
-			return false;
-		}
-	}
-	
-	protected abstract boolean doConfigureServer() throws ZigBeeClusterException;
-	
-	public boolean addReportListner(ReportListener listener) {
-		synchronized (listeners) {
-			if ( listeners.size() == 0 ) {
-				if( ! doBindToDevice() ) {
-					return false;
-				}
-				try {
-					doConfigureServer();
-				} catch (ZigBeeClusterException e) {
-					log.error("Unable to configure server for Reporting", e);
-					return false;
-				}
-				device.addClusterListener(bridge);
-			}
-			listeners.add(listener);
-		}
-		return true;
-	}
+        public void handleCluster(ZigBeeDevice device, Cluster c) {
+            try {
+                if ( c.getId() != cluster.getId() ) return;
+                ResponseImpl response = new ResponseImpl(c, cluster.getId());
+                AttributeReport[] reports = new ReportAttributesCommand(response).getAttributeReports();
+                Dictionary<Attribute, Object> event = new Hashtable<Attribute, Object>();
+                for (int i = 0; i < reports.length; i++) {
+                    event.put(
+                            cluster.getAttribute(reports[i].getAttributeId()),
+                            reports[i].getAttributeData()
+                    );
+                }
+                ArrayList<ReportListener> localCopy;
+                synchronized (listeners) {
+                    localCopy = new ArrayList<ReportListener>(listeners);
+                }
+                log.debug("Notifying {} ReportListener", localCopy.size());
+                for (ReportListener reportListner : localCopy) {
+                    try{
+                        log.debug("Notifying {}:{}", reportListner.getClass().getName(), reportListner);
+                        reportListner.receivedReport(event);
+                    }catch(Exception e){
+                        log.error("Error while notifying {}:{} caused by {}",new Object[]{
+                                reportListner.getClass().getName(), reportListner, e.getStackTrace()
+                        });
+                    }
+                }
 
-	public void clear() {
-		if ( doUnbindToDevice() == true ) { 
-			synchronized (listeners) {
-				listeners.clear();
-			}
-		}
-	}
+            } catch (ZigBeeClusterException e) {
+                e.printStackTrace();
+            }
+        }
 
-	public int getMaximumReportingInterval() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+        public ClusterFilter getClusterFilter() {
+            return SubscriptionClusterFilter.FILTER;
+        }
 
-	public int getMinimumReportingInterval() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+        public void setClusterFilter(ClusterFilter filter) {
+        }
 
-	public boolean removeReportListner(ReportListener listener) {
-		synchronized (listeners) {
-			if ( listeners.size() == 1 ) {
-				if( ! doUnbindToDevice() ) {
-					return false;
-				}
-				//TODO Change the configuration only if there were no subscriber
-				try {
-					doConfigureServer();
-				} catch (ZigBeeClusterException e) {
-					log.error("Unable to configure server for Reporting", e);
-					return false;
-				}
-				device.removeClusterListener(bridge);
-			}
-			listeners.remove(listener);
-		}
-		return true;
-	}
+    }
 
-	public int setMaximumReportingInterval(int value) {
-		//TODO Check the real value
-		max = value;
-		return max;
-	}
+    public SubscriptionBase(final ZigBeeDevice zb, final ZCLCluster c, final Attribute attrib) {
+        device = zb;
+        cluster = c;
+        attribute = attrib;
+    }
 
-	public int setMinimumReportingInterval(int value) {
-		min = value;
-		return min;
-	}
+    private boolean doBindToDevice() {
+        try {
+            return device.bind( cluster.getId() );
+        } catch (ZigBeeBasedriverException e) {
+            log.debug("Unable to bind to device {} on cluster {}", device, cluster.getId());
+            log.error("Binding failed", e);
+            return false;
+        }
+    }
 
-	public int getReportListenersCount() {
-		synchronized (listeners) {
-			return listeners.size();
-		}
-	}
+    private boolean doUnbindToDevice() {
+        try {
+            return device.unbind( cluster.getId() );
+        } catch (ZigBeeBasedriverException e) {
+            log.debug("Unable to bind to device {} on cluster {}", device, cluster.getId());
+            log.error("Binding failed", e);
+            return false;
+        }
+    }
 
-	public boolean isActive() {
-		synchronized (listeners) {
-			return listeners.size() == 0;
-		}
-	}
-	
-	public boolean updateConfiguration() {
-		try{
-			if( isActive() ) {
-				return doConfigureServer();
-			} else {
-				return true;
-			}
-		}catch (Exception e) {
-			log.error("Unable to update Report configuration");
-			return false;
-		}
-	}
+    protected abstract boolean doConfigureServer() throws ZigBeeClusterException;
+
+    public boolean addReportListner(ReportListener listener) {
+        synchronized (listeners) {
+            if ( listeners.size() == 0 ) {
+                if( ! doBindToDevice() ) {
+                    return false;
+                }
+                try {
+                    doConfigureServer();
+                } catch (ZigBeeClusterException e) {
+                    log.error("Unable to configure server for Reporting", e);
+                    return false;
+                }
+                device.addClusterListener(bridge);
+            }
+            listeners.add(listener);
+        }
+        return true;
+    }
+
+    public void clear() {
+        if ( doUnbindToDevice() == true ) {
+            synchronized (listeners) {
+                listeners.clear();
+            }
+        }
+    }
+
+    public int getMaximumReportingInterval() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    public int getMinimumReportingInterval() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    public boolean removeReportListner(ReportListener listener) {
+        synchronized (listeners) {
+            if ( listeners.size() == 1 ) {
+                if( ! doUnbindToDevice() ) {
+                    return false;
+                }
+                //TODO Change the configuration only if there were no subscriber
+                try {
+                    doConfigureServer();
+                } catch (ZigBeeClusterException e) {
+                    log.error("Unable to configure server for Reporting", e);
+                    return false;
+                }
+                device.removeClusterListener(bridge);
+            }
+            listeners.remove(listener);
+        }
+        return true;
+    }
+
+    public int setMaximumReportingInterval(int value) {
+        //TODO Check the real value
+        max = value;
+        return max;
+    }
+
+    public int setMinimumReportingInterval(int value) {
+        min = value;
+        return min;
+    }
+
+    public int getReportListenersCount() {
+        synchronized (listeners) {
+            return listeners.size();
+        }
+    }
+
+    public boolean isActive() {
+        synchronized (listeners) {
+            return listeners.size() == 0;
+        }
+    }
+
+    public boolean updateConfiguration() {
+        try{
+            if( isActive() ) {
+                return doConfigureServer();
+            } else {
+                return true;
+            }
+        }catch (Exception e) {
+            log.error("Unable to update Report configuration");
+            return false;
+        }
+    }
 }

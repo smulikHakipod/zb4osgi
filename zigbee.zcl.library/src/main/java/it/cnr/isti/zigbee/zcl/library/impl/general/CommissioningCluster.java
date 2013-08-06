@@ -24,7 +24,6 @@ package it.cnr.isti.zigbee.zcl.library.impl.general;
 import it.cnr.isti.zigbee.api.ZigBeeDevice;
 import it.cnr.isti.zigbee.zcl.library.api.core.Attribute;
 import it.cnr.isti.zigbee.zcl.library.api.core.Response;
-import it.cnr.isti.zigbee.zcl.library.api.core.ZCLCluster;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeClusterException;
 import it.cnr.isti.zigbee.zcl.library.api.general.Commissioning;
 import it.cnr.isti.zigbee.zcl.library.api.general.commissioning.ResetStartupPayload;
@@ -35,7 +34,7 @@ import it.cnr.isti.zigbee.zcl.library.impl.core.ZCLClusterBase;
  *
  *  PLACEHOLDER TO IMPLEMENT
  *
- * @author <a href="mailto:manlio.bacco@isti.cnr.it">Stefano "Kismet" Lenzi</a>
+ * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version  $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.8.0
  *

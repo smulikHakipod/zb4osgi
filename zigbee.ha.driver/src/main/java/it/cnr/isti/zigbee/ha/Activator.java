@@ -89,8 +89,8 @@ import org.slf4j.LoggerFactory;
 public class Activator implements BundleActivator {
 
     private final static Logger logger = LoggerFactory.getLogger(Activator.class);
-    
-    private static final String HA_CONFIG_PID = "it.cnr.isti.zigbee.ha.configuration";
+
+    private static final String HA_CONFIG_PID = HADriverConfiguration.PID;
 
     private HAImporter haImporter;
 

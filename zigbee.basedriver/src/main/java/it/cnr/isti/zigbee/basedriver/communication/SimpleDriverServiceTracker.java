@@ -52,118 +52,119 @@ import org.slf4j.LoggerFactory;
  */
 public class SimpleDriverServiceTracker implements ServiceListener{
 
-	private final static Logger logger = LoggerFactory.getLogger(SimpleDriverServiceTracker.class);
+    private final static Logger logger = LoggerFactory.getLogger(SimpleDriverServiceTracker.class);
 
-	private final Object driverLock = new Object();
+    private final Object driverLock = new Object();
 
-	private ServiceReference driverReference;
-	private SimpleDriver driverService;
-	private final AnnunceListnerThread annunceListener;
-	
-	private NetworkBrowserThread networkBrowser = null ;
-	private LQINetworkBrowserThread networkLQIBrowser = null;
-	
-	private DeviceBuilderThread deviceBuilder;
-	private final ImportingQueue importingQueue;
+    private ServiceReference driverReference;
+    private SimpleDriver driverService;
+    private final AnnunceListnerThread annunceListener;
 
-	public SimpleDriverServiceTracker(){
-		importingQueue = new ImportingQueue();
-		annunceListener = new AnnunceListnerThread(importingQueue);
+    private NetworkBrowserThread networkBrowser = null ;
+    private LQINetworkBrowserThread networkLQIBrowser = null;
 
-		ServiceReference ref = Activator.getBundleContext().getServiceReference(SimpleDriver.class.getName());
-		if(ref != null) addingSimpleDriver(ref);
-	}
+    private DeviceBuilderThread deviceBuilder;
+    private final ImportingQueue importingQueue;
 
-	public void serviceChanged(ServiceEvent se) {
-		switch (se.getType()) {
-			case ServiceEvent.REGISTERED:{
-				addingSimpleDriver(se.getServiceReference());
-			}break;
-			case ServiceEvent.UNREGISTERING:{
-				removingSimpleDriver(se.getServiceReference());
-			}break;
-		}
-	}
+    public SimpleDriverServiceTracker(){
+        importingQueue = new ImportingQueue();
+        annunceListener = new AnnunceListnerThread(importingQueue);
 
-	public void cleanUp() {
-	    setDownZigBeeImporter();
-	}
-	
-	private void setDownZigBeeImporter() {
-		logger.info("Driver used left:clean up all the data and closing all the threads");
+        ServiceReference ref = Activator.getBundleContext().getServiceReference(SimpleDriver.class.getName());
+        if(ref != null) addingSimpleDriver(ref);
+    }
 
-		Activator.getCurrentConfiguration().setDriver(null);
-		if( networkBrowser != null ) {
-		    networkBrowser.end();		    
-		    networkBrowser.interrupt();
-		}
-        if( networkLQIBrowser != null ) {
+    public void serviceChanged(ServiceEvent se) {
+        switch (se.getType()) {
+            case ServiceEvent.REGISTERED:{
+                addingSimpleDriver(se.getServiceReference());
+            }break;
+            case ServiceEvent.UNREGISTERING:{
+                removingSimpleDriver(se.getServiceReference());
+            }break;
+        }
+    }
+
+    public void cleanUp() {
+        setDownZigBeeImporter();
+    }
+
+    private void setDownZigBeeImporter() {
+        logger.info("Driver used left:clean up all the data and closing all the threads");
+        Activator.getCurrentConfiguration().setDriver(null);
+        if ( networkBrowser != null ) {
+            networkBrowser.end();
+            networkBrowser.interrupt();
+        }
+        if ( networkLQIBrowser != null ) {
             networkLQIBrowser.end();
             networkLQIBrowser.interrupt();
         }
-        deviceBuilder.end();
+        if ( deviceBuilder != null ) {
+            deviceBuilder.end();
+        }
         importingQueue.close();
-		Activator.unregisterAllDeviceService();
-	}
+        Activator.unregisterAllDeviceService();
+    }
 
-	private void removingSimpleDriver(ServiceReference sr) {
-		logger.info("A service of {} is leaving", SimpleDriver.class);
-		synchronized (driverLock) {
-			if ( driverReference == sr ) {
-				driverService.removeAnnunceListener(annunceListener);
-				Activator.getBundleContext().ungetService(driverReference);
-				driverReference = null;
-			} else {
-				return;
-			}
-		}
-		driverService = null;
-		setDownZigBeeImporter();
-	}
+    private void removingSimpleDriver(ServiceReference sr) {
+        logger.info("A service of {} is leaving", SimpleDriver.class);
+        synchronized (driverLock) {
+            if ( driverReference == sr ) {
+                driverService.removeAnnunceListener(annunceListener);
+                Activator.getBundleContext().ungetService(driverReference);
+                driverReference = null;
+            } else {
+                return;
+            }
+        }
+        driverService = null;
+        setDownZigBeeImporter();
+    }
 
-	private void setUpZigBeeImporter() {	   
-		logger.info("Setting up all the importer data and threads");
-		Activator.getCurrentConfiguration().setDriver(driverService);
-		importingQueue.clear();
-		AFLayer.getAFLayer(driverService);
-		final EnumSet<DiscoveryMode> enabledDiscoveries = Activator.getCurrentConfiguration().getDiscoveryMode();
+    private void setUpZigBeeImporter() {
+        logger.info("Setting up all the importer data and threads");
+        Activator.getCurrentConfiguration().setDriver(driverService);
+        importingQueue.clear();
+        AFLayer.getAFLayer(driverService);
+        final EnumSet<DiscoveryMode> enabledDiscoveries = Activator.getCurrentConfiguration().getDiscoveryMode();
         if ( enabledDiscoveries.contains( DiscoveryMode.Announce ) ) {
             driverService.addAnnunceListener(annunceListener);
         } else {
             logger.debug( "ANNUNCE discovery disabled due to {}", BaseDriverProperties.DISCOVERY_MODE_KEY );
-        }		
+        }
 
         if ( enabledDiscoveries .contains( DiscoveryMode.Addressing ) ) {
             networkBrowser = new NetworkBrowserThread(importingQueue,  driverService );
             new Thread(networkBrowser, "NetworkBrowser["+driverService+"]").start();
         } else {
-            logger.debug( "{} discovery disabled due to {}", 
+            logger.debug( "{} discovery disabled due to {}",
                 NetworkBrowserThread.class, BaseDriverProperties.DISCOVERY_MODE_KEY );
         }
-        
+
         if ( enabledDiscoveries .contains( DiscoveryMode.LinkQuality ) ) {
             networkLQIBrowser = new LQINetworkBrowserThread(importingQueue,  driverService );
             new Thread(networkLQIBrowser, "LQINetworkBrowser["+driverService+"]").start();
         } else {
-            logger.debug( "{} discovery disabled due to {}", 
+            logger.debug( "{} discovery disabled due to {}",
                 LQINetworkBrowserThread.class, BaseDriverProperties.DISCOVERY_MODE_KEY );
         }
-		
-		deviceBuilder = new DeviceBuilderThread( importingQueue, driverService);
-		new Thread(deviceBuilder, "DeviceBuilder["+driverService+"]").start();
-	}
 
-	private void addingSimpleDriver(ServiceReference sr) {
-		logger.info("New {} service found", SimpleDriver.class);
-		synchronized (driverLock) {
-			if ( driverReference == null ) {
-				driverReference = sr;
-			}else{
-				return;
-			}
-		}
-		driverService = (SimpleDriver) Activator.getBundleContext().getService(driverReference);
-		setUpZigBeeImporter();
-	}
+        deviceBuilder = new DeviceBuilderThread( importingQueue, driverService);
+        new Thread(deviceBuilder, "DeviceBuilder["+driverService+"]").start();
+    }
+
+    private void addingSimpleDriver(ServiceReference sr) {
+        logger.info("New {} service found", SimpleDriver.class);
+        synchronized (driverLock) {
+            if ( driverReference == null ) {
+                driverReference = sr;
+            }else{
+                return;
+            }
+        }
+        driverService = (SimpleDriver) Activator.getBundleContext().getService(driverReference);
+        setUpZigBeeImporter();
+    }
 
 }
