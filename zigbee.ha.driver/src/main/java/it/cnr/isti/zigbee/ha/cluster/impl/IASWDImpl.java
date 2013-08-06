@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2012-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,64 +34,64 @@ import it.cnr.isti.zigbee.zcl.library.impl.security_safety.IASWDCluster;
 
 /**
  * @author <a href="mailto:manlio.bacco@isti.cnr.it">Manlio Bacco</a>
- *         
+ *
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.7.0
  *
  */
 public class IASWDImpl implements IASWD {
 
-	private final IASWDCluster iaswdcluster;
-	private final Attribute maxDuration;
+    private final IASWDCluster iaswdcluster;
+    private final Attribute maxDuration;
 
-	public IASWDImpl(ZigBeeDevice zbDevice){
+    public IASWDImpl(ZigBeeDevice zbDevice){
 
-		iaswdcluster = new IASWDCluster(zbDevice);
-		maxDuration = iaswdcluster.getAttributeMaxDuration();
-	}
+        iaswdcluster = new IASWDCluster(zbDevice);
+        maxDuration = iaswdcluster.getAttributeMaxDuration();
+    }
 
-	public int getId() {
-		return iaswdcluster.getId();
-	}
+    public int getId() {
+        return iaswdcluster.getId();
+    }
 
-	public String getName() {
-		return iaswdcluster.getName();
-	}
+    public String getName() {
+        return iaswdcluster.getName();
+    }
 
-	public Subscription[] getActiveSubscriptions() {
-		return iaswdcluster.getActiveSubscriptions();
-	}
+    public Subscription[] getActiveSubscriptions() {
+        return iaswdcluster.getActiveSubscriptions();
+    }
 
-	public Attribute[] getAttributes() {
-		return iaswdcluster.getAvailableAttributes();
-	}
+    public Attribute[] getAttributes() {
+        return iaswdcluster.getAvailableAttributes();
+    }
 
-	public Attribute getAttribute(int id) {
-		Attribute[] attributes = iaswdcluster.getAvailableAttributes();
-		for (int i = 0; i < attributes.length; i++) {
-			if( attributes[i].getId() == id ) 
-				return attributes[i];
-		}
-		return null;
-	}
+    public Attribute getAttribute(int id) {
+        Attribute[] attributes = iaswdcluster.getAvailableAttributes();
+        for (int i = 0; i < attributes.length; i++) {
+            if( attributes[i].getId() == id )
+                return attributes[i];
+        }
+        return null;
+    }
 
-	public Attribute getMaxDuration() {
-		return maxDuration;
-	}
+    public Attribute getMaxDuration() {
+        return maxDuration;
+    }
 
-	public void startWarning(StartWarningPayload payload) throws ZigBeeHAException {
-		try {
-			iaswdcluster.startWarning(payload); 
-		} catch (ZigBeeClusterException e) {
-			throw new ZigBeeHAException(e);
-		}
-	}
+    public void startWarning(StartWarningPayload payload) throws ZigBeeHAException {
+        try {
+            iaswdcluster.startWarning(payload);
+        } catch (ZigBeeClusterException e) {
+            throw new ZigBeeHAException(e);
+        }
+    }
 
-	public void squawk(SquawkPayload payload) throws ZigBeeHAException {
-		try {
-			iaswdcluster.squawk(payload);
-		} catch (ZigBeeClusterException e) {
-			throw new ZigBeeHAException(e);
-		}
-	}
+    public void squawk(SquawkPayload payload) throws ZigBeeHAException {
+        try {
+            iaswdcluster.squawk(payload);
+        } catch (ZigBeeClusterException e) {
+            throw new ZigBeeHAException(e);
+        }
+    }
 }

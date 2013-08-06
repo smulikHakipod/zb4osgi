@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2012-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,110 +40,110 @@ import it.cnr.isti.zigbee.zcl.library.impl.security_safety.IASZoneCluster;
 
 /**
  * @author <a href="mailto:manlio.bacco@isti.cnr.it">Manlio Bacco</a>
- *         
+ *
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.7.0
  *
  */
 public class IASZoneImpl implements IASZone {
 
-	private final IASZoneCluster cluster;
+    private final IASZoneCluster cluster;
 
-	private final Attribute zoneState;
-	private final Attribute zoneType;
-	private final Attribute zoneStatus;
-	private final Attribute iasCIEaddress;
+    private final Attribute zoneState;
+    private final Attribute zoneType;
+    private final Attribute zoneStatus;
+    private final Attribute iasCIEaddress;
 
-	public IASZoneImpl(ZigBeeDevice zbDevice){
+    public IASZoneImpl(ZigBeeDevice zbDevice){
 
-		cluster = new IASZoneCluster(zbDevice);
-		zoneState = cluster.getAttributeZoneState();
-		zoneType = cluster.getAttributeZoneType();
-		zoneStatus = cluster.getAttributeZoneStatus();
-		iasCIEaddress = cluster.getAttributeIASCIEAddress();
-	}
+        cluster = new IASZoneCluster(zbDevice);
+        zoneState = cluster.getAttributeZoneState();
+        zoneType = cluster.getAttributeZoneType();
+        zoneStatus = cluster.getAttributeZoneStatus();
+        iasCIEaddress = cluster.getAttributeIASCIEAddress();
+    }
 
-	public int getId() {
-		return cluster.getId();
-	}
+    public int getId() {
+        return cluster.getId();
+    }
 
-	public String getName() {
-		return cluster.getName();
-	}
+    public String getName() {
+        return cluster.getName();
+    }
 
-	public Subscription[] getActiveSubscriptions() {
-		return cluster.getActiveSubscriptions();
-	}
+    public Subscription[] getActiveSubscriptions() {
+        return cluster.getActiveSubscriptions();
+    }
 
-	public Attribute[] getAttributes() {
-		return cluster.getAvailableAttributes();
-	}
+    public Attribute[] getAttributes() {
+        return cluster.getAvailableAttributes();
+    }
 
-	public Attribute getAttribute(int id) {
+    public Attribute getAttribute(int id) {
 
-		Attribute[] attributes = cluster.getAvailableAttributes();
-		for (int i = 0; i < attributes.length; i++) {
-			if( attributes[i].getId() == id ) 
-				return attributes[i];
-		}
-		return null;
-	}
+        Attribute[] attributes = cluster.getAvailableAttributes();
+        for (int i = 0; i < attributes.length; i++) {
+            if( attributes[i].getId() == id )
+                return attributes[i];
+        }
+        return null;
+    }
 
-	public Attribute getZoneState() {
+    public Attribute getZoneState() {
 
-		return zoneState;
-	}
+        return zoneState;
+    }
 
-	public Attribute getZoneType() {
+    public Attribute getZoneType() {
 
-		return zoneType;
-	}
+        return zoneType;
+    }
 
-	public Attribute getZoneStatus() {
+    public Attribute getZoneStatus() {
 
-		return zoneStatus;
-	}
+        return zoneStatus;
+    }
 
-	public Attribute getIASCIEAddress() {
+    public Attribute getIASCIEAddress() {
 
-		return iasCIEaddress;
-	}
+        return iasCIEaddress;
+    }
 
-	public ZoneEnrollResponse zoneEnrollRequest(ZoneEnrollRequestPayload payload) throws ZigBeeHAException {
+    public ZoneEnrollResponse zoneEnrollRequest(ZoneEnrollRequestPayload payload) throws ZigBeeHAException {
 
-		try {
-			ZoneEnrollResponse response = (ZoneEnrollResponse) cluster.zoneEnrollRequest(payload);
-			return response;
-		} 
-		catch (ZigBeeClusterException e) {
-			throw new ZigBeeHAException(e);
-		}
-	}
+        try {
+            ZoneEnrollResponse response = (ZoneEnrollResponse) cluster.zoneEnrollRequest(payload);
+            return response;
+        }
+        catch (ZigBeeClusterException e) {
+            throw new ZigBeeHAException(e);
+        }
+    }
 
-	public Response zoneStatusChangeNotification(ZoneStatusChangeNotificationPayload payload) throws ZigBeeHAException {
-		try {
-			Response response = cluster.zoneStatusChangeNotification(payload);
-			if (response.getZCLHeader().getCommandId() != ZoneStatusChangeNotificationResponse.ID)
-				throw new ZigBeeHAException( ((DefaultResponse) response).getStatus().toString());
+    public Response zoneStatusChangeNotification(ZoneStatusChangeNotificationPayload payload) throws ZigBeeHAException {
+        try {
+            Response response = cluster.zoneStatusChangeNotification(payload);
+            if (response.getZCLHeader().getCommandId() != ZoneStatusChangeNotificationResponse.ID)
+                throw new ZigBeeHAException( ((DefaultResponse) response).getStatus().toString());
 
-			return (GetAlarmResponse) response;
-		} catch (ZigBeeClusterException e) {
-			throw new ZigBeeHAException(e);
-		}
+            return (GetAlarmResponse) response;
+        } catch (ZigBeeClusterException e) {
+            throw new ZigBeeHAException(e);
+        }
 
-		/*try {
-			cluster.zoneStatusChangeNotification();
-		} 
-		catch (ZigBeeClusterException e) {
-			throw new ZigBeeHAException(e);
-		}*/
-	}
+        /*try {
+            cluster.zoneStatusChangeNotification();
+        }
+        catch (ZigBeeClusterException e) {
+            throw new ZigBeeHAException(e);
+        }*/
+    }
 
-	public boolean addZoneStatusChangeNotificationListener(ZoneStatusChangeNotificationListener listener) {
-		return cluster.addZoneStatusChangeNotificationListener(listener);
-	}
+    public boolean addZoneStatusChangeNotificationListener(ZoneStatusChangeNotificationListener listener) {
+        return cluster.addZoneStatusChangeNotificationListener(listener);
+    }
 
-	public boolean removeZoneStatusChangeNotificationListener(ZoneStatusChangeNotificationListener listener) {
-		return cluster.removeZoneStatusChangeNotificationListener(listener);
-	}
+    public boolean removeZoneStatusChangeNotificationListener(ZoneStatusChangeNotificationListener listener) {
+        return cluster.removeZoneStatusChangeNotificationListener(listener);
+    }
 }

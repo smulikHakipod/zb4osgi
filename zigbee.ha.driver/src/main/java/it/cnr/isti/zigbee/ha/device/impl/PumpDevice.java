@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2012-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,75 +39,75 @@ import org.osgi.framework.BundleContext;
 
 /**
  * @author <a href="mailto:manlio.bacco@isti.cnr.it">Manlio Bacco</a>
- *         
+ *
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.7.0
  *
  */
 public class PumpDevice extends HADeviceBase implements Pump {
 
-	private OnOff onOffCluster;
-	private Scenes scenesCluster;
-	private Groups groupsCluster;
-	private LevelControl levelControlCluster;
-	private TemperatureMeasurement temperatureMeasurementCluster;
+    private OnOff onOffCluster;
+    private Scenes scenesCluster;
+    private Groups groupsCluster;
+    private LevelControl levelControlCluster;
+    private TemperatureMeasurement temperatureMeasurementCluster;
 
-	public PumpDevice(BundleContext ctx, ZigBeeDevice zbDevice) throws ZigBeeHAException{
-		super(ctx, zbDevice);
+    public PumpDevice(BundleContext ctx, ZigBeeDevice zbDevice) throws ZigBeeHAException{
+        super(ctx, zbDevice);
 
-		levelControlCluster = (LevelControl) addCluster(HAProfile.LEVEL_CONTROL);
-		onOffCluster = (OnOff) addCluster(HAProfile.ON_OFF);
-		scenesCluster = (Scenes) addCluster(HAProfile.SCENES);
-		groupsCluster = (Groups) addCluster(HAProfile.GROUPS);
-		temperatureMeasurementCluster = (TemperatureMeasurement) addCluster(HAProfile.TEMPERATURE_MEASUREMENT);
-	}
+        levelControlCluster = (LevelControl) addCluster(HAProfile.LEVEL_CONTROL);
+        onOffCluster = (OnOff) addCluster(HAProfile.ON_OFF);
+        scenesCluster = (Scenes) addCluster(HAProfile.SCENES);
+        groupsCluster = (Groups) addCluster(HAProfile.GROUPS);
+        temperatureMeasurementCluster = (TemperatureMeasurement) addCluster(HAProfile.TEMPERATURE_MEASUREMENT);
+    }
 
-	final static DeviceDescription DEVICE_DESCRIPTOR =  new AbstractDeviceDescription(){
+    final static DeviceDescription DEVICE_DESCRIPTOR =  new AbstractDeviceDescription(){
 
-		public int[] getCustomClusters() {
-			return Pump.CUSTOM;
-		}
+        public int[] getCustomClusters() {
+            return Pump.CUSTOM;
+        }
 
-		public int[] getMandatoryCluster() {
-			return Pump.MANDATORY;
-		}
+        public int[] getMandatoryCluster() {
+            return Pump.MANDATORY;
+        }
 
-		public int[] getOptionalCluster() {
-			return Pump.OPTIONAL;
-		}
+        public int[] getOptionalCluster() {
+            return Pump.OPTIONAL;
+        }
 
-		public int[] getStandardClusters() {
-			return Pump.STANDARD;
-		}
-	};
+        public int[] getStandardClusters() {
+            return Pump.STANDARD;
+        }
+    };
 
-	@Override
-	public DeviceDescription getDescription() {
-		return DEVICE_DESCRIPTOR;
-	}
+    @Override
+    public DeviceDescription getDescription() {
+        return DEVICE_DESCRIPTOR;
+    }
 
-	@Override
-	public String getName() {
-		return Pump.NAME;
-	}
+    @Override
+    public String getName() {
+        return Pump.NAME;
+    }
 
-	public OnOff getOnOff() {
-		return onOffCluster;
-	}
+    public OnOff getOnOff() {
+        return onOffCluster;
+    }
 
-	public Scenes getScenes() {
-		return scenesCluster;
-	}
+    public Scenes getScenes() {
+        return scenesCluster;
+    }
 
-	public Groups getGroups() {
-		return groupsCluster;
-	}
+    public Groups getGroups() {
+        return groupsCluster;
+    }
 
-	public LevelControl getLevelControl() {
-		return levelControlCluster;
-	}
+    public LevelControl getLevelControl() {
+        return levelControlCluster;
+    }
 
-	public TemperatureMeasurement getTemperatureMeasurement() {
-		return temperatureMeasurementCluster;
-	}
+    public TemperatureMeasurement getTemperatureMeasurement() {
+        return temperatureMeasurementCluster;
+    }
 }

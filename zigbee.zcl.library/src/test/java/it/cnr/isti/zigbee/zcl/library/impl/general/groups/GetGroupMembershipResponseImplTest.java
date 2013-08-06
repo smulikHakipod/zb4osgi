@@ -1,11 +1,11 @@
 /*
 
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2013-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,7 @@ import it.cnr.isti.zigbee.zcl.library.impl.core.ResponseImpl;
 import org.junit.Test;
 
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.8.0
@@ -39,42 +39,42 @@ import org.junit.Test;
  */
 public class GetGroupMembershipResponseImplTest {
 
-	@Test
-	public void testGetGroupMembershipResponseImpl() {
-		try {
-			GetGroupMembershipResponseImpl response = new GetGroupMembershipResponseImpl(
-				new ResponseImpl(
-						new RawClusterImpl(
-								Groups.ID, 
-								new byte[]{0x09, 0x18, 0x02, 0x07, 0x01, 0x0f, 0x00}
-						), 
-						Groups.ID 
-				)
-			);
-			assertEquals(7, response.getCapacity());
-			assertEquals(1, response.getGroupList().length);
-			assertArrayEquals(new int[]{0x0f}, response.getGroupList());
-		} catch (ZigBeeClusterException e) {
-			e.printStackTrace();
-			fail("Exception thrwon "+e.getMessage());
-		}
-		
-		try {
-			GetGroupMembershipResponseImpl response = new GetGroupMembershipResponseImpl(
-				new ResponseImpl(
-						new RawClusterImpl(
-								Groups.ID, 
-								new byte[]{0x09, 0x18, 0x02, (byte) 0xF0, 0x03, 0x0f, 0x00, 0x00, (byte) 0xf0, 0x34, 0x12}
-						), 
-						Groups.ID 
-				)
-			);
-			assertEquals(240, response.getCapacity());
-			assertEquals(3, response.getGroupList().length);
-			assertArrayEquals(new int[]{0x0f, 0xf000, 0x1234}, response.getGroupList());
-		} catch (ZigBeeClusterException e) {
-			e.printStackTrace();
-			fail("Exception thrwon "+e.getMessage());
-		}
-	}
+    @Test
+    public void testGetGroupMembershipResponseImpl() {
+        try {
+            GetGroupMembershipResponseImpl response = new GetGroupMembershipResponseImpl(
+                new ResponseImpl(
+                        new RawClusterImpl(
+                                Groups.ID,
+                                new byte[]{0x09, 0x18, 0x02, 0x07, 0x01, 0x0f, 0x00}
+                        ),
+                        Groups.ID
+                )
+            );
+            assertEquals(7, response.getCapacity());
+            assertEquals(1, response.getGroupList().length);
+            assertArrayEquals(new int[]{0x0f}, response.getGroupList());
+        } catch (ZigBeeClusterException e) {
+            e.printStackTrace();
+            fail("Exception thrwon "+e.getMessage());
+        }
+
+        try {
+            GetGroupMembershipResponseImpl response = new GetGroupMembershipResponseImpl(
+                new ResponseImpl(
+                        new RawClusterImpl(
+                                Groups.ID,
+                                new byte[]{0x09, 0x18, 0x02, (byte) 0xF0, 0x03, 0x0f, 0x00, 0x00, (byte) 0xf0, 0x34, 0x12}
+                        ),
+                        Groups.ID
+                )
+            );
+            assertEquals(240, response.getCapacity());
+            assertEquals(3, response.getGroupList().length);
+            assertArrayEquals(new int[]{0x0f, 0xf000, 0x1234}, response.getGroupList());
+        } catch (ZigBeeClusterException e) {
+            e.printStackTrace();
+            fail("Exception thrwon "+e.getMessage());
+        }
+    }
 }

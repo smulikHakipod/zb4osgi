@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2012-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,64 +37,64 @@ import org.osgi.framework.BundleContext;
 
 /**
  * @author <a href="mailto:manlio.bacco@isti.cnr.it">Manlio Bacco</a>
- *         
+ *
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.7.0
  *
  */
 public class IASAncillaryControlEquipmentDevice extends HADeviceBase implements IASAncillaryControlEquipment{
 
-	private Identify identify;
-	private IASZone iasZone;
-	private IASACE iasAce;
+    private Identify identify;
+    private IASZone iasZone;
+    private IASACE iasAce;
 
-	public IASAncillaryControlEquipmentDevice(BundleContext ctx, ZigBeeDevice zbDevice) throws ZigBeeHAException {
+    public IASAncillaryControlEquipmentDevice(BundleContext ctx, ZigBeeDevice zbDevice) throws ZigBeeHAException {
 
-		super(ctx, zbDevice);
-		iasAce = (IASACE) addCluster(HAProfile.IAS_ACE);	
-		iasZone = (IASZone) addCluster(HAProfile.IAS_ZONE);	
-		identify = (Identify) addCluster(HAProfile.IDENTIFY);	
-	}
+        super(ctx, zbDevice);
+        iasAce = (IASACE) addCluster(HAProfile.IAS_ACE);
+        iasZone = (IASZone) addCluster(HAProfile.IAS_ZONE);
+        identify = (Identify) addCluster(HAProfile.IDENTIFY);
+    }
 
-	public IASACE getIASACE() {
-		return iasAce;
-	}
+    public IASACE getIASACE() {
+        return iasAce;
+    }
 
-	public IASZone getIASZone() {
-		return iasZone;
-	}
+    public IASZone getIASZone() {
+        return iasZone;
+    }
 
-	/*public Identify getIdentify(){
-		return identify;
-	}*/
+    /*public Identify getIdentify(){
+        return identify;
+    }*/
 
-	@Override
-	public String getName() {
-		return IASAncillaryControlEquipment.NAME;
-	}
+    @Override
+    public String getName() {
+        return IASAncillaryControlEquipment.NAME;
+    }
 
-	@Override
-	public DeviceDescription getDescription() {
+    @Override
+    public DeviceDescription getDescription() {
 
-		return DEVICE_DESCRIPTOR;
-	}
+        return DEVICE_DESCRIPTOR;
+    }
 
-	final static DeviceDescription DEVICE_DESCRIPTOR =  new AbstractDeviceDescription(){
+    final static DeviceDescription DEVICE_DESCRIPTOR =  new AbstractDeviceDescription(){
 
-		public int[] getCustomClusters() {
-			return IASAncillaryControlEquipment.CUSTOM;
-		}
+        public int[] getCustomClusters() {
+            return IASAncillaryControlEquipment.CUSTOM;
+        }
 
-		public int[] getMandatoryCluster() {
-			return IASAncillaryControlEquipment.MANDATORY;
-		}
+        public int[] getMandatoryCluster() {
+            return IASAncillaryControlEquipment.MANDATORY;
+        }
 
-		public int[] getOptionalCluster() {
-			return IASAncillaryControlEquipment.OPTIONAL;
-		}
+        public int[] getOptionalCluster() {
+            return IASAncillaryControlEquipment.OPTIONAL;
+        }
 
-		public int[] getStandardClusters() {
-			return IASAncillaryControlEquipment.STANDARD;
-		}
-	};
+        public int[] getStandardClusters() {
+            return IASAncillaryControlEquipment.STANDARD;
+        }
+    };
 }

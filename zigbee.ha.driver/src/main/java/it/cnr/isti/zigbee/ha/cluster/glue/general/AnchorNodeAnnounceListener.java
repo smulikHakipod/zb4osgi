@@ -1,5 +1,5 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
+   Copyright 2013-2013 CNR-ISTI, http://isti.cnr.it
    Institute of Information Science and Technologies
    of the Italian National Research Council
 
@@ -30,5 +30,5 @@ package it.cnr.isti.zigbee.ha.cluster.glue.general;
 public interface AnchorNodeAnnounceListener {
 
     public void anchorNodeAnnounce(long ieeeAddress, int x, int y, int z);
-    
+
 }

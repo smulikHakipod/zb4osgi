@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2012-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,7 @@ import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeClusterException;
 import it.cnr.isti.zigbee.zcl.library.api.security_safety.ias_ace.BypassPayload;
 
 /**
- * 
+ *
  * @author <a href="mailto:manlio.baco@isti.cnr.it">Manlio Bacco</a>
  * @version $LastChangedRevision: 42 $ ($LastChangedDate: 2010-09-23 14:21:48 +0200 (Thu, 23 Sep 2010) $)
  * @since 0.8.0
@@ -35,23 +35,23 @@ import it.cnr.isti.zigbee.zcl.library.api.security_safety.ias_ace.BypassPayload;
  */
 public interface IASACE extends ZCLCluster {
 
-	public static final short ID = 0x0501;
-	static final String NAME = "IAS ACE";
-	static final String DESCRIPTION = "Attributes and commands for any Ancillary Control Equipment device.";
+    public static final short ID = 0x0501;
+    static final String NAME = "IAS ACE";
+    static final String DESCRIPTION = "Attributes and commands for any Ancillary Control Equipment device.";
 
-	static final byte ARM = 0x00;
-	static final byte BYPASS = 0x01;
-	static final byte EMERGENCY = 0x02;
-	static final byte FIRE = 0x03;
-	static final byte PANIC = 0x04;
-	static final byte GET_ZONE_ID_MAP = 0x05;
-	static final byte GET_ZONE_INFORMATION = 0x06;
+    static final byte ARM = 0x00;
+    static final byte BYPASS = 0x01;
+    static final byte EMERGENCY = 0x02;
+    static final byte FIRE = 0x03;
+    static final byte PANIC = 0x04;
+    static final byte GET_ZONE_ID_MAP = 0x05;
+    static final byte GET_ZONE_INFORMATION = 0x06;
 
-	public Response arm(byte armMode) throws ZigBeeClusterException;
-	public void bypass(BypassPayload payload) throws ZigBeeClusterException;
-	public void emergency() throws ZigBeeClusterException;
-	public void fire() throws ZigBeeClusterException;
-	public void panic() throws ZigBeeClusterException;
-	public Response getZoneIdMap() throws ZigBeeClusterException;
-	public Response getZoneInformation(int zoneID) throws ZigBeeClusterException;
+    public Response arm(byte armMode) throws ZigBeeClusterException;
+    public void bypass(BypassPayload payload) throws ZigBeeClusterException;
+    public void emergency() throws ZigBeeClusterException;
+    public void fire() throws ZigBeeClusterException;
+    public void panic() throws ZigBeeClusterException;
+    public Response getZoneIdMap() throws ZigBeeClusterException;
+    public Response getZoneInformation(int zoneID) throws ZigBeeClusterException;
 }

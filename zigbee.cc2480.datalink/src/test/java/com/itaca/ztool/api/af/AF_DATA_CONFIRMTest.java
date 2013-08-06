@@ -1,8 +1,9 @@
 /*
-   Copyright 2008 Institute of Information Science and Technologies of 
-                  the Italian National Research Council ( ISTI-CNR )
+   Copyright 2008-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,20 +27,20 @@ import org.junit.Test;
 
 /**
  * Test class of {@link AF_DATA_CONFIRM}
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.1.0
  */
 public class AF_DATA_CONFIRMTest {
 
-	@Test
-	public void testGetStatus() {
-		assertEquals(1, new AF_DATA_CONFIRM(1,1,1).getStatus());
-		assertEquals(1, new AF_DATA_CONFIRM(new int[]{1, 1, 1}).getStatus());
-		
-		assertEquals(1, new AF_DATA_CONFIRM(1,2,3).getStatus());
-		assertEquals(1, new AF_DATA_CONFIRM(new int[]{1, 2, 3}).getStatus());
-	}
+    @Test
+    public void testGetStatus() {
+        assertEquals(1, new AF_DATA_CONFIRM(1,1,1).getStatus());
+        assertEquals(1, new AF_DATA_CONFIRM(new int[]{1, 1, 1}).getStatus());
+
+        assertEquals(1, new AF_DATA_CONFIRM(1,2,3).getStatus());
+        assertEquals(1, new AF_DATA_CONFIRM(new int[]{1, 2, 3}).getStatus());
+    }
 
 }

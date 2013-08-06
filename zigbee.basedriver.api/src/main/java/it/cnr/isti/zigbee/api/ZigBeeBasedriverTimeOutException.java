@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2013-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,22 +23,22 @@
 package it.cnr.isti.zigbee.api;
 
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.6.0
  */
 public class ZigBeeBasedriverTimeOutException extends ZigBeeBasedriverException {
 
-	public ZigBeeBasedriverTimeOutException() {
-		super("Timeout expired before receiving any data");
-	}
-	
-	public ZigBeeBasedriverTimeOutException(String msg) {
-		super(msg);
-	}
-	public ZigBeeBasedriverTimeOutException(Throwable ex) {
-		super(ex);
-	}
+    public ZigBeeBasedriverTimeOutException() {
+        super("Timeout expired before receiving any data");
+    }
+
+    public ZigBeeBasedriverTimeOutException(String msg) {
+        super(msg);
+    }
+    public ZigBeeBasedriverTimeOutException(Throwable ex) {
+        super(ex);
+    }
 
 }

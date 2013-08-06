@@ -1,6 +1,23 @@
-/**
- * 
- */
+/*
+   Copyright 2008-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
+
+   See the NOTICE file distributed with this work for additional
+   information regarding copyright ownership
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 package it.cnr.isti.cc2480.sniffer;
 
 import java.awt.event.ActionEvent;
@@ -25,8 +42,8 @@ import com.itaca.ztool.api.ZToolPacket;
 
 /**
  * <b>NOTE:</bThe file saved by {@link FilePacketSniffer} cannot be opened by {@link GUIPacketSniffer}
- * 
- * 
+ *
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.1.0
@@ -66,9 +83,9 @@ public class GUIPacketSniffer
             }
         }
     }
-    
+
     private class LoadSaveListener implements ActionListener{
-        
+
         public void actionPerformed( ActionEvent e ) {
             JFileChooser chooser = new JFileChooser();
             chooser.setFileFilter(new SnifferFileFilter());
@@ -78,16 +95,16 @@ public class GUIPacketSniffer
             if(returnVal != JFileChooser.APPROVE_OPTION) {
                 return;
             }
-            
+
             if( e.getSource() == jbtLoad ) {
-                loadFile(chooser.getSelectedFile());                
+                loadFile(chooser.getSelectedFile());
             }else if( e.getSource() == jbtSave ) {
-                saveFile(chooser.getSelectedFile());                
+                saveFile(chooser.getSelectedFile());
             }
-        }        
+        }
     }
-    
-    
+
+
     private class SnifferTableModel
         extends AbstractTableModel {
 
@@ -134,7 +151,7 @@ public class GUIPacketSniffer
             rows.add( values );
             fireTableRowsInserted( rows.size() - 1, rows.size() - 1 );
         }
-        
+
         public void clear() {
             int last = rows.size() - 1;
             rows.clear();
@@ -159,7 +176,7 @@ public class GUIPacketSniffer
         jScrollPane1.setViewportView( jTable1 );
 
         ActionListener loadSaveHandler = new LoadSaveListener();
-        
+
         jbtLoad.setText( "Load" );
         jbtLoad.setFocusable( false );
         jbtLoad.setHorizontalTextPosition( javax.swing.SwingConstants.CENTER );
@@ -191,7 +208,7 @@ public class GUIPacketSniffer
         pack();
     }
 
-    protected void saveFile( File selectedFile ) {       
+    protected void saveFile( File selectedFile ) {
         PrintStream out;
         try {
             out = new PrintStream(new FileOutputStream(selectedFile,true));
@@ -200,7 +217,7 @@ public class GUIPacketSniffer
             logger.debug("Failed to open file for dumping sniffed packet",e);
             return;
         }
-        
+
         SnifferTableModel packets = getModel();
         int r = packets.getRowCount();
         int c = packets.getColumnCount();
@@ -213,14 +230,14 @@ public class GUIPacketSniffer
             out.println(sb.toString());
         }
         out.flush();
-        out.close();        
+        out.close();
      }
 
     protected void loadFile( File selectedFile ) {
-        BufferedReader reader;         
+        BufferedReader reader;
         try {
             reader = new BufferedReader( new FileReader( selectedFile ) );
-            
+
             SnifferTableModel packets = getModel();
             packets.clear();
             String line;
@@ -234,9 +251,9 @@ public class GUIPacketSniffer
             logger.debug("Failed to open file for reading sniffed packet",e);
             return;
         }
-        
-    }    
-    
+
+    }
+
     public SnifferTableModel getModel() {
         if ( model == null ) {
             model = new SnifferTableModel();

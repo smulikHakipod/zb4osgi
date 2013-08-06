@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2013-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,46 +30,46 @@ package it.cnr.isti.thread;
  *
  */
 public abstract class RunnableThread implements Stoppable,Threaded {
-	
+
     private final Object threadLock = new Object();
     private boolean done = false;
-    
+
     private Thread executor = null;
-     
+
     public Thread getExecutorThread() {
-        synchronized ( threadLock ) {        
+        synchronized ( threadLock ) {
             return executor;
         }
     }
-    
-	public void end(){
-	    synchronized ( threadLock ) {
-	        done = true;
+
+    public void end(){
+        synchronized ( threadLock ) {
+            done = true;
         }
-	}
-	
-	protected boolean isDone() {
-	    synchronized ( threadLock ) {
+    }
+
+    protected boolean isDone() {
+        synchronized ( threadLock ) {
             return done;
         }
-	}
-	
-	public void run(){
-	    synchronized ( threadLock ) {
-	        executor = Thread.currentThread();
+    }
+
+    public void run(){
+        synchronized ( threadLock ) {
+            executor = Thread.currentThread();
         }
-	    task();
+        task();
         synchronized ( threadLock ) {
             executor = null;
         }
-	}
-	
-	public void interrupt() {
+    }
+
+    public void interrupt() {
         synchronized ( threadLock ) {
-    	    if ( executor == null ) return;
-    	    executor.interrupt();
+            if ( executor == null ) return;
+            executor.interrupt();
         }
-	}
-	
-	protected abstract void task();
+    }
+
+    protected abstract void task();
 }

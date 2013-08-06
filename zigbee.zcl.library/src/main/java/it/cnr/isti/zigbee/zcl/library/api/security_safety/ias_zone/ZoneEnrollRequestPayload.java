@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2012-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,7 +22,7 @@
 package it.cnr.isti.zigbee.zcl.library.api.security_safety.ias_zone;
 
 /**
- * 
+ *
  * @author <a href="mailto:manlio.baco@isti.cnr.it">Manlio Bacco</a>
  * @version $LastChangedRevision: 42 $ ($LastChangedDate: 2010-09-23 14:21:48 +0200 (Thu, 23 Sep 2010) $)
  * @since 0.8.0
@@ -30,6 +30,6 @@ package it.cnr.isti.zigbee.zcl.library.api.security_safety.ias_zone;
  */
 public interface ZoneEnrollRequestPayload {
 
-	public short getZoneType();
-	public int getManufacturerCode();
+    public short getZoneType();
+    public int getManufacturerCode();
 }

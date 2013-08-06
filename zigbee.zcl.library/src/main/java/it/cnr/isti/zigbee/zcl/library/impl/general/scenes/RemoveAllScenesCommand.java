@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2012-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,7 @@ import it.cnr.isti.zigbee.zcl.library.api.general.Scenes;
 import it.cnr.isti.zigbee.zcl.library.impl.core.AbstractCommand;
 import it.cnr.isti.zigbee.zcl.library.impl.core.ByteArrayOutputStreamSerializer;
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.7.1
@@ -35,18 +35,18 @@ import it.cnr.isti.zigbee.zcl.library.impl.core.ByteArrayOutputStreamSerializer;
  */
 public class RemoveAllScenesCommand extends AbstractCommand {
 
-	private int groupId;
-	
-	public RemoveAllScenesCommand(int groupId){
-		super(Scenes.REMOVE_ALL_SCENES);
-	}
-	
-	public byte[] getPayload(){	
-		if( payload == null){			
-			ZBSerializer serializer = new ByteArrayOutputStreamSerializer();
-			serializer.append_short((short)groupId);	
-			payload = serializer.getPayload();
-		}
-		return payload;
-	}
+    private int groupId;
+
+    public RemoveAllScenesCommand(int groupId){
+        super(Scenes.REMOVE_ALL_SCENES);
+    }
+
+    public byte[] getPayload(){
+        if( payload == null){
+            ZBSerializer serializer = new ByteArrayOutputStreamSerializer();
+            serializer.append_short((short)groupId);
+            payload = serializer.getPayload();
+        }
+        return payload;
+    }
 }

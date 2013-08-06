@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2008-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,7 @@ import it.cnr.isti.zigbee.zcl.library.impl.core.ByteArrayOutputStreamSerializer;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
@@ -39,27 +39,27 @@ import java.io.IOException;
  */
 public class AddGroupIfIdentyfingCommand extends AbstractCommand {
 
-	private int groupId;
-	private String name;
-	
-	public AddGroupIfIdentyfingCommand(int groupId, String name){
-		super(Groups.ADD_GROUP_IF_IDENTIFYING_ID);
-		this.groupId = groupId;
-		this.name = name;
-	}
-	
-	public byte[] getPayload(){	
-		if( payload == null){			
-			ByteArrayOutputStream bos = new ByteArrayOutputStream();
-			ZBSerializer serializer = new ByteArrayOutputStreamSerializer(bos);
-			serializer.append_short((short)groupId);
-			serializer.appendZigBeeType(name, ZigBeeType.CharacterString);
-			payload = serializer.getPayload();
-			try {
-				bos.close();
-			} catch (IOException ignored) {				
-			}
-		}
-		return payload;
-	}
+    private int groupId;
+    private String name;
+
+    public AddGroupIfIdentyfingCommand(int groupId, String name){
+        super(Groups.ADD_GROUP_IF_IDENTIFYING_ID);
+        this.groupId = groupId;
+        this.name = name;
+    }
+
+    public byte[] getPayload(){
+        if( payload == null){
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ZBSerializer serializer = new ByteArrayOutputStreamSerializer(bos);
+            serializer.append_short((short)groupId);
+            serializer.appendZigBeeType(name, ZigBeeType.CharacterString);
+            payload = serializer.getPayload();
+            try {
+                bos.close();
+            } catch (IOException ignored) {
+            }
+        }
+        return payload;
+    }
 }

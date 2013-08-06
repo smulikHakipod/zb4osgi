@@ -1,11 +1,11 @@
 /*
 
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2012-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,22 +27,22 @@ import static org.junit.Assert.assertArrayEquals;
 import org.junit.Test;
 
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.7.1
  *
  */
 public class StepCommandTest {
-	
-	@Test
-	public void testGetPayload() {
-		StepCommand command = new StepCommand((byte)0, (short)255, 32);
-		assertArrayEquals(new byte[]{
-				0x00, (byte) 0xff, 0x20, 0x00
-		}, command.getPayload()
-		);
-	}
-	
+
+    @Test
+    public void testGetPayload() {
+        StepCommand command = new StepCommand((byte)0, (short)255, 32);
+        assertArrayEquals(new byte[]{
+                0x00, (byte) 0xff, 0x20, 0x00
+        }, command.getPayload()
+        );
+    }
+
 
 }

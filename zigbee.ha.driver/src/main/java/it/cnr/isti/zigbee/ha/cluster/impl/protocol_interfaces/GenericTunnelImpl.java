@@ -1,5 +1,5 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
+   Copyright 2013-2013 CNR-ISTI, http://isti.cnr.it
    Institute of Information Science and Technologies
    of the Italian National Research Council
 
@@ -37,68 +37,68 @@ import it.cnr.isti.zigbee.zcl.library.api.core.Subscription;
  */
 public class GenericTunnelImpl implements GenericTunnel {
 
-	public int getId() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public int getId() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public String getName() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	public Subscription[] getActiveSubscriptions() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public Subscription[] getActiveSubscriptions() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	public Attribute[] getAttributes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public Attribute[] getAttributes() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	public Attribute getAttribute(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public Attribute getAttribute(int id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	public int getMaximumIncomingTransferSize() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public int getMaximumIncomingTransferSize() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	public int getMaximumOutgoingTransferSize() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public int getMaximumOutgoingTransferSize() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	public int getProtocolAddress() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public int getProtocolAddress() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	public void setProtocolAddress(int address) {
-		// TODO Auto-generated method stub
+    public void setProtocolAddress(int address) {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	public MatchProtocolAddressResponse matchProtocolAddress(
-			String protocolAddress) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public MatchProtocolAddressResponse matchProtocolAddress(
+            String protocolAddress) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	public boolean addAdvertiseProtocolAddressListener(
-			AdvertiseProtocolAddressListener listener) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    public boolean addAdvertiseProtocolAddressListener(
+            AdvertiseProtocolAddressListener listener) {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
-	public boolean removeAdvertiseProtocolAddressListener(
-			AdvertiseProtocolAddressListener listener) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    public boolean removeAdvertiseProtocolAddressListener(
+            AdvertiseProtocolAddressListener listener) {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
 
 }

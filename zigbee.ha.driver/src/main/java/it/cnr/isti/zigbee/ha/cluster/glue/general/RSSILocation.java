@@ -1,5 +1,5 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
+   Copyright 2008-2013 CNR-ISTI, http://isti.cnr.it
    Institute of Information Science and Technologies
    of the Italian National Research Council
 
@@ -38,54 +38,54 @@ public interface RSSILocation extends Cluster {
 
     public EnumSet<LocationType> getLocationType();
     public void setLocationType(EnumSet<LocationType> type);
-    
+
     public LocationMethod getLocationMethod();
     public void setLocationMethod(LocationMethod method);
-    
+
     public int getLocationAge();
-    
+
     public int getQualityMeasure();
-    
+
     public int getNumberOfDevices();
-    
+
     public int getCoordinate1();
     public void setCoordinate1( int coordinate1 );
-    
+
     public int getCoordinate2();
     public void setCoordinate2( int coordinate2 );
-    
+
     public int getCoordinate3();
     public void setCoordinate3( int coordinate3 );
-    
+
     public int getPower();
     public void setPower( int power );
-    
+
     public int getPathLossExponent();
     public void setPathLossExponent( int pathLossExponent );
-    
+
     public int getReportingPeriod();
     public void setReportingPeriod( int reportingPeriod );
-    
+
     public int getCalculationPeriod();
     public void setCalculationPeriod( int calculationPeriod );
-    
+
     public int getNumberRSSIMeasurements();
     public void setNumberRSSIMeasurements( int numberRSSIMeasurements );
-    
+
     public void setAbsoluteLocation(int x, int y, int z, int power, int ple);
     public void setDeviceConfiguration(int power, int ple, int calcPeriod, int nRSSI, int reportPeriod);
     public Response getDeviceConfiguration(long ieeeAddress);
-    
+
     public void getAbsoluteLocationData(boolean compact, boolean unicastResponse, int nResponse, long ieeeAddress);
     public void getLocationData(boolean compact, boolean unicastResponse, boolean recalc, int nResponse, long ieeeAddress);
     public void broadcastAbsoluteLocationData(boolean compact, boolean unicastResponse, int nResponse);
     public void broadcastLocationData(boolean compact, boolean unicastResponse, boolean recalc, int nResponse);
     public boolean addAnchorNodeAnnounceListener(AnchorNodeAnnounceListener listner);
     public boolean removeAnchorNodeAnnounceListener(AnchorNodeAnnounceListener listner);
-    
+
     public void RSSIResponse(long ieeeAddress, int x, int y, int z, int rssi, int nsamples);
     public void sendPings(long ieeeAddress, int nRSSI, int calcPeriod);
-    
+
     public boolean addRSSIPingListener(RSSIPingListener listener);
     public boolean removeRSSIPingListener(RSSIPingListener listener);
 

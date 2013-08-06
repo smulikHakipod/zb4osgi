@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2012-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +24,7 @@ package it.cnr.isti.zigbee.zcl.library.api.security_safety.ias_ace;
 import it.cnr.isti.zigbee.zcl.library.api.core.Response;
 
 /**
- * 
+ *
  * @author <a href="mailto:manlio.bacco@isti.cnr.it">Manlio Bacco</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.8.0
@@ -32,9 +32,9 @@ import it.cnr.isti.zigbee.zcl.library.api.core.Response;
  */
 public interface ZoneInformationResponse extends Response {
 
-	public static final byte ID = 0x02;
+    public static final byte ID = 0x02;
 
-	public int getZoneID();
-	public short getZoneType();
-	public String getIEEEAddress();
+    public int getZoneID();
+    public short getZoneType();
+    public String getIEEEAddress();
 }

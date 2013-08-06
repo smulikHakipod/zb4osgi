@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2012-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,7 +33,7 @@ import it.cnr.isti.zigbee.zcl.library.impl.core.ResponseImpl;
 import org.junit.Test;
 
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.8.0
@@ -41,45 +41,45 @@ import org.junit.Test;
  */
 public class ViewGroupResponseImplTest {
 
-	@Test
-	public void testViewGroupResponseImpl() {
-		Cluster c;
-		Response r;
-		c = new RawClusterImpl((short) 0x04, new byte[]{
-				0x19,
-				0x15,
-				0x01,
-				0x00, // Status = SUCCESS
-				0x10, 0x00, // GroupId = 16
-				0x03, 0x61, 0x62, 0x63 // GroupName = "abc"
-		});
-		try {
-			r = new ResponseImpl(c,Groups.ID);
-			ViewGroupResponseImpl aux = new ViewGroupResponseImpl(r);
-			assertEquals(16, aux.getGroupId() );
-			assertEquals("abc", aux.getGroupName() );
-		} catch (ZigBeeClusterException e) {
-			fail("Exception thrown " + e.getMessage() );
-			e.printStackTrace();
-		}
+    @Test
+    public void testViewGroupResponseImpl() {
+        Cluster c;
+        Response r;
+        c = new RawClusterImpl((short) 0x04, new byte[]{
+                0x19,
+                0x15,
+                0x01,
+                0x00, // Status = SUCCESS
+                0x10, 0x00, // GroupId = 16
+                0x03, 0x61, 0x62, 0x63 // GroupName = "abc"
+        });
+        try {
+            r = new ResponseImpl(c,Groups.ID);
+            ViewGroupResponseImpl aux = new ViewGroupResponseImpl(r);
+            assertEquals(16, aux.getGroupId() );
+            assertEquals("abc", aux.getGroupName() );
+        } catch (ZigBeeClusterException e) {
+            fail("Exception thrown " + e.getMessage() );
+            e.printStackTrace();
+        }
 
-		
-		c = new RawClusterImpl((short) 0x04, new byte[]{
-				0x19,
-				0x29,
-				0x01,
-				(byte) 0x8b, // Status != SUCCESS
-				0x05, 0x00, // GroupId = 5
-		});
-		try {
-			r = new ResponseImpl(c,Groups.ID);
-			ViewGroupResponseImpl aux = new ViewGroupResponseImpl(r);
-			assertEquals(5, aux.getGroupId() );
-			assertEquals(null, aux.getGroupName() );
-		} catch (ZigBeeClusterException e) {
-			fail("Exception thrown " + e.getMessage() );
-			e.printStackTrace();
-		}
-	}
+
+        c = new RawClusterImpl((short) 0x04, new byte[]{
+                0x19,
+                0x29,
+                0x01,
+                (byte) 0x8b, // Status != SUCCESS
+                0x05, 0x00, // GroupId = 5
+        });
+        try {
+            r = new ResponseImpl(c,Groups.ID);
+            ViewGroupResponseImpl aux = new ViewGroupResponseImpl(r);
+            assertEquals(5, aux.getGroupId() );
+            assertEquals(null, aux.getGroupName() );
+        } catch (ZigBeeClusterException e) {
+            fail("Exception thrown " + e.getMessage() );
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -1,11 +1,11 @@
 /*
 
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2013-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,7 +34,7 @@ import it.cnr.isti.zigbee.zcl.library.impl.core.ZCLFrame;
 import org.junit.Test;
 
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.8.0
@@ -42,24 +42,24 @@ import org.junit.Test;
  */
 public class AddGroupResponseImplTest {
 
-	@Test
-	public void testAddGroupResponseImpl() {
-		try {
-			AddGroupResponseImpl response = new AddGroupResponseImpl(
-				new ResponseImpl(
-						new RawClusterImpl(
-								Groups.ID, 
-								new byte[]{0x09, 0x18, 0x00, 0x00, 0x00, (byte) 0xf0 }
-						), 
-						Groups.ID 
-				)
-			);
-			assertEquals( Status.SUCCESS, response.getStatus() );
-			assertEquals( 0xf000, response.getGroupId() );
-		} catch (ZigBeeClusterException e) {
-			e.printStackTrace();
-			fail("Exception thrwon "+e.getMessage());
-		}
-	}
+    @Test
+    public void testAddGroupResponseImpl() {
+        try {
+            AddGroupResponseImpl response = new AddGroupResponseImpl(
+                new ResponseImpl(
+                        new RawClusterImpl(
+                                Groups.ID,
+                                new byte[]{0x09, 0x18, 0x00, 0x00, 0x00, (byte) 0xf0 }
+                        ),
+                        Groups.ID
+                )
+            );
+            assertEquals( Status.SUCCESS, response.getStatus() );
+            assertEquals( 0xf000, response.getGroupId() );
+        } catch (ZigBeeClusterException e) {
+            e.printStackTrace();
+            fail("Exception thrwon "+e.getMessage());
+        }
+    }
 
 }

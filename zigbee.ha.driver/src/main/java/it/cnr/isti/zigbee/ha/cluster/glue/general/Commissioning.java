@@ -1,5 +1,5 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
+   Copyright 2013-2013 CNR-ISTI, http://isti.cnr.it
    Institute of Information Science and Technologies
    of the Italian National Research Council
 
@@ -32,85 +32,85 @@ import it.cnr.isti.zigbee.zcl.library.api.core.Status;
  *
  */
 public interface Commissioning extends Cluster {
-    
+
     public abstract int getShortAddress();
     public abstract void setShortAddress(int shortAddress);
-    
+
     public abstract long getExtendedPANId();
     public abstract void setExtendedPANId(long extendedPANId);
-    
+
     public abstract int getPANId();
     public abstract void setPANId(int PANId);
-    
+
     public abstract int getChannelmask();
     public abstract void setChannelmask(int channelMask);
-    
+
     public int getProtocolVersion();
     public void setProtocolVersion( int protocolVersion );
-    
+
     public int getStackProfile();
     public void setStackProfile( int stackProfile );
-    
+
     public StartupControl getStartupControl();
     public void setStartupControl( StartupControl startupControl );
-    
+
     public long getTrustCenterAddress();
     public void setTrustCenterAddress( long trustCenterAddress );
-    
+
     public byte[] getTrustCenterMasterKey();
     public void setTrustCenterMasterKey( byte[] trustCenterMasterKey );
-    
+
     public byte[] getNetworkKey();
     public void setNetworkKey( byte[] networkKey );
-    
+
     public boolean isUseInsecureJoin();
     public void setUseInsecureJoin( boolean useInsecureJoin );
-    
+
     public byte[] getPreconfiguredLinkKey();
     public void setPreconfiguredLinkKey( byte[] preconfiguredLinkKey );
-    
+
     public int getNetworkKeySeqNum();
     public void setNetworkKeySeqNum( int networkKeySeqNum );
-    
+
     public NetworkKeyType getNetworkKeyType();
     public void setNetworkKeyType( NetworkKeyType networkKeyType );
-    
+
     public int getNetworkManagerAddress();
     public void setNetworkManagerAddress( int networkManagerAddress );
-    
+
     public int getScanAttempts();
     public void setScanAttempts( int scanAttempts );
-    
+
     public int getTimeBetweenScans();
     public void setTimeBetweenScans( int timeBetweenScans );
-    
+
     public int getRejoinInterval();
     public void setRejoinInterval( int rejoinInterval );
-    
+
     public int getMaxRejoinInterval();
     public void setMaxRejoinInterval( int maxRejoinInterval );
-    
+
     public int getIndirectPollRate();
     public void setIndirectPollRate( int indirectPollRate );
-    
+
     public int getParentRetryThreshold();
     public void setParentRetryThreshold( int parentRetryThreshold );
 
     public boolean isConcentratorFlag();
     public void setConcentratorFlag( boolean concentratorFlag );
-    
+
     public int getConcentratorRadius();
     public void setConcentratorRadius( int concentratorRadius );
-    
-    public int getConcentratorDiscoveryTime();   
+
+    public int getConcentratorDiscoveryTime();
     public void setConcentratorDiscoveryTime( int concentratorDiscoveryTime );
-    
+
     public Status restartDevice(StartupControl mode, boolean immediate, int delay, int jitter);
     public Status saveStartupParameters(int index);
     public Status restoreStartupParameters(int index);
-    
+
     public Status resetStartupParameter(int index);
     public Status resetCurrentStartupParameters();
     public Status resetAllStartupParameters();
-    
+
 }

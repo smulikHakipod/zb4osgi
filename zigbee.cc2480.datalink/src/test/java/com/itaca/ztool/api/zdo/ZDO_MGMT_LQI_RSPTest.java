@@ -1,5 +1,5 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
+   Copyright 2013-2013 CNR-ISTI, http://isti.cnr.it
    Institute of Information Science and Technologies
    of the Italian National Research Council
 
@@ -49,7 +49,7 @@ public class ZDO_MGMT_LQI_RSPTest {
             0x03,            //NEntries on device
             0x01,            //FirstIndex
             0x02,            //NEntries on message
-            
+
             0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,  //PanId
             0x10, 0x20, 0x30, 0x40, 0x50, 0x60, 0x70, 0x80,  //IEEEAddress
             0xAA, 0x11,                                      //Network Address
@@ -57,7 +57,7 @@ public class ZDO_MGMT_LQI_RSPTest {
             0x01,                                            //PermitJoining
             0x02,                                            //Depth
             0xAB,                                            //LQI
-            
+
             0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,  //PanId
             0x00, 0xA0, 0xB0, 0xC0, 0xD0, 0xE0, 0xF0, 0x00,  //IEEEAddress
             0xF0, 0x0F,                                      //Network Address
@@ -79,27 +79,27 @@ public class ZDO_MGMT_LQI_RSPTest {
         for ( int i = 0; i < neighborLQI.length; i++ ) {
             assertEquals( 2, neighborLQI[i].Depth );
             assertEquals( 32, neighborLQI[i].Reserved_Relationship_RxOnWhenIdle_DeviceType );
-            assertEquals( 1, neighborLQI[i].Reserved_PermitJoining );            
+            assertEquals( 1, neighborLQI[i].Reserved_PermitJoining );
             //assertEquals( 2, neighborLQI[i].ExtendedPanID);
         }
         assertEquals( 0xAB, neighborLQI[0].RxLQI );
         assertEquals( 0x8F, neighborLQI[1].RxLQI );
-        
-        assertEquals( 
+
+        assertEquals(
             new ZToolAddress64( new byte[]{(byte) 0x80, 0x70, 0x60, 0x50, 0x40, 0x30, 0x20, 0x10} )
-            , neighborLQI[0].ExtendedAddress 
+            , neighborLQI[0].ExtendedAddress
         );
-        
-        assertEquals( 
+
+        assertEquals(
             new ZToolAddress64( new byte[]{
-                0x00, (byte) 0xF0, (byte) 0xE0, (byte) 0xD0, (byte) 0xC0, (byte) 0xB0, (byte) 0xA0, 0x00 
+                0x00, (byte) 0xF0, (byte) 0xE0, (byte) 0xD0, (byte) 0xC0, (byte) 0xB0, (byte) 0xA0, 0x00
             } )
-            , neighborLQI[1].ExtendedAddress 
+            , neighborLQI[1].ExtendedAddress
         );
-        
+
         assertEquals( new ZToolAddress16( 0x11, 0xAA ), neighborLQI[0].NetworkAddress );
         assertEquals( new ZToolAddress16( 0x0F, 0xF0 ), neighborLQI[1].NetworkAddress );
-        
+
         assertNotNull( cmd );
     }
 

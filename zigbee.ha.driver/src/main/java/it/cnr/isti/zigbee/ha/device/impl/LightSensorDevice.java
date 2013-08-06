@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2012-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,62 +36,62 @@ import org.osgi.framework.BundleContext;
 
 /**
  * @author <a href="mailto:manlio.bacco@isti.cnr.it">Manlio Bacco</a>
- *         
+ *
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.7.0
  *
  */
 public class LightSensorDevice extends HADeviceBase implements LightSensor {
 
-	private IlluminanceMeasurement illuminanceMeasurement;
-	private Groups groups;
+    private IlluminanceMeasurement illuminanceMeasurement;
+    private Groups groups;
 
-	public LightSensorDevice(BundleContext ctx, ZigBeeDevice zbDevice) throws ZigBeeHAException {
+    public LightSensorDevice(BundleContext ctx, ZigBeeDevice zbDevice) throws ZigBeeHAException {
 
-		super(ctx, zbDevice);
+        super(ctx, zbDevice);
 
-		illuminanceMeasurement = (IlluminanceMeasurement) addCluster(HAProfile.ILLUMINANCE_MEASUREMENT);
-		groups = (Groups) addCluster(HAProfile.GROUPS);
-	}
+        illuminanceMeasurement = (IlluminanceMeasurement) addCluster(HAProfile.ILLUMINANCE_MEASUREMENT);
+        groups = (Groups) addCluster(HAProfile.GROUPS);
+    }
 
-	public IlluminanceMeasurement getIlluminanceMeasurement() {
+    public IlluminanceMeasurement getIlluminanceMeasurement() {
 
-		return illuminanceMeasurement;
-	}
+        return illuminanceMeasurement;
+    }
 
-	@Override
-	public String getName() {
+    @Override
+    public String getName() {
 
-		return LightSensor.NAME;
-	}
+        return LightSensor.NAME;
+    }
 
-	@Override
-	public DeviceDescription getDescription() {
+    @Override
+    public DeviceDescription getDescription() {
 
-		return DEVICE_DESCRIPTOR;
-	}
+        return DEVICE_DESCRIPTOR;
+    }
 
-	final static DeviceDescription DEVICE_DESCRIPTOR =  new AbstractDeviceDescription(){
+    final static DeviceDescription DEVICE_DESCRIPTOR =  new AbstractDeviceDescription(){
 
-		public int[] getCustomClusters() {
-			return LightSensor.CUSTOM;
-		}
+        public int[] getCustomClusters() {
+            return LightSensor.CUSTOM;
+        }
 
-		public int[] getMandatoryCluster() {
-			return LightSensor.MANDATORY;
-		}
+        public int[] getMandatoryCluster() {
+            return LightSensor.MANDATORY;
+        }
 
-		public int[] getOptionalCluster() {
-			return LightSensor.OPTIONAL;
-		}
+        public int[] getOptionalCluster() {
+            return LightSensor.OPTIONAL;
+        }
 
-		public int[] getStandardClusters() {
-			return LightSensor.STANDARD;
-		}
+        public int[] getStandardClusters() {
+            return LightSensor.STANDARD;
+        }
 
-	};
+    };
 
-	public Groups getGroups() {
-		return groups;
-	}
+    public Groups getGroups() {
+        return groups;
+    }
 }

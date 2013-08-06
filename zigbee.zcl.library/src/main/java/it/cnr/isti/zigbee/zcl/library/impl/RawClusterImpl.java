@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2012-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,30 +21,29 @@
 */
 package it.cnr.isti.zigbee.zcl.library.impl;
 import it.cnr.isti.zigbee.api.Cluster;
-import it.cnr.isti.zigbee.zcl.library.impl.core.ZCLFrame;
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate: 2010-09-23 14:21:48 +0200(Thu, 23 Sep 2010) $)
  * @since 0.8.0
  *
  */
 public class RawClusterImpl implements Cluster {
-	
-	private byte[] frame;
-	private short id;
 
-	public RawClusterImpl(short id, byte[] frame) {
-		this.frame = frame;
-		this.id = id;
-	}
+    private byte[] frame;
+    private short id;
 
-	public byte[] getClusterMsg() {
-		return frame;
-	}
+    public RawClusterImpl(short id, byte[] frame) {
+        this.frame = frame;
+        this.id = id;
+    }
 
-	public short getId() {
-		return id;
-	}
+    public byte[] getClusterMsg() {
+        return frame;
+    }
+
+    public short getId() {
+        return id;
+    }
 
 }

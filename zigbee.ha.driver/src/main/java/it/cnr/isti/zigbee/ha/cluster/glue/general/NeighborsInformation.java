@@ -1,5 +1,5 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
+   Copyright 2013-2013 CNR-ISTI, http://isti.cnr.it
    Institute of Information Science and Technologies
    of the Italian National Research Council
 
@@ -35,8 +35,8 @@ public class NeighborsInformation {
     private final int y;
     private final int z;
     private final int rssi;
-    private final int nSamples;       
-    
+    private final int nSamples;
+
     /**
      * @param ieeeAddress
      * @param x
@@ -60,40 +60,40 @@ public class NeighborsInformation {
     public long getIeeeAddress() {
         return ieeeAddress;
     }
-    
+
     /**
      * @return the x
      */
     public int getX() {
         return x;
     }
-    
+
     /**
      * @return the y
      */
     public int getY() {
         return y;
     }
-    
+
     /**
      * @return the z
      */
     public int getZ() {
         return z;
     }
-    
+
     /**
      * @return the rssi
      */
     public int getRssi() {
         return rssi;
     }
-    
+
     /**
      * @return the nSamples
      */
     public int getNSamples() {
         return nSamples;
     }
-    
+
 }

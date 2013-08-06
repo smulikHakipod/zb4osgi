@@ -1,7 +1,7 @@
 package it.cnr.isti.zigbee.hc.core;
 
 /*
- Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
+ Copyright 2013-2013 CNR-ISTI, http://isti.cnr.it
  Institute of Information Science and Technologies
  of the Italian National Research Council
 

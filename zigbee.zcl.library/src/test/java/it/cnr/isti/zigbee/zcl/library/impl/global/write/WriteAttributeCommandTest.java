@@ -1,11 +1,11 @@
 /*
 
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2012-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +30,7 @@ import it.cnr.isti.zigbee.zcl.library.impl.core.AttributeImpl;
 import org.junit.Test;
 
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.7.1
@@ -38,30 +38,30 @@ import org.junit.Test;
  */
 public class WriteAttributeCommandTest {
 
-	@Test
-	public void testGetPayloadWithString() {
-		AttributeImpl attribute = new AttributeImpl(null, null, Attributes.LOCATION_DESCRIPTION);
-		WriteAttributeRecord[] values = new WriteAttributeRecord[]{
-				new WriteAttributeRecordImpl( attribute, "garage" )
-		};
-		WriteAttributeCommand command = new WriteAttributeCommand(values);
-		assertArrayEquals(new byte[]{
-				0x10, 0x00, 0x42, 0x06, 0x67, 0x61, 0x72, 0x61, 0x67, 0x65
-		}, command.getPayload()
-		);
-	}
+    @Test
+    public void testGetPayloadWithString() {
+        AttributeImpl attribute = new AttributeImpl(null, null, Attributes.LOCATION_DESCRIPTION);
+        WriteAttributeRecord[] values = new WriteAttributeRecord[]{
+                new WriteAttributeRecordImpl( attribute, "garage" )
+        };
+        WriteAttributeCommand command = new WriteAttributeCommand(values);
+        assertArrayEquals(new byte[]{
+                0x10, 0x00, 0x42, 0x06, 0x67, 0x61, 0x72, 0x61, 0x67, 0x65
+        }, command.getPayload()
+        );
+    }
 
-	@Test
-	public void testGetPayloadWithInteger() {
-		AttributeImpl attribute = new AttributeImpl(null, null, Attributes.IDENTIFY_TIME);
-		WriteAttributeRecord[] values = new WriteAttributeRecord[]{
-				new WriteAttributeRecordImpl( attribute, new Integer(10) )
-		};
-		WriteAttributeCommand command = new WriteAttributeCommand(values);
-		assertArrayEquals(new byte[]{
-				0x00, 0x00, 0x21, 0x0a, 0x00
-		}, command.getPayload()
-		);
-	}
+    @Test
+    public void testGetPayloadWithInteger() {
+        AttributeImpl attribute = new AttributeImpl(null, null, Attributes.IDENTIFY_TIME);
+        WriteAttributeRecord[] values = new WriteAttributeRecord[]{
+                new WriteAttributeRecordImpl( attribute, new Integer(10) )
+        };
+        WriteAttributeCommand command = new WriteAttributeCommand(values);
+        assertArrayEquals(new byte[]{
+                0x00, 0x00, 0x21, 0x0a, 0x00
+        }, command.getPayload()
+        );
+    }
 
 }

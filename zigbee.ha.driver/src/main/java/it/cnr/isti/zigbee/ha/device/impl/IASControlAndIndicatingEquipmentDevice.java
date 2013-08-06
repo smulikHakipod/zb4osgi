@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2012-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,83 +40,83 @@ import org.osgi.framework.BundleContext;
 
 /**
  * @author <a href="mailto:manlio.bacco@isti.cnr.it">Manlio Bacco</a>
- *         
+ *
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.7.0
  *
  */
 public class IASControlAndIndicatingEquipmentDevice extends HADeviceBase implements IASControlAndIndicatingEquipment {
 
-	private Identify identify;
-	private IASZone iasZone;
-	private IASACE iasAce;
-	private IASWD iasWD;
-	private Scenes scenes;
-	private Groups groups;
+    private Identify identify;
+    private IASZone iasZone;
+    private IASACE iasAce;
+    private IASWD iasWD;
+    private Scenes scenes;
+    private Groups groups;
 
-	public IASControlAndIndicatingEquipmentDevice(BundleContext ctx, ZigBeeDevice zbDevice) throws ZigBeeHAException {
+    public IASControlAndIndicatingEquipmentDevice(BundleContext ctx, ZigBeeDevice zbDevice) throws ZigBeeHAException {
 
-		super(ctx, zbDevice);
+        super(ctx, zbDevice);
 
-		iasAce = (IASACE) addCluster(HAProfile.IAS_ACE);	
-		iasZone = (IASZone) addCluster(HAProfile.IAS_ZONE);	
-		identify = (Identify) addCluster(HAProfile.IDENTIFY);	
-		iasWD = (IASWD) addCluster(HAProfile.IAS_WD);
-		scenes = (Scenes) addCluster(HAProfile.SCENES);
-		groups = (Groups) addCluster(HAProfile.GROUPS);
-	}
+        iasAce = (IASACE) addCluster(HAProfile.IAS_ACE);
+        iasZone = (IASZone) addCluster(HAProfile.IAS_ZONE);
+        identify = (Identify) addCluster(HAProfile.IDENTIFY);
+        iasWD = (IASWD) addCluster(HAProfile.IAS_WD);
+        scenes = (Scenes) addCluster(HAProfile.SCENES);
+        groups = (Groups) addCluster(HAProfile.GROUPS);
+    }
 
-	public IASACE getIASACE() {
-		return iasAce;
-	}
+    public IASACE getIASACE() {
+        return iasAce;
+    }
 
-	public IASZone getIASZone() {
-		return iasZone;
-	}
+    public IASZone getIASZone() {
+        return iasZone;
+    }
 
-	public IASWD getIASwd() {
-		return iasWD;
-	}
+    public IASWD getIASwd() {
+        return iasWD;
+    }
 
-	public Scenes getScenes() {
-		return scenes;
-	}
+    public Scenes getScenes() {
+        return scenes;
+    }
 
-	public Groups getGroups() {
-		return groups;
-	}
-	
-	public Identify getIdentify() {
-		return identify;
-	}
+    public Groups getGroups() {
+        return groups;
+    }
 
-	@Override
-	public String getName() {
-		return IASControlAndIndicatingEquipment.NAME;
-	}
+    public Identify getIdentify() {
+        return identify;
+    }
 
-	@Override
-	public DeviceDescription getDescription() {
+    @Override
+    public String getName() {
+        return IASControlAndIndicatingEquipment.NAME;
+    }
 
-		return DEVICE_DESCRIPTOR;
-	}
+    @Override
+    public DeviceDescription getDescription() {
 
-	final static DeviceDescription DEVICE_DESCRIPTOR =  new AbstractDeviceDescription(){
+        return DEVICE_DESCRIPTOR;
+    }
 
-		public int[] getCustomClusters() {
-			return IASControlAndIndicatingEquipment.CUSTOM;
-		}
+    final static DeviceDescription DEVICE_DESCRIPTOR =  new AbstractDeviceDescription(){
 
-		public int[] getMandatoryCluster() {
-			return IASControlAndIndicatingEquipment.MANDATORY;
-		}
+        public int[] getCustomClusters() {
+            return IASControlAndIndicatingEquipment.CUSTOM;
+        }
 
-		public int[] getOptionalCluster() {
-			return IASControlAndIndicatingEquipment.OPTIONAL;
-		}
+        public int[] getMandatoryCluster() {
+            return IASControlAndIndicatingEquipment.MANDATORY;
+        }
 
-		public int[] getStandardClusters() {
-			return IASControlAndIndicatingEquipment.STANDARD;
-		}
-	};
+        public int[] getOptionalCluster() {
+            return IASControlAndIndicatingEquipment.OPTIONAL;
+        }
+
+        public int[] getStandardClusters() {
+            return IASControlAndIndicatingEquipment.STANDARD;
+        }
+    };
 }

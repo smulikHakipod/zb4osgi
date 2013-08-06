@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2012-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,110 +35,110 @@ import it.cnr.isti.zigbee.zcl.library.impl.measureament_sensing.IlluminanceMeasu
 
 /**
  * @author <a href="mailto:manlio.bacco@isti.cnr.it">Manlio Bacco</a>
- *         
+ *
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.7.0
  *
  */
 public class IlluminanceMeasurementImpl implements IlluminanceMeasurement {
 
-	private final IlluminanceMeasurementCluster cluster;
-	
-	private final Attribute measuredValue;
-	private final Attribute minMeasuredValue;
-	private final Attribute maxMeasuredValue;
-	private final Attribute tolerance;
-	private final Attribute lightSensorType;
+    private final IlluminanceMeasurementCluster cluster;
 
-	private final MeasuredValueBridgeListeners measureBridge;
-	private final ToleranceBridgeListeners toleranceBridge;
-	//private final ToleranceBridgeListeners toleranceBridge;
+    private final Attribute measuredValue;
+    private final Attribute minMeasuredValue;
+    private final Attribute maxMeasuredValue;
+    private final Attribute tolerance;
+    private final Attribute lightSensorType;
 
-	public IlluminanceMeasurementImpl(ZigBeeDevice zbDevice){
+    private final MeasuredValueBridgeListeners measureBridge;
+    private final ToleranceBridgeListeners toleranceBridge;
+    //private final ToleranceBridgeListeners toleranceBridge;
 
-		cluster = new IlluminanceMeasurementCluster(zbDevice);
-		measuredValue = cluster.getMeasuredValue();
-		minMeasuredValue = cluster.getMinMeasuredValue();
-		maxMeasuredValue = cluster.getMaxMeasuredValue();
-		tolerance = cluster.getTolerance();
-		lightSensorType = cluster.getLightSensorType();
+    public IlluminanceMeasurementImpl(ZigBeeDevice zbDevice){
 
-		toleranceBridge = new ToleranceBridgeListeners(Activator.getConfiguration(), tolerance, this);
-		measureBridge = new MeasuredValueBridgeListeners(Activator.getConfiguration(), measuredValue, this);
-	}
+        cluster = new IlluminanceMeasurementCluster(zbDevice);
+        measuredValue = cluster.getMeasuredValue();
+        minMeasuredValue = cluster.getMinMeasuredValue();
+        maxMeasuredValue = cluster.getMaxMeasuredValue();
+        tolerance = cluster.getTolerance();
+        lightSensorType = cluster.getLightSensorType();
 
-	public int getId() {
+        toleranceBridge = new ToleranceBridgeListeners(Activator.getConfiguration(), tolerance, this);
+        measureBridge = new MeasuredValueBridgeListeners(Activator.getConfiguration(), measuredValue, this);
+    }
 
-		return cluster.getId();
-	}
+    public int getId() {
 
-	public String getName() {
+        return cluster.getId();
+    }
 
-		return cluster.getName();
-	}
+    public String getName() {
 
-	public Subscription[] getActiveSubscriptions() {
+        return cluster.getName();
+    }
 
-		return cluster.getActiveSubscriptions();
-	}
+    public Subscription[] getActiveSubscriptions() {
 
-	public Attribute[] getAttributes() {
+        return cluster.getActiveSubscriptions();
+    }
 
-		return cluster.getAvailableAttributes();
-	}
+    public Attribute[] getAttributes() {
 
-	public Attribute getAttribute(int id) {
+        return cluster.getAvailableAttributes();
+    }
 
-		Attribute[] attributes = cluster.getAvailableAttributes();
-		for (int i = 0; i < attributes.length; i++) {
-			if( attributes[i].getId() == id ) 
-				return attributes[i];
-		}
-		return null;
-	}
+    public Attribute getAttribute(int id) {
 
-	public Attribute getMeasuredValue() {
+        Attribute[] attributes = cluster.getAvailableAttributes();
+        for (int i = 0; i < attributes.length; i++) {
+            if( attributes[i].getId() == id )
+                return attributes[i];
+        }
+        return null;
+    }
 
-		return measuredValue;
-	}
+    public Attribute getMeasuredValue() {
 
-	public Attribute getMinMeasuredValue() {
+        return measuredValue;
+    }
 
-		return minMeasuredValue;
-	}
+    public Attribute getMinMeasuredValue() {
 
-	public Attribute getMaxMeasuredValue() {
+        return minMeasuredValue;
+    }
 
-		return maxMeasuredValue;
-	}
+    public Attribute getMaxMeasuredValue() {
 
-	public Attribute getTolerance() {
+        return maxMeasuredValue;
+    }
 
-		return tolerance;
-	}
+    public Attribute getTolerance() {
 
-	public Attribute getLightSensorType() {
+        return tolerance;
+    }
 
-		return lightSensorType;
-	}
+    public Attribute getLightSensorType() {
 
-	public boolean subscribe(MeasuredValueListener tl) {
+        return lightSensorType;
+    }
 
-		return measureBridge.subscribe(tl);
-	}
+    public boolean subscribe(MeasuredValueListener tl) {
 
-	public boolean unsubscribe(MeasuredValueListener tl) {
+        return measureBridge.subscribe(tl);
+    }
 
-		return measureBridge.unsubscribe(tl);
-	}
+    public boolean unsubscribe(MeasuredValueListener tl) {
 
-	public boolean subscribe(ToleranceListener tl) {
+        return measureBridge.unsubscribe(tl);
+    }
 
-		return toleranceBridge.subscribe(tl);
-	}
+    public boolean subscribe(ToleranceListener tl) {
 
-	public boolean unsubscribe(ToleranceListener tl) {
+        return toleranceBridge.subscribe(tl);
+    }
 
-		return toleranceBridge.unsubscribe(tl);
-	}
+    public boolean unsubscribe(ToleranceListener tl) {
+
+        return toleranceBridge.unsubscribe(tl);
+    }
 }

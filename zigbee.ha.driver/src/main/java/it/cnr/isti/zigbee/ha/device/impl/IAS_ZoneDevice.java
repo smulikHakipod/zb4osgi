@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2012-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,55 +35,55 @@ import org.osgi.framework.BundleContext;
 
 /**
  * @author <a href="mailto:manlio.bacco@isti.cnr.it">Manlio Bacco</a>
- *         
+ *
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.7.0
  *
  */
 public class IAS_ZoneDevice extends HADeviceBase implements IAS_Zone {
 
-	private IASZone iasZoneCluster;
+    private IASZone iasZoneCluster;
 
-	public IAS_ZoneDevice(BundleContext ctx, ZigBeeDevice zbDevice) throws ZigBeeHAException {
+    public IAS_ZoneDevice(BundleContext ctx, ZigBeeDevice zbDevice) throws ZigBeeHAException {
 
-		super(ctx, zbDevice);
-		
-		iasZoneCluster = (IASZone) addCluster(HAProfile.IAS_ZONE);
-	}
+        super(ctx, zbDevice);
 
-	public IASZone getIASZone() {
+        iasZoneCluster = (IASZone) addCluster(HAProfile.IAS_ZONE);
+    }
 
-		return iasZoneCluster;
-	}
+    public IASZone getIASZone() {
 
-	@Override
-	public String getName() {
+        return iasZoneCluster;
+    }
 
-		return IAS_Zone.NAME;
-	}
+    @Override
+    public String getName() {
 
-	@Override
-	public DeviceDescription getDescription() {
+        return IAS_Zone.NAME;
+    }
 
-		return DEVICE_DESCRIPTOR;
-	}
+    @Override
+    public DeviceDescription getDescription() {
 
-	final static DeviceDescription DEVICE_DESCRIPTOR =  new AbstractDeviceDescription(){
+        return DEVICE_DESCRIPTOR;
+    }
 
-		public int[] getCustomClusters() {
-			return IAS_Zone.CUSTOM;
-		}
+    final static DeviceDescription DEVICE_DESCRIPTOR =  new AbstractDeviceDescription(){
 
-		public int[] getMandatoryCluster() {
-			return IAS_Zone.MANDATORY;
-		}
+        public int[] getCustomClusters() {
+            return IAS_Zone.CUSTOM;
+        }
 
-		public int[] getOptionalCluster() {
-			return IAS_Zone.OPTIONAL;
-		}
+        public int[] getMandatoryCluster() {
+            return IAS_Zone.MANDATORY;
+        }
 
-		public int[] getStandardClusters() {
-			return IAS_Zone.STANDARD;
-		}
-	};
+        public int[] getOptionalCluster() {
+            return IAS_Zone.OPTIONAL;
+        }
+
+        public int[] getStandardClusters() {
+            return IAS_Zone.STANDARD;
+        }
+    };
 }

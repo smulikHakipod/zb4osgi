@@ -1,5 +1,5 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
+   Copyright 2008-2013 CNR-ISTI, http://isti.cnr.it
    Institute of Information Science and Technologies
    of the Italian National Research Council
 
@@ -45,7 +45,7 @@ import it.cnr.isti.zigbee.zcl.library.impl.general.OnOffCluster;
  * @since 0.1.0
  *
  */
-public class OnOffImpl implements OnOff{
+public class OnOffImpl implements OnOff {
 
     private final Attribute onOff;
     private final OnOffCluster onOffCluster;

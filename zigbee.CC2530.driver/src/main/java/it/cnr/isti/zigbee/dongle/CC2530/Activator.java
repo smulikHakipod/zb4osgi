@@ -1,5 +1,5 @@
 /*
-   Copyright 2008-2011 CNR-ISTI, http://isti.cnr.it
+   Copyright 2011-2013 CNR-ISTI, http://isti.cnr.it
    Institute of Information Science and Technologies
    of the Italian National Research Council
 

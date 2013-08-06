@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2012-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -52,7 +52,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 
+ *
  * @author <a href="mailto:manlio.bacco@isti.cnr.it">Manlio Bacco</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.8.0
@@ -60,155 +60,155 @@ import org.slf4j.LoggerFactory;
  */
 public class IASZoneCluster extends ZCLClusterBase implements IASZone {
 
-	private final AttributeImpl attributeZoneState;
-	private final AttributeImpl attributeZoneType;
-	private final AttributeImpl attributeZoneStatus;
-	private final AttributeImpl attributeIASCIEAddress;
+    private final AttributeImpl attributeZoneState;
+    private final AttributeImpl attributeZoneType;
+    private final AttributeImpl attributeZoneStatus;
+    private final AttributeImpl attributeIASCIEAddress;
 
-	private final ArrayList<ZoneStatusChangeNotificationListener> listeners = new ArrayList<ZoneStatusChangeNotificationListener>();
-	private ZoneStatusChangeNotificationListenerNotifier bridge;
+    private final ArrayList<ZoneStatusChangeNotificationListener> listeners = new ArrayList<ZoneStatusChangeNotificationListener>();
+    private ZoneStatusChangeNotificationListenerNotifier bridge;
 
-	private final Attribute[] attributes;
+    private final Attribute[] attributes;
 
-	private final Logger log = LoggerFactory.getLogger(IASZoneCluster.class);
+    private final Logger log = LoggerFactory.getLogger(IASZoneCluster.class);
 
-	public IASZoneCluster(ZigBeeDevice zbDevice) {
+    public IASZoneCluster(ZigBeeDevice zbDevice) {
 
-		super(zbDevice);
+        super(zbDevice);
 
-		attributeZoneState = new AttributeImpl(zbDevice,this,Attributes.ZONE_STATE);
-		attributeZoneType = new AttributeImpl(zbDevice,this,Attributes.ZONE_TYPE);
-		attributeZoneStatus = new AttributeImpl(zbDevice,this,Attributes.ZONE_STATUS);
-		attributeIASCIEAddress = new AttributeImpl(zbDevice,this,Attributes.IAS_CIE_ADDRESS);
+        attributeZoneState = new AttributeImpl(zbDevice,this,Attributes.ZONE_STATE);
+        attributeZoneType = new AttributeImpl(zbDevice,this,Attributes.ZONE_TYPE);
+        attributeZoneStatus = new AttributeImpl(zbDevice,this,Attributes.ZONE_STATUS);
+        attributeIASCIEAddress = new AttributeImpl(zbDevice,this,Attributes.IAS_CIE_ADDRESS);
 
-		attributes = new AttributeImpl[]{attributeZoneState, attributeZoneType, attributeZoneStatus, attributeIASCIEAddress};
+        attributes = new AttributeImpl[]{attributeZoneState, attributeZoneType, attributeZoneStatus, attributeIASCIEAddress};
 
-		bridge = new ZoneStatusChangeNotificationListenerNotifier();
-	}	
+        bridge = new ZoneStatusChangeNotificationListenerNotifier();
+    }
 
-	public Attribute getAttributeZoneState() {
+    public Attribute getAttributeZoneState() {
 
-		return attributeZoneState;
-	}
+        return attributeZoneState;
+    }
 
-	public Attribute getAttributeZoneType() {
+    public Attribute getAttributeZoneType() {
 
-		return attributeZoneType;
-	}
+        return attributeZoneType;
+    }
 
-	public Attribute getAttributeZoneStatus() {
+    public Attribute getAttributeZoneStatus() {
 
-		return attributeZoneStatus;
-	}
+        return attributeZoneStatus;
+    }
 
-	public Attribute getAttributeIASCIEAddress() {
+    public Attribute getAttributeIASCIEAddress() {
 
-		return attributeIASCIEAddress;
-	}
+        return attributeIASCIEAddress;
+    }
 
-	@Override
-	public short getId() {
+    @Override
+    public short getId() {
 
-		return IASZone.ID;
-	}
+        return IASZone.ID;
+    }
 
-	@Override
-	public String getName() {
+    @Override
+    public String getName() {
 
-		return IASZone.NAME;
-	}
+        return IASZone.NAME;
+    }
 
-	@Override
-	public Attribute[] getStandardAttributes() {
+    @Override
+    public Attribute[] getStandardAttributes() {
 
-		return attributes;
-	}
+        return attributes;
+    }
 
-	public Response zoneStatusChangeNotification(ZoneStatusChangeNotificationPayload payload) throws ZigBeeClusterException {
+    public Response zoneStatusChangeNotification(ZoneStatusChangeNotificationPayload payload) throws ZigBeeClusterException {
 
-		enableDefaultResponse();
-		ZoneStatusChangeNotificationCommand zscnc = new ZoneStatusChangeNotificationCommand(payload);
-		Response response = invoke(zscnc);
-		return new DefaultResponseImpl(response);
-	}
+        enableDefaultResponse();
+        ZoneStatusChangeNotificationCommand zscnc = new ZoneStatusChangeNotificationCommand(payload);
+        Response response = invoke(zscnc);
+        return new DefaultResponseImpl(response);
+    }
 
-	public ZoneEnrollResponse zoneEnrollRequest(ZoneEnrollRequestPayload payload) throws ZigBeeClusterException {
+    public ZoneEnrollResponse zoneEnrollRequest(ZoneEnrollRequestPayload payload) throws ZigBeeClusterException {
 
-		ZoneEnrollRequestCommand zoneEnrCmd = new ZoneEnrollRequestCommand(payload);
-		Response response = invoke(zoneEnrCmd, false);
-		return new ZoneEnrollResponseImpl(response);
-	}
+        ZoneEnrollRequestCommand zoneEnrCmd = new ZoneEnrollRequestCommand(payload);
+        Response response = invoke(zoneEnrCmd, false);
+        return new ZoneEnrollResponseImpl(response);
+    }
 
-	public boolean addZoneStatusChangeNotificationListener(ZoneStatusChangeNotificationListener listener) {
-		synchronized (listeners) {
-			if ( listeners.size() == 0 ){
-				try {
-					getZigBeeDevice().bind(ID);
-				} catch (ZigBeeBasedriverException e) {
-					log.error("Unable to bind to device for IASZone reporting", e);
-					return false;
-				}
-				if ( getZigBeeDevice().addClusterListener(bridge) == false ) {
-					log.error("Unable to register the cluster listener for IASZone reporting");
-					return false;
-				}
-			}
-			listeners.add(listener);
-			return true;		
-		}
-	}
+    public boolean addZoneStatusChangeNotificationListener(ZoneStatusChangeNotificationListener listener) {
+        synchronized (listeners) {
+            if ( listeners.size() == 0 ){
+                try {
+                    getZigBeeDevice().bind(ID);
+                } catch (ZigBeeBasedriverException e) {
+                    log.error("Unable to bind to device for IASZone reporting", e);
+                    return false;
+                }
+                if ( getZigBeeDevice().addClusterListener(bridge) == false ) {
+                    log.error("Unable to register the cluster listener for IASZone reporting");
+                    return false;
+                }
+            }
+            listeners.add(listener);
+            return true;
+        }
+    }
 
-	public boolean removeZoneStatusChangeNotificationListener(ZoneStatusChangeNotificationListener listener) {
-		synchronized (listeners) {
-			boolean removed = listeners.remove(listener); 
-			if ( listeners.size() == 0 && removed ){
-				try {
-					getZigBeeDevice().unbind(ID);
-				} catch (ZigBeeBasedriverException e) {
-					log.error("Unable to unbind to device for IASZone reporting", e);
-					return false;
-				}
-				if ( getZigBeeDevice().removeClusterListener(bridge) == false ) {
-					log.error("Unable to unregister the cluster listener for IASZone reporting");
-					return false;
-				}
-			}
-			return removed;		
-		}
-	}
+    public boolean removeZoneStatusChangeNotificationListener(ZoneStatusChangeNotificationListener listener) {
+        synchronized (listeners) {
+            boolean removed = listeners.remove(listener);
+            if ( listeners.size() == 0 && removed ){
+                try {
+                    getZigBeeDevice().unbind(ID);
+                } catch (ZigBeeBasedriverException e) {
+                    log.error("Unable to unbind to device for IASZone reporting", e);
+                    return false;
+                }
+                if ( getZigBeeDevice().removeClusterListener(bridge) == false ) {
+                    log.error("Unable to unregister the cluster listener for IASZone reporting");
+                    return false;
+                }
+            }
+            return removed;
+        }
+    }
 
-	private class ZoneStatusChangeNotificationListenerNotifier implements ClusterListner{
+    private class ZoneStatusChangeNotificationListenerNotifier implements ClusterListner{
 
-		public void setClusterFilter(ClusterFilter filter) {
-		}
+        public void setClusterFilter(ClusterFilter filter) {
+        }
 
-		public ClusterFilter getClusterFilter() {
-			return IAS_ZoneZoneStatusChangeNotificationFilter.FILTER;
-		}
+        public ClusterFilter getClusterFilter() {
+            return IAS_ZoneZoneStatusChangeNotificationFilter.FILTER;
+        }
 
-		public void handleCluster(ZigBeeDevice device, Cluster c) {
-			try {
-				ResponseImpl response = new ResponseImpl(c, ID);
-				ZoneStatusChangeNotificationResponse zscnr = new ZoneStatusChangeNotificationResponseImpl(response);
-				ArrayList<ZoneStatusChangeNotificationListener> localCopy;
-				synchronized (listeners) {
-					localCopy = new ArrayList<ZoneStatusChangeNotificationListener>(listeners);					
-				}
-				log.debug("Notifying {} ZoneStatusChangeNotificationListener", localCopy.size());
-				for (ZoneStatusChangeNotificationListener alarmListner : localCopy) {
-					try{
-						log.debug("Notifying {}:{}", alarmListner.getClass().getName(), alarmListner);
-						alarmListner.zoneStatusChangeNotification(zscnr.getZoneStatus());
-					}catch(Exception e){
-						log.error("Error while notifying {}:{} caused by {}",new Object[]{
-								alarmListner.getClass().getName(), alarmListner, e.getStackTrace() 
-						});
-					}
-				}
+        public void handleCluster(ZigBeeDevice device, Cluster c) {
+            try {
+                ResponseImpl response = new ResponseImpl(c, ID);
+                ZoneStatusChangeNotificationResponse zscnr = new ZoneStatusChangeNotificationResponseImpl(response);
+                ArrayList<ZoneStatusChangeNotificationListener> localCopy;
+                synchronized (listeners) {
+                    localCopy = new ArrayList<ZoneStatusChangeNotificationListener>(listeners);
+                }
+                log.debug("Notifying {} ZoneStatusChangeNotificationListener", localCopy.size());
+                for (ZoneStatusChangeNotificationListener alarmListner : localCopy) {
+                    try{
+                        log.debug("Notifying {}:{}", alarmListner.getClass().getName(), alarmListner);
+                        alarmListner.zoneStatusChangeNotification(zscnr.getZoneStatus());
+                    }catch(Exception e){
+                        log.error("Error while notifying {}:{} caused by {}",new Object[]{
+                                alarmListner.getClass().getName(), alarmListner, e.getStackTrace()
+                        });
+                    }
+                }
 
-			} catch (ZigBeeClusterException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+            } catch (ZigBeeClusterException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

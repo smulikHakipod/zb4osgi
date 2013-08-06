@@ -1,5 +1,5 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
+   Copyright 2013-2013 CNR-ISTI, http://isti.cnr.it
    Institute of Information Science and Technologies
    of the Italian National Research Council
 
@@ -32,7 +32,7 @@ public enum StartupControl {
     CreateExtendPANIdNetwork(0x01,""),
     RejoinExtendPANIdNetwork(0x02,""),
     JoinNetwork(0x03,"");
-    
+
     public final int value;
     public final String description;
 

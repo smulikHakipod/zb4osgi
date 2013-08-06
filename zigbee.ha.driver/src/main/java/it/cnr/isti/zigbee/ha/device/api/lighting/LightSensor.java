@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2012-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,25 +30,25 @@ import it.cnr.isti.zigbee.ha.driver.core.HAProfile;
 
 /**
  * @author <a href="mailto:manlio.bacco@isti.cnr.it">Manlio Bacco</a>
- *         
+ *
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.7.0
  *
  */
 public interface LightSensor extends HADevice {
 
-	public static final int DEVICE_ID = 0x0106;
-	public static final String NAME = "Light Sensor";
-	public static final int[] MANDATORY = ArraysUtil.append(HADevice.MANDATORY, new int[]{
-			HAProfile.ILLUMINANCE_MEASUREMENT
-	});
-	public static final int[] OPTIONAL = ArraysUtil.append(HADevice.OPTIONAL, new int[]{
-			HAProfile.GROUPS
-	});
-	public static final int[] STANDARD = ArraysUtil.append(MANDATORY, OPTIONAL);
-	public static final int[] CUSTOM = {};
+    public static final int DEVICE_ID = 0x0106;
+    public static final String NAME = "Light Sensor";
+    public static final int[] MANDATORY = ArraysUtil.append(HADevice.MANDATORY, new int[]{
+            HAProfile.ILLUMINANCE_MEASUREMENT
+    });
+    public static final int[] OPTIONAL = ArraysUtil.append(HADevice.OPTIONAL, new int[]{
+            HAProfile.GROUPS
+    });
+    public static final int[] STANDARD = ArraysUtil.append(MANDATORY, OPTIONAL);
+    public static final int[] CUSTOM = {};
 
-	public IlluminanceMeasurement getIlluminanceMeasurement();
-	
-	public Groups getGroups();
+    public IlluminanceMeasurement getIlluminanceMeasurement();
+
+    public Groups getGroups();
 }

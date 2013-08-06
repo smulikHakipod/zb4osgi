@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2012-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +26,7 @@ import static org.junit.Assert.assertArrayEquals;
 import org.junit.Test;
 
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.8.0
@@ -34,13 +34,13 @@ import org.junit.Test;
  */
 public class ResetAlarmCommandTest {
 
-	@Test
-	public void testGetPayload() {
-		ResetAlarmCommand command = new ResetAlarmCommand( (byte)0x10, (short) 0x2030);
-		assertArrayEquals(new byte[]{
-				0x10, 0x30, 0x20
-		}, command.getPayload()
-		);
-	}
+    @Test
+    public void testGetPayload() {
+        ResetAlarmCommand command = new ResetAlarmCommand( (byte)0x10, (short) 0x2030);
+        assertArrayEquals(new byte[]{
+                0x10, 0x30, 0x20
+        }, command.getPayload()
+        );
+    }
 
 }

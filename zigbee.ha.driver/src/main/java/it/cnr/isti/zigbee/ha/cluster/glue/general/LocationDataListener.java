@@ -1,5 +1,5 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
+   Copyright 2013-2013 CNR-ISTI, http://isti.cnr.it
    Institute of Information Science and Technologies
    of the Italian National Research Council
 
@@ -32,21 +32,21 @@ import it.cnr.isti.zigbee.zcl.library.api.core.Status;
 public interface LocationDataListener {
 
     public void locationDataFailure(Status state);
-    
+
     public void locationAbsoluteData(boolean rectangular, int x, int y, int z, int power, int ple, LocationMethod method);
-    
+
     public void locationAbsolute2DData(boolean rectangular, int x, int y, int power, int ple, LocationMethod method);
 
     public void locationData(boolean rectangular, int x, int y, int z, int power, int ple, LocationMethod method, int quality, int age);
-    
+
     public void location2DData(boolean rectangular, int x, int y, int power, int ple, LocationMethod method, int quality, int age);
-    
+
     public void locationAbsoluteData(boolean rectangular, int x, int y, int z);
-    
+
     public void locationAbsolute2DData(boolean rectangular, int x, int y);
 
     public void locationData(boolean rectangular, int x, int y, int z, int quality, int age);
-    
+
     public void location2DData(boolean rectangular, int x, int y, int quality, int age);
-    
+
 }

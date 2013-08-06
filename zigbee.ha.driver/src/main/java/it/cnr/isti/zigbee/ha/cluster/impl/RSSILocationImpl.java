@@ -1,5 +1,5 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
+   Copyright 2013-2013 CNR-ISTI, http://isti.cnr.it
    Institute of Information Science and Technologies
    of the Italian National Research Council
 
@@ -68,205 +68,205 @@ public class RSSILocationImpl implements RSSILocation {
         return null;
     }
 
-	public EnumSet<LocationType> getLocationType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public EnumSet<LocationType> getLocationType() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	public void setLocationType(EnumSet<LocationType> type) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void setLocationType(EnumSet<LocationType> type) {
+        // TODO Auto-generated method stub
 
-	public LocationMethod getLocationMethod() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    }
 
-	public void setLocationMethod(LocationMethod method) {
-		// TODO Auto-generated method stub
-		
-	}
+    public LocationMethod getLocationMethod() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	public int getLocationAge() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public void setLocationMethod(LocationMethod method) {
+        // TODO Auto-generated method stub
 
-	public int getQualityMeasure() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    }
 
-	public int getNumberOfDevices() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public int getLocationAge() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	public int getCoordinate1() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public int getQualityMeasure() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	public void setCoordinate1(int coordinate1) {
-		// TODO Auto-generated method stub
-		
-	}
+    public int getNumberOfDevices() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	public int getCoordinate2() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public int getCoordinate1() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	public void setCoordinate2(int coordinate2) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void setCoordinate1(int coordinate1) {
+        // TODO Auto-generated method stub
 
-	public int getCoordinate3() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    }
 
-	public void setCoordinate3(int coordinate3) {
-		// TODO Auto-generated method stub
-		
-	}
+    public int getCoordinate2() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	public int getPower() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public void setCoordinate2(int coordinate2) {
+        // TODO Auto-generated method stub
 
-	public void setPower(int power) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	public int getPathLossExponent() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public int getCoordinate3() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	public void setPathLossExponent(int pathLossExponent) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void setCoordinate3(int coordinate3) {
+        // TODO Auto-generated method stub
 
-	public int getReportingPeriod() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    }
 
-	public void setReportingPeriod(int reportingPeriod) {
-		// TODO Auto-generated method stub
-		
-	}
+    public int getPower() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	public int getCalculationPeriod() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public void setPower(int power) {
+        // TODO Auto-generated method stub
 
-	public void setCalculationPeriod(int calculationPeriod) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	public int getNumberRSSIMeasurements() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public int getPathLossExponent() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	public void setNumberRSSIMeasurements(int numberRSSIMeasurements) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void setPathLossExponent(int pathLossExponent) {
+        // TODO Auto-generated method stub
 
-	public void setAbsoluteLocation(int x, int y, int z, int power, int ple) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	public void setDeviceConfiguration(int power, int ple, int calcPeriod,
-			int nRSSI, int reportPeriod) {
-		// TODO Auto-generated method stub
-		
-	}
+    public int getReportingPeriod() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	public Response getDeviceConfiguration(long ieeeAddress) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public void setReportingPeriod(int reportingPeriod) {
+        // TODO Auto-generated method stub
 
-	public void getAbsoluteLocationData(boolean compact,
-			boolean unicastResponse, int nResponse, long ieeeAddress) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	public void getLocationData(boolean compact, boolean unicastResponse,
-			boolean recalc, int nResponse, long ieeeAddress) {
-		// TODO Auto-generated method stub
-		
-	}
+    public int getCalculationPeriod() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	public void broadcastAbsoluteLocationData(boolean compact,
-			boolean unicastResponse, int nResponse) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void setCalculationPeriod(int calculationPeriod) {
+        // TODO Auto-generated method stub
 
-	public void broadcastLocationData(boolean compact, boolean unicastResponse,
-			boolean recalc, int nResponse) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	public boolean addAnchorNodeAnnounceListener(
-			AnchorNodeAnnounceListener listner) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    public int getNumberRSSIMeasurements() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	public boolean removeAnchorNodeAnnounceListener(
-			AnchorNodeAnnounceListener listner) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    public void setNumberRSSIMeasurements(int numberRSSIMeasurements) {
+        // TODO Auto-generated method stub
 
-	public void RSSIResponse(long ieeeAddress, int x, int y, int z, int rssi,
-			int nsamples) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	public void sendPings(long ieeeAddress, int nRSSI, int calcPeriod) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void setAbsoluteLocation(int x, int y, int z, int power, int ple) {
+        // TODO Auto-generated method stub
 
-	public boolean addRSSIPingListener(RSSIPingListener listener) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    }
 
-	public boolean removeRSSIPingListener(RSSIPingListener listener) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    public void setDeviceConfiguration(int power, int ple, int calcPeriod,
+            int nRSSI, int reportPeriod) {
+        // TODO Auto-generated method stub
 
-	public boolean addReportRSSIMeasurementsListener(
-			ReportRSSIMeasurementsListener listener) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    }
 
-	public boolean removeReportRSSIMeasurementsListener(
-			ReportRSSIMeasurementsListener listener) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    public Response getDeviceConfiguration(long ieeeAddress) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    public void getAbsoluteLocationData(boolean compact,
+            boolean unicastResponse, int nResponse, long ieeeAddress) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void getLocationData(boolean compact, boolean unicastResponse,
+            boolean recalc, int nResponse, long ieeeAddress) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void broadcastAbsoluteLocationData(boolean compact,
+            boolean unicastResponse, int nResponse) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void broadcastLocationData(boolean compact, boolean unicastResponse,
+            boolean recalc, int nResponse) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public boolean addAnchorNodeAnnounceListener(
+            AnchorNodeAnnounceListener listner) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    public boolean removeAnchorNodeAnnounceListener(
+            AnchorNodeAnnounceListener listner) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    public void RSSIResponse(long ieeeAddress, int x, int y, int z, int rssi,
+            int nsamples) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void sendPings(long ieeeAddress, int nRSSI, int calcPeriod) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public boolean addRSSIPingListener(RSSIPingListener listener) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    public boolean removeRSSIPingListener(RSSIPingListener listener) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    public boolean addReportRSSIMeasurementsListener(
+            ReportRSSIMeasurementsListener listener) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    public boolean removeReportRSSIMeasurementsListener(
+            ReportRSSIMeasurementsListener listener) {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
 
 }

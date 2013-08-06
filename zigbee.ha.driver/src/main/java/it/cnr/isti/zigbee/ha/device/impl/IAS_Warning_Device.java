@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2012-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,77 +38,77 @@ import org.osgi.framework.BundleContext;
 
 /**
  * @author <a href="mailto:manlio.bacco@isti.cnr.it">Manlio Bacco</a>
- *         
+ *
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.7.0
  *
  */
 public class IAS_Warning_Device extends HADeviceBase implements IAS_Warning{
 
-	private IASZone iasZoneCluster;
-	private IASWD iasWD;
-	private Scenes scenes;
-	private Groups groups;
+    private IASZone iasZoneCluster;
+    private IASWD iasWD;
+    private Scenes scenes;
+    private Groups groups;
 
-	public IAS_Warning_Device(BundleContext ctx, ZigBeeDevice zbDevice) throws ZigBeeHAException {
+    public IAS_Warning_Device(BundleContext ctx, ZigBeeDevice zbDevice) throws ZigBeeHAException {
 
-		super(ctx, zbDevice);
+        super(ctx, zbDevice);
 
-		iasZoneCluster = (IASZone) addCluster(HAProfile.IAS_ZONE);
-		iasWD = (IASWD) addCluster(HAProfile.IAS_WD);
+        iasZoneCluster = (IASZone) addCluster(HAProfile.IAS_ZONE);
+        iasWD = (IASWD) addCluster(HAProfile.IAS_WD);
 
-		scenes = (Scenes) addCluster(HAProfile.SCENES);
-		groups = (Groups) addCluster(HAProfile.GROUPS);
-	}
+        scenes = (Scenes) addCluster(HAProfile.SCENES);
+        groups = (Groups) addCluster(HAProfile.GROUPS);
+    }
 
-	public IASZone getIASZone() {
+    public IASZone getIASZone() {
 
-		return iasZoneCluster;
-	}
+        return iasZoneCluster;
+    }
 
-	public IASWD getIASWD() {
+    public IASWD getIASWD() {
 
-		return iasWD;
-	}
+        return iasWD;
+    }
 
-	public Scenes getScenes() {
+    public Scenes getScenes() {
 
-		return scenes;
-	}
+        return scenes;
+    }
 
-	public Groups getGroups() {
+    public Groups getGroups() {
 
-		return groups;
-	}
+        return groups;
+    }
 
-	@Override
-	public String getName() {
+    @Override
+    public String getName() {
 
-		return IAS_Warning_Device.NAME;
-	}
+        return IAS_Warning_Device.NAME;
+    }
 
-	@Override
-	public DeviceDescription getDescription() {
+    @Override
+    public DeviceDescription getDescription() {
 
-		return DEVICE_DESCRIPTOR;
-	}
+        return DEVICE_DESCRIPTOR;
+    }
 
-	final static DeviceDescription DEVICE_DESCRIPTOR =  new AbstractDeviceDescription(){
+    final static DeviceDescription DEVICE_DESCRIPTOR =  new AbstractDeviceDescription(){
 
-		public int[] getCustomClusters() {
-			return IAS_Warning.CUSTOM;
-		}
+        public int[] getCustomClusters() {
+            return IAS_Warning.CUSTOM;
+        }
 
-		public int[] getMandatoryCluster() {
-			return IAS_Warning.MANDATORY;
-		}
+        public int[] getMandatoryCluster() {
+            return IAS_Warning.MANDATORY;
+        }
 
-		public int[] getOptionalCluster() {
-			return IAS_Warning.OPTIONAL;
-		}
+        public int[] getOptionalCluster() {
+            return IAS_Warning.OPTIONAL;
+        }
 
-		public int[] getStandardClusters() {
-			return IAS_Warning.STANDARD;
-		}
-	};
+        public int[] getStandardClusters() {
+            return IAS_Warning.STANDARD;
+        }
+    };
 }

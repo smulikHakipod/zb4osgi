@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2013-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,12 +30,12 @@ package it.cnr.isti.thread;
  *
  */
 public interface Threaded extends Runnable {
-	
+
     /**
      * @return the {@link Thread} if any that is executing this {@link Runnable} object
      */
     public Thread getExecutorThread();
-	
+
     /**
      * Sent an {@link InterruptedException} to the {@link Thread} executing the {@link Runnable} if any
      */

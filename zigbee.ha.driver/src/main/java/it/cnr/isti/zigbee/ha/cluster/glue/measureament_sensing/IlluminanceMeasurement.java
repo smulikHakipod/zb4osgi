@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2012-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,28 +29,28 @@ import it.cnr.isti.zigbee.zcl.library.api.core.Attribute;
 
 /**
  * @author <a href="mailto:manlio.bacco@isti.cnr.it">Manlio Bacco</a>
- *         
+ *
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.7.0
  *
  */
 public interface IlluminanceMeasurement extends Cluster {
 
-	public Attribute getMeasuredValue();
-	public Attribute getMinMeasuredValue();
-	public Attribute getMaxMeasuredValue();
-	public Attribute getTolerance();
-	public Attribute getLightSensorType();
+    public Attribute getMeasuredValue();
+    public Attribute getMinMeasuredValue();
+    public Attribute getMaxMeasuredValue();
+    public Attribute getTolerance();
+    public Attribute getLightSensorType();
 
-	public boolean subscribe(MeasuredValueListener tl);
+    public boolean subscribe(MeasuredValueListener tl);
 
-	public boolean unsubscribe(MeasuredValueListener tl);
+    public boolean unsubscribe(MeasuredValueListener tl);
 
-	public boolean subscribe(ToleranceListener tl);
+    public boolean subscribe(ToleranceListener tl);
 
-	public boolean unsubscribe(ToleranceListener tl);
+    public boolean unsubscribe(ToleranceListener tl);
 
-	//public boolean subscribe(LightSensorTypeListener tl);
+    //public boolean subscribe(LightSensorTypeListener tl);
 
-	//public boolean unsubscribe(LightSensorTypeListener tl);
+    //public boolean unsubscribe(LightSensorTypeListener tl);
 }

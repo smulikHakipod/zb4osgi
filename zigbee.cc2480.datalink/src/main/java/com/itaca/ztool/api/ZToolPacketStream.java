@@ -1,7 +1,7 @@
 /*
-   Copyright 2008-2010 Andrew Rapp, http://code.google.com/p/xbee-api/
+   Copyright 2008-2013 Andrew Rapp, http://code.google.com/p/xbee-api/
 
-   Copyright 2008-2010 ITACA-TSB, http://www.tsb.upv.es/
+   Copyright 2008-2013 ITACA-TSB, http://www.tsb.upv.es/
    Instituto Tecnologico de Aplicaciones de Comunicacion 
    Avanzadas - Grupo Tecnologias para la Salud y el 
    Bienestar (TSB)

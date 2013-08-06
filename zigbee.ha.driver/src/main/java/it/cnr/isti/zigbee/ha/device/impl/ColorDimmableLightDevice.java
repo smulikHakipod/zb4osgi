@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2012-2013 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,82 +40,82 @@ import org.osgi.framework.BundleContext;
 
 /**
  * @author <a href="mailto:manlio.bacco@isti.cnr.it">Manlio Bacco</a>
- *         
+ *
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.7.0
  *
  */
 public class ColorDimmableLightDevice extends HADeviceBase implements ColorDimmableLight {
 
-	private OnOff onOff;
-	private Scenes scenes;
-	private Groups groups;
-	private LevelControl levelControl;
-	private OccupacySensing occupancySensing;
-	private ColorControl colorControl;
+    private OnOff onOff;
+    private Scenes scenes;
+    private Groups groups;
+    private LevelControl levelControl;
+    private OccupacySensing occupancySensing;
+    private ColorControl colorControl;
 
-	public ColorDimmableLightDevice(BundleContext ctx, ZigBeeDevice zbDevice) throws ZigBeeHAException {
+    public ColorDimmableLightDevice(BundleContext ctx, ZigBeeDevice zbDevice) throws ZigBeeHAException {
 
-		super(ctx, zbDevice);
+        super(ctx, zbDevice);
 
-		onOff = (OnOff) addCluster(HAProfile.ON_OFF);
-		scenes = (Scenes) addCluster(HAProfile.SCENES);
-		groups = (Groups) addCluster(HAProfile.GROUPS);
-		levelControl = (LevelControl) addCluster(HAProfile.LEVELCONTROL);
-		occupancySensing = (OccupacySensing) addCluster(HAProfile.OCCUPANCY_SENSING);
-		colorControl = (ColorControl) addCluster(HAProfile.COLOR_CONTROL);
-	}
+        onOff = (OnOff) addCluster(HAProfile.ON_OFF);
+        scenes = (Scenes) addCluster(HAProfile.SCENES);
+        groups = (Groups) addCluster(HAProfile.GROUPS);
+        levelControl = (LevelControl) addCluster(HAProfile.LEVELCONTROL);
+        occupancySensing = (OccupacySensing) addCluster(HAProfile.OCCUPANCY_SENSING);
+        colorControl = (ColorControl) addCluster(HAProfile.COLOR_CONTROL);
+    }
 
-	final static DeviceDescription DEVICE_DESCRIPTOR =  new AbstractDeviceDescription(){
+    final static DeviceDescription DEVICE_DESCRIPTOR =  new AbstractDeviceDescription(){
 
-		public int[] getCustomClusters() {
-			return ColorDimmableLight.CUSTOM;
-		}
+        public int[] getCustomClusters() {
+            return ColorDimmableLight.CUSTOM;
+        }
 
-		public int[] getMandatoryCluster() {
-			return ColorDimmableLight.MANDATORY;
-		}
+        public int[] getMandatoryCluster() {
+            return ColorDimmableLight.MANDATORY;
+        }
 
-		public int[] getOptionalCluster() {
-			return ColorDimmableLight.OPTIONAL;
-		}
+        public int[] getOptionalCluster() {
+            return ColorDimmableLight.OPTIONAL;
+        }
 
-		public int[] getStandardClusters() {
-			return ColorDimmableLight.STANDARD;
-		}		
-	};
+        public int[] getStandardClusters() {
+            return ColorDimmableLight.STANDARD;
+        }
+    };
 
-	public OnOff getOnOff() {
-		return onOff;
-	}
+    public OnOff getOnOff() {
+        return onOff;
+    }
 
-	public Scenes getScenes() {
-		return scenes;
-	}
+    public Scenes getScenes() {
+        return scenes;
+    }
 
-	public Groups getGroups() {
-		return groups;
-	}
+    public Groups getGroups() {
+        return groups;
+    }
 
-	public LevelControl getLevelControl() {
-		return levelControl;
-	}
+    public LevelControl getLevelControl() {
+        return levelControl;
+    }
 
-	public OccupacySensing getOccupacySensing() {
-		return occupancySensing;
-	}
+    public OccupacySensing getOccupacySensing() {
+        return occupancySensing;
+    }
 
-	public ColorControl getColorControl() {
-		return colorControl;
-	}
+    public ColorControl getColorControl() {
+        return colorControl;
+    }
 
-	@Override
-	public String getName() {
-		return ColorDimmableLight.NAME;
-	}
+    @Override
+    public String getName() {
+        return ColorDimmableLight.NAME;
+    }
 
-	@Override
-	public DeviceDescription getDescription() {
-		return DEVICE_DESCRIPTOR;
-	}
+    @Override
+    public DeviceDescription getDescription() {
+        return DEVICE_DESCRIPTOR;
+    }
 }

@@ -1,5 +1,5 @@
 /*
-   Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
+   Copyright 2013-2013 CNR-ISTI, http://isti.cnr.it
    Institute of Information Science and Technologies
    of the Italian National Research Council
 
@@ -33,7 +33,7 @@ public enum LocationType {
     TwoDimensional(1,1),
     ThreeDimensional(0,1),
     Rectangular(0,2);
-    
+
     public final byte value;
     public final byte bit;
 
