@@ -142,8 +142,8 @@
         <configuration>
           <type>date</type>
           <dates>
-            <date implementation="java.lang.String">2010-10-24</date>
-            <date implementation="java.lang.String">2013-07-24</date>
+            <date implementation="java.lang.String">2013-08-04</date>
+            <date implementation="java.lang.String">2030-12-31</date>
           </dates>
           <dateFormat>yyyy-MM-dd</dateFormat>
         </configuration>

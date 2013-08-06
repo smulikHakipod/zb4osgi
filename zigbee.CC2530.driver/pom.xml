@@ -151,11 +151,11 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
           <bottom><![CDATA[
-   Copyright 2008-2010 <a href="http://isti.cnr.it">CNR-ISTI, 
+   Copyright 2008-2013 <a href="http://isti.cnr.it">CNR-ISTI, 
    Institute of Information Science and Technologies 
    of the Italian National Research Council</a>
 <br>
-   Copyright 2008-2010 <a href="http://www.itaca.upv.es/"> 
+   Copyright 2008-2013 <a href="http://www.itaca.upv.es/"> 
    Instituto Tecnologico de Aplicaciones de Comunicacion Avanzadas - Grupo Tecnologias para la Salud y el Bienestar (TSB)</a>
           ]]></bottom>
         </configuration>
