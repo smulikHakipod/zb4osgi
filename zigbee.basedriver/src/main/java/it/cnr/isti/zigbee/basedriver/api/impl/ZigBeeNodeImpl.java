@@ -1,10 +1,10 @@
 /*
    Copyright 2008-2010 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,7 +32,7 @@ import java.util.Properties;
 import com.itaca.ztool.api.ZToolAddress64;
 
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
@@ -41,90 +41,90 @@ import com.itaca.ztool.api.ZToolAddress64;
  */
 public class ZigBeeNodeImpl implements ZigBeeNode {
 
-	private int nwkAddress;
+    private int nwkAddress;
     final private String ieeeAddress;
-	final private Properties description;
-	
-	/**
-	 * 
-	 * @param nwk
-	 * @param ieee
-	 * @param pan
-	 * @since 0.6.0 - Revision 67
-	 */
-    public ZigBeeNodeImpl(int nwk, String ieee, short pan){     
-        this.nwkAddress = nwk;
-        this.ieeeAddress = ieee;
-        IEEEAddress.fromColonNotation( ieee ); //Only for checking the IEEE format
+    final private Properties description;
 
-        description  = new Properties();        
-        description.put( ZigBeeNode.IEEE_ADDRESS, ieee );
-        description.put( ZigBeeNode.NWK_ADDRESS, nwk );
-        description.put( ZigBeeNode.PAN_ID, pan );
-    }
-    
     /**
-     * 
+     *
      * @param nwk
      * @param ieee
      * @param pan
      * @since 0.6.0 - Revision 67
      */
-	public ZigBeeNodeImpl(int nwk, String ieee){		
-	    this( nwk, ieee, Activator.getCurrentConfiguration().getPanId() );
-	}
+    public ZigBeeNodeImpl(int nwk, String ieee, short pan){
+        this.nwkAddress = nwk;
+        this.ieeeAddress = ieee;
+        IEEEAddress.fromColonNotation( ieee ); //Only for checking the IEEE format
 
-	
-    public ZigBeeNodeImpl(int nwk, ZToolAddress64 ieee){      
+        description  = new Properties();
+        description.put( ZigBeeNode.IEEE_ADDRESS, ieee );
+        description.put( ZigBeeNode.NWK_ADDRESS, nwk );
+        description.put( ZigBeeNode.PAN_ID, pan );
+    }
+
+    /**
+     *
+     * @param nwk
+     * @param ieee
+     * @param pan
+     * @since 0.6.0 - Revision 67
+     */
+    public ZigBeeNodeImpl(int nwk, String ieee){
+        this( nwk, ieee, Activator.getCurrentConfiguration().getPanId() );
+    }
+
+
+    public ZigBeeNodeImpl(int nwk, ZToolAddress64 ieee){
         this.ieeeAddress = IEEEAddress.toString(ieee.getLong());
         description  = new Properties();
         description.put( ZigBeeNode.IEEE_ADDRESS, ieee );
         description.put( ZigBeeNode.PAN_ID, Activator.getCurrentConfiguration().getPanId() );
         setNetworkAddress( nwk );
     }
-	
 
-	@SuppressWarnings("unchecked")
-	public Dictionary getDescription() {
-		return description;
-	}
 
-	public String getIEEEAddress() {
-		return ieeeAddress;
-	}
+    @SuppressWarnings("unchecked")
+    public Dictionary getDescription() {
+        return description;
+    }
 
-	/**
-	 * 
-	 * @param nwk the new network address
-	 * 
-	 * @since 0.6.0 - Revision 74
-	 */
+    public String getIEEEAddress() {
+        return ieeeAddress;
+    }
+
+    /**
+     *
+     * @param nwk the new network address
+     *
+     * @since 0.6.0 - Revision 74
+     */
     public void setNetworkAddress(int nwk) {
         nwkAddress = nwk;
         description.put( ZigBeeNode.NWK_ADDRESS, nwk );
-    }   
-    
-	public int getNetworkAddress() {
-		return nwkAddress;
-	}	
-	
-	public String toString() {
-	    return nwkAddress + "(" + ieeeAddress + ") ";
-	}
-	
-	public boolean equals(Object obj) {
-	    if ( obj == this ) {
-	        return true;
-	    }else if ( obj instanceof ZigBeeNode ){
-	        ZigBeeNode node = (ZigBeeNode) obj;
-	        return nwkAddress == node.getNetworkAddress() && ieeeAddress.equals( node.getIEEEAddress() );
-	    }else{
-	        return false;
-	    }
-	}
-	
-	public int hashCode() {
-	    return ieeeAddress.hashCode();
-	}
+    }
+
+    public int getNetworkAddress() {
+        return nwkAddress;
+    }
+
+    public String toString() {
+        return nwkAddress + "(" + ieeeAddress + ") ";
+    }
+
+    public boolean equals(Object obj) {
+        if ( obj == this ) {
+            return true;
+        }else if ( obj instanceof ZigBeeNode ){
+            ZigBeeNode node = (ZigBeeNode) obj;
+            return nwkAddress == node.getNetworkAddress() && ieeeAddress.equals( node.getIEEEAddress() );
+        }else{
+            return false;
+        }
+    }
+
+    public int hashCode() {
+        return ieeeAddress.hashCode();
+    }
 
 }
