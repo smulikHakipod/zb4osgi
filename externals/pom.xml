@@ -23,7 +23,8 @@
   <parent>
     <groupId>org.aaloa.zb4osgi</groupId>
     <artifactId>org.aaloa.zb4osgi.pom</artifactId>
-    <version>8</version>
+    <version>10-SNAPSHOT</version>
+    <relativePath>../pom/pom.xml</relativePath>
   </parent>
 
   <groupId>org.aaloa.zb4osgi</groupId>
