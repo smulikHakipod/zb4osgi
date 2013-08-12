@@ -4,6 +4,7 @@
 --profiles=log,config
 --executor=script
 --org.ops4j.pax.runner.platform.downloadFeedback=false
+--vmOptions=-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005
 
 #
 # BUNDLE LIST
@@ -11,11 +12,12 @@
 
 # OSGi Tool 
 mvn:org.ops4j.pax.confman/pax-confman-propsloader/0.2.2	    
+mvn:org.apache.felix/org.apache.felix.fileinstall/3.2.6
 
 # ZigBee Stack General Dependencies & Tool
 mvn:org.aaloa.zb4osgi.bundle/org.aaloa.zb4osgi.bundle.rxtx/2.1.7-3
 mvn:org.aaloa.zb4osgi.bundle/org.aaloa.zb4osgi.bundle.net.sf.trove4j/2.0.4-1
-mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.tester
+#mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.tester
 
 # ZigBee Hardware Access Layer 
 mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.dongle.api
@@ -25,7 +27,8 @@ mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.cc2480.datalink
 mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.common
 
 # ZigBee Base Driver 
-mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.basedriver	    
+mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.basedriver
+mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.basedriver.stub@nostart
 
 # ZigBee Refinement Architecture 
 mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.ha.driver
