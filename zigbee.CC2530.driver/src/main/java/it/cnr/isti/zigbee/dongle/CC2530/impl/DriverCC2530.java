@@ -871,16 +871,6 @@ public class DriverCC2530 implements Runnable, SimpleDriver{
         return response != null;
     }
 
-    private boolean dongleClearState(){
-        dongleSetCleanState(true);
-
-        boolean result = dongleReset();
-
-        dongleSetCleanState(false);
-
-        return result;
-    }
-
     private boolean dongleSetCleanState(boolean clean){
         ZB_WRITE_CONFIGURATION_RSP response;
         if(clean){
@@ -1007,58 +997,47 @@ public class DriverCC2530 implements Runnable, SimpleDriver{
         createCustomDevicesOnDongle();
 
         switch (mode) {
-            case Coordinator:
-                return doCoordinatorCreateNetwork();
-            case Router:
-                //TODO Implements start up as Router
-                return false;
-            case EndDevice:
-                return doEndDeviceCreateNetwok();
+
+            case Coordinator: {
+                logger.info("Creating network as Coordintator");
+            } ; break ;
+
+            case Router: {
+                logger.info("Creating network as Router");
+            } ; break ;
+
+            case EndDevice: {
+                logger.info("Creating network as EndDevice");
+            } ; break ;
+
         }
 
-        /*
-         * This code is unreachable but compiler can't find this out yet.
-         * It may introduce a compilation issue of future compilers
-         */
-        return false;
-    }
-
-    private boolean doEndDeviceCreateNetwok() {
-        logger.debug("Creating network as EndDevice");
+        final int INSTANT_STARTUP = 0;
 
         ZDO_STARTUP_FROM_APP_SRSP response = (ZDO_STARTUP_FROM_APP_SRSP) sendSynchrouns(
-                high, new ZDO_STARTUP_FROM_APP(ZDO_STARTUP_FROM_APP.RESET_TYPE.TARGET_DEVICE)
+                high, new ZDO_STARTUP_FROM_APP(INSTANT_STARTUP)
         );
-        if ( response == null ) {
-            return false;
-        } else {
-            return true;//TODO: response.Status == ZDO_STARTUP_FROM_APP_SRSP.AF_STATUS.SUCCESS;
-        }
-    }
-
-    private boolean doCoordinatorCreateNetwork() {
-        logger.info("Creating network as Coordintator");
-
-        ZB_READ_CONFIGURATION_RSP response = (ZB_READ_CONFIGURATION_RSP) sendSynchrouns(
-                high, new ZB_READ_CONFIGURATION(3));
-
-        if(response!=null && response.Status==0){
-            if(response.Len==1 && response.Value[0]==0){
-                dongleSetCleanState(false);
+        if ( response == null  ) return false;
+        switch ( response.Status ) {
+            case 0: {
+                logger.info("Initialized ZigBee Network with OLD Network State");
+                return true;
             }
-        }else{
-            logger.error("Couldn´t get dongle status for startup");
-            return false;
+            case 1: {
+                logger.info("Initialized ZigBee Network with NEW Network State");
+                return true;
+            }
+            case 2: {
+                logger.warn("Failed to initialized ZigBee Network");
+                return false;
+            }
+            default: {
+                logger.error("Unxpected response state for ZDO_STARTUP_FROM_APP {}", response.Status);
+                return false;
+            }
         }
 
-        ZDO_STARTUP_FROM_APP_SRSP response2 = (ZDO_STARTUP_FROM_APP_SRSP) sendSynchrouns(
-                high, new ZDO_STARTUP_FROM_APP(ZDO_STARTUP_FROM_APP.RESET_TYPE.TARGET_DEVICE)
-        );
-        if ( response2 == null ) {
-            return false;
-        } else {
-            return true;//TODO response.Status == ZDO_STARTUP_FROM_APP_SRSP.AF_STATUS.SUCCESS;
-        }
+
     }
 
     /*
@@ -1103,7 +1082,7 @@ public class DriverCC2530 implements Runnable, SimpleDriver{
 
         boolean cleanNetworkState = cleanStatus;
 
-        if(cleanNetworkState){
+        if ( cleanNetworkState ) {
             if ( doCleanAndSetConfiguration() == false ) {
                 return false;
             }
@@ -1156,12 +1135,6 @@ public class DriverCC2530 implements Runnable, SimpleDriver{
 
     private boolean doCleanAndSetConfiguration() {
         logger.debug("Cleaning dongle networks stack status");
-//		if( ! dongleClearState() ){
-//			logger.error("Unable to CLEAN the ZigBee network stack staus");
-//			return false;
-//		} else {
-//			logger.info("ZigBee network stack status CLEANED");
-//		}
         if( ! dongleSetCleanState(true) ){
             logger.error("Unable to set clean state for dongle");
             return false;
@@ -1192,12 +1165,6 @@ public class DriverCC2530 implements Runnable, SimpleDriver{
             logger.error("Unable to unset clean state for dongle");
             return false;
         }
-//		if ( dongleMasterReset() == false ) {
-//			logger.error("Unable to send the master reset for ZigBee Network");
-//			return false;
-//		} else {
-//			logger.info("master reset sent");
-//		}
         return true;
     }
 
