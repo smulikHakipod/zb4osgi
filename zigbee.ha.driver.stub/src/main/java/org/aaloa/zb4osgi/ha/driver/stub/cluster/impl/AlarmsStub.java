@@ -143,4 +143,9 @@ public class AlarmsStub
         return null;
     }
 
+	public boolean addAlarmListener(AlarmListener listener) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

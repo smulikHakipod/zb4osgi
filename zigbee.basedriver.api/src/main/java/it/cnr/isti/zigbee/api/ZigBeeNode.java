@@ -75,6 +75,9 @@ public interface ZigBeeNode {
 	 * @return
 	 */
 	public Dictionary getDescription();
+
+
+	
 	
 //TODO Identify an OSGi compatible way to expose the method below. A solution could be to return ServiceReference instead of the Service itself	
 //	/**

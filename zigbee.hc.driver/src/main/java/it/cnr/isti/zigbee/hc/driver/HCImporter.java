@@ -1,5 +1,5 @@
 /*
-   Copyright 2013-2013 CNR-ISTI, http://isti.cnr.it
+   Copyright 2008-2013 CNR-ISTI, http://isti.cnr.it
    Institute of Information Science and Technologies
    of the Italian National Research Council
 
@@ -23,14 +23,12 @@
 package it.cnr.isti.zigbee.hc.driver;
 
 import it.cnr.isti.zigbee.api.ZigBeeDevice;
-import it.cnr.isti.zigbee.ha.driver.core.HADeviceRegistry;
-import it.cnr.isti.zigbee.ha.driver.core.HAProfile;
-import it.cnr.isti.zigbee.hc.core.HCDevice;
-import it.cnr.isti.zigbee.hc.core.HCDeviceBase;
-import it.cnr.isti.zigbee.hc.core.HCDeviceFactory;
-import it.cnr.isti.zigbee.hc.core.HCDeviceRegistry;
-import it.cnr.isti.zigbee.hc.core.HCProfile;
-import it.cnr.isti.zigbee.hc.core.ZigBeeHCException;
+import it.cnr.isti.zigbee.hc.driver.core.HCDevice;
+import it.cnr.isti.zigbee.hc.driver.core.HCDeviceBase;
+import it.cnr.isti.zigbee.hc.driver.core.HCDeviceFactory;
+import it.cnr.isti.zigbee.hc.driver.core.HCDeviceRegistry;
+import it.cnr.isti.zigbee.hc.driver.core.HCProfile;
+import it.cnr.isti.zigbee.hc.driver.core.ZigBeeHCException;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -50,6 +48,8 @@ import org.slf4j.LoggerFactory;
 /**
  *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
+ * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
+ * @author <a href="mailto:giancarlo.riolo@isti.cnr.it">Giancarlo Riolo</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.1.0
  *
@@ -65,12 +65,12 @@ public class HCImporter extends Thread {
 
     private final Hashtable<String, HCDeviceDescriptor> refinedDevices;
     private final HCDeviceRegistry deviceRegistry;
-    private final HCDeviceListener listenerHADevice = new HCDeviceListener();
-    private final HCDeviceFactoryListener listenerHADeviceFactory = new HCDeviceFactoryListener();
+    private final HCDeviceListener listenerHCDevice = new HCDeviceListener();
+    private final HCDeviceFactoryListener listenerHCDeviceFactory = new HCDeviceFactoryListener();
 
     private class HCDeviceDescriptor {
         ServiceRegistration registration;
-        HCDeviceBase haDevice;
+        HCDeviceBase hcDevice;
         ServiceReference zbDeviceSR;
     }
 
@@ -81,7 +81,7 @@ public class HCImporter extends Thread {
                 ServiceReference zbDeviceSR = event.getServiceReference();
                 switch(event.getType()){
                     case ServiceEvent.REGISTERED:{
-                        doRefineHADevice(zbDeviceSR);
+                        doRefineHCDevice(zbDeviceSR);
                     };break;
 
                     case ServiceEvent.MODIFIED:{
@@ -103,17 +103,17 @@ public class HCImporter extends Thread {
             synchronized (DISCOVERY) {
                 switch(event.getType()){
                     case ServiceEvent.REGISTERED:{
-                        deviceRegistry.addHADeviceFactory(zbDeviceFactorySR);
+                        deviceRegistry.addHCDeviceFactory(zbDeviceFactorySR);
                         refineDevices(zbDeviceFactorySR);
                     };break;
 
                     case ServiceEvent.MODIFIED:{
-                        deviceRegistry.removeHADeviceFactory(zbDeviceFactorySR);
-                        deviceRegistry.addHADeviceFactory(zbDeviceFactorySR);
+                        deviceRegistry.removeHCDeviceFactory(zbDeviceFactorySR);
+                        deviceRegistry.addHCDeviceFactory(zbDeviceFactorySR);
                     };break;
 
                     case ServiceEvent.UNREGISTERING:{
-                        deviceRegistry.removeHADeviceFactory(zbDeviceFactorySR);
+                        deviceRegistry.removeHCDeviceFactory(zbDeviceFactorySR);
                     };break;
                 }
             }
@@ -123,7 +123,7 @@ public class HCImporter extends Thread {
             try {
                 ServiceReference[] references = context.getServiceReferences(
                         ZigBeeDevice.class.getName(),
-                        "("+ZigBeeDevice.PROFILE_ID+"="+HAProfile.ID+")"
+                        "("+ZigBeeDevice.PROFILE_ID+"="+HCProfile.ID+")"
                 );
                 if ( references == null ) return;
                 for (int j = 0; j < references.length; j++) {
@@ -139,7 +139,7 @@ public class HCImporter extends Thread {
                         );
                         continue;
                     }
-                    doRefineHADevice(references[j]);
+                    doRefineHCDevice(references[j]);
                 }
             } catch (InvalidSyntaxException ex) {
                 log.error("Fixed the filter definition and recompile the bundle {}",ex);
@@ -159,20 +159,20 @@ public class HCImporter extends Thread {
 
         synchronized (DISCOVERY) {
             try {
-                context.addServiceListener(listenerHADevice,ANY_HCDEVICE_FILTER);
-                context.addServiceListener(listenerHADeviceFactory,HADeviceRegistry.ANY_ZBDEVICE_FACTORY_FILTER);
+                context.addServiceListener(listenerHCDevice,ANY_HCDEVICE_FILTER);
+                context.addServiceListener(listenerHCDeviceFactory,HCDeviceRegistry.ANY_ZBDEVICE_FACTORY_FILTER);
             } catch (InvalidSyntaxException e) {
-                log.error("Modified the value of ANY_HCDEVICE_FILTER or HADeviceRegistry.ANY_ZBDEVICE_FACTORY_FILTER and recompile",e);
+                log.error("Modified the value of ANY_HCDEVICE_FILTER or HCDeviceRegistry.ANY_ZBDEVICE_FACTORY_FILTER and recompile",e);
             }
             try {
                 ServiceReference[] zbDeviceSRs = context.getAllServiceReferences(ZigBeeDevice.class.getName(), ANY_HCDEVICE_FILTER);
                 if (zbDeviceSRs!= null){
                     for (int i= 0; i<zbDeviceSRs.length;i++){
-                        doRefineHADevice(zbDeviceSRs[i]);
+                        doRefineHCDevice(zbDeviceSRs[i]);
                     }
                 }
             } catch (InvalidSyntaxException e) {
-                log.error("Modified the value of ANY_HCDEVICE_FILTER and recompile",e);
+                log.error("Modified the value of ANY_HCDevice_FILTER and recompile",e);
             }
         }
     }
@@ -181,7 +181,7 @@ public class HCImporter extends Thread {
 
     }
 
-    private void doRefineHADevice(ServiceReference zbDeviceSR) {
+    private void doRefineHCDevice(ServiceReference zbDeviceSR) {
         final String uuid = (String) zbDeviceSR.getProperty(ZigBeeDevice.UUID);
         log.info("HCD - refining ZigbeeDevice {}", uuid);
         ZigBeeDevice zbDevice = (ZigBeeDevice) context.getService(zbDeviceSR);
@@ -190,11 +190,8 @@ public class HCImporter extends Thread {
              * Call the getDeviceFactories and check for multiple factory
              * capable of handling the device
              */
-            final HCDeviceFactory factory = deviceRegistry.getBestFactory(zbDeviceSR);
-            if ( factory == null) { // pending services
-                log.warn("No refinement for ZigbeeDevice {} currently found", uuid);
-                return;
-            }
+          //  final HCDeviceFactory factory = deviceRegistry.getBestFactory(zbDeviceSR);
+        	final HCDeviceFactory factory = deviceRegistry.getExactFactory(zbDevice);
             final HCDeviceBase refined = factory.getInstance(zbDevice);
             doRefinementRegistration(zbDeviceSR, refined, factory);
         } catch (ZigBeeHCException e) {
@@ -206,7 +203,7 @@ public class HCImporter extends Thread {
     private void doRefinementRegistration(ServiceReference zbDeviceSR, HCDeviceBase refined, HCDeviceFactory factory) {
         String[] directInterfaces = factory.getRefinedInterfaces();
 
-        //TODO definition of HAdevice Properties
+        //TODO definition of HCDevice Properties
         Properties properties = new Properties();
 
         properties.put(HCDevice.ZIGBEE_DEVICE_UUID, zbDeviceSR.getProperty(ZigBeeDevice.UUID));
@@ -222,7 +219,7 @@ public class HCImporter extends Thread {
 
         HCDeviceDescriptor descriptor = new HCDeviceDescriptor();
         descriptor.registration = registration;
-        descriptor.haDevice = refined;
+        descriptor.hcDevice = refined;
         descriptor.zbDeviceSR = zbDeviceSR;
 
         synchronized (refinedDevices) {
@@ -237,7 +234,7 @@ public class HCImporter extends Thread {
             descriptor = (HCDeviceDescriptor) refinedDevices.remove(uuid);
         }
         if (descriptor != null){
-            descriptor.haDevice.stop();
+            descriptor.hcDevice.stop();
             descriptor.registration.unregister();
             context.ungetService(descriptor.zbDeviceSR);
         }
@@ -246,13 +243,13 @@ public class HCImporter extends Thread {
 
     public void close() {
         synchronized (refinedDevices) {
-            context.removeServiceListener(listenerHADevice);
-            context.removeServiceListener(listenerHADeviceFactory);
+            context.removeServiceListener(listenerHCDevice);
+            context.removeServiceListener(listenerHCDeviceFactory);
             Enumeration<String> keys =  refinedDevices.keys();
             while (keys.hasMoreElements()) {
                 String key = (String) keys.nextElement();
                 HCDeviceDescriptor descriptor = (HCDeviceDescriptor)  refinedDevices.get(key);
-                descriptor.haDevice.stop();
+                descriptor.hcDevice.stop();
                 descriptor.registration.unregister();
                 context.ungetService(descriptor.zbDeviceSR);
             }

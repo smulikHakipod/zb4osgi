@@ -27,7 +27,7 @@ import it.cnr.isti.zigbee.ha.cluster.glue.general.Groups;
 import it.cnr.isti.zigbee.ha.cluster.glue.general.LevelControl;
 import it.cnr.isti.zigbee.ha.cluster.glue.general.OnOff;
 import it.cnr.isti.zigbee.ha.cluster.glue.general.Scenes;
-import it.cnr.isti.zigbee.ha.cluster.glue.measureament_sensing.OccupacySensing;
+import it.cnr.isti.zigbee.ha.cluster.glue.measureament_sensing.OccupancySensing;
 import it.cnr.isti.zigbee.ha.device.api.lighting.DimmableLight;
 import it.cnr.isti.zigbee.ha.driver.core.HADeviceBase;
 import it.cnr.isti.zigbee.ha.driver.core.HAProfile;
@@ -50,7 +50,7 @@ public class DimmableLightDevice extends HADeviceBase implements DimmableLight {
 	private LevelControl levelControl;
 	private Scenes scenes;
 	private Groups groups;
-	private OccupacySensing occupancySensing;
+	private OccupancySensing occupancySensing;
 	
 	public DimmableLightDevice(BundleContext ctx, ZigBeeDevice zbDevice) throws ZigBeeHAException{
 		super(ctx,zbDevice);
@@ -58,7 +58,7 @@ public class DimmableLightDevice extends HADeviceBase implements DimmableLight {
 		onOff = (OnOff) addCluster(HAProfile.ON_OFF);
 		groups = (Groups) addCluster(HAProfile.GROUPS);
 		scenes = (Scenes) addCluster(HAProfile.SCENES);
-		occupancySensing = (OccupacySensing) addCluster(HAProfile.OCCUPANCY_SENSING);
+		occupancySensing = (OccupancySensing) addCluster(HAProfile.OCCUPANCY_SENSING);
 	}
 	
 	final static DeviceDescription DEVICE_DESCRIPTOR =  new AbstractDeviceDescription(){
@@ -99,7 +99,7 @@ public class DimmableLightDevice extends HADeviceBase implements DimmableLight {
 		return levelControl;
 	}
 
-	public OccupacySensing getOccupacySensing() {
+	public OccupancySensing getOccupacySensing() {
 		return occupancySensing;
 	}
 

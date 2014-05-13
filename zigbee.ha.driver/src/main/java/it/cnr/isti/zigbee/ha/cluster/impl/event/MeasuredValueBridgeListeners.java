@@ -101,7 +101,7 @@ public class MeasuredValueBridgeListeners implements ReportListener {
 					subscription.setReportableChange(configuration.getReportingChange());
 					subscription.updateConfiguration();
 				}
-				if ( subscription.addReportListner(this) == false ) {
+				if ( subscription.addReportListener(this) == false ) {
 					return false;
 				}
 			}

@@ -21,13 +21,13 @@
 */
 package it.cnr.isti.zigbee.dongle.ez430rf2480;
 
-import java.util.Properties;
-
 import it.cnr.isti.osgi.util.OSGiProperties;
 import it.cnr.isti.zigbee.dongle.api.ConfigurationProperties;
 import it.cnr.isti.zigbee.dongle.api.NetworkMode;
 import it.cnr.isti.zigbee.dongle.api.SimpleDriver;
 import it.cnr.isti.zigbee.dongle.ez430rf2480.impl.DriverEZ430_RF2480;
+
+import java.util.Properties;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -48,7 +48,7 @@ public class Activator implements BundleActivator {
 	public void start(BundleContext bc) throws Exception {		
 		driver = new DriverEZ430_RF2480(
 				OSGiProperties.getString(bc, ConfigurationProperties.COM_NAME_KEY, ConfigurationProperties.COM_NAME),
-				OSGiProperties.getInt(bc, ConfigurationProperties.COM_BOUDRATE_KEY, ConfigurationProperties.COM_BOUDRATE),
+				OSGiProperties.getInt(bc, ConfigurationProperties.COM_BAUDRATE_KEY, ConfigurationProperties.COM_BAUDRATE),
 				NetworkMode.valueOf(OSGiProperties.getString(
 						bc, ConfigurationProperties.NETWORK_MODE_KEY, ConfigurationProperties.NETWORK_MODE
 				)),

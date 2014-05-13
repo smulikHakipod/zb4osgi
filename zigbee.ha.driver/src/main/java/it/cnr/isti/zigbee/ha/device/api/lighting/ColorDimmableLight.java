@@ -26,7 +26,7 @@ import it.cnr.isti.zigbee.ha.cluster.glue.general.Groups;
 import it.cnr.isti.zigbee.ha.cluster.glue.general.LevelControl;
 import it.cnr.isti.zigbee.ha.cluster.glue.general.OnOff;
 import it.cnr.isti.zigbee.ha.cluster.glue.general.Scenes;
-import it.cnr.isti.zigbee.ha.cluster.glue.measureament_sensing.OccupacySensing;
+import it.cnr.isti.zigbee.ha.cluster.glue.measureament_sensing.OccupancySensing;
 import it.cnr.isti.zigbee.ha.driver.ArraysUtil;
 import it.cnr.isti.zigbee.ha.driver.core.HADevice;
 import it.cnr.isti.zigbee.ha.driver.core.HAProfile;
@@ -83,11 +83,11 @@ public interface ColorDimmableLight extends HADevice {
 	public LevelControl getLevelControl();
 
 	/**
-	 * Access method for the <b>Optional</b> cluster: {@link OccupacySensing} 
+	 * Access method for the <b>Optional</b> cluster: {@link OccupancySensing} 
 	 *  
-	 * @return the {@link OccupacySensing} cluster object if implemented by the device, otherwise <code>null</code>
+	 * @return the {@link OccupancySensing} cluster object if implemented by the device, otherwise <code>null</code>
 	 */
-	public OccupacySensing getOccupacySensing();	
+	public OccupancySensing getOccupacySensing();	
 
 	/**
 	 * Access method for the <b>Mandatory</b> cluster: {@link ColorControl} 

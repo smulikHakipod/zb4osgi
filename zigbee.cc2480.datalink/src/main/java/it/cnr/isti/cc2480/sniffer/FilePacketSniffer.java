@@ -20,8 +20,6 @@
    limitations under the License.
 */
 package it.cnr.isti.cc2480.sniffer;
-import it.cnr.isti.cc2480.sniffer.SnifferInterface;
-
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.text.SimpleDateFormat;

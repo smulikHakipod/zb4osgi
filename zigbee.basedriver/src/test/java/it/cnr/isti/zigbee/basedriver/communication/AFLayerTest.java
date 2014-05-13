@@ -22,19 +22,18 @@
 
 package it.cnr.isti.zigbee.basedriver.communication;
 
-import static org.easymock.EasyMock.anyObject;
+import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.classextension.EasyMock.createMock;
-import static org.easymock.classextension.EasyMock.replay;
-import static org.junit.Assert.*;
+import static org.easymock.EasyMock.replay;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import it.cnr.isti.zigbee.basedriver.Activator;
 import it.cnr.isti.zigbee.basedriver.communication.AFLayer.SenderIdentifier;
 import it.cnr.isti.zigbee.basedriver.configuration.ConfigurationService;
+import it.cnr.isti.zigbee.dongle.api.DuplicateMacPolicy;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.InvalidSyntaxException;
 
 
 /**
@@ -58,8 +57,12 @@ public class AFLayerTest {
         ConfigurationService stub = createMock(ConfigurationService.class);
         
         expect(stub.getFirstFreeEndPoint())
-            .andReturn( new Integer(2) )
-            .anyTimes();
+        .andReturn( new Integer(2) )
+        .anyTimes();
+        
+        expect(stub.getDiscoveryDuplicateMacPolicy())
+        .andReturn( DuplicateMacPolicy.Ignore  )
+        .anyTimes();
         
         replay(stub);
         

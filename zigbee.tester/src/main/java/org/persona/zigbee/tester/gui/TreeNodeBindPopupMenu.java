@@ -55,7 +55,11 @@ public class TreeNodeBindPopupMenu
     extends JPopupMenu
     implements PopupMenuListener {
 
-    JTree tree;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3175875257203883428L;
+	JTree tree;
     final JMenu bind;
     final Action action;
     HADeviceTreeNode lastNode = null;
@@ -68,7 +72,12 @@ public class TreeNodeBindPopupMenu
         add( bind );
         action = new AbstractAction(){
 
-            public void actionPerformed( ActionEvent e ) {
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 7784951706085415028L;
+
+			public void actionPerformed( ActionEvent e ) {
                 final JMenuItem item = (JMenuItem) e.getSource();
                 final String uuidTo = item.getText();
                 final Cluster binding = (Cluster) lastNode.getUserObject();

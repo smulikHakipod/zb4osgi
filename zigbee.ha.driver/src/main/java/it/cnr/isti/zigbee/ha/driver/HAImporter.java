@@ -49,6 +49,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
+ * @author <a href="mailto:giancarlo.riolo@isti.cnr.it">Giancarlo Riolo</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.1.0
  *
@@ -189,13 +190,8 @@ public class HAImporter extends Thread {
              * Call the getDeviceFactories and check for multiple factory
              * capable of handling the device
              */
-            final HADeviceFactory factory = deviceRegistry.getBestFactory(zbDeviceSR);
-            final HADeviceBase refined = factory.getInstance(zbDevice);
-            if ( factory == null) { // pending services
-                log.warn("No refinement for ZigbeeDevice {} currently found", uuid);
-                return;
-            }
-
+        	final HADeviceFactory factory = deviceRegistry.getExactFactory(zbDevice);
+            final HADeviceBase refined = factory.getInstance(zbDevice); 
             doRefinementRegistration(zbDeviceSR, refined, factory);
         } catch (ZigBeeHAException e) {
             // TODO Auto-generated catch block
@@ -215,6 +211,8 @@ public class HAImporter extends Thread {
         properties.put(HADevice.HA_DEVICE_NAME, refined.getName());
         properties.put(HADevice.HA_DEVICE_GROUP, ""); //TODO
         properties.put(HADevice.HA_DEVICE_STANDARD, Boolean.TRUE);
+        properties.put(HADevice.ENDPOINT_ADDRESS, zbDeviceSR.getProperty(ZigBeeDevice.ENDPOINT));
+        properties.put(HADevice.MAC_ADDRESS, zbDeviceSR.getProperty(ZigBeeDevice.IEEE_ADDRESS));
 
 
         ServiceRegistration registration = context.registerService(directInterfaces, refined, properties);

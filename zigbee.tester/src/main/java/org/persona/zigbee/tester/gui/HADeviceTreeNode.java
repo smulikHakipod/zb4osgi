@@ -55,12 +55,17 @@ import org.persona.zigbee.tester.discovery.DeviceNode;
  * 
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
+ *  * @author <a href="mailto:giancarlo.riolo@isti.cnr.it">Giancarlo Riolo</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.1.0
  *
  */
 public class HADeviceTreeNode extends DefaultMutableTreeNode {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public final static String HA_DEVICE = "RootDeviceNode";
 	public final static String HA_EVENT = "HAEventNode";
 	public final static String ZIGBEE_DEVICE = "DeviceNode";
@@ -83,7 +88,7 @@ public class HADeviceTreeNode extends DefaultMutableTreeNode {
 		
 		category = HA_DEVICE;
 		
-		final HADevice device = node.getDevice(Activator.context);
+		device = node.getDevice(Activator.context);
 		/* Adding the wrapped ZigBeeDevice as subnode and removing it from the sibling nodes */
 		ServiceReference[] sr = null;
         try {
@@ -139,6 +144,7 @@ public class HADeviceTreeNode extends DefaultMutableTreeNode {
 	
 	public HADeviceTreeNode(HADevice device, Cluster obj) {
 		super(obj);
+		this.device = device;
 		category = SERVICE;
 		Attribute[] variables = obj.getAttributes();
 		if (variables != null) {
@@ -203,6 +209,7 @@ public class HADeviceTreeNode extends DefaultMutableTreeNode {
 
 	public HADeviceTreeNode(HADevice device, Attribute obj) {
 		super(obj);
+		this.device = device;
 		if (obj.isReportable()) category = EVENTED_STATE;
 		else category = ZCL_ATTRIBUTE;
 	}
@@ -247,12 +254,16 @@ public class HADeviceTreeNode extends DefaultMutableTreeNode {
 //   local class for JTree icon renderer
 class TreeNodeCellRenderer extends DefaultTreeCellRenderer implements ImageObserver {
 	
-	private HashMap icons ;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private HashMap<String, ImageIcon> icons ;
 	ImageIcon image;
 	
 	public TreeNodeCellRenderer() {
 		super();
-		icons = new HashMap();
+		icons = new HashMap<String, ImageIcon>();
 		try {
 			icons.put( HADeviceTreeNode.EVENTED_STATE, loadIcon( HADeviceTreeNode.EVENTED_STATE ) );
             image = loadIcon( HADeviceTreeNode.SUBSCRIBED_STATE );

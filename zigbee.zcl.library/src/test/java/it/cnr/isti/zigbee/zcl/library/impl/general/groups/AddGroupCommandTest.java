@@ -22,7 +22,7 @@
 */
 package it.cnr.isti.zigbee.zcl.library.impl.general.groups;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 

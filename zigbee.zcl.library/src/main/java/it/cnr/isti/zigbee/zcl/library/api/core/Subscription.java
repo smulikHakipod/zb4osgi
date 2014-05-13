@@ -43,8 +43,8 @@ public interface Subscription {
 	 */
 	public static final int DEFAULT_MIN_REPORTING_INTERVAL = 0;
 		
-	public boolean addReportListner(ReportListener listner);	
-	public boolean removeReportListner(ReportListener listner);
+	public boolean addReportListener(ReportListener listener);	
+	public boolean removeReportListner(ReportListener listener);
 	
 	public int getMinimumReportingInterval();
 	public int setMinimumReportingInterval(int value);

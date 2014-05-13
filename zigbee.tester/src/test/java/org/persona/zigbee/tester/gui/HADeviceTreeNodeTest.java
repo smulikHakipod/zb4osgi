@@ -21,7 +21,6 @@
 */
 package org.persona.zigbee.tester.gui;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import it.cnr.isti.zigbee.ha.cluster.glue.Cluster;
 import it.cnr.isti.zigbee.ha.cluster.impl.AlarmsImpl;
@@ -30,8 +29,6 @@ import it.cnr.isti.zigbee.ha.cluster.impl.IdentifyImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 import org.junit.Test;
 

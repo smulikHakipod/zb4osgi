@@ -50,7 +50,7 @@ public interface GetAlarmResponse extends Response{
 	 * 
 	 * @return the int representing the <i>Alarm Code</i> field. The value is valid only if <code>getStatus() = Status.SUCCESS</code>
 	 */
-	public int getAllarmCode();
+	public int getAlarmCode();
 
 	/**
 	 * 

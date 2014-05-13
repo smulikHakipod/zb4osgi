@@ -21,9 +21,9 @@
 */
 package it.cnr.isti.basedriver.stub.api.impl;
 
-import java.util.Dictionary;
-
 import it.cnr.isti.zigbee.api.ZigBeeNode;
+
+import java.util.Dictionary;
 
 /**
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
@@ -41,7 +41,6 @@ public class StubZigBeeNode implements ZigBeeNode {
 		this.nwk = nwk;
 	}
 
-	@SuppressWarnings("unchecked")
 	public Dictionary getDescription() {
 		return null;
 	}
@@ -53,5 +52,12 @@ public class StubZigBeeNode implements ZigBeeNode {
 	public int getNetworkAddress() {
 		return nwk;
 	}
+
+	public void setnewNetworkAddress(int networkAddress) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 
 }

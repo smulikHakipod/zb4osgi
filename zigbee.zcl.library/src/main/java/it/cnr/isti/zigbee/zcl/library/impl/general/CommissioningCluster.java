@@ -35,178 +35,178 @@ import it.cnr.isti.zigbee.zcl.library.impl.core.ZCLClusterBase;
  *  PLACEHOLDER TO IMPLEMENT
  *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
+ * @author <a href="mailto:giancarlo.riolo@isti.cnr.it">Giancarlo Riolo</a>
  * @version  $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.8.0
  *
  */
 public class CommissioningCluster  extends ZCLClusterBase implements Commissioning {
+	
+	private final Attribute[] attributes;
+	
+	public CommissioningCluster(ZigBeeDevice zbDevice) {
+		super(zbDevice);
+		attributes = new Attribute[]{ };
+	}
 
-    public CommissioningCluster(ZigBeeDevice zbDevice) {
-        super(zbDevice);
-        // TODO Auto-generated constructor stub
-    }
+	@Override
+	public short getId() {
+		return Commissioning.ID;
+	}
 
-    public Attribute getAttributeShortAddress() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	@Override
+	public String getName() {
+		return Commissioning.NAME;
+	}
 
-    public Attribute getAttributeExtendedPanID() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	@Override
+	public Attribute[] getStandardAttributes() {
+		return attributes;
+	}
 
-    public Attribute getAttributePanID() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributeShortAddress() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Attribute getAttributeChannelMask() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributeExtendedPanID() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Attribute getAttributeProtocolVersion() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributePanID() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Attribute getAttributeStackProfile() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributeChannelMask() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Attribute getAttributeStartupControl() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributeProtocolVersion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Attribute getAttributeTrustCenterAddress() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributeStackProfile() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Attribute getAttributeTrustCenterMasterKey() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributeStartupControl() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Attribute getAttributeNetworkKey() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributeTrustCenterAddress() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Attribute getAttributeUseInsecureJoin() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributeTrustCenterMasterKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Attribute getAttributePreconfiguredLinkKey() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributeNetworkKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Attribute getAttributeNetworkKeySeqNum() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributeUseInsecureJoin() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Attribute getAttributeNetworkKeyType() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributePreconfiguredLinkKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Attribute getAttributeNetworkManagerAddress() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributeNetworkKeySeqNum() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Attribute getAttributeScanAttempts() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributeNetworkKeyType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Attribute getAttributeTimeBetweenScans() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributeNetworkManagerAddress() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Attribute getAttributeRejoinInterval() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributeScanAttempts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Attribute getAttributeMaxRejoinInterval() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributeTimeBetweenScans() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Attribute getAttributeIndirectPollRate() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributeRejoinInterval() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Attribute getAttributeParentRetryThreshold() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributeMaxRejoinInterval() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Attribute getAttributeConcentratorFlag() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributeIndirectPollRate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Attribute getAttributeConcentratorRadius() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributeParentRetryThreshold() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Attribute getAttributeConcentratorDiscoveryTime() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributeConcentratorFlag() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Response restartDevice(RestartDevicePayload payload)
-            throws ZigBeeClusterException {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributeConcentratorRadius() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Response saveStartupParameters(int index)
-            throws ZigBeeClusterException {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Attribute getAttributeConcentratorDiscoveryTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Response restoreStartupParameters(int index)
-            throws ZigBeeClusterException {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Response restartDevice(RestartDevicePayload payload)
+			throws ZigBeeClusterException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public Response resetStartupParameters(ResetStartupPayload payload)
-            throws ZigBeeClusterException {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Response saveStartupParameters(int index)
+			throws ZigBeeClusterException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    @Override
-    public short getId() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+	public Response restoreStartupParameters(int index)
+			throws ZigBeeClusterException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    @Override
-    public String getName() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Attribute[] getStandardAttributes() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public Response resetStartupParameters(ResetStartupPayload payload)
+			throws ZigBeeClusterException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 }

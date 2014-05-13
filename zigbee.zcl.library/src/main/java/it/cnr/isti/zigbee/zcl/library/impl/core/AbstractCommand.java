@@ -18,17 +18,19 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-*/
+ */
 
 package it.cnr.isti.zigbee.zcl.library.impl.core;
 
 import it.cnr.isti.zigbee.zcl.library.api.core.Command;
+
 /**
  * 
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
- * @version $LastChangedRevision$ ($LastChangedDate$)
- *
+ * @version $LastChangedRevision$ ($LastChangedDate: 2013-08-06 18:00:05
+ *          +0200(mar, 06 ago 2013) $)
+ * 
  */
 public class AbstractCommand implements Command {
 
@@ -38,26 +40,30 @@ public class AbstractCommand implements Command {
 	private boolean isClusterSpecific;
 	private boolean isManufacturerExtension;
 	private byte[] allowedResponseIds;
-	protected byte[] payload = null;	
+	protected byte[] payload = null;
 	protected int freeIdxPayload = 0;
-	
+
 	public AbstractCommand(byte id) {
-		this(id,null,true);
+		this(id, null, true);
 	}
 
 	public AbstractCommand(byte id, boolean isClusterSpecific) {
-		this(id,null,true,isClusterSpecific,null);
+		this(id, null, true, isClusterSpecific, null);
 	}
-	
-	public AbstractCommand(byte id, byte[] manufacturerId, boolean isClientServerDirection) {
+
+	public AbstractCommand(byte id, byte[] manufacturerId,
+			boolean isClientServerDirection) {
 		this(id, manufacturerId, isClientServerDirection, true, null);
 	}
-	
-	public AbstractCommand(byte id, byte[] manufacturerId, boolean isClientServerDirection, boolean isClusterSpecific) {
-		this(id, manufacturerId, isClientServerDirection, isClusterSpecific, null);
+
+	public AbstractCommand(byte id, byte[] manufacturerId,
+			boolean isClientServerDirection, boolean isClusterSpecific) {
+		this(id, manufacturerId, isClientServerDirection, isClusterSpecific,
+				null);
 	}
-	
-	public AbstractCommand(byte id, byte[] manufacturerId, boolean isClientServerDirection, boolean isClusterSpecific,
+
+	public AbstractCommand(byte id, byte[] manufacturerId,
+			boolean isClientServerDirection, boolean isClusterSpecific,
 			byte[] allowedResponseIds) {
 		super();
 		this.id = id;
@@ -71,24 +77,24 @@ public class AbstractCommand implements Command {
 	public byte[] getAllowedResponseId() {
 		return allowedResponseIds;
 	}
-	
-	protected AbstractCommand setAllowedResponseId(byte[] allowedResponseIds){
+
+	protected AbstractCommand setAllowedResponseId(byte[] allowedResponseIds) {
 		this.allowedResponseIds = allowedResponseIds;
-		return this;	
+		return this;
 	}
 
 	public byte getHeaderCommandId() {
 		return id;
 	}
-	
+
 	public byte[] getManufacturerId() {
 		return manufacturerId;
 	}
-	
+
 	public boolean isClientServerDirection() {
 		return isClientServerDirection;
 	}
-	
+
 	public boolean isClusterSpecific() {
 		return isClusterSpecific;
 	}
@@ -96,15 +102,16 @@ public class AbstractCommand implements Command {
 	public boolean isManufacturerExtension() {
 		return isManufacturerExtension;
 	}
-	
+
 	protected void setId(byte id) {
 		this.id = id;
 	}
-	
-	public  byte[] getPayload() {
-		if( payload == null ) {
+
+	public byte[] getPayload() {
+		if (payload == null) {
 			payload = new byte[0];
 		}
 		return payload;
 	}
+
 }

@@ -26,7 +26,6 @@
 package com.itaca.ztool.util;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
@@ -420,7 +419,7 @@ public class ByteUtils {
 		
 		return msb + lsb;
 	}
-	
+		
 	public static int parse10BitAnalog(IIntArrayInputStream in, int pos) throws IOException {
 		int adcMsb = in.read("Analog " + pos + " MSB");
 		int adcLsb = in.read("Analog " + pos + " LSB");
@@ -428,4 +427,18 @@ public class ByteUtils {
 		return ByteUtils.parse10BitAnalog(adcMsb, adcLsb);
 	}
 
+	
+	/**
+	 * Parse N-th bit from a byte
+	 * 
+	 * @param byte from whitch exstract n-th bit
+	 * 
+	 * @return boolean
+	 * 
+	 */
+	public static boolean getNthBitFromByte(byte thebyte, int position) {
+
+		return (1 == ((thebyte >> position) & 1));
+
+	}
 }

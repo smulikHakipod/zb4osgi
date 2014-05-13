@@ -4,20 +4,23 @@
 --profiles=log,config
 --executor=script
 --org.ops4j.pax.runner.platform.downloadFeedback=false
---vmOptions=-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005
+--vmOptions= -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005 -Dgnu.io.rxtx.SerialPorts=/dev/ttyACM0:/dev/ttyUSB0:/dev/ttyUSB1:/dev/ttyUSB2:/dev/ttyUSB3
 
 #
 # BUNDLE LIST
 #
 
 # OSGi Tool 
-mvn:org.ops4j.pax.confman/pax-confman-propsloader/0.2.2	    
+mvn:org.apache.felix/org.apache.felix.configadmin/1.2.4
+mvn:org.ops4j.pax.confman/pax-confman-propsloader/0.2.2
 mvn:org.apache.felix/org.apache.felix.fileinstall/3.2.6
 
+
 # ZigBee Stack General Dependencies & Tool
-mvn:org.aaloa.zb4osgi.bundle/org.aaloa.zb4osgi.bundle.rxtx/2.1.7-3
+mvn:org.aaloa.zb4osgi.bundle/org.aaloa.zb4osgi.externals.rxtx/2.1.7-5-SNAPSHOT
 mvn:org.aaloa.zb4osgi.bundle/org.aaloa.zb4osgi.bundle.net.sf.trove4j/2.0.4-1
 #mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.tester
+
 
 # ZigBee Hardware Access Layer 
 mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.dongle.api
@@ -32,3 +35,8 @@ mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.basedriver.stub@nostart
 
 # ZigBee Refinement Architecture 
 mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.ha.driver
+mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.hc.driver
+mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.eh.driver
+mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.zhccl.library
+mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.se.zcl.library
+mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.eh.zcl.library

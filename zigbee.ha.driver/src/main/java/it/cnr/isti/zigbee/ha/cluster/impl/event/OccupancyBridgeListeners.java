@@ -99,7 +99,7 @@ public class OccupancyBridgeListeners implements ReportListener {
 					subscription.setMinimumReportingInterval(configuration.getReportingMinimum());
 					subscription.updateConfiguration();
 				}
-				if ( subscription.addReportListner(this) == false ) {
+				if ( subscription.addReportListener(this) == false ) {
 					return false;
 				}
 			}

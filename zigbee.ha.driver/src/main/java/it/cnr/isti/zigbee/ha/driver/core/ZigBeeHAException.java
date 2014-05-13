@@ -35,6 +35,11 @@ import it.cnr.isti.zigbee.api.ZigBeeException;
  */
 public class ZigBeeHAException extends ZigBeeException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1406265825475519905L;
+
 	public ZigBeeHAException(String msg) {
 		super(msg);
 	}

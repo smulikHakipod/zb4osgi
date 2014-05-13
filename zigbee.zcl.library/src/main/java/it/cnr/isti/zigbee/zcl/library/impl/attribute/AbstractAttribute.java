@@ -35,7 +35,7 @@ public class AbstractAttribute implements AttributeDescriptor{
 
 	private int id;
 	private String name;
-	private Class clazz;
+	private Class<?> clazz;
 	private ZigBeeType zbType;
 	private boolean isReportable;
 	private boolean isWritable;
@@ -61,11 +61,11 @@ public class AbstractAttribute implements AttributeDescriptor{
 		return this;
 	}
 
-	final public Class getType() {
+	final public Class<?> getType() {
 		return clazz;
 	}
 
-	private AbstractAttribute setType(Class clazz){
+	private AbstractAttribute setType(Class<?> clazz){
 		this.clazz=clazz;
 		return this;
 	}

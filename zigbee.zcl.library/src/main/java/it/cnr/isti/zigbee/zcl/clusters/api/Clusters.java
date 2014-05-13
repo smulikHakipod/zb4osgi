@@ -22,6 +22,7 @@
 package it.cnr.isti.zigbee.zcl.clusters.api;
 
 import it.cnr.isti.zigbee.zcl.library.api.general.Alarms;
+import it.cnr.isti.zigbee.zcl.library.api.general.AnalogInput;
 import it.cnr.isti.zigbee.zcl.library.api.general.Basic;
 import it.cnr.isti.zigbee.zcl.library.api.general.Commissioning;
 import it.cnr.isti.zigbee.zcl.library.api.general.DeviceTemperatureConfiguration;
@@ -36,16 +37,18 @@ import it.cnr.isti.zigbee.zcl.library.api.general.Scenes;
 import it.cnr.isti.zigbee.zcl.library.api.general.Time;
 import it.cnr.isti.zigbee.zcl.library.api.lighting.ColorControl;
 import it.cnr.isti.zigbee.zcl.library.api.measureament_sensing.IlluminanceMeasurement;
-import it.cnr.isti.zigbee.zcl.library.api.measureament_sensing.OccupacySensing;
+import it.cnr.isti.zigbee.zcl.library.api.measureament_sensing.OccupancySensing;
 import it.cnr.isti.zigbee.zcl.library.api.measureament_sensing.RelativeHumidityMeasurement;
 import it.cnr.isti.zigbee.zcl.library.api.measureament_sensing.TemperatureMeasurement;
 import it.cnr.isti.zigbee.zcl.library.api.security_safety.IASACE;
 import it.cnr.isti.zigbee.zcl.library.api.security_safety.IASWD;
 import it.cnr.isti.zigbee.zcl.library.api.security_safety.IASZone;
 
+
 /**
  *
  * @author <a href="mailto:manlio.bacco@isti.cnr.it">Manlio Bacco</a>
+ * @author <a href="mailto:giancarlo.riolo@isti.cnr.it">Giancarlo Riolo</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.8.0
  *
@@ -76,19 +79,39 @@ public interface Clusters {
     public static final String IAS_ACE = "1281";
     public static final String IAS_WD = "1282";
     public static final String IAS_ZONE = "1280";
+    
+    public static final String ANALOG_INPUT = "12";
+  //  public static final String METERING = "1794";
 
-    public static final String[][] cluster_impl = {new String[]{ALARMS, Alarms.class.getName()}, new String[]{BASIC, Basic.class.getName()},
-        new String[]{COMMISSIONING, Commissioning.class.getName()}, new String[]{DEVICE_TEMPERATURE_CONFIGURATION, DeviceTemperatureConfiguration.class.getName()},
-        new String[]{GROUPS, Groups.class.getName()}, new String[]{IDENTIFY, Identify.class.getName()}, new String[]{LEVEL_CONTROL, LevelControl.class.getName()},
-        new String[]{ON_OFF, OnOff.class.getName()}, new String[]{ON_OFF_SWITCH_CONFIGURATION, OnOffSwitchConfiguration.class.getName()},
-        new String[]{POWER_CONFIGURATION, PowerConfiguration.class.getName()}, new String[]{RSSI_LOCATION, RSSILocation.class.getName()},
-        new String[]{SCENES, Scenes.class.getName()}, new String[]{TIME, Time.class.getName()},
+    public static final String[][] cluster_impl = {
+    	new String[]{ALARMS, Alarms.class.getName()},
+    	new String[]{BASIC, Basic.class.getName()},
+        new String[]{COMMISSIONING, Commissioning.class.getName()},
+        new String[]{DEVICE_TEMPERATURE_CONFIGURATION, DeviceTemperatureConfiguration.class.getName()},
+        new String[]{GROUPS, Groups.class.getName()},
+        new String[]{IDENTIFY, Identify.class.getName()},
+        new String[]{LEVEL_CONTROL, LevelControl.class.getName()},
+        new String[]{ON_OFF, OnOff.class.getName()},
+        new String[]{ON_OFF_SWITCH_CONFIGURATION, OnOffSwitchConfiguration.class.getName()},
+        new String[]{POWER_CONFIGURATION, PowerConfiguration.class.getName()},
+        new String[]{RSSI_LOCATION, RSSILocation.class.getName()},
+        new String[]{SCENES, Scenes.class.getName()},
+        new String[]{TIME, Time.class.getName()},
 
         new String[]{COLOR_CONTROL, ColorControl.class.getName()},
 
-        new String[]{ILLUMINANCE_MEASUREMENT, IlluminanceMeasurement.class.getName()}, new String[]{OCCUPANCY_SENSING, OccupacySensing.class.getName()},
+        new String[]{ILLUMINANCE_MEASUREMENT, IlluminanceMeasurement.class.getName()},
+        new String[]{OCCUPANCY_SENSING, OccupancySensing.class.getName()},
         new String[]{RELATIVE_HUMIDITY_MEASUREMENT, RelativeHumidityMeasurement.class.getName()},
         new String[]{TEMPERATURE_MEASUREMENT, TemperatureMeasurement.class.getName()},
 
-        new String[]{IAS_ACE, IASACE.class.getName()},new String[]{IAS_WD, IASWD.class.getName()},new String[]{IAS_ZONE, IASZone.class.getName()}};
+        new String[]{IAS_ACE, IASACE.class.getName()},
+        new String[]{IAS_WD, IASWD.class.getName()},
+        new String[]{IAS_ZONE, IASZone.class.getName()},
+    	
+        
+        new String[]{ANALOG_INPUT, AnalogInput.class.getName()},
+     	};
+    
+    
 }

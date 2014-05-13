@@ -27,7 +27,7 @@ import it.cnr.isti.zigbee.ha.cluster.glue.general.Groups;
 import it.cnr.isti.zigbee.ha.cluster.glue.general.LevelControl;
 import it.cnr.isti.zigbee.ha.cluster.glue.general.OnOff;
 import it.cnr.isti.zigbee.ha.cluster.glue.general.Scenes;
-import it.cnr.isti.zigbee.ha.cluster.glue.measureament_sensing.OccupacySensing;
+import it.cnr.isti.zigbee.ha.cluster.glue.measureament_sensing.OccupancySensing;
 import it.cnr.isti.zigbee.ha.device.api.lighting.ColorDimmableLight;
 import it.cnr.isti.zigbee.ha.driver.core.HADeviceBase;
 import it.cnr.isti.zigbee.ha.driver.core.HAProfile;
@@ -51,7 +51,7 @@ public class ColorDimmableLightDevice extends HADeviceBase implements ColorDimma
     private Scenes scenes;
     private Groups groups;
     private LevelControl levelControl;
-    private OccupacySensing occupancySensing;
+    private OccupancySensing occupancySensing;
     private ColorControl colorControl;
 
     public ColorDimmableLightDevice(BundleContext ctx, ZigBeeDevice zbDevice) throws ZigBeeHAException {
@@ -62,7 +62,7 @@ public class ColorDimmableLightDevice extends HADeviceBase implements ColorDimma
         scenes = (Scenes) addCluster(HAProfile.SCENES);
         groups = (Groups) addCluster(HAProfile.GROUPS);
         levelControl = (LevelControl) addCluster(HAProfile.LEVELCONTROL);
-        occupancySensing = (OccupacySensing) addCluster(HAProfile.OCCUPANCY_SENSING);
+        occupancySensing = (OccupancySensing) addCluster(HAProfile.OCCUPANCY_SENSING);
         colorControl = (ColorControl) addCluster(HAProfile.COLOR_CONTROL);
     }
 
@@ -101,7 +101,7 @@ public class ColorDimmableLightDevice extends HADeviceBase implements ColorDimma
         return levelControl;
     }
 
-    public OccupacySensing getOccupacySensing() {
+    public OccupancySensing getOccupacySensing() {
         return occupancySensing;
     }
 

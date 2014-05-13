@@ -30,7 +30,11 @@ package it.cnr.isti.zigbee.api;
  */
 public class ZigBeeBasedriverTimeOutException extends ZigBeeBasedriverException {
 
-    public ZigBeeBasedriverTimeOutException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -760208831735995910L;
+	public ZigBeeBasedriverTimeOutException() {
         super("Timeout expired before receiving any data");
     }
 

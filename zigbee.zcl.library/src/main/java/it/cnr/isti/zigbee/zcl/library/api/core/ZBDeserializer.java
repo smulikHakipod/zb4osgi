@@ -71,7 +71,7 @@ public interface ZBDeserializer {
 	 * @return the parse {@link Object} from the stream depending the {@link Class} specified
 	 * @deprecated Use {@link #readZigBeeType(ZigBeeType)} instead 
 	 */
-	public Object readObject(Class clazz);
+	public Object readObject(Class<?> clazz);
 	public Boolean readBoolean();
 	public Byte readByte();
 	public Short readShort();

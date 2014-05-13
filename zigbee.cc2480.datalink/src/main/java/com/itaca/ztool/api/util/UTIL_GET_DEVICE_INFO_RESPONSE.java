@@ -22,9 +22,9 @@
 */
 package com.itaca.ztool.api.util;
 
-import com.itaca.ztool.api.ZToolCMD;
 import com.itaca.ztool.api.ZToolAddress16;
 import com.itaca.ztool.api.ZToolAddress64;
+import com.itaca.ztool.api.ZToolCMD;
 import com.itaca.ztool.api.ZToolPacket;
 import com.itaca.ztool.util.DoubleByte;
 

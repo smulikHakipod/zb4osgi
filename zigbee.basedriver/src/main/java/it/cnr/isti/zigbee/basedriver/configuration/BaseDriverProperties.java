@@ -73,6 +73,6 @@ public interface BaseDriverProperties {
      * Key to use to control which discovery technique should be used by the ZigBee Base Driver.<br>
      * For the bits associated to each discovery mode see {@link DiscoveryMode}
      */
-    public final static String DISCOVERY_MODE_KEY = "it.cnr.isti.zigbee.driver.disovery.mode";
+    public final static String DISCOVERY_MODE_KEY = "it.cnr.isti.zigbee.driver.discovery.mode";
     
 }

@@ -23,8 +23,6 @@
 
 package com.itaca.ztool.api.af;
 
-import it.cnr.isti.cc2480.low.HWLowLevelDriver;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

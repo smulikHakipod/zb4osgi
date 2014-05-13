@@ -20,9 +20,9 @@
    limitations under the License.
 */
 package org.aaloa.zb4osgi.api.monitor.impl;
-import java.util.Collection;
-
 import it.cnr.isti.zigbee.api.ZigBeeNode;
+
+import java.util.Collection;
 
 import org.aaloa.zb4osgi.api.monitor.ZigBeeDiscoveryMonitor;
 import org.aaloa.zb4osgi.network.browser.ui.model.ZigBeeEdge;

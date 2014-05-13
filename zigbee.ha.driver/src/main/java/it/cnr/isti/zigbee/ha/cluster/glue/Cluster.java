@@ -33,7 +33,9 @@ import it.cnr.isti.zigbee.zcl.library.api.core.Subscription;
  */
 public interface Cluster {
 	
-	String PROFILE_CLUSTER_IDs = "zigbee.profile.cluster.ids";
+	public String PROFILE_CLUSTER_IDS = "zigbee.profile.cluster.ids";
+	public String BELONGING_PROFILES = "zigbee.profile.belong.ids";
+	public String RAW_CLUSTER_IDS = "zigbee.cluster.raw.ids";
 
 	/**
 	 * This method return the actual <i>ClusterId</i>. Please remember that the final and official <i>ClusterId</i><br>

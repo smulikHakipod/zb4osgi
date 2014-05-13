@@ -22,11 +22,12 @@
 */
 package org.persona.zigbee.tester.gui;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import it.cnr.isti.zigbee.ha.cluster.impl.GroupsImpl;
 
 import java.lang.reflect.InvocationTargetException;
-
-import it.cnr.isti.zigbee.ha.cluster.impl.GroupsImpl;
 
 import org.junit.Test;
 

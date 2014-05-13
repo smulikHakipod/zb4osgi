@@ -12,13 +12,13 @@
   <properties>
     <pkgArtifactId>rxtx</pkgArtifactId>
     <pkgVersion>2.1.7</pkgVersion>
-    <pomVersion>3-SNAPSHOT</pomVersion>
+    <pomVersion>5-SNAPSHOT</pomVersion>
     <osgiVersion>${pkgVersion}</osgiVersion>
   </properties>
 
   <groupId>org.aaloa.zb4osgi.bundle</groupId>
-  <artifactId>${project.groupId}.${pkgArtifactId}</artifactId>
-  <version>2.1.7-4-SNAPSHOT</version>
+  <artifactId>org.aaloa.zb4osgi.externals.rxtx</artifactId>
+  <version>2.1.7-5-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <name>${pkgArtifactId} Bundle Wrapper</name>
   <description>
@@ -50,15 +50,16 @@ on the JAR package of this artifact.
             <Bundle-Description>${project.description}</Bundle-Description>
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Bundle-NativeCode>
-              Windows/i368-mingw32/rxtxSerial.dll; Windows/i368-mingw32/rxtxParallel.dll; osname=win32; processor=x86, 
+              Windows/i386-mingw32/rxtxSerial.dll; Windows/i386-mingw32/rxtxParallel.dll; osname=win32; processor=x86, 
               Windows/win64/rxtxSerial.dll; Windows/win64/rxtxParallel.dll; osname=win64; processor=x86-64,
-              Windows/i368-mingw32/rxtxSerial.dll; Windows/i368-mingw32/rxtxParallel.dll; osname=win32; processor=x86-64,
-              Windows/i368-mingw32/rxtxSerial.dll; Windows/i368-mingw32/rxtxParallel.dll; osname=Windows 7; processor=x86,
+              Windows/i386-mingw32/rxtxSerial.dll; Windows/i386-mingw32/rxtxParallel.dll; osname=win32; processor=x86-64,
+              Windows/i386-mingw32/rxtxSerial.dll; Windows/i386-mingw32/rxtxParallel.dll; osname=Windows 7; processor=x86,
               Windows/win64/rxtxSerial.dll; Windows/win64/rxtxParallel.dll; osname=Windows 7; processor=x86-64,
               Linux/i686-unknown-linux-gnu/librxtxSerial.so; Linux/i686-unknown-linux-gnu/librxtxParallel.so; osname=linux; processor=x86, 
-              Linux/ia64-unkown-linux-gnu/librxtxSerial.so; osname=linux; processor=ia64, 
+              Linux/ia64-unknown-linux-gnu/librxtxSerial.so; osname=linux; processor=ia64, 
+              Linux/arm-unknown-linux-gnu/librxtxSerial.so; osname=linux; processor=ARM_le, 
               Linux/x86_64-unknown-linux-gnu/librxtxSerial.so; osname=linux; processor=x86_64, 
-              Mac_OS_X/librxtxSerial.jnilib; osname=solaris; processor=sparc32, 
+              Mac_OS_X/librxtxSerial.jnilib; osname=Mac OS X; processor=x86_64, 
               Solaris/sparc-solaris/sparc32-sun-solaris2.8/librxtxSerial.so; osname=solaris; processor=sparc32, 
               Solaris/sparc-solaris/sparc64-sun-solaris2.8/librxtxSerial.so; osname=solaris; processor=sparc64
             </Bundle-NativeCode>

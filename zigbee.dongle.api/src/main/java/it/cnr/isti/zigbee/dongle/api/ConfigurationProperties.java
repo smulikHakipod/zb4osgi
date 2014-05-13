@@ -29,6 +29,7 @@ package it.cnr.isti.zigbee.dongle.api;
  * 
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi - ISTI-CNR</a>
  * @author <a href="mailto:manlio.bacco@isti.cnr.it">Manlio Bacco - ISTI-CNR</a>
+ * @author <a href="mailto:giancarlo.riolo@isti.cnr.it">Giancarlo Riolo</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.6.0
  *
@@ -83,14 +84,14 @@ public interface ConfigurationProperties {
 
 	
     /**
-     * The default value for the {@link #COM_BOUDRATE_KEY} property, that is <b>38400</b>
+     * The default value for the {@link #COM_BAUDRATE_KEY} property, that is <b>115200</b>
      */
-	public final static int COM_BOUDRATE = 38400;
+	public final static int COM_BAUDRATE = 115200;
 
     /**
-     * Key to use to control the <b>Boud Rate</b> used by the driver for communicating with the dongle
+     * Key to use to control the <b>Baud Rate</b> used by the driver for communicating with the dongle
      */
-	public final static String COM_BOUDRATE_KEY = "it.cnr.isti.zigbee.driver.serial.boudrate";
+	public final static String COM_BAUDRATE_KEY = "it.cnr.isti.zigbee.driver.serial.baudrate";
 
 	
     /**
@@ -190,4 +191,7 @@ public interface ConfigurationProperties {
      *  ZigBee Base Driver. It is useful to reduce the network saturation during the first boot of the driver.  
      */
     public final static String DEVICE_INSPECTION_PERIOD_KEY = "it.cnr.isti.zigbee.driver.device.inspection.rate";
+	
+    public static final String DISCOVERY_DUPLICATE_MAC_KEY = "it.cnr.isti.zigbee.driver.discovery.duplicate.mac.policy";
+	public static final String DISCOVERY_DUPLICATE_MAC = "Ignore";
 }

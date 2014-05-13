@@ -26,7 +26,6 @@ import it.cnr.isti.osgi.util.DictionaryHelper;
 import it.cnr.isti.osgi.util.OSGiProperties;
 import it.cnr.isti.zigbee.ha.driver.core.HADevice;
 import it.cnr.isti.zigbee.ha.driver.core.HADeviceBase;
-import it.cnr.isti.zigbee.ha.driver.core.ReportingConfiguration;
 
 import java.util.Dictionary;
 import java.util.HashMap;
@@ -40,11 +39,12 @@ import org.slf4j.LoggerFactory;
 /**
  *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
+ * @author <a href="mailto:giancarlo.riolo@isti.cnr.it">Giancarlo Riolo</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.1.0
  *
  */
-public class HCDriverConfiguration implements ManagedService, ReportingConfiguration {
+public class HCDriverConfiguration implements ManagedService, HCReportingConfiguration {
 
     private final static Logger logger = LoggerFactory.getLogger(HCDriverConfiguration.class);
 
@@ -79,20 +79,20 @@ public class HCDriverConfiguration implements ManagedService, ReportingConfigura
     public HCDriverConfiguration(BundleContext bc){
         context = bc;
         synchronized (configuration) {
-            configuration.put(ReportingConfiguration.CONFIGURE_REPORTING_MIN_KEY,
-                    OSGiProperties.getInt(context, ReportingConfiguration.CONFIGURE_REPORTING_MIN_KEY, ReportingConfiguration.DEFAULT_CONFIGURE_REPORTING_MIN)
+            configuration.put(HCReportingConfiguration.CONFIGURE_REPORTING_MIN_KEY,
+                    OSGiProperties.getInt(context, HCReportingConfiguration.CONFIGURE_REPORTING_MIN_KEY, HCReportingConfiguration.DEFAULT_CONFIGURE_REPORTING_MIN)
             );
 
-            configuration.put(ReportingConfiguration.CONFIGURE_REPORTING_MAX_KEY,
-                    OSGiProperties.getInt(context, ReportingConfiguration.CONFIGURE_REPORTING_MAX_KEY, ReportingConfiguration.DEFAULT_CONFIGURE_REPORTING_MAX)
+            configuration.put(HCReportingConfiguration.CONFIGURE_REPORTING_MAX_KEY,
+                    OSGiProperties.getInt(context, HCReportingConfiguration.CONFIGURE_REPORTING_MAX_KEY, HCReportingConfiguration.DEFAULT_CONFIGURE_REPORTING_MAX)
             );
 
-            configuration.put(ReportingConfiguration.CONFIGURE_REPORTING_CHANGE_KEY,
-                    OSGiProperties.getDouble(context, ReportingConfiguration.CONFIGURE_REPORTING_CHANGE_KEY, ReportingConfiguration.DEFAULT_CONFIGURE_REPORTING_CHANGE)
+            configuration.put(HCReportingConfiguration.CONFIGURE_REPORTING_CHANGE_KEY,
+                    OSGiProperties.getDouble(context, HCReportingConfiguration.CONFIGURE_REPORTING_CHANGE_KEY, HCReportingConfiguration.DEFAULT_CONFIGURE_REPORTING_CHANGE)
             );
 
-            configuration.put(ReportingConfiguration.CONFIGURE_REPORTING_OVERWRITE_KEY,
-                    OSGiProperties.getBoolean(context, ReportingConfiguration.CONFIGURE_REPORTING_OVERWRITE_KEY, ReportingConfiguration.DEFAULT_CONFIGURE_REPORTING_OVERWRITE)
+            configuration.put(HCReportingConfiguration.CONFIGURE_REPORTING_OVERWRITE_KEY,
+                    OSGiProperties.getBoolean(context, HCReportingConfiguration.CONFIGURE_REPORTING_OVERWRITE_KEY, HCReportingConfiguration.DEFAULT_CONFIGURE_REPORTING_OVERWRITE)
             );
             try{
                 configuration.put(PROVIDED_CLUSTER_MODE_KEY,
@@ -128,20 +128,20 @@ public class HCDriverConfiguration implements ManagedService, ReportingConfigura
         DictionaryHelper helper = new DictionaryHelper(newConfig);
         boolean isChanged = false;
         synchronized (this) {
-            isChanged = setInteger(ReportingConfiguration.CONFIGURE_REPORTING_MIN_KEY,
-                    helper.getInt(ReportingConfiguration.CONFIGURE_REPORTING_MIN_KEY, getReportingMinimum())
+            isChanged = setInteger(HCReportingConfiguration.CONFIGURE_REPORTING_MIN_KEY,
+                    helper.getInt(HCReportingConfiguration.CONFIGURE_REPORTING_MIN_KEY, getReportingMinimum())
             ) || isChanged;
 
-            isChanged = setInteger(ReportingConfiguration.CONFIGURE_REPORTING_MAX_KEY,
-                    helper.getInt(ReportingConfiguration.CONFIGURE_REPORTING_MAX_KEY, getReportingMaximum())
+            isChanged = setInteger(HCReportingConfiguration.CONFIGURE_REPORTING_MAX_KEY,
+                    helper.getInt(HCReportingConfiguration.CONFIGURE_REPORTING_MAX_KEY, getReportingMaximum())
             ) || isChanged;
 
-            isChanged = setDouble(ReportingConfiguration.CONFIGURE_REPORTING_CHANGE_KEY,
-                    helper.getDouble(ReportingConfiguration.CONFIGURE_REPORTING_CHANGE_KEY, getReportingChange())
+            isChanged = setDouble(HCReportingConfiguration.CONFIGURE_REPORTING_CHANGE_KEY,
+                    helper.getDouble(HCReportingConfiguration.CONFIGURE_REPORTING_CHANGE_KEY, getReportingChange())
             ) || isChanged;
 
-            isChanged = setBoolean(ReportingConfiguration.CONFIGURE_REPORTING_OVERWRITE_KEY,
-                    helper.getBoolean(ReportingConfiguration.CONFIGURE_REPORTING_OVERWRITE_KEY, getReportingOverwrite())
+            isChanged = setBoolean(HCReportingConfiguration.CONFIGURE_REPORTING_OVERWRITE_KEY,
+                    helper.getBoolean(HCReportingConfiguration.CONFIGURE_REPORTING_OVERWRITE_KEY, getReportingOverwrite())
             ) || isChanged;
             try {
                 isChanged = setStringCaseSensitve( PROVIDED_CLUSTER_MODE_KEY,
@@ -220,19 +220,19 @@ public class HCDriverConfiguration implements ManagedService, ReportingConfigura
     }
 
     public synchronized int getReportingMinimum() {
-        return getInt(ReportingConfiguration.CONFIGURE_REPORTING_MIN_KEY);
+        return getInt(HCReportingConfiguration.CONFIGURE_REPORTING_MIN_KEY);
     }
 
     public synchronized int getReportingMaximum() {
-        return getInt(ReportingConfiguration.CONFIGURE_REPORTING_MAX_KEY);
+        return getInt(HCReportingConfiguration.CONFIGURE_REPORTING_MAX_KEY);
     }
 
     public synchronized double getReportingChange() {
-        return getDouble(ReportingConfiguration.CONFIGURE_REPORTING_CHANGE_KEY);
+        return getDouble(HCReportingConfiguration.CONFIGURE_REPORTING_CHANGE_KEY);
     }
 
     public synchronized boolean getReportingOverwrite() {
-        return getBoolean(ReportingConfiguration.CONFIGURE_REPORTING_OVERWRITE_KEY);
+        return getBoolean(HCReportingConfiguration.CONFIGURE_REPORTING_OVERWRITE_KEY);
     }
 
     /**

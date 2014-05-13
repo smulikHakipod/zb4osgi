@@ -21,12 +21,12 @@
 */
 package it.cnr.isti.zigbee.zcl.library.impl.general.groups;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import it.cnr.isti.zigbee.api.Cluster;
 import it.cnr.isti.zigbee.zcl.library.api.core.Response;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeClusterException;
 import it.cnr.isti.zigbee.zcl.library.api.general.Groups;
-import it.cnr.isti.zigbee.zcl.library.api.general.groups.ViewGroupResponse;
 import it.cnr.isti.zigbee.zcl.library.impl.RawClusterImpl;
 import it.cnr.isti.zigbee.zcl.library.impl.core.ResponseImpl;
 

@@ -49,7 +49,7 @@ public class Activator implements BundleActivator {
     public void start(BundleContext bc) throws Exception {
         driver = new DriverCC2530(
                 OSGiProperties.getString(bc, ConfigurationProperties.COM_NAME_KEY, ConfigurationProperties.COM_NAME),
-                OSGiProperties.getInt(bc, ConfigurationProperties.COM_BOUDRATE_KEY, ConfigurationProperties.COM_BOUDRATE),
+                OSGiProperties.getInt(bc, ConfigurationProperties.COM_BAUDRATE_KEY, ConfigurationProperties.COM_BAUDRATE),
                 NetworkMode.valueOf(OSGiProperties.getString(
                         bc, ConfigurationProperties.NETWORK_MODE_KEY, ConfigurationProperties.NETWORK_MODE
                 )),

@@ -127,11 +127,11 @@ A set of Java classes reppresenting the Cluster defined by the ZigBee Health Car
           <groups>
     <group>
       <title>ZigBee Health Care Cluster Library API</title>
-      <packages>it.cnr.isti.zigbee.zhccl.library.api*</packages>
+      <packages>it.cnr.isti.zigbee.hc.zcl.library.api*</packages>
     </group>
     <group>
       <title>Default ZigBee Health Care Cluster Library implementation</title>
-      <packages>it.cnr.isti.zigbee.zhccl.library.impl*</packages>
+      <packages>it.cnr.isti.zigbee.hc.zcl.library.impl*</packages>
     </group>
   </groups>
         </configuration>
@@ -160,8 +160,8 @@ A set of Java classes reppresenting the Cluster defined by the ZigBee Health Car
               org.slf4j; provider=paxlogging
             </Import-Package>
             <Export-Package>
-              it.cnr.isti.zigbee.zhccl.library.api.*;version=${pom.version},
-              it.cnr.isti.zigbee.zhccl.library.impl.*;version=${pom.version}
+              it.cnr.isti.zigbee.hc.zcl.library.api.*;version=${pom.version},
+              it.cnr.isti.zigbee.hc.zcl.library.impl.*;version=${pom.version}
             </Export-Package>
           </instructions>
         </configuration>

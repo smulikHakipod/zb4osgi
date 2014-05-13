@@ -27,7 +27,6 @@ import junit.framework.TestCase;
 import com.itaca.ztool.api.ZToolPacket.CommandSubsystem;
 import com.itaca.ztool.api.ZToolPacket.CommandType;
 import com.itaca.ztool.api.af.AF_DATA_CONFIRM;
-import com.itaca.ztool.api.af.AF_DATA_REQUEST;
 import com.itaca.ztool.api.simple.ZB_GET_DEVICE_INFO;
 import com.itaca.ztool.api.system.SYS_VERSION;
 import com.itaca.ztool.api.zdo.ZDO_ACTIVE_EP_REQ;

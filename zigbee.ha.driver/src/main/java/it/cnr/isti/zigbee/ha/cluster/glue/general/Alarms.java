@@ -46,7 +46,7 @@ public interface Alarms extends Cluster {
 
     public void resetAlarmLog() throws ZigBeeHAException;
 
-    public boolean addAlarmListerner(AlarmListener listener);
+    public boolean addAlarmListener(AlarmListener listener);
 
     public boolean removeAlarmListerner(AlarmListener listener);
 

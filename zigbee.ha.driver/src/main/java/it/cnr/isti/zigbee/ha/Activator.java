@@ -62,7 +62,7 @@ import it.cnr.isti.zigbee.ha.driver.HAImporter;
 import it.cnr.isti.zigbee.ha.driver.core.GenericHADeviceFactory;
 import it.cnr.isti.zigbee.ha.driver.core.HADeviceFactoryBase;
 import it.cnr.isti.zigbee.ha.driver.core.ReportingConfiguration;
-import it.cnr.isti.zigbee.ha.driver.core.UnknowHADeviceFactory;
+import it.cnr.isti.zigbee.ha.driver.core.UnknownHADeviceFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -157,9 +157,9 @@ public class Activator implements BundleActivator {
         }
 
         try {
-            factories.add( new UnknowHADeviceFactory( bc ).register() );
+            factories.add( new UnknownHADeviceFactory( bc ).register() );
         } catch ( Exception ex) {
-            logger.error( "Failed to register UnknowHADeviceFactory", ex );
+            logger.error( "Failed to register UnknownHADeviceFactory", ex );
         }
     }
 

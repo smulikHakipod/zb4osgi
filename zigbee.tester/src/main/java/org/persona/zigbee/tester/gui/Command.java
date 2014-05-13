@@ -26,10 +26,6 @@ package org.persona.zigbee.tester.gui;
 import it.cnr.isti.zigbee.ha.cluster.glue.Cluster;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import javax.swing.text.StyledEditorKit.ItalicAction;
 
 /**
  * 
@@ -40,6 +36,10 @@ import javax.swing.text.StyledEditorKit.ItalicAction;
 public class Command {
 	
 	public class CommandParsingException extends IllegalArgumentException {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1396230279824610647L;
 		public String value;
 		public int index;
 		

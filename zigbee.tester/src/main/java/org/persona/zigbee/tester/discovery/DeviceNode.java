@@ -42,7 +42,7 @@ public class DeviceNode {
 	private String udn ;
 	private boolean hasChild;
 	private int numberOfSons;
-	private ArrayList children;
+	private ArrayList<Object> children;
 	private DeviceNode parent;
 	final private String friendlyName;
 	
@@ -58,7 +58,7 @@ public class DeviceNode {
 		String[] sons = null;
 		hasChild = (sons != null);
 		if (hasChild) {
-			children = new ArrayList();
+			children = new ArrayList<Object>();
 			numberOfSons = sons.length;
 		}
 		/*

@@ -22,8 +22,6 @@
 
 package it.cnr.isti.zigbee.ha.driver.core;
 
-import it.cnr.isti.zigbee.ha.driver.HADriverConfiguration;
-
 import org.osgi.framework.Constants;
 import org.osgi.service.cm.ManagedService;
 

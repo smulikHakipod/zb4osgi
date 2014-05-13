@@ -34,7 +34,7 @@ import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeType;
 public interface AttributeDescriptor {
 	public int getId();
 	public String getName();
-	public Class getType();
+	public Class<?> getType();
 		
 	public boolean isWritable();
 	

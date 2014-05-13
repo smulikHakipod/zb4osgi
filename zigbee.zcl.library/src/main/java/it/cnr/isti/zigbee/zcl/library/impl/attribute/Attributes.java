@@ -29,6 +29,7 @@ import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeType;
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
  * @author <a href="mailto:manlio.bacco@isti.cnr.it">Manlio Bacco</a>
  * @author <a href="mailto:h.alink1@chello.nl">Han Alink</a>
+ * @author <a href="mailto:giancarlo.riolo@isti.cnr.it">Giancarlo Riolo</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  */
 public class Attributes  {
@@ -850,7 +851,7 @@ public class Attributes  {
     .setId(0x0055)
     .setName("PresentValue")
     .setReportable(true)
-    .setZigBeeType(ZigBeeType.Boolean)
+    .setZigBeeType(ZigBeeType.SinglePrecision)
     .setWritable(true);
 
     final static public  AttributeDescriptor APPLICATION_TYPE = new AbstractAttribute()
@@ -894,4 +895,35 @@ public class Attributes  {
     .setReportable(false)
     .setZigBeeType(ZigBeeType.CharacterString)
     .setWritable(true);
+
+	public static final AttributeDescriptor MAX_PRESENT_VALUE = new AbstractAttribute()
+    .setId(0x0041)
+    .setName("MaxPresentValue")
+    .setReportable(false)
+    .setZigBeeType(ZigBeeType.SinglePrecision)
+    .setWritable(true);
+	
+	public static final AttributeDescriptor MIN_PRESENT_VALUE= new AbstractAttribute()
+    .setId(0x0045)
+    .setName("MinPresentValue")
+    .setReportable(false)
+    .setZigBeeType(ZigBeeType.SinglePrecision)
+    .setWritable(true);
+	
+	public static final AttributeDescriptor RESOLUTION = new AbstractAttribute()
+    .setId(0x006A)
+    .setName("Resolution")
+    .setReportable(false)
+    .setZigBeeType(ZigBeeType.SinglePrecision)
+    .setWritable(true);
+	
+	public static final AttributeDescriptor ENGINEERING_UNITS = new AbstractAttribute()
+    .setId(0x0075)
+    .setName("EngineeringUnits")
+    .setReportable(false)
+    .setZigBeeType(ZigBeeType.Enumeration16bit)
+    .setWritable(true);
+
+
+	
 }

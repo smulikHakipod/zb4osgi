@@ -33,6 +33,10 @@ import it.cnr.isti.zigbee.api.ZigBeeException;
  */
 public class ZigBeeClusterException extends ZigBeeException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7959927532738218313L;
 	private Response response;
 
 	public ZigBeeClusterException(String msg) {

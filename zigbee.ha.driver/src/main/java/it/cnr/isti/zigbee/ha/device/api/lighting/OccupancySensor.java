@@ -22,7 +22,7 @@
 
 package it.cnr.isti.zigbee.ha.device.api.lighting;
 
-import it.cnr.isti.zigbee.ha.cluster.glue.measureament_sensing.OccupacySensing;
+import it.cnr.isti.zigbee.ha.cluster.glue.measureament_sensing.OccupancySensing;
 import it.cnr.isti.zigbee.ha.driver.ArraysUtil;
 import it.cnr.isti.zigbee.ha.driver.core.HADevice;
 import it.cnr.isti.zigbee.ha.driver.core.HAProfile;
@@ -52,10 +52,10 @@ public interface OccupancySensor extends HADevice{
 	public static final int[] CUSTOM = {};
 	
 	/**
-	 * Access method for the <b>Mandatory</b> cluster: {@link OccupacySensing} 
+	 * Access method for the <b>Mandatory</b> cluster: {@link OccupancySensing} 
 	 *  
-	 * @return the {@link OccupacySensing} cluster implemented by the device
+	 * @return the {@link OccupancySensing} cluster implemented by the device
 	 */
-	public  OccupacySensing getOccupacySensing();	
+	public  OccupancySensing getOccupacySensing();	
 	
 }

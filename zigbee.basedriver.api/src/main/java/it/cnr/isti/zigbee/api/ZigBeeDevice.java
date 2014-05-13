@@ -118,6 +118,8 @@ public interface ZigBeeDevice {
 	 * the ZigBee device
 	 */
     public final String ZIGBEE_IMPORT = "zigbee.import.id";
+
+	public final String IEEE_ADDRESS = "zigbee.node.address.ieee";
 	
 	/**
 	 * Constant for the ZigBee device match scale, indicating a match with the ProfileId. Value is 1024.

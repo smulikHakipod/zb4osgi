@@ -88,7 +88,7 @@ public class SimpleDriverTest {
 				
 			System.out.print("Driver creation on "+com);
 			sd = new DriverEZ430_RF2480(com,
-					Integer.parseInt(config.getProperty(ConfigurationProperties.COM_BOUDRATE_KEY)),
+					Integer.parseInt(config.getProperty(ConfigurationProperties.COM_BAUDRATE_KEY)),
 					NetworkMode.valueOf(config.getProperty(ConfigurationProperties.NETWORK_MODE_KEY)),
 					Integer.parseInt(config.getProperty(ConfigurationProperties.PAN_ID_KEY)),
 					Integer.parseInt(config.getProperty(ConfigurationProperties.CHANNEL_ID_KEY))

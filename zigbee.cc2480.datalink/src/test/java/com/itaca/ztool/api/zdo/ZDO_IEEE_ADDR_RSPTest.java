@@ -63,10 +63,10 @@ public class ZDO_IEEE_ADDR_RSPTest {
 		
 		short[] devs = response.getAssociatedDeviceList();
 		for (int i = 0; i < devs.length; i++) {
-			assertEquals(devs[i] & 0xFFFF, response.AssocDevList[i].get16BitValue());
+			assertEquals(devs[i] , response.AssocDevList[i].get16BitValue());
 		}
 		for (int i = 0; i < devs.length; i++) {
-			assertEquals(devs[i], (short) response.AssocDevList[i].get16BitValue());
+			assertEquals(devs[i],  response.AssocDevList[i].get16BitValue());
 		}
 	}
 

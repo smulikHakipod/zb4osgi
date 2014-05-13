@@ -27,12 +27,10 @@ import it.cnr.isti.cc2480.low.PacketListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import org.slf4j.Logger;

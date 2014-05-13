@@ -18,7 +18,7 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-*/
+ */
 
 package it.cnr.isti.zigbee.zcl.library.impl.general.scenes;
 
@@ -26,31 +26,32 @@ import it.cnr.isti.zigbee.zcl.library.api.core.ZBSerializer;
 import it.cnr.isti.zigbee.zcl.library.api.general.Scenes;
 import it.cnr.isti.zigbee.zcl.library.impl.core.AbstractCommand;
 import it.cnr.isti.zigbee.zcl.library.impl.core.DefaultSerializer;
+
 /**
  * 
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
- * @version $LastChangedRevision$ ($LastChangedDate$)
- *
+ * @version $LastChangedRevision$ ($LastChangedDate: 2013-08-06 18:00:05
+ *          +0200(mar, 06 ago 2013) $)
+ * 
  */
 public class RecallSceneCommand extends AbstractCommand {
-	
+
 	private int groupId;
 	private short sceneId;
-	
-	
-	public RecallSceneCommand(int groupId, short sceneId){		
+
+	public RecallSceneCommand(int groupId, short sceneId) {
 		super(Scenes.RECALL_SCENE);
 		this.groupId = groupId;
 		this.sceneId = sceneId;
 	}
 
-	public byte[] getPayload(){	
-		if( payload == null){			
+	public byte[] getPayload() {
+		if (payload == null) {
 			payload = new byte[3];
-			ZBSerializer serializer = new DefaultSerializer(payload,0);
-			serializer.append_short((short)groupId);
-			serializer.append_byte((byte)sceneId);
+			ZBSerializer serializer = new DefaultSerializer(payload, 0);
+			serializer.append_short((short) groupId);
+			serializer.append_byte((byte) sceneId);
 		}
 		return payload;
 	}

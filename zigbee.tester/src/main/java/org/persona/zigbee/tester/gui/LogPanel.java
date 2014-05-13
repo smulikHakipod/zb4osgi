@@ -38,7 +38,11 @@ import javax.swing.JTextArea;
  *
  */
 public class LogPanel extends JPanel {
-    private static JTextArea logArea = new JTextArea(4,50);
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 9042188374562242146L;
+	private static JTextArea logArea = new JTextArea(4,50);
     private static JPanel statusBar = new JPanel(new BorderLayout());
     private static JLabel statusText = new JLabel();
     

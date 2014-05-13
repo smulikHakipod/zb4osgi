@@ -20,19 +20,15 @@
    limitations under the License.
  */
 
-
-
 package it.cnr.isti.zigbee.hc;
 
-import it.cnr.isti.zigbee.hc.core.GenericHCDeviceFactory;
-import it.cnr.isti.zigbee.hc.core.HCClustersFactory;
-import it.cnr.isti.zigbee.hc.core.HCDeviceFactoryBase;
-import it.cnr.isti.zigbee.hc.core.UnknowHADeviceFactory;
-import it.cnr.isti.zigbee.hc.device.api.aging_independetly.DosageSensor;
-import it.cnr.isti.zigbee.hc.device.impl.aging_independetly.DosageSensorDevice;
 import it.cnr.isti.zigbee.hc.driver.HCDriverConfiguration;
 import it.cnr.isti.zigbee.hc.driver.HCImporter;
 import it.cnr.isti.zigbee.hc.driver.HCReportingConfiguration;
+import it.cnr.isti.zigbee.hc.driver.core.GenericHCDeviceFactory;
+import it.cnr.isti.zigbee.hc.driver.core.HCClustersFactory;
+import it.cnr.isti.zigbee.hc.driver.core.HCDeviceFactoryBase;
+import it.cnr.isti.zigbee.hc.driver.core.UnknowHCDeviceFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,69 +42,83 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.Constants;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.cm.ManagedService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- *
+ * 
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
- * @version $LastChangedRevision$ ($LastChangedDate$)
- *
+ * @author <a href="mailto:giancarlo.riolo@isti.cnr.it">Giancarlo Riolo</a>
+ * @version $LastChangedRevision$ ($LastChangedDate: 2014-01-09 19:07:02
+ *          +0100 (gio, 09 gen 2014) $)
+ * 
  */
 public class Activator implements BundleActivator {
 
-    private static final String HC_CONFIG_PID = "it.cnr.isti.zigbee.hc.configuration";
+	private final static Logger logger = LoggerFactory
+			.getLogger(Activator.class);
 
-    private HCImporter haImporter;
+	private static final String HC_CONFIG_PID = "it.cnr.isti.zigbee.hc.configuration";
 
-    private final ArrayList<HCDeviceFactoryBase> factories = new ArrayList<HCDeviceFactoryBase>();
+	private HCImporter hcImporter;
 
-    private ServiceRegistration configRegistration;
+	private final ArrayList<HCDeviceFactoryBase> factories = new ArrayList<HCDeviceFactoryBase>();
 
-    private static HCDriverConfiguration configuration = null;
+	private ServiceRegistration configRegistration;
 
+	private static HCDriverConfiguration configuration = null;
 
-    private void doRegisterConfigurationService(BundleContext ctx) {
-        Properties properties = new Properties();
+	private void doRegisterConfigurationService(BundleContext ctx) {
+		Properties properties = new Properties();
 
-        properties.setProperty(Constants.SERVICE_PID, HC_CONFIG_PID);
+		properties.setProperty(Constants.SERVICE_PID, HC_CONFIG_PID);
 
-        configuration = new HCDriverConfiguration(ctx);
-        configRegistration = ctx.registerService(
-                new String[]{ManagedService.class.getName(), HCReportingConfiguration.class.getName()},
-                configuration,
-                null
-                );
-    }
+		configuration = new HCDriverConfiguration(ctx);
+		configRegistration = ctx.registerService(
+				new String[] { ManagedService.class.getName(),
+						HCReportingConfiguration.class.getName() },
+				configuration, null);
+	}
 
-    public void start(BundleContext ctx) throws Exception {
-        doRegisterConfigurationService(ctx);
-        new HCClustersFactory(ctx).register();
-        doRegisterDeviceFactories(ctx);
-        haImporter = new HCImporter(ctx);
-    }
+	public void start(BundleContext ctx) throws Exception {
+		doRegisterConfigurationService(ctx);
+		new HCClustersFactory(ctx).register();
+		doRegisterDeviceFactories(ctx);
+		hcImporter = new HCImporter(ctx);
+	}
 
-    private void doRegisterDeviceFactories(final BundleContext bc) throws Exception {
-        Map< Class<?>, Class<?> > refinedAvailables = new HashMap< Class<?>, Class<?> >();
-        refinedAvailables.put( DosageSensor.class, DosageSensorDevice.class );
+	private void doRegisterDeviceFactories(final BundleContext bc)
+			throws Exception {
+		Map<Class<?>, Class<?>> refinedAvailables = new HashMap<Class<?>, Class<?>>();
+	//	refinedAvailables.put(DosageSensor.class, DosageSensorDevice.class);
 
-        final Iterator< Entry<Class<?>, Class<?>> > i = refinedAvailables.entrySet().iterator();
-        while ( i.hasNext() ) {
-            Entry<Class<?>, Class<?>> refining = i.next();
-            factories.add( new GenericHCDeviceFactory( bc, refining.getKey(), refining.getValue() ).register() );
-        }
+		  final Iterator< Entry<Class<?>, Class<?>> > i = refinedAvailables.entrySet().iterator();
+	        while ( i.hasNext() ) {
+	            Entry<Class<?>, Class<?>> refining = i.next();
+	            try {
+	                factories.add( new GenericHCDeviceFactory( bc, refining.getKey(), refining.getValue() ).register() );
+	            } catch ( Exception ex) {
+	                logger.error( "Failed to register GenericHCDeviceFactory for " + refining.getKey(), ex );
+	            }
+	        }
 
-        factories.add( new UnknowHADeviceFactory( bc ).register() );
-    }
+	        try {
+	            factories.add( new UnknowHCDeviceFactory( bc ).register() );
+	        } catch ( Exception ex) {
+	            logger.error( "Failed to register UnknowHCDeviceFactory", ex );
+	        }
+	    }
 
-    public void stop(BundleContext context) throws Exception {
-        haImporter.close();
+	public void stop(BundleContext context) throws Exception {
+		hcImporter.close();
 
-        for (HCDeviceFactoryBase factory : factories) {
-            factory.unregister();
-        }
+		for (HCDeviceFactoryBase factory : factories) {
+			factory.unregister();
+		}
 
-    }
+	}
 
-    public static HCDriverConfiguration getConfiguration(){
-        return configuration;
-    }
+	public static HCDriverConfiguration getConfiguration() {
+		return configuration;
+	}
 }

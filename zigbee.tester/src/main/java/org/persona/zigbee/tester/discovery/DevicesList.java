@@ -34,11 +34,11 @@ import java.util.Iterator;
  */
 public class DevicesList {
 	
-	ArrayList devices;	
+	ArrayList<DeviceNode> devices;	
 	DeviceChangeListener listener = null;
 	
 	public DevicesList(){
-		devices = new ArrayList();
+		devices = new ArrayList<DeviceNode>();
 	}
 	
 	
@@ -48,7 +48,7 @@ public class DevicesList {
 		return devices.add(dev);
 	}
 
-	public Iterator iterator() {
+	public Iterator<DeviceNode> iterator() {
 		return devices.iterator();
 	}
 

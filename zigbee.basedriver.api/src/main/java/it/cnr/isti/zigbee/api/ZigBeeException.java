@@ -38,6 +38,11 @@ package it.cnr.isti.zigbee.api;
  */
 public class ZigBeeException extends Exception {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3335517547711817845L;
+
 	public ZigBeeException(String msg) {
 		super(msg);
 	}

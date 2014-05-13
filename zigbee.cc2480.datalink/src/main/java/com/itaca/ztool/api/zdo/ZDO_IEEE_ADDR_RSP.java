@@ -155,7 +155,7 @@ public class ZDO_IEEE_ADDR_RSP extends ZToolPacket /*implements IRESPONSE_CALLBA
 	public short[] getAssociatedDeviceList() {
 		short[] values = new short[AssocDevList.length];
 		for (int i = 0; i < AssocDevList.length; i++) {
-			values[i] = (short) AssocDevList[i].get16BitValue();
+			values[i] =  AssocDevList[i].get16BitValue();
 		}
 		return values;
 	}

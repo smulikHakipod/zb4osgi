@@ -18,7 +18,7 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-*/
+ */
 
 package it.cnr.isti.zigbee.zcl.library.impl.global.read;
 
@@ -27,40 +27,42 @@ import it.cnr.isti.zigbee.zcl.library.api.core.ZBDeserializer;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeType;
 import it.cnr.isti.zigbee.zcl.library.api.global.ReadAttributesStatus;
 import it.cnr.isti.zigbee.zcl.library.impl.attribute.AttributeDescriptor;
+
 /**
  * 
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
- * @version $LastChangedRevision$ ($LastChangedDate$)
- *
+ * @version $LastChangedRevision$ ($LastChangedDate: 2013-08-06 18:00:05
+ *          +0200(mar, 06 ago 2013) $)
+ * 
  */
 public class ReadAttributeStatusImpl implements ReadAttributesStatus {
 
 	private byte status;
-	
+
 	private int attributeId;
-	
+
 	private byte dataType;
-	
-	@SuppressWarnings("unchecked")
-	private Class clazz;
-	
+
+	private Class<?> clazz;
+
 	private Object data;
 
-	public ReadAttributeStatusImpl(
-			AttributeDescriptor descriptor, ZBDeserializer deserializer) {
+	public ReadAttributeStatusImpl(AttributeDescriptor descriptor,
+			ZBDeserializer deserializer) {
 
-		attributeId = deserializer.read_short();			
+		attributeId = deserializer.read_short();
 		status = deserializer.read_byte();
 		if (Status.getStatus(status).equals(Status.SUCCESS)) {
 			dataType = deserializer.read_byte();
-			final ZigBeeType type = ZigBeeType.getType(dataType);  
+			final ZigBeeType type = ZigBeeType.getType(dataType);
 			clazz = type.getJavaClass();
 			data = deserializer.readZigBeeType(type);
 		}
-		
+
 		// TODO Attribute Check
-		// indeed the order could be different, so we should receive all the list
+		// indeed the order could be different, so we should receive all the
+		// list
 		// and in any case we could also avoid to throw an Exception
 
 	}
@@ -81,8 +83,7 @@ public class ReadAttributeStatusImpl implements ReadAttributesStatus {
 		return status;
 	}
 
-	@SuppressWarnings("unchecked")
-	public Class getDataClass(){
+	public Class<?> getDataClass() {
 		return clazz;
 	}
 }

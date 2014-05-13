@@ -26,7 +26,7 @@ import it.cnr.isti.zigbee.zcl.library.api.core.ZCLCluster;
 
 /**
  *
- * @author <a href="mailto:manlio.baco@isti.cnr.it">Manlio Bacco</a>
+ * @author <a href="mailto:manlio.bacco@isti.cnr.it">Manlio Bacco</a>
  * @version $LastChangedRevision: 42 $ ($LastChangedDate: 2010-09-23 14:21:48 +0200 (Thu, 23 Sep 2010) $)
  * @since 0.8.0
  *

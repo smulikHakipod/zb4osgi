@@ -45,6 +45,10 @@ import org.persona.zigbee.tester.event.api.HAListenerFactoryService;
  */
 public class HAEventActionPanel extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 572969514672982031L;
 	HAEvent event;
 	JPanel buttonPanel;
 	

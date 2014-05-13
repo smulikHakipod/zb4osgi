@@ -54,7 +54,11 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class PropertiesViewer extends JPanel {
 
-    AttributeActionPanel attributePanel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3181670269001968195L;
+	AttributeActionPanel attributePanel;
     CommandActionPanel commandPanel;
     HAEventActionPanel eventPanel;
 	DataModel dataModel;
@@ -185,6 +189,10 @@ public class PropertiesViewer extends JPanel {
 }
 
 class DataModel extends  AbstractTableModel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2094592918201988677L;
 	int size = 0;
 	String[] names = new String[]{""};
 	String[] values = new String[]{""};
@@ -215,7 +223,12 @@ class DataModel extends  AbstractTableModel {
 
 class LinkCellRenderer extends DefaultTableCellRenderer
 {
-    public LinkCellRenderer(){
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 123271155225735344L;
+
+	public LinkCellRenderer(){
         super();
     }
     

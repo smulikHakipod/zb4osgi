@@ -30,14 +30,13 @@ package com.itaca.ztool.api;
  * notify users what they can expect.
  * 
  * @author <a href="mailto:andrew.rapp@gmail.com">Andrew Rapp</a>
- * @author <a href="mailto:alfiva@aaa.upv.es">Alvaro Fides Valero</a>
+ * @author <a href="mailto:alfiva@aaa.upv.es">Alvaro Fides Valero</a> 
  * @version $LastChangedRevision$ ($LastChangedDate$)
  *
  */
 public class ZToolException extends Exception {
 
 	private static final long serialVersionUID = -5501299728920565639L;
-	private Exception cause;
 	
 	public ZToolException(String message) {
 		super(message);
@@ -58,15 +57,7 @@ public class ZToolException extends Exception {
 	}
 	
 	public ZToolException(Exception cause) {
-		super();
-		this.setCause(cause);
+		super(cause);
 	}
 
-	public Exception getCause() {
-		return cause;
-	}
-
-	public void setCause(Exception cause) {
-		this.cause = cause;
-	}
 }

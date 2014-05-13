@@ -83,13 +83,13 @@ public abstract class SubscriptionBase implements Subscription {
                     localCopy = new ArrayList<ReportListener>(listeners);
                 }
                 log.debug("Notifying {} ReportListener", localCopy.size());
-                for (ReportListener reportListner : localCopy) {
+                for (ReportListener reportListener : localCopy) {
                     try{
-                        log.debug("Notifying {}:{}", reportListner.getClass().getName(), reportListner);
-                        reportListner.receivedReport(event);
+                        log.debug("Notifying {}:{}", reportListener.getClass().getName(), reportListener);
+                        reportListener.receivedReport(event);
                     }catch(Exception e){
                         log.error("Error while notifying {}:{} caused by {}",new Object[]{
-                                reportListner.getClass().getName(), reportListner, e.getStackTrace()
+                                reportListener.getClass().getName(), reportListener, e.getStackTrace()
                         });
                     }
                 }
@@ -136,7 +136,7 @@ public abstract class SubscriptionBase implements Subscription {
 
     protected abstract boolean doConfigureServer() throws ZigBeeClusterException;
 
-    public boolean addReportListner(ReportListener listener) {
+    public boolean addReportListener(ReportListener listener) {
         synchronized (listeners) {
             if ( listeners.size() == 0 ) {
                 if( ! doBindToDevice() ) {

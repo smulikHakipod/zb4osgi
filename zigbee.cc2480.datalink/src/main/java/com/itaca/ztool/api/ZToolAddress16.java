@@ -62,8 +62,8 @@ public class ZToolAddress16 extends ZToolAddress {
 		
 	}
 	
-	public int get16BitValue() {
-		return this.doubleByte.get16BitValue();
+	public short get16BitValue() {
+		return (short) this.doubleByte.get16BitValue();
 	}
 	
 	public int getMsb() {

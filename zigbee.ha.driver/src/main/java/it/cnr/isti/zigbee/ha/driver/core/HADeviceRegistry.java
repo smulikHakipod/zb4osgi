@@ -25,7 +25,6 @@ package it.cnr.isti.zigbee.ha.driver.core;
 import it.cnr.isti.zigbee.api.ZigBeeDevice;
 import it.cnr.isti.zigbee.ha.driver.HAImporter;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -41,6 +40,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
+ * @author <a href="mailto:giancarlo.riolo@isti.cnr.it">Giancarlo Riolo</a>
  *
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.4.0
@@ -111,6 +111,7 @@ public class HADeviceRegistry {
 
             for (Iterator<HADeviceFactory> iterator = factories.iterator(); iterator.hasNext();) {
                 final HADeviceFactory factory = (HADeviceFactory) iterator.next();
+                
                 final int matching = factory.hasMatch( sr );
                 if ( factory.hasMatch( sr ) > bestMatching ) {
                     refining = factory;
@@ -137,6 +138,15 @@ public class HADeviceRegistry {
         }
     }
 
+    /**
+     * This method has never been used, it is a candidate for removal in the next release cycle
+     * 
+     * @param sr
+     * @param device
+     * @return
+     * @throws ZigBeeHAException
+     * @deprecated 
+     */
     public HADeviceBase getInstance(ServiceReference sr, ZigBeeDevice device) throws ZigBeeHAException{
         final HADeviceFactory factory = getBestFactory(sr);
 
@@ -146,5 +156,18 @@ public class HADeviceRegistry {
             return null;
         }
     }
+
+	public HADeviceFactory getExactFactory(ZigBeeDevice zbDevice) {
+	
+		final String deviceId = String.valueOf(zbDevice.getDeviceId());
+		
+	        synchronized (REGISTRY) {
+	        	HADeviceFactory exact = registry.get(deviceId);
+	            if  (exact != null) 
+	        		return exact;
+        		return registry.get(UnknownHADevice.DEVICE_ID);
+	        }
+	      
+	}
 
 }

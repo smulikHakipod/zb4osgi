@@ -56,7 +56,7 @@ public class GetAlarmResponseImpl extends ResponseImpl implements GetAlarmRespon
 		}
 	}
 
-	public int getAllarmCode() {
+	public int getAlarmCode() {
 	    return alarmCode;
 	}
 

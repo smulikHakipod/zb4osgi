@@ -23,10 +23,13 @@
 package org.persona.zigbee.tester;
 
 
+
+
 import java.util.HashMap;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.persona.zigbee.tester.event.EHListenerFactoryServiceTracker;
 import org.persona.zigbee.tester.event.HAListenerFactoryServiceTracker;
 
 /**
@@ -44,6 +47,7 @@ public class Activator implements BundleActivator {
 	private ControlPoint cp;
 
 	public static HAListenerFactoryServiceTracker tracker = null;
+	public static EHListenerFactoryServiceTracker trackerEH = null;
 	
 	/**
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
@@ -53,7 +57,8 @@ public class Activator implements BundleActivator {
 	    for ( int i = 0; i < opts.length; i++ ) {
             options.put( opts[i], opts[i].defaultValue );
         }
-        tracker = new HAListenerFactoryServiceTracker(context);
+	    tracker = new HAListenerFactoryServiceTracker(context);
+	    trackerEH = new EHListenerFactoryServiceTracker(context);
 		Activator.context = context;
         cp = new ControlPoint();
         
@@ -68,5 +73,8 @@ public class Activator implements BundleActivator {
 		Activator.context=null;
 		context.removeServiceListener(tracker);
 		tracker = null;
+
+		context.removeServiceListener(trackerEH);
+		trackerEH = null;
 	}
 }

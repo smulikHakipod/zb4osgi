@@ -21,7 +21,6 @@
 */
 package org.aaloa.zb4osgi.network.browser.ui;
 
-import it.cnr.isti.zigbee.api.ZigBeeDevice;
 import it.cnr.isti.zigbee.api.ZigBeeNode;
 
 import java.awt.BorderLayout;
@@ -33,7 +32,6 @@ import java.awt.GridBagLayout;
 import java.awt.Paint;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -43,7 +41,6 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.border.EtchedBorder;
 
-import org.aaloa.zb4osgi.network.browser.Activtor;
 import org.aaloa.zb4osgi.network.browser.ui.model.ZigBeeEdge;
 import org.aaloa.zb4osgi.network.browser.ui.model.ZigBeeVertex;
 import org.apache.commons.collections15.Transformer;
@@ -53,12 +50,15 @@ import edu.uci.ics.jung.graph.SparseMultigraph;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse;
-import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
 
 public class NetworkGraph extends JFrame {
     
-    private SparseMultigraph<ZigBeeVertex, ZigBeeEdge> graph = new SparseMultigraph<ZigBeeVertex, ZigBeeEdge>();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6626710419721479862L;
+	private SparseMultigraph<ZigBeeVertex, ZigBeeEdge> graph = new SparseMultigraph<ZigBeeVertex, ZigBeeEdge>();
     private VisualizationViewer<ZigBeeVertex,ZigBeeEdge> viewer = null;
 	private JToolBar jToolBar;
 	private JPanel statusBar;

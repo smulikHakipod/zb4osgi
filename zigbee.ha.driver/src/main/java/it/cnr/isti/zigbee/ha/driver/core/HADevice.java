@@ -48,6 +48,8 @@ public interface HADevice {
 	public static final String HA_DEVICE_NAME = "zigbee.ha.name";
 	public static final String HA_DEVICE_GROUP = "zigbee.ha.group";
 	public static final String HA_DEVICE_STANDARD = "zigbee.ha.standard";
+	public static final String ENDPOINT_ADDRESS = "zigbee.device.endpoint";
+	public static final String MAC_ADDRESS = "zigbee.device.macaddress";
 	
 	public static final int[] MANDATORY = {HAProfile.BASIC,HAProfile.IDENTIFY};
 	public static final int[] OPTIONAL = {HAProfile.POWER_CONFIGURATION, HAProfile.DEVICE_TEMPERATURE_CONFIGURATION, HAProfile.ALARMS};

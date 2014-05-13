@@ -70,6 +70,10 @@ import org.persona.zigbee.tester.discovery.DeviceNodeListener;
 public class TreeViewer extends JPanel 	implements DeviceNodeListener 
 {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -359691042081435209L;
 	private HADeviceTreeNode root;
 	private DefaultTreeModel treeModel;
 	private JTree tree;
@@ -123,8 +127,7 @@ public class TreeViewer extends JPanel 	implements DeviceNodeListener
 		root.add(new HADeviceTreeNode(node, root));
 		treeModel.nodeStructureChanged(root);
 	}
-	
-	@SuppressWarnings("unchecked")
+		
 	public void rootDeviceUnplugged(String udn){
 		Enumeration list = root.children();
 		LogPanel.log("Unregistering udn = '" + udn + "'"); 

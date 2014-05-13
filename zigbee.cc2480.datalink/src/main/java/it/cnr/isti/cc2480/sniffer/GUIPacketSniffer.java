@@ -53,7 +53,12 @@ public class GUIPacketSniffer
     extends javax.swing.JFrame
     implements SnifferInterface {
 
-    private static final Logger logger = LoggerFactory.getLogger( GUIPacketSniffer.class );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6574161785640230306L;
+
+	private static final Logger logger = LoggerFactory.getLogger( GUIPacketSniffer.class );
 
     private static final SimplePacketFormat PACKET_FORMATTER = new SimplePacketFormat();
 
@@ -108,7 +113,12 @@ public class GUIPacketSniffer
     private class SnifferTableModel
         extends AbstractTableModel {
 
-        private final Object[] columns = new Object[] {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 6459033421363510648L;
+
+		private final Object[] columns = new Object[] {
             new String[] {
                 "Time", "Direction", "Type", "Packet", "Payload"
             }, new Class[] {
@@ -134,7 +144,7 @@ public class GUIPacketSniffer
             return rows.get( row )[col];
         }
 
-        public Class getColumnClass( int col ) {
+        public Class<?> getColumnClass( int col ) {
             return ( (Class[]) columns[1] ).getClass();
         }
 

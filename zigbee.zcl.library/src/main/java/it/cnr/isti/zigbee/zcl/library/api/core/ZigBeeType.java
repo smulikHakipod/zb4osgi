@@ -28,10 +28,11 @@ import java.util.Hashtable;
  * 
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
+ * @author <a href="mailto:giancarlo.riolo@isti.cnr.it">Giancarlo Riolo</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  *
  */
-public enum ZigBeeType {
+public enum ZigBeeType  {
 	
 	//TODO Add missing data types
 	
@@ -58,7 +59,17 @@ public enum ZigBeeType {
 	SignedInteger8bit(0x28, 1, true, Integer.class),
 	SignedInteger16bit(0x29, 2, true, Integer.class),
 	SignedInteger24bit(0x2a, 3, true, Integer.class),
-	SignedInteger32bit(0x2b, 4, true, Integer.class);
+	SignedInteger32bit(0x2b, 4, true, Integer.class), 
+	SemiPrecision(0x38, 2, true, Short.class),
+	SinglePrecision(0x39, 4, true, Float.class),
+	DoublePrecision(0x3a, 8, true, Double.class),
+	//sistemare
+	UnsignedInteger48bit(0xff, 8, true, Double.class),
+	UTCTime(0xff, 8, true, Double.class),
+	Signature(0xff, 42, false,Byte.class),
+	Bitmap56bit (0xff, 8, true, Double.class);
+	
+	
 	
 	
 	static Hashtable<Byte, ZigBeeType> MAP;
@@ -66,9 +77,9 @@ public enum ZigBeeType {
 	private int id;
 	private int length;
 	private boolean analog;
-	private Class javaClass; 
+	private Class<?> javaClass; 
 
-	private ZigBeeType(int id, int length, boolean analog, Class javaClass){
+	private ZigBeeType(int id, int length, boolean analog, Class<?> javaClass){
 		this.id = id;
 		this.length = length;
 		this.analog = analog;
@@ -94,7 +105,7 @@ public enum ZigBeeType {
 		return analog;
 	}
 	
-	public Class getJavaClass() {
+	public Class<?> getJavaClass() {
 		return javaClass;
 	}
 

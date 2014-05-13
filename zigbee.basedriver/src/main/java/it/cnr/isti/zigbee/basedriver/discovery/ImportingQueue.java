@@ -22,8 +22,6 @@
 
 package it.cnr.isti.zigbee.basedriver.discovery;
 
-import it.cnr.isti.thread.ThreadUtils;
-
 import java.util.ArrayList;
 
 import org.slf4j.Logger;

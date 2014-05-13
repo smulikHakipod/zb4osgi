@@ -23,12 +23,7 @@
 package it.cnr.isti.zigbee.ha.device.impl;
 
 import it.cnr.isti.zigbee.api.ZigBeeDevice;
-import it.cnr.isti.zigbee.ha.cluster.glue.general.Groups;
-import it.cnr.isti.zigbee.ha.cluster.glue.general.Identify;
-import it.cnr.isti.zigbee.ha.cluster.glue.general.LevelControl;
-import it.cnr.isti.zigbee.ha.cluster.glue.general.OnOff;
 import it.cnr.isti.zigbee.ha.cluster.glue.general.OnOffSwitchConfiguration;
-import it.cnr.isti.zigbee.ha.cluster.glue.general.Scenes;
 import it.cnr.isti.zigbee.ha.device.api.generic.LevelControlSwitch;
 import it.cnr.isti.zigbee.ha.driver.core.HADeviceBase;
 import it.cnr.isti.zigbee.ha.driver.core.HAProfile;

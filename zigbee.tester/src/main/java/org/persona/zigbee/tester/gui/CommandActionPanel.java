@@ -68,6 +68,11 @@ import com.itaca.ztool.util.ByteUtils;
  */
 public class CommandActionPanel extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(CommandActionPanel.class);
 	
 	Command action;
@@ -95,6 +100,11 @@ public class CommandActionPanel extends JPanel {
 		buttonPanel = new JPanel();
 		JButton doAction = new JButton("Execute Specific Cluster Command");
 		doAction.addActionListener(new AbstractAction(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public void actionPerformed(ActionEvent e) {
 
 				String[] params = null;
@@ -149,14 +159,14 @@ public class CommandActionPanel extends JPanel {
 					result.setText("Invokation successed without error, but without return values");
 					return;
 				}
-				final Class clz = returned.getClass();
+				final Class<? extends Object> clz = returned.getClass();
 				if ( clz.isPrimitive() || clz == String.class ){
 					result.setText(returned.toString());
 				} else if ( returned instanceof Response){
 					Response r = (Response) returned;
 					String str = r.toString();
 					try {
-						final Class clzToString = clz.getMethod("toString").getDeclaringClass();
+						final Class<?> clzToString = clz.getMethod("toString").getDeclaringClass();
 						if ( clzToString == Object.class || clzToString == ResponseImpl.class) {
 							//TODO A default response to String in a ResponseBase class or Response.stringValueOf(Response) should be provided
 							str = "The response object do not provide any String representation of itself\n";
@@ -226,6 +236,10 @@ public class CommandActionPanel extends JPanel {
 
 //thanks to Thomas Wagner 12/10/2005
 class ArgumentsModel extends  AbstractTableModel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	int size = 0;
 	private MyTable table;	
     String[] types = new String[]{""};
@@ -271,11 +285,15 @@ class ArgumentsModel extends  AbstractTableModel {
 // thanks to Thomas Wagner 12/10/2005
 class MyTable extends JTable { 
 
-	private Hashtable cellEditors;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Hashtable<Integer, TableCellEditor> cellEditors;
 	
 	public MyTable(TableModel dm) {
 		super(dm);
-		cellEditors = new Hashtable();
+		cellEditors = new Hashtable<Integer, TableCellEditor>();
 	}
 
 	public void setMyCellEditor(TableCellEditor editor,int col){
@@ -299,7 +317,11 @@ class MyTable extends JTable {
 
 class SliderEditor extends AbstractCellEditor implements TableCellEditor
 {
-    JPanel editor;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	JPanel editor;
     JTextField text;
     JSlider slider;
     public SliderEditor(int min, int max, int value){

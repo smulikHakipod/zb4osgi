@@ -35,8 +35,6 @@ import it.cnr.isti.zigbee.dongle.api.SimpleDriver;
 
 import java.util.Collection;
 
-import javax.naming.spi.DirStateFactory.Result;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,8 +42,8 @@ import com.itaca.ztool.api.af.AF_REGISTER;
 import com.itaca.ztool.api.af.AF_REGISTER_SRSP;
 
 /**
- * This class is a <i>singelton</i> aimed at share the <b>the Application Framework Layer</b><br>
- * status of the <b>ZigBee Base Drier</b> among all the {@link ZigBeeDevice} register by it.<br>
+ * This class is a <i>singleton</i> aimed at share the <b>the Application Framework Layer</b><br>
+ * status of the <b>ZigBee Base Driver</b> among all the {@link ZigBeeDevice} registered by it.<br>
  * <br>
  * In particular, this class tracks the <i>Transaction Id</i> and the <i>Active End Point</i><br>
  * on the hardware providing access to <i>ZigBee Network</i> (currently the <b>Texas Instrument CC2480</b>)<br>
@@ -85,7 +83,7 @@ public class AFLayer {
 		}
 	}
 	
-	private static AFLayer singelton;
+	private static AFLayer singleton;
 	
 	final TObjectByteHashMap<SenderIdentifier> sender2EndPoint = new TObjectByteHashMap<SenderIdentifier>();
 	final TShortObjectHashMap<TShortArrayList> profile2Cluster = new TShortObjectHashMap<TShortArrayList>();
@@ -105,16 +103,16 @@ public class AFLayer {
 		
 	public static AFLayer getAFLayer(SimpleDriver driver){
 		synchronized (LOCK) {
-			if( singelton == null ){
-				singelton = new AFLayer(driver);
-			}else if ( singelton.driver != driver ){
+			if( singleton == null ){
+				singleton = new AFLayer(driver);
+			}else if ( singleton.driver != driver ){
 				/*
 				 * It means that the service implementing the driver has been changed 
 				 * so we have to create a new AFLayer
 				 */
-				singelton = new AFLayer(driver);
+				singleton = new AFLayer(driver);
 			}
-			return singelton;
+			return singleton;
 		}
 	}
 	

@@ -22,14 +22,14 @@
 
 package it.cnr.isti.zigbee.zcl.library.impl.core;
 
-import com.itaca.ztool.util.ByteUtils;
-
 import it.cnr.isti.zigbee.api.Cluster;
 import it.cnr.isti.zigbee.zcl.library.api.core.Response;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZCLHeader;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeClusterException;
 import it.cnr.isti.zigbee.zcl.library.api.global.DefaultResponse;
 import it.cnr.isti.zigbee.zcl.library.impl.global.DefaultResponseImpl;
+
+import com.itaca.ztool.util.ByteUtils;
 /**
  *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>

@@ -22,17 +22,17 @@
 
 package it.cnr.isti.zigbee.basedriver.communication;
 
-import java.util.EnumSet;
-
 import it.cnr.isti.zigbee.basedriver.Activator;
 import it.cnr.isti.zigbee.basedriver.configuration.BaseDriverProperties;
 import it.cnr.isti.zigbee.basedriver.configuration.BaseDriverProperties.DiscoveryMode;
-import it.cnr.isti.zigbee.basedriver.discovery.AnnunceListnerThread;
+import it.cnr.isti.zigbee.basedriver.discovery.AnnounceListenerThread;
 import it.cnr.isti.zigbee.basedriver.discovery.DeviceBuilderThread;
 import it.cnr.isti.zigbee.basedriver.discovery.ImportingQueue;
 import it.cnr.isti.zigbee.basedriver.discovery.LQINetworkBrowserThread;
 import it.cnr.isti.zigbee.basedriver.discovery.NetworkBrowserThread;
 import it.cnr.isti.zigbee.dongle.api.SimpleDriver;
+
+import java.util.EnumSet;
 
 import org.osgi.framework.ServiceEvent;
 import org.osgi.framework.ServiceListener;
@@ -58,17 +58,17 @@ public class SimpleDriverServiceTracker implements ServiceListener{
 
     private ServiceReference driverReference;
     private SimpleDriver driverService;
-    private final AnnunceListnerThread annunceListener;
+    private final AnnounceListenerThread annunceListener;
 
     private NetworkBrowserThread networkBrowser = null ;
     private LQINetworkBrowserThread networkLQIBrowser = null;
 
     private DeviceBuilderThread deviceBuilder;
-    private final ImportingQueue importingQueue;
+    private ImportingQueue importingQueue;
 
     public SimpleDriverServiceTracker(){
         importingQueue = new ImportingQueue();
-        annunceListener = new AnnunceListnerThread(importingQueue);
+        annunceListener = new AnnounceListenerThread(importingQueue);
 
         ServiceReference ref = Activator.getBundleContext().getServiceReference(SimpleDriver.class.getName());
         if(ref != null) addingSimpleDriver(ref);
@@ -104,6 +104,7 @@ public class SimpleDriverServiceTracker implements ServiceListener{
             deviceBuilder.end();
         }
         importingQueue.close();
+        importingQueue = new ImportingQueue();
         Activator.unregisterAllDeviceService();
     }
 

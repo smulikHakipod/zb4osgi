@@ -26,7 +26,7 @@ import it.cnr.isti.zigbee.api.ZigBeeDevice;
 import it.cnr.isti.zigbee.ha.cluster.glue.general.Groups;
 import it.cnr.isti.zigbee.ha.cluster.glue.general.OnOff;
 import it.cnr.isti.zigbee.ha.cluster.glue.general.Scenes;
-import it.cnr.isti.zigbee.ha.cluster.glue.measureament_sensing.OccupacySensing;
+import it.cnr.isti.zigbee.ha.cluster.glue.measureament_sensing.OccupancySensing;
 import it.cnr.isti.zigbee.ha.device.api.lighting.OnOffLight;
 import it.cnr.isti.zigbee.ha.driver.core.HADeviceBase;
 import it.cnr.isti.zigbee.ha.driver.core.HAProfile;
@@ -49,14 +49,14 @@ public class OnOffLightDevice extends HADeviceBase implements OnOffLight {
 	private OnOff onOff;
 	private Scenes scenes;
 	private Groups groups;
-	private OccupacySensing occupancySensing;
+	private OccupancySensing occupancySensing;
 	
 	public  OnOffLightDevice(BundleContext ctx,ZigBeeDevice zbDevice) throws ZigBeeHAException {
 		super(ctx,zbDevice);
 		onOff = (OnOff) addCluster(HAProfile.ON_OFF);
 		groups = (Groups) addCluster(HAProfile.GROUPS);
 		scenes = (Scenes) addCluster(HAProfile.SCENES);
-		occupancySensing = (OccupacySensing) addCluster(HAProfile.OCCUPANCY_SENSING);
+		occupancySensing = (OccupancySensing) addCluster(HAProfile.OCCUPANCY_SENSING);
 	}
 
 
@@ -64,7 +64,7 @@ public class OnOffLightDevice extends HADeviceBase implements OnOffLight {
 		return groups;
 	}
 
-	public OccupacySensing getOccupacySensing() {
+	public OccupancySensing getOccupacySensing() {
 		return occupancySensing;
 	}
 

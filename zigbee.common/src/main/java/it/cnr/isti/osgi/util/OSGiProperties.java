@@ -126,4 +126,6 @@ public class OSGiProperties {
 		String value = bundle == null ? null : bundle.getProperty(property);
 		return value == null ? defaultValue : Double.parseDouble(value);
 	}
+
+	
 }

@@ -529,7 +529,7 @@ public class DriverEZ430_RF2480 implements Runnable, SimpleDriver{
 		}
 	}
 
-	static boolean initializeHardware(String portName, int boudRate) {
+	static boolean initializeHardware(String portName, int baudRate) {
 		boolean result = false;
 		final int recieved[] = new int[1];
 		final HWLowLevelDriver probingDriver = new HWLowLevelDriver();
@@ -556,7 +556,7 @@ public class DriverEZ430_RF2480 implements Runnable, SimpleDriver{
 		};
 		probingDriver.addPacketListener(monitor);
 		try {
-			probingDriver.open(portName,boudRate);
+			probingDriver.open(portName,baudRate);
 			probingDriver.sendPacket(new SYS_VERSION());
 			final long ready = System.currentTimeMillis() + 5000;
 			while(ready > System.currentTimeMillis()){

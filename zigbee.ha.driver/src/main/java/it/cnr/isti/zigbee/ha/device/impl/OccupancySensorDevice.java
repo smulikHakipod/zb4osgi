@@ -23,7 +23,7 @@
 package it.cnr.isti.zigbee.ha.device.impl;
 
 import it.cnr.isti.zigbee.api.ZigBeeDevice;
-import it.cnr.isti.zigbee.ha.cluster.glue.measureament_sensing.OccupacySensing;
+import it.cnr.isti.zigbee.ha.cluster.glue.measureament_sensing.OccupancySensing;
 import it.cnr.isti.zigbee.ha.device.api.lighting.OccupancySensor;
 import it.cnr.isti.zigbee.ha.driver.core.HADeviceBase;
 import it.cnr.isti.zigbee.ha.driver.core.HAProfile;
@@ -44,14 +44,14 @@ import org.osgi.framework.BundleContext;
  */
 public class OccupancySensorDevice extends HADeviceBase implements OccupancySensor {
 	
-	private OccupacySensing occupancySensing;
+	private OccupancySensing occupancySensing;
 	
 	public  OccupancySensorDevice(BundleContext ctx,ZigBeeDevice zbDevice) throws ZigBeeHAException {
 		super(ctx,zbDevice);
-		occupancySensing = (OccupacySensing) addCluster(HAProfile.OCCUPANCY_SENSING);
+		occupancySensing = (OccupancySensing) addCluster(HAProfile.OCCUPANCY_SENSING);
 	}
 
-	public OccupacySensing getOccupacySensing() {
+	public OccupancySensing getOccupacySensing() {
 		return occupancySensing;
 	}
 	

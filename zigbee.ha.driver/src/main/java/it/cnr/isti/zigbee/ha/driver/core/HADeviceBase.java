@@ -22,8 +22,6 @@
 
 package it.cnr.isti.zigbee.ha.driver.core;
 
-import java.util.Arrays;
-
 import it.cnr.isti.zigbee.api.ZigBeeDevice;
 import it.cnr.isti.zigbee.ha.Activator;
 import it.cnr.isti.zigbee.ha.cluster.glue.Cluster;
@@ -171,7 +169,7 @@ public abstract class HADeviceBase implements HADevice  {
         if ( ! zbDevice.providesInputCluster(clusterId) && getDescription().isOptional(clusterId) ){
             logger.warn(
                     "[WARNING] ZigBeeDevice with DeviceId={} of Home Automation profile " +
-                    "implements the OPTINAL cluster {} ONLY AS OUTPUT instead of input " +
+                    "implements the OPTIONAL cluster {} ONLY AS OUTPUT instead of input " +
                     "it may identify an error either on the Driver description or in " +
                     "in the implementation of firmware of the physical device",
                     zbDevice.getDeviceId(), clusterId
@@ -254,8 +252,10 @@ public abstract class HADeviceBase implements HADevice  {
          * ClusterFactory that can provide it
          */
         try {
+            //TODO We should add a enum configuration property for enabling both the following behavior or just one of them 
+            
             String key = HAProfile.ID + ":"+String.valueOf(clusterId);
-            String filter = "(" + Cluster.PROFILE_CLUSTER_IDs + "=" + key+ ")";
+            String filter = "(" + Cluster.PROFILE_CLUSTER_IDS + "=" + key+ ")";
             ServiceReference[] srClusterFactory = ctx.getServiceReferences(ClusterFactory.class.getName(), filter);
             if( srClusterFactory != null ) {
                 ClusterFactory factory = (ClusterFactory) ctx.getService(srClusterFactory[0]);
@@ -263,6 +263,23 @@ public abstract class HADeviceBase implements HADevice  {
                 clusters[index++] = cluster;
                 return cluster;
             }
+            
+            /*
+             * After looking up for a ClusterFactory that matches <profileId,clusterId> key, we relax the look up.
+             * We are now looking for a ClusterFactory that support the <profileId> of my device and also support
+             * the cluster that we are trying to use.
+             */
+            filter = "(&" +
+            		"(" + Cluster.BELONGING_PROFILES + "=" + HAProfile.ID + ")" +
+        			"(" + Cluster.RAW_CLUSTER_IDS + "=" + String.valueOf(clusterId) + ")" +
+    			")";
+            srClusterFactory = ctx.getServiceReferences(ClusterFactory.class.getName(), filter);
+            if( srClusterFactory != null ) {
+                ClusterFactory factory = (ClusterFactory) ctx.getService(srClusterFactory[0]);
+                Cluster cluster = factory.getInstance(key,zbDevice);
+                clusters[index++] = cluster;
+                return cluster;
+            }            
         } catch (InvalidSyntaxException e) {
             logger.error("Modified the value of ANY_HADEVICE_FILTER and recompile",e);
         }
