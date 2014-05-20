@@ -26,7 +26,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import it.cnr.isti.zigbee.dongle.api.AFMessageListner;
-import it.cnr.isti.zigbee.dongle.api.AnnunceListner;
+import it.cnr.isti.zigbee.dongle.api.AnnounceListner;
 import it.cnr.isti.zigbee.dongle.api.ConfigurationProperties;
 import it.cnr.isti.zigbee.dongle.api.NetworkMode;
 
@@ -68,7 +68,7 @@ public class SimpleDriverTest {
 	
 	public static DriverEZ430_RF2480 sd = null; 
 	public AFMessageListner afMsgList = null;
-	public AnnunceListner announcelist = null;
+	public AnnounceListner announcelist = null;
 	
 	private static final Properties config = System.getProperties(); 
 	
@@ -104,7 +104,7 @@ public class SimpleDriverTest {
 			};
 		}
 		if (announcelist == null){
-			announcelist = new AnnunceListner()
+			announcelist = new AnnounceListner()
 			{
 				public void notify(ZToolAddress16 senderAddress, ZToolAddress64 ieeeAddress,
 					ZToolAddress16 networkAddress, int capabilitiesBitmask){
@@ -225,9 +225,9 @@ public class SimpleDriverTest {
 			System.out.println("Test skipped");
 			return;
 		}
-		boolean condition = sd.addAnnunceListener(announcelist);
+		boolean condition = sd.addAnnounceListener(announcelist);
 		assertTrue(condition);
-		condition = sd.removeAnnunceListener(announcelist);
+		condition = sd.removeAnnounceListener(announcelist);
 		assertTrue(condition);		
 	}
 

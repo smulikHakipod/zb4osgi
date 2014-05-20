@@ -59,7 +59,7 @@ public class SimpleDriverServiceTracker implements ServiceListener{
 
     private ServiceReference driverReference;
     private SimpleDriver driverService;
-    private final AnnounceListenerThread annunceListener;
+    private final AnnounceListenerThread announceListener;
 
     private NetworkBrowserThread networkBrowser = null ;
     private LQINetworkBrowserThread networkLQIBrowser = null;
@@ -69,7 +69,7 @@ public class SimpleDriverServiceTracker implements ServiceListener{
 
     public SimpleDriverServiceTracker(){
         importingQueue = new ImportingQueue();
-        annunceListener = new AnnounceListenerThread(importingQueue);
+        announceListener = new AnnounceListenerThread(importingQueue);
 
         ServiceReference ref = Activator.getBundleContext().getServiceReference(SimpleDriver.class.getName());
         if(ref != null) addingSimpleDriver(ref);
@@ -106,7 +106,7 @@ public class SimpleDriverServiceTracker implements ServiceListener{
         }
         importingQueue.close();
         importingQueue = new ImportingQueue();
-        annunceListener.setQueue(importingQueue);
+        announceListener.setQueue(importingQueue);
         Activator.unregisterAllDeviceService();
     }
 
@@ -114,7 +114,7 @@ public class SimpleDriverServiceTracker implements ServiceListener{
         logger.info("A service of {} is leaving", SimpleDriver.class);
         synchronized (driverLock) {
             if ( driverReference == sr ) {
-                driverService.removeAnnunceListener(annunceListener);
+                driverService.removeAnnounceListener(announceListener);
                 Activator.getBundleContext().ungetService(driverReference);
                 driverReference = null;
             } else {
@@ -132,7 +132,7 @@ public class SimpleDriverServiceTracker implements ServiceListener{
         AFLayer.getAFLayer(driverService);
         final EnumSet<DiscoveryMode> enabledDiscoveries = Activator.getCurrentConfiguration().getDiscoveryMode();
         if ( enabledDiscoveries.contains( DiscoveryMode.Announce ) ) {
-            driverService.addAnnunceListener(annunceListener);
+            driverService.addAnnounceListener(announceListener);
         } else {
             logger.debug( "ANNOUNCE discovery disabled due to {}", BaseDriverProperties.DISCOVERY_MODE_KEY );
         }

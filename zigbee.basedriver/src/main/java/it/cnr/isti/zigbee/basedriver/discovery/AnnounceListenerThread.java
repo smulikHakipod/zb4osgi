@@ -25,7 +25,7 @@ package it.cnr.isti.zigbee.basedriver.discovery;
 import it.cnr.isti.zigbee.api.ZigBeeNode;
 import it.cnr.isti.zigbee.basedriver.Activator;
 import it.cnr.isti.zigbee.basedriver.api.impl.ZigBeeNodeImpl;
-import it.cnr.isti.zigbee.dongle.api.AnnunceListner;
+import it.cnr.isti.zigbee.dongle.api.AnnounceListner;
 import it.cnr.isti.zigbee.dongle.api.SimpleDriver;
 
 import org.aaloa.zb4osgi.api.monitor.ZigBeeDiscoveryMonitor;
@@ -40,7 +40,7 @@ import com.itaca.ztool.api.ZToolAddress64;
 /**
  *
  * <b>NOTE:</b>This class doesn't implement a real {@link Thread}, anyway<br>
- * because it is a {@link AnnunceListner} a different thread then the application will call
+ * because it is a {@link AnnounceListner} a different thread then the application will call
  * the {@link #notify(ZToolAddress16, ZToolAddress64, ZToolAddress16, int)} method.
  *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
@@ -49,7 +49,7 @@ import com.itaca.ztool.api.ZToolAddress64;
  * @since 0.1.0
  *
  */
-public class AnnounceListenerThread implements AnnunceListner{
+public class AnnounceListenerThread implements AnnounceListner{
 
     private final static Logger logger = LoggerFactory.getLogger(AnnounceListenerThread.class);
 

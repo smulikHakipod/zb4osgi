@@ -29,7 +29,7 @@ import it.cnr.isti.cc2480.low.HWLowLevelDriver;
 import it.cnr.isti.cc2480.low.PacketListener;
 import it.cnr.isti.primitvetypes.util.Integers;
 import it.cnr.isti.zigbee.dongle.api.AFMessageListner;
-import it.cnr.isti.zigbee.dongle.api.AnnunceListner;
+import it.cnr.isti.zigbee.dongle.api.AnnounceListner;
 import it.cnr.isti.zigbee.dongle.api.ConfigurationProperties;
 import it.cnr.isti.zigbee.dongle.api.DriverStatus;
 import it.cnr.isti.zigbee.dongle.api.NetworkMode;
@@ -130,7 +130,7 @@ public class DriverEZ430_RF2480 implements Runnable, SimpleDriver{
 	private final int RESEND_MAX_RETRY;
 	private final boolean RESEND_ONLY_EXCEPTION;
 
-	private final HashSet<AnnunceListner> annunceListners = new HashSet<AnnunceListner>();
+	private final HashSet<AnnounceListner> annunceListners = new HashSet<AnnounceListner>();
 	private final AnnunceListerFilter annunceListner = new AnnunceListerFilter(annunceListners);
 
 	private final ArrayList<AFMessageListner> afMessageListners = new ArrayList<AFMessageListner>();
@@ -141,9 +141,9 @@ public class DriverEZ430_RF2480 implements Runnable, SimpleDriver{
 
 	private class AnnunceListerFilter implements AsynchrounsCommandListener{
 
-		private final Collection<AnnunceListner> listners;
+		private final Collection<AnnounceListner> listners;
 
-		private AnnunceListerFilter(Collection<AnnunceListner> list){
+		private AnnunceListerFilter(Collection<AnnounceListner> list){
 			listners = list;
 		}
 
@@ -151,7 +151,7 @@ public class DriverEZ430_RF2480 implements Runnable, SimpleDriver{
 			if(packet.isError()) return;
 			if(packet.getCMD().get16BitValue() == ZToolCMD.ZDO_END_DEVICE_ANNCE_IND){
 				ZDO_END_DEVICE_ANNCE_IND annunce = (ZDO_END_DEVICE_ANNCE_IND) packet;
-				for (AnnunceListner l : listners) {
+				for (AnnounceListner l : listners) {
 					l.notify(annunce.SrcAddr, annunce.IEEEAddr, annunce.NwkAddr, annunce.Capabilities);
 				}
 			}
@@ -1175,14 +1175,14 @@ public class DriverEZ430_RF2480 implements Runnable, SimpleDriver{
 		return response[0];
 	}
 
-	public boolean addAnnunceListener(AnnunceListner listner){
+	public boolean addAnnounceListener(AnnounceListner listner){
 		if(annunceListners.isEmpty() && isHardwareReady() ){
 			high.addAsynchrounsCommandListener(annunceListner);
 		}
 		return annunceListners.add(listner);
 	}
 
-	public boolean removeAnnunceListener(AnnunceListner listner){
+	public boolean removeAnnounceListener(AnnounceListner listner){
 		boolean result = annunceListners.remove(listner);
 		if(annunceListners.isEmpty() && isHardwareReady() ){
 			high.removeAsynchrounsCommandListener(annunceListner);
