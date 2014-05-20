@@ -53,7 +53,7 @@ public class AnnounceListenerThread implements AnnunceListner{
 
     private final static Logger logger = LoggerFactory.getLogger(AnnounceListenerThread.class);
 
-    private final ImportingQueue queue;
+    private ImportingQueue queue;
 
     /**
      * Created the {@link AnnounceListenerThread} object and register itself to the {@link SimpleDriver}<br>
@@ -66,12 +66,25 @@ public class AnnounceListenerThread implements AnnunceListner{
         this.queue = queue;
     }
 
+    /**
+     * Update the {@link ImportingQueue} used for discovering devices
+     *
+     * @param queue the new {@link ImportingQueue} to use
+     */
+    public void setQueue(final ImportingQueue queue){
+        synchronized (this) {
+            this.queue = queue;
+        }
+    }
+
     public void notify(ZToolAddress16 senderAddress,
             ZToolAddress64 ieeeAddress, ZToolAddress16 destinationAddress,
             int capabilitiesBitmask) {
 
-        logger.info("received an ANNUNCE from {} {}", senderAddress, ieeeAddress);
-        queue.push(senderAddress, ieeeAddress);
+        logger.info("received an ANNOUNCE from {} {}", senderAddress, ieeeAddress);
+        synchronized (this) {
+            queue.push(senderAddress, ieeeAddress);
+        }
         annuncedNode( new ZigBeeNodeImpl( senderAddress.get16BitValue(), ieeeAddress ) );
     }
 

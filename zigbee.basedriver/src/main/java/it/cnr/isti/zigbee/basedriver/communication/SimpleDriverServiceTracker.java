@@ -46,6 +46,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
+ * @author <a href="mailto:giancarlo.riolo@isti.cnr.it">Giancarlo Riolo</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.6.0
  *
@@ -105,6 +106,7 @@ public class SimpleDriverServiceTracker implements ServiceListener{
         }
         importingQueue.close();
         importingQueue = new ImportingQueue();
+        annunceListener.setQueue(importingQueue);
         Activator.unregisterAllDeviceService();
     }
 
@@ -132,7 +134,7 @@ public class SimpleDriverServiceTracker implements ServiceListener{
         if ( enabledDiscoveries.contains( DiscoveryMode.Announce ) ) {
             driverService.addAnnunceListener(annunceListener);
         } else {
-            logger.debug( "ANNUNCE discovery disabled due to {}", BaseDriverProperties.DISCOVERY_MODE_KEY );
+            logger.debug( "ANNOUNCE discovery disabled due to {}", BaseDriverProperties.DISCOVERY_MODE_KEY );
         }
 
         if ( enabledDiscoveries .contains( DiscoveryMode.Addressing ) ) {
