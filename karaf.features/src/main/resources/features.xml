@@ -32,7 +32,8 @@
 	</feature>
 	<feature name="zb4o-driver-stub" version="${project.version}"> <!-- OK -->
 		<feature version="${project.version}">zb4o-base</feature>
-		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.basedriver.stub/0.2.0-SNAPSHOT
+		<feature version="${project.version}">zb4o-tester</feature>
+		<bundle start='false'>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.basedriver.stub/0.2.0-SNAPSHOT
 		</bundle>
 	</feature>
 	<feature name="zb4o-driver-CC2530" version="${project.version}">
@@ -50,16 +51,23 @@
 	</feature>
 	<feature name="zb4o-tester" version="${project.version}">
 		<feature version="${project.version}">zb4o-base</feature>
-		<bundle start='false'>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.tester/0.5.0-SNAPSHOT
+		<bundle start='true'>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.tester/0.5.0-SNAPSHOT
 		</bundle>
 	</feature>
-	<feature name="zb4o-all" version="${project.version}">
+	<feature name="zb4o" version="${project.version}">
+		<feature version="${project.version}">zb4o-base</feature>		
+		<feature version="${project.version}">zb4o-driver-CC2530</feature>		
+		<feature version="${project.version}">zb4o-tester</feature>
+	</feature>
+	
+	<feature name="zb4o-dev" version="${project.version}">
 		<feature version="${project.version}">zb4o-base</feature>
 		<feature version="${project.version}">zb4o-driver-stub</feature>
 		<feature version="${project.version}">zb4o-driver-CC2530</feature>
 		<feature version="${project.version}">zb4o-driver-EZ430</feature>
 		<feature version="${project.version}">zb4o-tester</feature>
 	</feature>
+	
 	<feature name="zb4o-rxtx" version="${project.version}">
 		<bundle>mvn:org.aaloa.zb4osgi.bundle/org.aaloa.zb4osgi.externals.rxtx/2.1.7-5-SNAPSHOT
 		</bundle>

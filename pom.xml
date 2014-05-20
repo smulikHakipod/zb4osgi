@@ -51,6 +51,7 @@
     <module>zigbee.common</module>
     <module>zigbee.network.browser</module>
     <module>externals/bundles</module>
+    <module>karaf.features</module>
   </modules>
 
   <scm>
