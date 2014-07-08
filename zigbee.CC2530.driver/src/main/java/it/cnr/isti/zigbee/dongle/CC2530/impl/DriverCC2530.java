@@ -408,7 +408,7 @@ public class DriverCC2530 implements Runnable, SimpleDriver {
             logger.debug("Closing NETWORK");
             setState(DriverStatus.HARDWARE_READY);
         }
-        if (state == DriverStatus.HARDWARE_READY) {
+        if (state == DriverStatus.HARDWARE_READY || state == DriverStatus.NETWORK_INITIALIZING ) {
             logger.debug("Closing HARDWARE");
             high.close();
             logger.debug("Closing LOW HARDWARE");
@@ -597,6 +597,10 @@ public class DriverCC2530 implements Runnable, SimpleDriver {
         if (initializeZigBeeNetwork() == true) {
             setState(DriverStatus.NETWORK_READY);
         } else {
+            /*
+             * We reset the status of the driver to HARDWARE_READY because the network initialization failed
+             */
+            setState(DriverStatus.HARDWARE_READY);
             close();
             return;
         }
