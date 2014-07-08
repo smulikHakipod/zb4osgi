@@ -24,6 +24,7 @@ package it.cnr.isti.zigbee.ha;
 
 import it.cnr.isti.zigbee.ha.cluster.factory.HAClustersFactory;
 import it.cnr.isti.zigbee.ha.device.api.generic.LevelControlSwitch;
+import it.cnr.isti.zigbee.ha.device.api.generic.LevelControllableOutput;
 import it.cnr.isti.zigbee.ha.device.api.generic.MainsPowerOutlet;
 import it.cnr.isti.zigbee.ha.device.api.generic.OnOffOutput;
 import it.cnr.isti.zigbee.ha.device.api.generic.OnOffSwitch;
@@ -47,6 +48,7 @@ import it.cnr.isti.zigbee.ha.device.impl.IASControlAndIndicatingEquipmentDevice;
 import it.cnr.isti.zigbee.ha.device.impl.IAS_Warning_Device;
 import it.cnr.isti.zigbee.ha.device.impl.IAS_ZoneDevice;
 import it.cnr.isti.zigbee.ha.device.impl.LevelControlSwitchDevice;
+import it.cnr.isti.zigbee.ha.device.impl.LevelControllableOutputDevice;
 import it.cnr.isti.zigbee.ha.device.impl.LightSensorDevice;
 import it.cnr.isti.zigbee.ha.device.impl.MainsPowerOutletDevice;
 import it.cnr.isti.zigbee.ha.device.impl.OccupancySensorDevice;
@@ -145,6 +147,7 @@ public class Activator implements BundleActivator {
         refinedAvailables.put( TemperatureSensor.class, TemperatureSensorDevice.class );
         refinedAvailables.put( IAS_Warning.class, IAS_Warning_Device.class );
         refinedAvailables.put( SimpleSensor.class, SimpleSensorDevice.class );
+        refinedAvailables.put( LevelControllableOutput.class, LevelControllableOutputDevice.class );
 
         final Iterator< Entry<Class<?>, Class<?>> > i = refinedAvailables.entrySet().iterator();
         while ( i.hasNext() ) {
