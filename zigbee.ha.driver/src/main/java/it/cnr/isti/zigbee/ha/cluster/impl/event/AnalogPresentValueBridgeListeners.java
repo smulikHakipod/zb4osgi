@@ -1,5 +1,5 @@
 /*
-   Copyright 2013-2013 CNR-ISTI, http://isti.cnr.it
+   Copyright 2013-2014 CNR-ISTI, http://isti.cnr.it
    Institute of Information Science and Technologies
    of the Italian National Research Council
 
@@ -23,9 +23,10 @@
 package it.cnr.isti.zigbee.ha.cluster.impl.event;
 
 import it.cnr.isti.zigbee.ha.cluster.glue.Cluster;
-import it.cnr.isti.zigbee.ha.cluster.glue.general.event.PresentValueEvent;
-import it.cnr.isti.zigbee.ha.cluster.glue.general.event.PresentValueListener;
+import it.cnr.isti.zigbee.ha.cluster.glue.general.event.AnalogPresentValueEvent;
+import it.cnr.isti.zigbee.ha.cluster.glue.general.event.AnalogPresentValueListener;
 import it.cnr.isti.zigbee.ha.driver.core.ReportingConfiguration;
+import it.cnr.isti.zigbee.zcl.library.api.core.AnalogSubscription;
 import it.cnr.isti.zigbee.zcl.library.api.core.Attribute;
 import it.cnr.isti.zigbee.zcl.library.api.core.ReportListener;
 import it.cnr.isti.zigbee.zcl.library.api.core.Subscription;
@@ -36,25 +37,24 @@ import java.util.List;
 
 /**
 *
-* @author <a href="mailto:h.alink1@chello.nl">Han Alink</a>
 * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
 * @version $LastChangedRevision$ ($LastChangedDate$)
-* @since 0.7.0
+* @since 0.9.0
 *
 */
-public class PresentValueBridgeListeners implements ReportListener {
+public class AnalogPresentValueBridgeListeners implements ReportListener {
 
-    private class PresentValueEventImpl implements PresentValueEvent{
+    private class FloatPresentValueEventImpl implements AnalogPresentValueEvent{
 
         private final Cluster source;
-        private final boolean event;
+        private final float event;
 
-        public PresentValueEventImpl(Cluster cluster, Boolean value) {
+        public FloatPresentValueEventImpl(Cluster cluster, Float value) {
             source = cluster;
             event = value;
         }
 
-        public boolean getEvent() {
+        public float getEvent() {
             return event;
         }
 
@@ -64,11 +64,11 @@ public class PresentValueBridgeListeners implements ReportListener {
     }
 
     private final Attribute bridged;
-    private final ArrayList<PresentValueListener> listeners = new ArrayList<PresentValueListener>();
+    private final ArrayList<AnalogPresentValueListener> listeners = new ArrayList<AnalogPresentValueListener>();
     private final Cluster cluster;
     private final ReportingConfiguration configuration;
 
-    public PresentValueBridgeListeners(final ReportingConfiguration conf, final Attribute attribute, final Cluster c) {
+    public AnalogPresentValueBridgeListeners(final ReportingConfiguration conf, final Attribute attribute, final Cluster c) {
         bridged = attribute;
         cluster = c;
         configuration = conf;
@@ -79,23 +79,24 @@ public class PresentValueBridgeListeners implements ReportListener {
             return;
         }
         synchronized (listeners) {
-            for (PresentValueListener listener : listeners) {
-                listener.changedPresentValue(new PresentValueEventImpl(cluster, (Boolean) reports.get(bridged)));
+            for (AnalogPresentValueListener listener : listeners) {
+                listener.changedPresentValue(new FloatPresentValueEventImpl(cluster, (Float) reports.get(bridged)));
             }
         }
     }
 
-    public List<PresentValueListener> getListeners(){
+    public List<AnalogPresentValueListener> getListeners(){
         return listeners;
     }
 
-    public boolean subscribe(PresentValueListener listener) {
+    public boolean subscribe(AnalogPresentValueListener listener) {
         synchronized (listeners) {
             if ( listeners.size() == 0 ) {
-                Subscription subscription = bridged.getSubscription();
+                AnalogSubscription subscription = (AnalogSubscription) bridged.getSubscription();
                 if ( configuration.getReportingOverwrite() || subscription.isActive() == false ) {
                     subscription.setMaximumReportingInterval(configuration.getReportingMaximum());
                     subscription.setMinimumReportingInterval(configuration.getReportingMinimum());
+                    subscription.setReportableChange(configuration.getReportingChange());
                     subscription.updateConfiguration();
                 }
                 if ( subscription.addReportListener(this) == false ) {
@@ -106,7 +107,7 @@ public class PresentValueBridgeListeners implements ReportListener {
         }
     }
 
-    public boolean unsubscribe(PresentValueListener listener) {
+    public boolean unsubscribe(AnalogPresentValueListener listener) {
         synchronized (listeners) {
             listeners.remove(listener);
             if ( listeners.size() == 0 ) {

@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2013 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2008-2014 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,19 +23,18 @@
 package it.cnr.isti.zigbee.ha.cluster.glue.general;
 
 import it.cnr.isti.zigbee.ha.cluster.glue.Cluster;
-import it.cnr.isti.zigbee.ha.cluster.glue.general.event.PresentValueListener;
+import it.cnr.isti.zigbee.ha.cluster.glue.general.event.AnalogPresentValueListener;
 import it.cnr.isti.zigbee.ha.driver.core.ZigBeeHAException;
+
 /**
- * 
- * @author <a href="mailto:giancarlo.riolo@isti.cnr.it">Giancarlo Riolo</a>
- * @version $LastChangedRevision:  $ ($LastChangedDate: $)
  *
+ * @author <a href="mailto:giancarlo.riolo@isti.cnr.it">Giancarlo Riolo</a>
+ * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
+ * @version $LastChangedRevision$ ($LastChangedDate$)
+ * @since 0.9.0
  */
+public interface AnalogInput extends Cluster {
 
-public interface AnalogInput extends Cluster{
-
-	
-   
     public String getDescription() throws ZigBeeHAException;
     public float getMaxPresentValue() throws ZigBeeHAException;
     public float getMinPresentValue() throws ZigBeeHAException;
@@ -47,9 +46,8 @@ public interface AnalogInput extends Cluster{
     public int getEngineeringUnits() throws ZigBeeHAException;
     public long getApplicationType() throws ZigBeeHAException;
 
-   
-	public boolean subscribe(PresentValueListener listener);
-	public boolean unsubscribe(PresentValueListener listener);
-	
+    public boolean subscribe(AnalogPresentValueListener listener);
+    public boolean unsubscribe(AnalogPresentValueListener listener);
+
 }
 

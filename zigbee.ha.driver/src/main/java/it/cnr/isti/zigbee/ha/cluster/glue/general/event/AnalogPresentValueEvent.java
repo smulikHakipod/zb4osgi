@@ -1,5 +1,5 @@
 /*
-   Copyright 2013-2013 CNR-ISTI, http://isti.cnr.it
+   Copyright 2013-2014 CNR-ISTI, http://isti.cnr.it
    Institute of Information Science and Technologies
    of the Italian National Research Council
 
@@ -18,19 +18,23 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-*/
+ */
 
 package it.cnr.isti.zigbee.ha.cluster.glue.general.event;
 
-/**
-*
-* @author <a href="mailto:h.alink1@chello.nl">Han Alink</a>
-* @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
-* @version $LastChangedRevision$ ($LastChangedDate$)
-* @since 0.7.0
-*
-*/
-public interface PresentValueListener {
+import it.cnr.isti.zigbee.ha.cluster.glue.Cluster;
 
-    public void changedPresentValue(PresentValueEvent event);
+/**
+ *
+ * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
+ * @version $LastChangedRevision$ ($LastChangedDate$)
+ * @since 0.9.0
+ *
+ */
+public interface AnalogPresentValueEvent {
+
+    public float getEvent();
+
+    public Cluster getSource();
+
 }

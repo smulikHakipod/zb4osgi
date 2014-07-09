@@ -1,5 +1,5 @@
 /*
-   Copyright 2013-2013 CNR-ISTI, http://isti.cnr.it
+   Copyright 2013-2014 CNR-ISTI, http://isti.cnr.it
    Institute of Information Science and Technologies
    of the Italian National Research Council
 
@@ -32,7 +32,7 @@ import it.cnr.isti.zigbee.ha.cluster.glue.Cluster;
 * @since 0.7.0
 *
 */
-public interface PresentValueEvent {
+public interface BinaryPresentValueEvent {
 
     public boolean getEvent();
 

@@ -23,7 +23,7 @@
 package it.cnr.isti.zigbee.ha.cluster.glue.general;
 
 import it.cnr.isti.zigbee.ha.cluster.glue.Cluster;
-import it.cnr.isti.zigbee.ha.cluster.glue.general.event.PresentValueListener;
+import it.cnr.isti.zigbee.ha.cluster.glue.general.event.BinaryPresentValueListener;
 import it.cnr.isti.zigbee.ha.driver.core.ZigBeeHAException;
 
 
@@ -49,14 +49,14 @@ public interface BinaryInput extends Cluster {
 
     /**
      *
-     * @param listener The {@link PresentValueListener} to subscribe for events
+     * @param listener The {@link BinaryPresentValueListener} to subscribe for events
      */
-    public boolean subscribe(PresentValueListener listener);
+    public boolean subscribe(BinaryPresentValueListener listener);
 
     /**
      *
-     * @param listener The {@link PresentValueListener} to unsubscribe
+     * @param listener The {@link BinaryPresentValueListener} to unsubscribe
      */
-    public boolean unsubscribe(PresentValueListener listener);
+    public boolean unsubscribe(BinaryPresentValueListener listener);
 
 }
