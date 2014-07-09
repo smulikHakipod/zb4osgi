@@ -25,8 +25,8 @@ package it.cnr.isti.zigbee.ha.cluster.impl;
 import it.cnr.isti.zigbee.api.ZigBeeDevice;
 import it.cnr.isti.zigbee.ha.Activator;
 import it.cnr.isti.zigbee.ha.cluster.glue.general.BinaryInput;
-import it.cnr.isti.zigbee.ha.cluster.glue.general.event.PresentValueListener;
-import it.cnr.isti.zigbee.ha.cluster.impl.event.PresentValueBridgeListeners;
+import it.cnr.isti.zigbee.ha.cluster.glue.general.event.BinaryPresentValueListener;
+import it.cnr.isti.zigbee.ha.cluster.impl.event.BinaryPresentValueBridgeListeners;
 import it.cnr.isti.zigbee.ha.driver.core.ZigBeeHAException;
 import it.cnr.isti.zigbee.zcl.library.api.core.Attribute;
 import it.cnr.isti.zigbee.zcl.library.api.core.Subscription;
@@ -48,21 +48,21 @@ public class BinaryInputImpl implements BinaryInput {
     private final Attribute outOfService;
     private final Attribute statusFlags;
     private final BinaryInputCluster binaryInput;
-    private PresentValueBridgeListeners eventBridge;
+    private BinaryPresentValueBridgeListeners eventBridge;
 
     public BinaryInputImpl(ZigBeeDevice zbDevice){
         binaryInput = new BinaryInputCluster(zbDevice);
         presentValue = binaryInput.getAttributePresentValue();
         outOfService = binaryInput.getAttributeOutOfService();
         statusFlags = binaryInput.getAttributeStatusFlags();
-        eventBridge = new PresentValueBridgeListeners(Activator.getConfiguration(), presentValue, this);
+        eventBridge = new BinaryPresentValueBridgeListeners(Activator.getConfiguration(), presentValue, this);
     }
 
-    public boolean subscribe(PresentValueListener listener) {
+    public boolean subscribe(BinaryPresentValueListener listener) {
         return eventBridge.subscribe(listener);
     }
 
-    public boolean unsubscribe(PresentValueListener listener) {
+    public boolean unsubscribe(BinaryPresentValueListener listener) {
         return eventBridge.unsubscribe(listener);
     }
 
