@@ -80,25 +80,25 @@ public class LevelControllableOutputDevice extends HADeviceBase implements Level
 
     @Override
     public String getName() {
-        return OnOffOutput.NAME;
+        return LevelControllableOutput.NAME;
     }
 
     public final static DeviceDescription DEVICE_DESCRIPTOR =  new AbstractDeviceDescription(){
 
         public int[] getCustomClusters() {
-            return OnOffLight.CUSTOM;
+            return LevelControllableOutput.CUSTOM;
         }
 
         public int[] getMandatoryCluster() {
-            return OnOffLight.MANDATORY;
+            return LevelControllableOutput.MANDATORY;
         }
 
         public int[] getOptionalCluster() {
-            return OnOffLight.OPTIONAL;
+            return LevelControllableOutput.OPTIONAL;
         }
 
         public int[] getStandardClusters() {
-            return OnOffLight.STANDARD;
+            return LevelControllableOutput.STANDARD;
         }
 
     };
