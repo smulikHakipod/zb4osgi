@@ -847,12 +847,20 @@ public class Attributes  {
     .setZigBeeType(ZigBeeType.Bitmap8bit)
     .setWritable(false);
 
-    final static public  AttributeDescriptor PRESENT_VALUE = new AbstractAttribute()
+    final static public  AttributeDescriptor ANALOG_PRESENT_VALUE = new AbstractAttribute()
     .setId(0x0055)
     .setName("PresentValue")
     .setReportable(true)
     .setZigBeeType(ZigBeeType.SinglePrecision)
     .setWritable(true);
+
+    final static public  AttributeDescriptor BINARY_PRESENT_VALUE = new AbstractAttribute()
+    .setId(0x0055)
+    .setName("PresentValue")
+    .setReportable(true)
+    .setZigBeeType(ZigBeeType.Boolean)
+    .setWritable(true);
+
 
     final static public  AttributeDescriptor APPLICATION_TYPE = new AbstractAttribute()
     .setId(0x0100)
@@ -896,28 +904,28 @@ public class Attributes  {
     .setZigBeeType(ZigBeeType.CharacterString)
     .setWritable(true);
 
-	public static final AttributeDescriptor MAX_PRESENT_VALUE = new AbstractAttribute()
+    public static final AttributeDescriptor MAX_PRESENT_VALUE = new AbstractAttribute()
     .setId(0x0041)
     .setName("MaxPresentValue")
     .setReportable(false)
     .setZigBeeType(ZigBeeType.SinglePrecision)
     .setWritable(true);
-	
-	public static final AttributeDescriptor MIN_PRESENT_VALUE= new AbstractAttribute()
+
+    public static final AttributeDescriptor MIN_PRESENT_VALUE= new AbstractAttribute()
     .setId(0x0045)
     .setName("MinPresentValue")
     .setReportable(false)
     .setZigBeeType(ZigBeeType.SinglePrecision)
     .setWritable(true);
-	
-	public static final AttributeDescriptor RESOLUTION = new AbstractAttribute()
+
+    public static final AttributeDescriptor RESOLUTION = new AbstractAttribute()
     .setId(0x006A)
     .setName("Resolution")
     .setReportable(false)
     .setZigBeeType(ZigBeeType.SinglePrecision)
     .setWritable(true);
-	
-	public static final AttributeDescriptor ENGINEERING_UNITS = new AbstractAttribute()
+
+    public static final AttributeDescriptor ENGINEERING_UNITS = new AbstractAttribute()
     .setId(0x0075)
     .setName("EngineeringUnits")
     .setReportable(false)
@@ -925,5 +933,5 @@ public class Attributes  {
     .setWritable(true);
 
 
-	
+
 }

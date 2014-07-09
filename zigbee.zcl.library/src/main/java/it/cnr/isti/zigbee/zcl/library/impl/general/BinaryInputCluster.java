@@ -1,5 +1,5 @@
 /*
-   Copyright 2013-2013 CNR-ISTI, http://isti.cnr.it
+   Copyright 2013-2014 CNR-ISTI, http://isti.cnr.it
    Institute of Information Science and Technologies
    of the Italian National Research Council
 
@@ -54,7 +54,7 @@ public class BinaryInputCluster extends ZCLClusterBase implements BinaryInput {
 
     public BinaryInputCluster(ZigBeeDevice zbDevice) {
         super(zbDevice);
-        presentValue = new AttributeImpl(zbDevice, this, Attributes.PRESENT_VALUE);
+        presentValue = new AttributeImpl(zbDevice, this, Attributes.BINARY_PRESENT_VALUE);
         outOfService = new AttributeImpl(zbDevice, this, Attributes.OUT_OF_SERVICE);
         statusFlags = new AttributeImpl(zbDevice, this, Attributes.STATUS_FLAGS);
 
