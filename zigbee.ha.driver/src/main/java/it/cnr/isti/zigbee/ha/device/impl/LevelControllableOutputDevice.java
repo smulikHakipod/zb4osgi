@@ -28,8 +28,6 @@ import it.cnr.isti.zigbee.ha.cluster.glue.general.LevelControl;
 import it.cnr.isti.zigbee.ha.cluster.glue.general.OnOff;
 import it.cnr.isti.zigbee.ha.cluster.glue.general.Scenes;
 import it.cnr.isti.zigbee.ha.device.api.generic.LevelControllableOutput;
-import it.cnr.isti.zigbee.ha.device.api.generic.OnOffOutput;
-import it.cnr.isti.zigbee.ha.device.api.lighting.OnOffLight;
 import it.cnr.isti.zigbee.ha.driver.core.HADeviceBase;
 import it.cnr.isti.zigbee.ha.driver.core.HAProfile;
 import it.cnr.isti.zigbee.ha.driver.core.ZigBeeHAException;
