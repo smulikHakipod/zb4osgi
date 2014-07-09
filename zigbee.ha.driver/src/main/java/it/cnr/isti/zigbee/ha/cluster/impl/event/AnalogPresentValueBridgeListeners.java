@@ -44,12 +44,12 @@ import java.util.List;
 */
 public class AnalogPresentValueBridgeListeners implements ReportListener {
 
-    private class FloatPresentValueEventImpl implements AnalogPresentValueEvent{
+    private class AnalogPresentValueEventImpl implements AnalogPresentValueEvent{
 
         private final Cluster source;
         private final float event;
 
-        public FloatPresentValueEventImpl(Cluster cluster, Float value) {
+        public AnalogPresentValueEventImpl(Cluster cluster, Float value) {
             source = cluster;
             event = value;
         }
@@ -80,7 +80,7 @@ public class AnalogPresentValueBridgeListeners implements ReportListener {
         }
         synchronized (listeners) {
             for (AnalogPresentValueListener listener : listeners) {
-                listener.changedPresentValue(new FloatPresentValueEventImpl(cluster, (Float) reports.get(bridged)));
+                listener.changedPresentValue(new AnalogPresentValueEventImpl(cluster, (Float) reports.get(bridged)));
             }
         }
     }
