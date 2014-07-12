@@ -507,6 +507,7 @@ public class DriverEZ430_RF2480 implements Runnable, SimpleDriver{
             low.open(portToOpen, rate);
         } catch (ZToolException e) {
             logger.error("The port was already open in advance but we can't open it now",e);
+            low.close();
             return false;
         }
         high = new HWHighLevelDriver(low);
