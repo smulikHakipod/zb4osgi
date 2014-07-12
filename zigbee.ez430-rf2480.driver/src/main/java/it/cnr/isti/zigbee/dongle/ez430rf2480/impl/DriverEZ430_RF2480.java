@@ -119,7 +119,7 @@ public class DriverEZ430_RF2480 implements Runnable, SimpleDriver{
     private HWLowLevelDriver low;
     private String port;
     private int rate;
-    private DriverStatus state;
+    private volatile DriverStatus state;
     private NetworkMode mode;
     private short pan;
     private byte channel;
