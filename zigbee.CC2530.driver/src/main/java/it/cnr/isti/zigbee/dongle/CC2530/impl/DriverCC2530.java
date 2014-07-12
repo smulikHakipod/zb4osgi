@@ -133,7 +133,7 @@ public class DriverCC2530 implements Runnable, SimpleDriver {
     private HWLowLevelDriver low;
     private String port;
     private int rate;
-    private DriverStatus state;
+    private volatile DriverStatus state;
     private NetworkMode mode;
     private short pan;
     private byte channel;
@@ -644,6 +644,7 @@ public class DriverCC2530 implements Runnable, SimpleDriver {
             logger.error(
                     "The port was already open in advance but we can't open it now",
                     e);
+            low.close();
             return false;
         }
         high = new HWHighLevelDriver(low);
