@@ -1,11 +1,11 @@
 /*
    Copyright 2008-2013 ITACA-TSB, http://www.tsb.upv.es/
-   Instituto Tecnologico de Aplicaciones de Comunicacion 
-   Avanzadas - Grupo Tecnologias para la Salud y el 
+   Instituto Tecnologico de Aplicaciones de Comunicacion
+   Avanzadas - Grupo Tecnologias para la Salud y el
    Bienestar (TSB)
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -678,6 +678,10 @@ public class ZToolCMD {
         /// <name>TI.ZPI2.MESSAGE_ID.ZDO_USER_DESC_SET_SRSP</name>
         /// <summary>Response for ZDO_USER_DESC_SET</summary>
         public static final int ZDO_USER_DESC_SET_SRSP = 0x650b;
+
+        public static final int ZDO_MGMT_NWK_UPDATE_REQ = 0x2537;
+        public static final int ZDO_MGMT_NWK_UPDATE_REQ_SRSP = 0x6537;
+
         /// <name>TI.ZPI2.MESSAGE_ID.ZMAC_ASSOCIATE_CNF</name>
         /// <summary>This sends a associat confirm command</summary>
         public static final int ZMAC_ASSOCIATE_CNF = 0x4282;
@@ -807,5 +811,4 @@ public class ZToolCMD {
         /// <name>TI.ZPI2.MESSAGE_ID.ZMAC_SYNCHRONIZE_RESPONSE</name>
         /// <summary>Response for ZMAC_SYNCHRONIZE_REQUEST</summary>
         public static final int ZMAC_SYNCHRONIZE_RESPONSE = 0x6204;
-
 }
