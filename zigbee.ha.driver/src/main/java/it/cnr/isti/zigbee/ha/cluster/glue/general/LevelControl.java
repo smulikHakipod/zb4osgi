@@ -1,10 +1,10 @@
 /*
    Copyright 2008-2013 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,49 +37,44 @@ import it.cnr.isti.zigbee.zcl.library.api.core.Attribute;
  */
 public interface LevelControl extends Cluster {
 
-	public Attribute getCurrentLevel();
-	public Attribute getRemainingTime();
-	public Attribute getOnOffTransitionTime();
-	public Attribute getOnLevel();
-	
-	/**
-	 * 
-	 * @param listener The {@link CurrentLevelListener} to subscribe for events
-	 * @since 0.2.0
-	 */
-	public boolean subscribe(CurrentLevelListener listener);
-	
-	/**
-	 * 
-	 * @param listener The {@link CurrentLevelListener} to unsubscribe
-	 * @since 0.2.0
-	 */
-	public boolean unsubscribe(CurrentLevelListener listener);
-	
-	
-	public void moveToLevel(short level, int time) throws ZigBeeHAException;
-	public void move(byte mode, short rate) throws ZigBeeHAException;
-	public void step(byte mode, short step, int time) throws ZigBeeHAException;
-	public void stop() throws ZigBeeHAException;
+    public Attribute getCurrentLevel();
+    public Attribute getRemainingTime();
+    public Attribute getOnOffTransitionTime();
+    public Attribute getOnLevel();
 
-	/**
-	 * @since 0.6.0
-	 */
-	public void moveToLevelWithOnOff(short level, int time) throws ZigBeeHAException;
+    /**
+     *
+     * @param listener The {@link CurrentLevelListener} to subscribe for events
+     * @since 0.2.0
+     */
+    public boolean subscribe(CurrentLevelListener listener);
 
-	/**
-	 * @since 0.6.0
-	 */
-	public void moveWithOnOff(byte mode, short rate) throws ZigBeeHAException;
+    /**
+     *
+     * @param listener The {@link CurrentLevelListener} to unsubscribe
+     * @since 0.2.0
+     */
+    public boolean unsubscribe(CurrentLevelListener listener);
 
-	/**
-	 * @since 0.6.0
-	 */
-	public void stepWithOnOff(byte mode, short step, int time) throws ZigBeeHAException;
-	
-	/**
-	 * @since 0.6.0
-	 */
-	public void stopWithOnOff() throws ZigBeeHAException;
-	
+
+    public void moveToLevel(short level, int time) throws ZigBeeHAException;
+    public void move(byte mode, short rate) throws ZigBeeHAException;
+    public void step(byte mode, short step, int time) throws ZigBeeHAException;
+    public void stop() throws ZigBeeHAException;
+
+    /**
+     * @since 0.6.0
+     */
+    public void moveToLevelWithOnOff(short level, int time) throws ZigBeeHAException;
+
+    /**
+     * @since 0.6.0
+     */
+    public void moveWithOnOff(byte mode, short rate) throws ZigBeeHAException;
+
+    /**
+     * @since 0.6.0
+     */
+    public void stepWithOnOff(byte mode, short step, int time) throws ZigBeeHAException;
+
 }

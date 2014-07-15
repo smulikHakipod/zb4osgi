@@ -45,119 +45,112 @@ import it.cnr.isti.zigbee.zcl.library.impl.global.DefaultResponseImpl;
 public class LevelControlCluster extends ZCLClusterBase implements LevelControl {
 
 
+    private final AttributeImpl currentLevel;
+    private final AttributeImpl remainingTime;
+    private final AttributeImpl onOffTransactionTime;
+    private final AttributeImpl onLevel;
 
-	private final AttributeImpl currentLevel;
-	private final AttributeImpl remainingTime;
-	private final AttributeImpl onOffTransactionTime;
-	private final AttributeImpl onLevel;
+    private final Attribute[] attributes;
 
-	private final Attribute[] attributes;
+    private static EmptyPayloadCommand CMD_STOP = new EmptyPayloadCommand()
+        .setId(LevelControl.STOP_ID)
+        .setClientServerDirection(true)
+        .setClusterSpecific(true)
+        .setManufacturerExtension(false);
 
-	private static EmptyPayloadCommand CMD_STOP = new EmptyPayloadCommand()
-		.setId(LevelControl.STOP_ID)
-		.setClientServerDirection(true)
-		.setClusterSpecific(true)
-		.setManufacturerExtension(false);
-
-	private static EmptyPayloadCommand CMD_STOP_WITH_ONOFF = new EmptyPayloadCommand()
-		.setId(LevelControl.STOP_WITH_ONOFF_ID)
-		.setClientServerDirection(true)
-		.setClusterSpecific(true)
-		.setManufacturerExtension(false);
+    private static EmptyPayloadCommand CMD_STOP_WITH_ONOFF = new EmptyPayloadCommand()
+        .setId(LevelControl.STOP_WITH_ONOFF_ID)
+        .setClientServerDirection(true)
+        .setClusterSpecific(true)
+        .setManufacturerExtension(false);
 
 
-	public LevelControlCluster(ZigBeeDevice zbDevice){
-		super(zbDevice);
-		currentLevel = new AttributeImpl(zbDevice,this,Attributes.CURRENT_LEVEL);
-		remainingTime = new AttributeImpl(zbDevice,this,Attributes.REMAINING_TIME);
-		onOffTransactionTime = new AttributeImpl(zbDevice,this,Attributes.ON_OFF_TRANSITION_TIME);
-		onLevel = new AttributeImpl(zbDevice,this,Attributes.ON_LEVEL);
-		attributes = new AttributeImpl[]{currentLevel, remainingTime, onOffTransactionTime, onLevel};
-	}
+    public LevelControlCluster(ZigBeeDevice zbDevice){
+        super(zbDevice);
+        currentLevel = new AttributeImpl(zbDevice,this,Attributes.CURRENT_LEVEL);
+        remainingTime = new AttributeImpl(zbDevice,this,Attributes.REMAINING_TIME);
+        onOffTransactionTime = new AttributeImpl(zbDevice,this,Attributes.ON_OFF_TRANSITION_TIME);
+        onLevel = new AttributeImpl(zbDevice,this,Attributes.ON_LEVEL);
+        attributes = new AttributeImpl[]{currentLevel, remainingTime, onOffTransactionTime, onLevel};
+    }
 
-	@Override
-	public short getId() {
-		return LevelControl.ID;
-	}
+    @Override
+    public short getId() {
+        return LevelControl.ID;
+    }
 
-	@Override
-	public String getName() {
-		return LevelControl.NAME;
-	}
+    @Override
+    public String getName() {
+        return LevelControl.NAME;
+    }
 
-	@Override
-	public Attribute[] getStandardAttributes() {
-		return attributes;
-	}
+    @Override
+    public Attribute[] getStandardAttributes() {
+        return attributes;
+    }
 
-	public Attribute getAttributeCurrentLevel() {
-		return currentLevel;
-	}
+    public Attribute getAttributeCurrentLevel() {
+        return currentLevel;
+    }
 
-	public Attribute getAttributeOnLevel() {
-		return onLevel;
-	}
+    public Attribute getAttributeOnLevel() {
+        return onLevel;
+    }
 
-	public Attribute getAttributeOnOffTransitionTime() {
-		return onOffTransactionTime;
-	}
+    public Attribute getAttributeOnOffTransitionTime() {
+        return onOffTransactionTime;
+    }
 
-	public Attribute getAttributeRemainingTime() {
-		return remainingTime;
-	}
+    public Attribute getAttributeRemainingTime() {
+        return remainingTime;
+    }
 
-	public Response move(byte mode, short rate) throws ZigBeeClusterException{
-		enableDefaultResponse();
-		MoveCommand moveCmd = new MoveCommand(mode,rate);
-		Response response = invoke(moveCmd);
-		return new DefaultResponseImpl(response);
-	}
+    public Response move(byte mode, short rate) throws ZigBeeClusterException{
+        enableDefaultResponse();
+        MoveCommand moveCmd = new MoveCommand(mode,rate);
+        Response response = invoke(moveCmd);
+        return new DefaultResponseImpl(response);
+    }
 
-	public Response moveWithOnOff(byte mode, short rate) throws ZigBeeClusterException {
-		enableDefaultResponse();
-		MoveCommand moveCmd = new MoveCommand(mode,rate,true);
-		Response response = invoke(moveCmd);
-		return new DefaultResponseImpl(response);
-	}
+    public Response moveWithOnOff(byte mode, short rate) throws ZigBeeClusterException {
+        enableDefaultResponse();
+        MoveCommand moveCmd = new MoveCommand(mode,rate,true);
+        Response response = invoke(moveCmd);
+        return new DefaultResponseImpl(response);
+    }
 
-	public Response moveToLevel(short level, int time) throws ZigBeeClusterException{
-		enableDefaultResponse();
-		MoveToLevelCommand moveToLevCmd = new MoveToLevelCommand(level,time);
-		Response response = invoke(moveToLevCmd);
-		return new DefaultResponseImpl(response);
-	}
+    public Response moveToLevel(short level, int time) throws ZigBeeClusterException{
+        enableDefaultResponse();
+        MoveToLevelCommand moveToLevCmd = new MoveToLevelCommand(level,time);
+        Response response = invoke(moveToLevCmd);
+        return new DefaultResponseImpl(response);
+    }
 
-	public Response moveToLevelWithOnOff(short level, int time) throws ZigBeeClusterException {
-		enableDefaultResponse();
-		MoveToLevelCommand moveToLevCmd = new MoveToLevelCommand(level,time,true);
-		Response response = invoke(moveToLevCmd);
-		return new DefaultResponseImpl(response);
-	}
+    public Response moveToLevelWithOnOff(short level, int time) throws ZigBeeClusterException {
+        enableDefaultResponse();
+        MoveToLevelCommand moveToLevCmd = new MoveToLevelCommand(level,time,true);
+        Response response = invoke(moveToLevCmd);
+        return new DefaultResponseImpl(response);
+    }
 
-	public Response step(byte mode, short step, int time) throws ZigBeeClusterException{
-		enableDefaultResponse();
-		StepCommand stepCmd = new StepCommand(mode,step,time);
-		Response response = invoke(stepCmd);
-		return new DefaultResponseImpl(response);
-	}
+    public Response step(byte mode, short step, int time) throws ZigBeeClusterException{
+        enableDefaultResponse();
+        StepCommand stepCmd = new StepCommand(mode,step,time);
+        Response response = invoke(stepCmd);
+        return new DefaultResponseImpl(response);
+    }
 
-	public Response stepWithOnOff(byte mode, short step, int time) throws ZigBeeClusterException {
-		enableDefaultResponse();
-		StepCommand stepCmd = new StepCommand(mode,step,time,true);
-		Response response = invoke(stepCmd);
-		return new DefaultResponseImpl(response);
-	}
+    public Response stepWithOnOff(byte mode, short step, int time) throws ZigBeeClusterException {
+        enableDefaultResponse();
+        StepCommand stepCmd = new StepCommand(mode,step,time,true);
+        Response response = invoke(stepCmd);
+        return new DefaultResponseImpl(response);
+    }
 
-	public Response stop() throws ZigBeeClusterException{
-		enableDefaultResponse();
-		Response response = invoke(CMD_STOP);
-		return new DefaultResponseImpl(response);
-	}
-
-	public Response stopWithOnOff() throws ZigBeeClusterException {
-		enableDefaultResponse();
-		Response response = invoke(CMD_STOP_WITH_ONOFF);
-		return new DefaultResponseImpl(response);
-	}
+    public Response stop() throws ZigBeeClusterException{
+        enableDefaultResponse();
+        Response response = invoke(CMD_STOP);
+        return new DefaultResponseImpl(response);
+    }
 
 }
