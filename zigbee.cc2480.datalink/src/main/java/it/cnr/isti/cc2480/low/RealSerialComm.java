@@ -1,10 +1,10 @@
 /*
    Copyright 2008-2013 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,12 @@
  */
 package it.cnr.isti.cc2480.low;
 
+import it.cnr.isti.zigbee.dongle.CC2530.impl.DriverCC2530;
+
 import java.io.OutputStream;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.itaca.ztool.RxTxSerialComm;
 import com.itaca.ztool.api.ZToolException;
@@ -30,31 +35,34 @@ import com.itaca.ztool.api.ZToolPacketParser;
 
 
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.6.0
- * 
+ *
  */
 public class RealSerialComm extends RxTxSerialComm implements SerialHandler{
 
     private Object parserLock = new Object();
 
     private ZToolPacketParser parser;
-    
+
+    private final static Logger logger = LoggerFactory.getLogger(RealSerialComm.class);
+
     public void open( String port, int baudRate, ZToolPacketHandler packethandler ) throws ZToolException {
         try {
             this.openSerialPort( port, baudRate );
             parser = new ZToolPacketParser( super.getInputStream(), packethandler, parserLock );
         } catch ( Exception e ) {
+            logger.error("Failed to open Serial Port due Exception", e);
             throw new ZToolException("Unable to open SerialHandler due to exception",e);
-        }        
+        }
     }
 
     public OutputStream getOutputStream(){
         return super.getOutputStream();
     }
-    
+
     /**
      * Called by RXTX to notify us that data is available to be read.
      */
@@ -63,7 +71,7 @@ public class RealSerialComm extends RxTxSerialComm implements SerialHandler{
             parser.notify();
         }
     }
-    
+
     /**
      * Shuts down RXTX and input stream threads
      */
