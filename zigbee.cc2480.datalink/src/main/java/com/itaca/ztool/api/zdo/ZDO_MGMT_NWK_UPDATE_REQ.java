@@ -1,13 +1,7 @@
 /*
-   Copyright 2008-2014 ITACA-TSB, http://www.tsb.upv.es/
-   Instituto Tecnologico de Aplicaciones de Comunicacion
-   Avanzadas - Grupo Tecnologias para la Salud y el
-   Bienestar (TSB)
-
-   Copyright 2008-2014 CNR-ISTI, http://isti.cnr.it
+   Copyright 2013-2014 CNR-ISTI, http://isti.cnr.it
    Institute of Information Science and Technologies
    of the Italian National Research Council
-
 
    See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
