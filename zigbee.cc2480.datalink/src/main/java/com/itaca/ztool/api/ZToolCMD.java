@@ -4,6 +4,9 @@
    Avanzadas - Grupo Tecnologias para la Salud y el
    Bienestar (TSB)
 
+   Copyright 2013-2014 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
    See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
@@ -26,6 +29,8 @@ package com.itaca.ztool.api;
 /**
  *
  * @author <a href="mailto:alfiva@aaa.upv.es">Alvaro Fides Valero</a>
+ * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
+ * @author <a href="mailto:tommi.s.e.laukkanen@gmail.com">Tommi Laukkanen</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  */
 public class ZToolCMD {
@@ -239,6 +244,12 @@ public class ZToolCMD {
         /// <name>TI.ZPI2.MESSAGE_ID.SYS_ADC_READ</name>
         /// <summary>Stop timer.</summary>
         public static final int SYS_ADC_READ = 0x210d;
+
+        /**
+         * see page 15 of CC2530-ZNP version 1.3
+         * @since 0.9.0
+         */
+        public static final int SYS_UNRECOGNIZED_SREQ_SRSP = 0x6000;
         /// <name>TI.ZPI2.MESSAGE_ID.SYS_ADC_READ_SRSP</name>
         /// <summary>Response for SYS_ADC_READ</summary>
         public static final int SYS_ADC_READ_SRSP = 0x610d;
@@ -679,7 +690,14 @@ public class ZToolCMD {
         /// <summary>Response for ZDO_USER_DESC_SET</summary>
         public static final int ZDO_USER_DESC_SET_SRSP = 0x650b;
 
+        /**
+         * @since 0.9.0
+         */
         public static final int ZDO_MGMT_NWK_UPDATE_REQ = 0x2537;
+
+        /**
+         * @since 0.9.0
+         */
         public static final int ZDO_MGMT_NWK_UPDATE_REQ_SRSP = 0x6537;
 
         /// <name>TI.ZPI2.MESSAGE_ID.ZMAC_ASSOCIATE_CNF</name>

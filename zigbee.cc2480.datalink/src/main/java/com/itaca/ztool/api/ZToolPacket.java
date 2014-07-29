@@ -2,16 +2,16 @@
    Copyright 2008-2013 Andrew Rapp, http://code.google.com/p/xbee-api/
 
    Copyright 2008-2013 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
-   
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
+
    Copyright 2008-2013 ITACA-TSB, http://www.tsb.upv.es/
-   Instituto Tecnologico de Aplicaciones de Comunicacion 
-   Avanzadas - Grupo Tecnologias para la Salud y el 
+   Instituto Tecnologico de Aplicaciones de Comunicacion
+   Avanzadas - Grupo Tecnologias para la Salud y el
    Bienestar (TSB)
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,7 +34,7 @@ import it.cnr.isti.primitvetypes.util.Integers;
 import com.itaca.ztool.util.ByteUtils;
 import com.itaca.ztool.util.DoubleByte;
 /**
- * 
+ *
  * @author <a href="mailto:andrew.rapp@gmail.com">Andrew Rapp</a>
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:alfiva@aaa.upv.es">Alvaro Fides Valero</a>
@@ -43,38 +43,48 @@ import com.itaca.ztool.util.DoubleByte;
  */
 public class ZToolPacket {
 
-    public final static int PAYLOAD_START_INDEX = 4;	
-	
+    public final static int PAYLOAD_START_INDEX = 4;
+
     public enum CommandType {
-	POLL,SREQ,AREQ,SRSP
+    POLL,SREQ,AREQ,SRSP
     }
 
     public enum CommandSubsystem {
-	RESERVED_0, SYS, RESERVED_1, RESERVED_2, AF, ZDO, ZB
+    RESERVED_0, SYS, RESERVED_1, RESERVED_2, AF, ZDO, ZB
     }
-    
-    
+
+    /**
+     *
+     * @since 0.9.0
+     */
+    public enum ErrorType {
+        BAD_FCS,
+        PACKET_SHORTER_THEN_LENGTH,
+        ZNP_ERROR_PACKET
+    }
+
+
     //private final static Logger log = Logger.getLogger(ZToolPacket.class);
     public final static int START_BYTE = 0xFE;
     protected int[] packet;
     private int LEN;
     private DoubleByte CMD;
     private int FCS;
-    private boolean error = false;
+    private ErrorType error = null;
     private String errorMsg;
     private CommandType type = null;
     private CommandSubsystem subsystem = null;
-    
+
     /**
      * I started off using bytes but quickly realized that java bytes are signed, so effectively only 7 bits.
      * We should be able to use int instead.
-     * 
-     * 
+     *
+     *
      * @param data
      */    //PROTECTED?
     public ZToolPacket() {
     }
-    
+
     //PROTECTED?
     public ZToolPacket(DoubleByte ApiId, int[] frameData) {
         this.buildPacket(ApiId, frameData);
@@ -88,7 +98,7 @@ public class ZToolPacket {
         // note: if checksum is not correct, XBee won't send out packet or return error.  ask me how I know.
         // checksum is always computed on pre-escaped packet
         Checksum checksum = new Checksum();
-        // Packet length does not include escape bytes 
+        // Packet length does not include escape bytes
         this.LEN = frameData.length;
         packet[1] = this.LEN;
         checksum.addByte(packet[1]);
@@ -113,20 +123,20 @@ public class ZToolPacket {
         packet[packet.length - 1] = this.FCS;
 
     }
-       
+
     public CommandType getCommandType(){
-	if ( type != null ) return type;
-	type = CommandType.values()[(packet[2] & 0x60)>>5];
-	return type;
+    if ( type != null ) return type;
+    type = CommandType.values()[(packet[2] & 0x60)>>5];
+    return type;
     }
 
     public CommandSubsystem getCommandSubsystem(){
-	if ( subsystem != null ) return subsystem;
-	subsystem = CommandSubsystem.values()[packet[2] & 0x1F];
-	return subsystem;
+    if ( subsystem != null ) return subsystem;
+    subsystem = CommandSubsystem.values()[packet[2] & 0x1F];
+    return subsystem;
     }
-    
-    
+
+
     public int[] getPacket() {
         return packet;
     }
@@ -138,9 +148,9 @@ public class ZToolPacket {
     public DoubleByte getCMD() {
         return this.CMD;
     }
-    
-    public short getCommandId(){    
-    	return  Integers.shortFromInts(packet, 2, 3); 
+
+    public short getCommandId(){
+        return  Integers.shortFromInts(packet, 2, 3);
     }
 
     public int getFCS() {
@@ -155,11 +165,15 @@ public class ZToolPacket {
         return false;
     }
 
-    public boolean isError() {
+    public ErrorType getError() {
         return error;
     }
 
-    public void setError(boolean error) {
+    public boolean isError() {
+        return error != null;
+    }
+
+    public void setError(ErrorType error) {
         this.error = error;
     }
 

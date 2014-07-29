@@ -2,12 +2,12 @@
    Copyright 2008-2013 Andrew Rapp, http://code.google.com/p/xbee-api/
 
    Copyright 2008-2013 ITACA-TSB, http://www.tsb.upv.es/
-   Instituto Tecnologico de Aplicaciones de Comunicacion 
-   Avanzadas - Grupo Tecnologias para la Salud y el 
+   Instituto Tecnologico de Aplicaciones de Comunicacion
+   Avanzadas - Grupo Tecnologias para la Salud y el
    Bienestar (TSB)
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,6 +31,7 @@ import java.io.InputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.itaca.ztool.api.ZToolPacket.ErrorType;
 import com.itaca.ztool.api.af.AF_DATA_CONFIRM;
 import com.itaca.ztool.api.af.AF_DATA_SRSP;
 import com.itaca.ztool.api.af.AF_INCOMING_MSG;
@@ -61,8 +62,8 @@ import com.itaca.ztool.api.system.SYS_OSAL_TIMER_EXPIRED_IND;
 import com.itaca.ztool.api.system.SYS_PING_RESPONSE;
 import com.itaca.ztool.api.system.SYS_RANDOM_SRSP;
 import com.itaca.ztool.api.system.SYS_RESET_RESPONSE;
-import com.itaca.ztool.api.system.SYS_RPC_ERROR;
 import com.itaca.ztool.api.system.SYS_TEST_LOOPBACK_SRSP;
+import com.itaca.ztool.api.system.SYS_UNRECOGNIZED_SREQ_SRSP;
 import com.itaca.ztool.api.system.SYS_VERSION_RESPONSE;
 import com.itaca.ztool.api.util.UTIL_GET_DEVICE_INFO_RESPONSE;
 import com.itaca.ztool.api.util.UTIL_SET_CHANNELS_RESPONSE;
@@ -105,7 +106,7 @@ import com.itaca.ztool.util.IIntArrayInputStream;
 
 /**
  * Reads a packet from the input stream, verifies checksum and creates an XBeeResponse object
- * 
+ *
  * @author <a href="mailto:andrew.rapp@gmail.com">Andrew Rapp</a>
  * @author <a href="mailto:alfiva@aaa.upv.es">Alvaro Fides Valero</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
@@ -132,7 +133,7 @@ public class ZToolPacketStream
     }
 
     /**
-     * 
+     *
      * @param packet
      * @return
      * @since 0.6.0 - Revision 60
@@ -164,7 +165,7 @@ public class ZToolPacketStream
     }
 
     /**
-     * 
+     *
      * @param packet
      * @return
      * @since 0.6.0 - Revision 60
@@ -204,6 +205,7 @@ public class ZToolPacketStream
     public ZToolPacket parsePacket()
         throws IOException {
 
+        ErrorType error = null;
         Exception exception = null;
         done = false;
         bytesRead = 0;
@@ -235,12 +237,14 @@ public class ZToolPacketStream
             int fcs = this.read( "Checksum" );
             //setDone(true);
             if ( fcs != response.getFCS() ) {
+                error = ErrorType.BAD_FCS;
                 //log.debug("Checksum of packet failed: received =" + fcs + " expected = " + response.getFCS());
-                throw new ZToolParseException( "Packet checksum failed" );
+                throw new ZToolParseException( "Packet checksum failed" , frameData, response);
             }
             if ( !this.isDone() ) {
                 // TODO this is not the answer!
-                throw new ZToolParseException( "Packet stream is not finished yet we seem to think it is" );
+                error = ErrorType.PACKET_SHORTER_THEN_LENGTH;
+                throw new ZToolParseException( "Packet stream is not finished yet we seem to think it is", frameData, response );
             }
             return response;
         }
@@ -248,18 +252,24 @@ public class ZToolPacketStream
             //log.error("Failed due to exception", e);
             exception = e;
         }
-        final ZToolPacket exceptionResponse = new ErrorPacket();
 
         if ( exception != null ) {
-            exceptionResponse.setError( true );
+            final ZToolPacket exceptionResponse = new ErrorPacket();
+            exceptionResponse.setError( error );
             exceptionResponse.setErrorMsg( exception.getMessage() );
+            return exceptionResponse;
         }
 
-        return exceptionResponse;
+        /*
+         * We should never reach this point
+         */
+        throw new IllegalStateException("Reached an invalid code line");
     }
 
     private static ZToolPacket parsePayload( final DoubleByte cmdId, final int[] payload ) {
         switch ( cmdId.get16BitValue() ) {
+            case ZToolCMD.SYS_UNRECOGNIZED_SREQ_SRSP:
+                return new SYS_UNRECOGNIZED_SREQ_SRSP( payload );
             case ZToolCMD.SYS_ADC_READ_SRSP:
                 return new SYS_ADC_READ_SRSP( payload );
             case ZToolCMD.SYS_RESET_RESPONSE:
@@ -280,8 +290,6 @@ public class ZToolPacketStream
                 return new SYS_OSAL_TIMER_EXPIRED_IND( payload );
             case ZToolCMD.SYS_RANDOM_SRSP:
                 return new SYS_RANDOM_SRSP( payload );
-            case ZToolCMD.SYS_RPC_ERROR:
-                return new SYS_RPC_ERROR( payload );
             case ZToolCMD.SYS_GPIO_SRSP:
                 return new SYS_GPIO_SRSP( payload );
             case ZToolCMD.SYS_TEST_LOOPBACK_SRSP:
@@ -395,7 +403,7 @@ public class ZToolPacketStream
             case ZToolCMD.UTIL_SET_CHANNELS_RESPONSE:
                 return new UTIL_SET_CHANNELS_RESPONSE( payload );
             case ZToolCMD.UTIL_GET_DEVICE_INFO_RESPONSE:
-            	return new UTIL_GET_DEVICE_INFO_RESPONSE( payload);
+                return new UTIL_GET_DEVICE_INFO_RESPONSE( payload);
             default:
                 return new ZToolPacket( cmdId, payload );
         }
@@ -410,7 +418,7 @@ public class ZToolPacketStream
 
     /**
      * TODO implement as class that extends inputstream?
-     * 
+     *
      * This method reads bytes from the underlying input stream and performs the following tasks: keeps track of how
      * many bytes we've read, un-escapes bytes if necessary and verifies the checksum.
      */
@@ -459,7 +467,7 @@ public class ZToolPacketStream
 
     /**
      * Returns number of bytes remaining, relative to the stated packet length (not including checksum).
-     * 
+     *
      * @return
      */
     public int getFrameDataBytesRead() {
@@ -469,7 +477,7 @@ public class ZToolPacketStream
 
     /**
      * Number of bytes remaining to be read, including the checksum
-     * 
+     *
      * @return
      */
     public int getRemainingBytes() {
@@ -481,7 +489,7 @@ public class ZToolPacketStream
     // get escaped packet length
     /**
      * Does not include any escape bytes
-     * 
+     *
      * @return
      */
     public int getBytesRead() {

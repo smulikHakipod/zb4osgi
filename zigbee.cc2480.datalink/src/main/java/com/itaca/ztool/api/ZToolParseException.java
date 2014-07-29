@@ -1,13 +1,13 @@
 /*
    Copyright 2008-2013 Andrew Rapp, http://code.google.com/p/xbee-api/
-   
+
    Copyright 2008-2013 ITACA-TSB, http://www.tsb.upv.es/
-   Instituto Tecnologico de Aplicaciones de Comunicacion 
-   Avanzadas - Grupo Tecnologias para la Salud y el 
+   Instituto Tecnologico de Aplicaciones de Comunicacion
+   Avanzadas - Grupo Tecnologias para la Salud y el
    Bienestar (TSB)
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,18 +24,45 @@
 */
 
 package com.itaca.ztool.api;
+
+import java.util.Arrays;
+
 /**
- * 
+ *
  * @author <a href="mailto:andrew.rapp@gmail.com">Andrew Rapp</a>
  * @author <a href="mailto:alfiva@aaa.upv.es">Alvaro Fides Valero</a>
+ * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  *
  */
 public class ZToolParseException extends RuntimeException {
 
-	private static final long serialVersionUID = 6752060371295132748L;
+    private static final long serialVersionUID = 6752060371295132748L;
+    private int[] frame;
+    private ZToolPacket packet;
 
-	public ZToolParseException(String s) {
-		super(s);
-	}
+    public ZToolParseException(String s) {
+        super(s);
+    }
+
+    /**
+     *
+     * @param string
+     * @param frameData
+     * @param response
+     * @since 0.9.0
+     */
+    public ZToolParseException(String string, int[] frameData,
+            ZToolPacket response) {
+        this.frame = Arrays.copyOf(frameData, frameData.length);
+        this.packet = response;
+    }
+
+    public int[] getRawFrame() {
+        return frame;
+    }
+
+    public ZToolPacket getPacket() {
+        return packet;
+    }
 }
