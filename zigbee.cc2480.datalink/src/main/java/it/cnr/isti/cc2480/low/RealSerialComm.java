@@ -21,8 +21,6 @@
  */
 package it.cnr.isti.cc2480.low;
 
-import it.cnr.isti.zigbee.dongle.CC2530.impl.DriverCC2530;
-
 import java.io.OutputStream;
 
 import org.slf4j.Logger;
