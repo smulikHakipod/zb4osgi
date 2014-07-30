@@ -389,16 +389,13 @@ public class DeviceBuilderThread implements Stoppable {
                     "we identified a network address changing");
             return;
         }
-
-        TByteObjectIterator<ServiceRegistration> iter = registrations.iterator();
-        while (iter.hasNext()){
-            ServiceRegistration reg = iter.value();
-            ServiceReference ref = reg.getReference();
+        ServiceRegistration[] regs = registrations.getValues(new ServiceRegistration[]{});
+        for (int i = 0; i < regs.length; i++) {
+            ServiceReference ref = regs[i].getReference();
             final ZigBeeDeviceImpl device = (ZigBeeDeviceImpl) Activator
                     .getBundleContext().getService(ref);
             device.setPhysicalNode(aux);
-            reg.setProperties(device.getDescription());
-
+            regs[i].setProperties(device.getDescription());
         }
     }
 
