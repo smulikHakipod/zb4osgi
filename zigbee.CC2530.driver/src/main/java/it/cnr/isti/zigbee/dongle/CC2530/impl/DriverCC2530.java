@@ -1106,18 +1106,6 @@ public class DriverCC2530 implements Runnable, SimpleDriver {
     private boolean doCoordinatorCreateNetwork() {
         logger.info("Creating network as Coordinator");
 
-        ZB_READ_CONFIGURATION_RSP response = (ZB_READ_CONFIGURATION_RSP) sendSynchrouns(
-                high, new ZB_READ_CONFIGURATION(3));
-
-        if (response != null && response.Status == 0) {
-            if (response.Len == 1 && response.Value[0] == 0) {
-                dongleSetCleanState(false);
-            }
-        } else {
-            logger.error("Could not get dongle status for startup");
-            return false;
-        }
-
         ZDO_STARTUP_FROM_APP_SRSP response2 = (ZDO_STARTUP_FROM_APP_SRSP) sendSynchrouns(
                 high, new ZDO_STARTUP_FROM_APP(
                         ZDO_STARTUP_FROM_APP.RESET_TYPE.TARGET_DEVICE));
@@ -1174,7 +1162,10 @@ public class DriverCC2530 implements Runnable, SimpleDriver {
         }
         setState(DriverStatus.NETWORK_READY);
         if (doesCurrentConfigurationMatchZStackConfiguration()) {
-            logger.error("Dongle configuration does not match the specified configuration.");
+            logger.warn("ZigBee Network has been initialized but it seems that " +
+                    "the Dongle configuration does not match the specified configuration." +
+                    "We are continuing to execute anyhow but the dongle may be using a" +
+                    "wrong ZigBee channle or connected to a different PanId or others");
         }
 
         return creation;
@@ -1261,6 +1252,13 @@ public class DriverCC2530 implements Runnable, SimpleDriver {
         return true;
     }
 
+    /**
+     * It was developed by TSB for their custom firmware and their custom need,
+     * it is not clear what it does. Please keep it for reference but ignore the
+     * method
+     *
+     * @deprecated
+     */
     protected boolean dongleMasterReset() {
         // ---------START FROM APP
         logger.debug("Reset seq: Trying STARTFROMAPP");
