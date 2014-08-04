@@ -86,7 +86,7 @@ public abstract class RxTxSerialComm implements SerialPortEventListener {
         while (portList.hasMoreElements()) {
 
             portId = (CommPortIdentifier) portList.nextElement();
-            logger.debug("Inspecting port {} of tyoe {}",portId.getName(), portId.getPortType());
+            logger.debug("Inspecting port {} of type {}",portId.getName(), portId.getPortType());
 
             if (portId.getName().equals(port)) {
                 if (portId.getPortType() == CommPortIdentifier.PORT_SERIAL) {
