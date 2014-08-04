@@ -1,10 +1,10 @@
 /*
    Copyright 2008-2013 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,68 +22,83 @@
 
 package it.cnr.isti.zigbee.zcl.library.impl.global.read;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import it.cnr.isti.zigbee.dongle.CC2530.impl.DriverCC2530;
 import it.cnr.isti.zigbee.zcl.library.api.core.Status;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZBDeserializer;
+import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeClusterException;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeType;
 import it.cnr.isti.zigbee.zcl.library.api.global.ReadAttributesStatus;
 import it.cnr.isti.zigbee.zcl.library.impl.attribute.AttributeDescriptor;
 
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
  * @version $LastChangedRevision$ ($LastChangedDate: 2013-08-06 18:00:05
  *          +0200(mar, 06 ago 2013) $)
- * 
+ *
  */
 public class ReadAttributeStatusImpl implements ReadAttributesStatus {
 
-	private byte status;
+    private final static Logger logger = LoggerFactory
+            .getLogger(ReadAttributeStatusImpl.class);
 
-	private int attributeId;
+    private byte status;
 
-	private byte dataType;
+    private int attributeId;
 
-	private Class<?> clazz;
+    private byte dataType;
 
-	private Object data;
+    private Class<?> clazz;
 
-	public ReadAttributeStatusImpl(AttributeDescriptor descriptor,
-			ZBDeserializer deserializer) {
+    private Object data;
 
-		attributeId = deserializer.read_short();
-		status = deserializer.read_byte();
-		if (Status.getStatus(status).equals(Status.SUCCESS)) {
-			dataType = deserializer.read_byte();
-			final ZigBeeType type = ZigBeeType.getType(dataType);
-			clazz = type.getJavaClass();
-			data = deserializer.readZigBeeType(type);
-		}
+    public ReadAttributeStatusImpl(AttributeDescriptor descriptor,
+            ZBDeserializer deserializer) {
 
-		// TODO Attribute Check
-		// indeed the order could be different, so we should receive all the
-		// list
-		// and in any case we could also avoid to throw an Exception
+        attributeId = deserializer.read_short();
+        status = deserializer.read_byte();
+        if (Status.getStatus(status).equals(Status.SUCCESS)) {
+            dataType = deserializer.read_byte();
+            final ZigBeeType type = ZigBeeType.getType(dataType);
+            if (type == null) {
+                logger.debug(
+                        "Unable to find a {} for the dataType {} it is not supported by the current implementation",
+                        ZigBeeType.class, dataType);
+                throw new ZigBeeClusterException("Unsupported data type "
+                        + dataType);
+            }
+            clazz = type.getJavaClass();
+            data = deserializer.readZigBeeType(type);
+        }
 
-	}
+        // TODO Attribute Check
+        // indeed the order could be different, so we should receive all the
+        // list
+        // and in any case we could also avoid to throw an Exception
 
-	public Object getAttributeData() {
-		return data;
-	}
+    }
 
-	public byte getAttributeDataType() {
-		return dataType;
-	}
+    public Object getAttributeData() {
+        return data;
+    }
 
-	public int getAttributeId() {
-		return attributeId;
-	}
+    public byte getAttributeDataType() {
+        return dataType;
+    }
 
-	public byte getStatus() {
-		return status;
-	}
+    public int getAttributeId() {
+        return attributeId;
+    }
 
-	public Class<?> getDataClass() {
-		return clazz;
-	}
+    public byte getStatus() {
+        return status;
+    }
+
+    public Class<?> getDataClass() {
+        return clazz;
+    }
 }
