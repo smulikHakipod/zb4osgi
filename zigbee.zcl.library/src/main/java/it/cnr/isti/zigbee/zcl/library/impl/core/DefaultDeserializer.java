@@ -239,14 +239,20 @@ public class DefaultDeserializer implements ZBDeserializer {
             int i24 = read_int24bit();
             value[0] = new Integer(i24);
             break;
-        case UnsignedInteger40bit: case SignedInteger40bit:
-            read_int24bit()
+        case UnsignedInteger40bit:
+        case SignedInteger40bit:
+            value[0] = read_long(5);
             break;
-        case UnsignedInteger48bit:			case SignedInteger48bit:
+        case UnsignedInteger48bit:
+        case SignedInteger48bit:
+            value[0] = read_long(6);
             break;
-        case UnsignedInteger56bit: case SignedInteger56bit:
+        case UnsignedInteger56bit:
+        case SignedInteger56bit:
+            value[0] = read_long(7);
             break;
-                    case UnsignedInteger64bit: case SignedInteger64bit:
+        case SignedInteger64bit:
+            value[0] = read_long();
             break;
         case CharacterString:
         case OctectString: {
