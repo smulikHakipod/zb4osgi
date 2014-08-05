@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2013 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2013-2014 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,17 +23,26 @@
 package it.cnr.isti.zigbee.dongle.api;
 
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi - ISTI-CNR
- * @version $LastChangedRevision: 799 $ ($LastChangedDate: 2013-08-06 18:00:05 +0200 (mar, 06 ago 2013) $)
+ * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.1.0
  *
  */
 public enum DuplicateMacPolicy {
 
-	Ignore,
-	Update,
-	Register
-	
+    /**
+     * The ZigBee Base Driver will ignore the duplicated device and it will not update the network address of it
+     */
+    IGNORE,
 
+    /**
+     * The ZigBee Base Driver will detect the duplication and update the related ZigBeeDevice service
+     */
+    UPDATE,
+
+    /**
+     * The ZigBee Base Driver will deregister the old ZigBeeDevice service and register new one with the correct data
+     */
+    REGISTER
 }

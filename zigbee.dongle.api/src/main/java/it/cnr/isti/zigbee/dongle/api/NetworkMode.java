@@ -1,10 +1,10 @@
 /*
    Copyright 2008-2013 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +23,7 @@
 package it.cnr.isti.zigbee.dongle.api;
 
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi - ISTI-CNR
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.1.0
@@ -31,8 +31,19 @@ package it.cnr.isti.zigbee.dongle.api;
  */
 public enum NetworkMode {
 
-	Coordinator,
-	Router,
-	EndDevice;			
+    /**
+     * The dongle will act as ZigBee network Coordinator
+     */
+    COORDINATOR,
+
+    /**
+     * The dongle will act as ZigBee network Router
+     */
+    ROUTER,
+
+    /**
+     * The dongle will act as ZigBee network device
+     */
+    END_DEVICE;
 
 }
