@@ -22,6 +22,7 @@
 */
 package org.persona.zigbee.tester.gui;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -38,6 +39,19 @@ import org.junit.Test;
  * @since 0.4.0
  */
 public class CommandTest {
+
+    @Test
+    public void staticParametersTypeToString() {
+        try {
+            String[] result = Command.parametersTypeToString(GroupsImpl.class.getMethod("getGroupMembership", int[].class));
+            String[] expected = new String[]{"int[]"};
+            assertArrayEquals(expected,result);
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Failed due to exception:"+e.getMessage());
+        }
+    }
+
 
     @Test
     public void testInvoke() {
