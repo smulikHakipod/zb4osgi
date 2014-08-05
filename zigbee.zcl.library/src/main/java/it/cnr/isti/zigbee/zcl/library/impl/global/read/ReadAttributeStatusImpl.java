@@ -1,5 +1,5 @@
 /*
-   Copyright 2008-2013 CNR-ISTI, http://isti.cnr.it
+   Copyright 2008-2014 CNR-ISTI, http://isti.cnr.it
    Institute of Information Science and Technologies
    of the Italian National Research Council
 
@@ -22,16 +22,15 @@
 
 package it.cnr.isti.zigbee.zcl.library.impl.global.read;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import it.cnr.isti.zigbee.dongle.CC2530.impl.DriverCC2530;
 import it.cnr.isti.zigbee.zcl.library.api.core.Status;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZBDeserializer;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeClusterException;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeType;
 import it.cnr.isti.zigbee.zcl.library.api.global.ReadAttributesStatus;
 import it.cnr.isti.zigbee.zcl.library.impl.attribute.AttributeDescriptor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -57,7 +56,7 @@ public class ReadAttributeStatusImpl implements ReadAttributesStatus {
     private Object data;
 
     public ReadAttributeStatusImpl(AttributeDescriptor descriptor,
-            ZBDeserializer deserializer) {
+            ZBDeserializer deserializer) throws ZigBeeClusterException {
 
         attributeId = deserializer.read_short();
         status = deserializer.read_byte();
