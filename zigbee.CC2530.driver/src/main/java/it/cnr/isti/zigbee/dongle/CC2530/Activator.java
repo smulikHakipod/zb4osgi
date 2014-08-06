@@ -50,9 +50,9 @@ public class Activator implements BundleActivator {
         driver = new DriverCC2530(
                 OSGiProperties.getString(bc, ConfigurationProperties.COM_NAME_KEY, ConfigurationProperties.COM_NAME),
                 OSGiProperties.getInt(bc, ConfigurationProperties.COM_BAUDRATE_KEY, ConfigurationProperties.COM_BAUDRATE),
-                NetworkMode.valueOf(OSGiProperties.getString(
+                OSGiProperties.getEnum(
                         bc, ConfigurationProperties.NETWORK_MODE_KEY, ConfigurationProperties.NETWORK_MODE
-                )),
+                ),
                 OSGiProperties.getInt(bc, ConfigurationProperties.PAN_ID_KEY, ConfigurationProperties.PAN_ID),
                 OSGiProperties.getInt(bc, ConfigurationProperties.CHANNEL_ID_KEY, ConfigurationProperties.CHANNEL_ID),
                 OSGiProperties.getBoolean(bc, ConfigurationProperties.NETWORK_FLUSH_KEY, ConfigurationProperties.NETWORK_FLUSH),
