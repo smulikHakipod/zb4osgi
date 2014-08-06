@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2013 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2008-2014 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,112 +48,112 @@ import com.itaca.ztool.api.ZToolAddress64;
 import com.itaca.ztool.api.zdo.ZDO_ACTIVE_EP_REQ;
 
 /**
- * 
+ *
  * @author <a href="mailto:giancarlo.riolo@isti.cnr.it">Giancarlo Riolo</a>
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision: 799 $ ($LastChangedDate: 2013-08-06 18:00:05
  *          +0200 (mar, 06 ago 2013) $)
- * 
+ *
  */
 public class RetryCountTest {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(RetryCountTest.class);
+    private static final Logger logger = LoggerFactory
+            .getLogger(RetryCountTest.class);
 
-	private ConfigurationService cs = null;
-	private BundleContext bc = null;
+    private ConfigurationService cs = null;
+    private BundleContext bc = null;
 
-	private int[] retryValue = new int[]{4,10};
-	private int[] retryInvokation = new int[]{retryValue[0]+1,retryValue[1]+1};
+    private int[] retryValue = new int[]{4,10};
+    private int[] retryInvokation = new int[]{retryValue[0]+1,retryValue[1]+1};
 
-	private BundleContext stub;
+    private BundleContext stub;
 
-	private ConfigurationService csStub;
+    private ConfigurationService csStub;
 
-	private Throwable testResult = null;
+    private Throwable testResult = null;
 
-	
-	
-	@Before
-	public void createActivatorStub() {
-		cs = createConfigurationServiceStub();
-		bc = createBundleContextStub();
-		Activator.setStubObjectes(cs, bc);
-	}
 
-	public BundleContext createBundleContextStub() {
-		stub = createStrictMock(BundleContext.class);
 
-		try {
-			expect(
-					stub.getServiceReferences((String) anyObject(),
-							(String) anyObject())).andReturn(null).anyTimes();
-		} catch (InvalidSyntaxException ex) {
-		}
-		replay(stub);
+    @Before
+    public void createActivatorStub() {
+        cs = createConfigurationServiceStub();
+        bc = createBundleContextStub();
+        Activator.setStubObjectes(cs, bc);
+    }
 
-		return stub;
-	}
+    public BundleContext createBundleContextStub() {
+        stub = createStrictMock(BundleContext.class);
 
-	public ConfigurationService createConfigurationServiceStub() {
-		csStub = createMock(ConfigurationService.class);
+        try {
+            expect(
+                    stub.getServiceReferences((String) anyObject(),
+                            (String) anyObject())).andReturn(null).anyTimes();
+        } catch (InvalidSyntaxException ex) {
+        }
+        replay(stub);
 
-		expect(csStub.getFirstFreeEndPoint()).andReturn(new Integer(2))
-				.anyTimes();
+        return stub;
+    }
 
-		expect(csStub.getDeviceInspectionPeriod()).andReturn(new Long(250))
-				.anyTimes();
+    public ConfigurationService createConfigurationServiceStub() {
+        csStub = createMock(ConfigurationService.class);
 
-		
-		
-		expect(csStub.getMessageRetryCount()).andReturn(retryValue[0])
-				.times(retryInvokation[0]).andReturn(retryValue[1])
-				.times(retryInvokation[1]);
-		
+        expect(csStub.getFirstFreeEndPoint()).andReturn(new Integer(2))
+                .anyTimes();
 
-		expect(csStub.getMessageRetryDelay()).andReturn(new Integer(100))
-				.anyTimes();
+        expect(csStub.getDeviceInspectionPeriod()).andReturn(new Long(250))
+                .anyTimes();
 
-		expect(csStub.getPanId()).andReturn(new Short((short) 13531)).anyTimes();
 
-		expect(csStub.getDiscoveryDuplicateMacPolicy()).andReturn(DuplicateMacPolicy.Ignore).anyTimes();
 
-		replay(csStub);
+        expect(csStub.getMessageRetryCount()).andReturn(retryValue[0])
+                .times(retryInvokation[0]).andReturn(retryValue[1])
+                .times(retryInvokation[1]);
 
-		return csStub;
-	}
 
-	@Test
-	public void testRetryCount() {		
-	
-		SimpleDriver driver = createStrictMock(SimpleDriver.class);
-		expect(
-				driver.sendZDOActiveEndPointRequest(isA(ZDO_ACTIVE_EP_REQ.class)))
-				.andReturn(null).anyTimes();
-		replay(driver);
+        expect(csStub.getMessageRetryDelay()).andReturn(new Integer(100))
+                .anyTimes();
 
-		ImportingQueue queue = new ImportingQueue();
-		queue.push(new ZToolAddress16(0x00, 0x01), new ZToolAddress64(
-				"00 12 4B 00 00 03 15 AD"));
-		DeviceBuilderThread builder = new DeviceBuilderThread(queue, driver);
-		Thread thread = new Thread(builder, DeviceBuilderThread.class.getName());
-		thread.start();
-		ThreadUtils.waitNonPreemptive(2000);
-		builder.end();
-		thread.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
-			public void uncaughtException(Thread t, Throwable e) {
-				testResult = e;
-			}
-		});
-		queue.push(new ZToolAddress16(0x00, 0x01), new ZToolAddress64(
-				"00 12 4B 00 00 03 15 AD"));
-		try {
-			thread.join();
-		} catch (InterruptedException e) {
-		}
-		
-		assertNull("Failed due to exception " + testResult, testResult);
+        expect(csStub.getPanId()).andReturn(new Short((short) 13531)).anyTimes();
 
-	}
+        expect(csStub.getDiscoveryDuplicateMacPolicy()).andReturn(DuplicateMacPolicy.IGNORE).anyTimes();
+
+        replay(csStub);
+
+        return csStub;
+    }
+
+    @Test
+    public void testRetryCount() {
+
+        SimpleDriver driver = createStrictMock(SimpleDriver.class);
+        expect(
+                driver.sendZDOActiveEndPointRequest(isA(ZDO_ACTIVE_EP_REQ.class)))
+                .andReturn(null).anyTimes();
+        replay(driver);
+
+        ImportingQueue queue = new ImportingQueue();
+        queue.push(new ZToolAddress16(0x00, 0x01), new ZToolAddress64(
+                "00 12 4B 00 00 03 15 AD"));
+        DeviceBuilderThread builder = new DeviceBuilderThread(queue, driver);
+        Thread thread = new Thread(builder, DeviceBuilderThread.class.getName());
+        thread.start();
+        ThreadUtils.waitNonPreemptive(2000);
+        builder.end();
+        thread.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+            public void uncaughtException(Thread t, Throwable e) {
+                testResult = e;
+            }
+        });
+        queue.push(new ZToolAddress16(0x00, 0x01), new ZToolAddress64(
+                "00 12 4B 00 00 03 15 AD"));
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+        }
+
+        assertNull("Failed due to exception " + testResult, testResult);
+
+    }
 
 }

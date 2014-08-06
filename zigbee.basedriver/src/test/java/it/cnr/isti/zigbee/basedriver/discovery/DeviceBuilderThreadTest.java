@@ -1,10 +1,10 @@
 /*
-   Copyright 2008-2013 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Copyright 2008-2014 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -45,150 +45,150 @@ import com.itaca.ztool.api.ZToolAddress64;
 import com.itaca.ztool.api.zdo.ZDO_ACTIVE_EP_REQ;
 
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:giancarlo.riolo@isti.cnr.it">Giancarlo Riolo</a>
  * @version $LastChangedRevision$ ($LastChangedDate: 2013-10-30 10:52:39
  *          +0100 (mer, 30 ott 2013) $)
- * 
+ *
  */
 public class DeviceBuilderThreadTest {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(DeviceBuilderThreadTest.class);
+    private static final Logger logger = LoggerFactory
+            .getLogger(DeviceBuilderThreadTest.class);
 
-	private ConfigurationService cs = null;
-	private BundleContext bc = null;
+    private ConfigurationService cs = null;
+    private BundleContext bc = null;
 
-	private BundleContext stub;
+    private BundleContext stub;
 
-	@Before
-	public void createActivatorStub() {
-		cs = createConfigurationServiceStub();
-		bc = createBundleContextStub();
-		Activator.setStubObjectes(cs, bc);
-	}
+    @Before
+    public void createActivatorStub() {
+        cs = createConfigurationServiceStub();
+        bc = createBundleContextStub();
+        Activator.setStubObjectes(cs, bc);
+    }
 
-	public BundleContext createBundleContextStub() {
-		stub = createMock(BundleContext.class);
+    public BundleContext createBundleContextStub() {
+        stub = createMock(BundleContext.class);
 
-		try {
-			expect(
-					stub.getServiceReferences((String) anyObject(),
-							(String) anyObject())).andReturn(null).anyTimes();
-		} catch (InvalidSyntaxException ex) {
-		}
-		replay(stub);
+        try {
+            expect(
+                    stub.getServiceReferences((String) anyObject(),
+                            (String) anyObject())).andReturn(null).anyTimes();
+        } catch (InvalidSyntaxException ex) {
+        }
+        replay(stub);
 
-		return stub;
-	}
+        return stub;
+    }
 
-	public ConfigurationService createConfigurationServiceStub() {
-		ConfigurationService stub = createMock(ConfigurationService.class);
-		int messageRetryCount = 10;
-		expect(stub.getFirstFreeEndPoint()).andReturn(new Integer(2))
-				.anyTimes();
+    public ConfigurationService createConfigurationServiceStub() {
+        ConfigurationService stub = createMock(ConfigurationService.class);
+        int messageRetryCount = 10;
+        expect(stub.getFirstFreeEndPoint()).andReturn(new Integer(2))
+                .anyTimes();
 
-		expect(stub.getDeviceInspectionPeriod()).andReturn(new Long(250))
-				.anyTimes();
+        expect(stub.getDeviceInspectionPeriod()).andReturn(new Long(250))
+                .anyTimes();
 
-		expect(stub.getMessageRetryCount()).andReturn(messageRetryCount)
-				.anyTimes();
+        expect(stub.getMessageRetryCount()).andReturn(messageRetryCount)
+                .anyTimes();
 
-		expect(stub.getMessageRetryDelay()).andReturn(new Integer(100))
-				.anyTimes();
+        expect(stub.getMessageRetryDelay()).andReturn(new Integer(100))
+                .anyTimes();
 
-		expect(stub.getPanId()).andReturn(new Short((short) 13531)).anyTimes();
+        expect(stub.getPanId()).andReturn(new Short((short) 13531)).anyTimes();
 
-		expect(stub.getDiscoveryDuplicateMacPolicy())
-				.andReturn(DuplicateMacPolicy.Ignore).times(1)
-				.andReturn(DuplicateMacPolicy.Update).times(1)
-				.andReturn(DuplicateMacPolicy.Register).times(1);
+        expect(stub.getDiscoveryDuplicateMacPolicy())
+                .andReturn(DuplicateMacPolicy.IGNORE).times(1)
+                .andReturn(DuplicateMacPolicy.UPDATE).times(1)
+                .andReturn(DuplicateMacPolicy.REGISTER).times(1);
 
-		replay(stub);
+        replay(stub);
 
-		return stub;
-	}
+        return stub;
+    }
 
-	@Test
-	public void testDuplicateDeviceCreationIgnorePolicy() {
-		SimpleDriver driver = createMock(SimpleDriver.class);
-		expect(
-				driver.sendZDOActiveEndPointRequest(isA(ZDO_ACTIVE_EP_REQ.class)))
-				.andReturn(null).anyTimes();
-		replay(driver);
-		ImportingQueue queue = new ImportingQueue();
-		queue.push(new ZToolAddress16(0x00, 0x01), new ZToolAddress64(
-				"00 12 4B 00 00 03 15 AD"));
-		DeviceBuilderThread builder = new DeviceBuilderThread(queue, driver);
-		Thread thread = new Thread(builder, DeviceBuilderThread.class.getName());
-		thread.start();
-		ThreadUtils.waitNonPreemptive(2000);
-		builder.end();
-		queue.push(new ZToolAddress16(0x14, 0x3E), new ZToolAddress64(
-				"00 12 4B 00 00 03 15 AD"));
-		try {
-			thread.join();
-		} catch (InterruptedException e) {
-		}
+    @Test
+    public void testDuplicateDeviceCreationIgnorePolicy() {
+        SimpleDriver driver = createMock(SimpleDriver.class);
+        expect(
+                driver.sendZDOActiveEndPointRequest(isA(ZDO_ACTIVE_EP_REQ.class)))
+                .andReturn(null).anyTimes();
+        replay(driver);
+        ImportingQueue queue = new ImportingQueue();
+        queue.push(new ZToolAddress16(0x00, 0x01), new ZToolAddress64(
+                "00 12 4B 00 00 03 15 AD"));
+        DeviceBuilderThread builder = new DeviceBuilderThread(queue, driver);
+        Thread thread = new Thread(builder, DeviceBuilderThread.class.getName());
+        thread.start();
+        ThreadUtils.waitNonPreemptive(2000);
+        builder.end();
+        queue.push(new ZToolAddress16(0x14, 0x3E), new ZToolAddress64(
+                "00 12 4B 00 00 03 15 AD"));
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+        }
 
-		assertEquals(0, builder.getPendingNodes());
-		assertEquals(0, builder.getPendingDevices());
+        assertEquals(0, builder.getPendingNodes());
+        assertEquals(0, builder.getPendingDevices());
 
-	}
+    }
 
-	@Test
-	public void testDuplicateDeviceCreationUpdatePolicy() {
-		SimpleDriver driver = createMock(SimpleDriver.class);
-		expect(
-				driver.sendZDOActiveEndPointRequest(isA(ZDO_ACTIVE_EP_REQ.class)))
-				.andReturn(null).anyTimes();
-		replay(driver);
-		ImportingQueue queue = new ImportingQueue();
-		queue.push(new ZToolAddress16(0x00, 0x01), new ZToolAddress64(
-				"00 12 4B 00 00 03 15 AD"));
-		DeviceBuilderThread builder = new DeviceBuilderThread(queue, driver);
-		Thread thread = new Thread(builder, DeviceBuilderThread.class.getName());
-		thread.start();
-		ThreadUtils.waitNonPreemptive(2000);
-		builder.end();
-		queue.push(new ZToolAddress16(0x14, 0x3E), new ZToolAddress64(
-				"00 12 4B 00 00 03 15 AD"));
-		try {
-			thread.join();
-		} catch (InterruptedException e) {
-		}
+    @Test
+    public void testDuplicateDeviceCreationUpdatePolicy() {
+        SimpleDriver driver = createMock(SimpleDriver.class);
+        expect(
+                driver.sendZDOActiveEndPointRequest(isA(ZDO_ACTIVE_EP_REQ.class)))
+                .andReturn(null).anyTimes();
+        replay(driver);
+        ImportingQueue queue = new ImportingQueue();
+        queue.push(new ZToolAddress16(0x00, 0x01), new ZToolAddress64(
+                "00 12 4B 00 00 03 15 AD"));
+        DeviceBuilderThread builder = new DeviceBuilderThread(queue, driver);
+        Thread thread = new Thread(builder, DeviceBuilderThread.class.getName());
+        thread.start();
+        ThreadUtils.waitNonPreemptive(2000);
+        builder.end();
+        queue.push(new ZToolAddress16(0x14, 0x3E), new ZToolAddress64(
+                "00 12 4B 00 00 03 15 AD"));
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+        }
 
-		assertEquals(0, builder.getPendingNodes());
-		assertEquals(0, builder.getPendingDevices());
+        assertEquals(0, builder.getPendingNodes());
+        assertEquals(0, builder.getPendingDevices());
 
-	}
+    }
 
-	@Test
-	public void testDuplicateDeviceCreationRegisterPolicy() {
-		SimpleDriver driver = createMock(SimpleDriver.class);
-		expect(
-				driver.sendZDOActiveEndPointRequest(isA(ZDO_ACTIVE_EP_REQ.class)))
-				.andReturn(null).anyTimes();
-		replay(driver);
-		ImportingQueue queue = new ImportingQueue();
-		queue.push(new ZToolAddress16(0x00, 0x01), new ZToolAddress64(
-				"00 12 4B 00 00 03 15 AD"));
-		DeviceBuilderThread builder = new DeviceBuilderThread(queue, driver);
-		Thread thread = new Thread(builder, DeviceBuilderThread.class.getName());
-		thread.start();
-		ThreadUtils.waitNonPreemptive(2000);
-		builder.end();
-		System.out.println(cs.getDiscoveryDuplicateMacPolicy());
-		queue.push(new ZToolAddress16(0x14, 0x3E), new ZToolAddress64(
-				"00 12 4B 00 00 03 15 AD"));
-		try {
-			thread.join();
-		} catch (InterruptedException e) {
-		}
+    @Test
+    public void testDuplicateDeviceCreationRegisterPolicy() {
+        SimpleDriver driver = createMock(SimpleDriver.class);
+        expect(
+                driver.sendZDOActiveEndPointRequest(isA(ZDO_ACTIVE_EP_REQ.class)))
+                .andReturn(null).anyTimes();
+        replay(driver);
+        ImportingQueue queue = new ImportingQueue();
+        queue.push(new ZToolAddress16(0x00, 0x01), new ZToolAddress64(
+                "00 12 4B 00 00 03 15 AD"));
+        DeviceBuilderThread builder = new DeviceBuilderThread(queue, driver);
+        Thread thread = new Thread(builder, DeviceBuilderThread.class.getName());
+        thread.start();
+        ThreadUtils.waitNonPreemptive(2000);
+        builder.end();
+        System.out.println(cs.getDiscoveryDuplicateMacPolicy());
+        queue.push(new ZToolAddress16(0x14, 0x3E), new ZToolAddress64(
+                "00 12 4B 00 00 03 15 AD"));
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+        }
 
-		assertEquals(0, builder.getPendingNodes());
-		assertEquals(0, builder.getPendingDevices());
+        assertEquals(0, builder.getPendingNodes());
+        assertEquals(0, builder.getPendingDevices());
 
-	}
+    }
 }

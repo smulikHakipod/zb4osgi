@@ -1,5 +1,5 @@
 /*
-   Copyright 2008-2013 CNR-ISTI, http://isti.cnr.it
+   Copyright 2008-2014 CNR-ISTI, http://isti.cnr.it
    Institute of Information Science and Technologies
    of the Italian National Research Council
 
@@ -23,7 +23,6 @@
 package it.cnr.isti.zigbee.basedriver.discovery;
 
 import gnu.trove.TByteObjectHashMap;
-import gnu.trove.TByteObjectIterator;
 import it.cnr.isti.thread.Stoppable;
 import it.cnr.isti.thread.ThreadUtils;
 import it.cnr.isti.zigbee.api.ZigBeeBasedriverException;
@@ -34,6 +33,7 @@ import it.cnr.isti.zigbee.basedriver.api.impl.ZigBeeDeviceImpl;
 import it.cnr.isti.zigbee.basedriver.api.impl.ZigBeeNodeImpl;
 import it.cnr.isti.zigbee.basedriver.communication.AFLayer;
 import it.cnr.isti.zigbee.basedriver.discovery.ImportingQueue.ZigBeeNodeAddress;
+import it.cnr.isti.zigbee.dongle.api.ConfigurationProperties;
 import it.cnr.isti.zigbee.dongle.api.DuplicateMacPolicy;
 import it.cnr.isti.zigbee.dongle.api.SimpleDriver;
 import it.cnr.isti.zigbee.util.IEEEAddress;
@@ -95,9 +95,6 @@ public class DeviceBuilderThread implements Stoppable {
 
     private long nextInspectionSlot = 0;
     private ZigBeeNodeAddress dev;
-
-    private DuplicateMacPolicy duplicateMacPolicy = Activator
-            .getCurrentConfiguration().getDiscoveryDuplicateMacPolicy();
 
     private class ZigBeeDeviceReference {
         ZigBeeNode node;
@@ -168,14 +165,14 @@ public class DeviceBuilderThread implements Stoppable {
 
             synchronized (network) {
                 if (network.containsDevice(node.getIEEEAddress(), endPoints[i])) {
-                    switch (duplicateMacPolicy) {
-                    case Ignore:
+                    switch (Activator.getCurrentConfiguration().getDiscoveryDuplicateMacPolicy()) {
+                    case IGNORE:
                         logger.info(
                                 "Skipping service creation for endpoint {} on node {} it is already registered as a Service",
                                 endPoints[i], node);
 
                         break;
-                    case Register:
+                    case REGISTER:
                         logger.info(
                                 "Node ieee collision, stored is {} and new one is {}, De-registering old service and registering new one",
                                 endPoints[i], node);
@@ -183,7 +180,7 @@ public class DeviceBuilderThread implements Stoppable {
                         doCreateZigBeeDeviceService(node, endPoints[i]);
 
                         break;
-                    case Update:
+                    case UPDATE:
                         logger.info(
                                 "Node ieee collision, stored is {} and new one is {}, updating NetworkAddress",
                                 endPoints[i], node);
@@ -293,7 +290,7 @@ public class DeviceBuilderThread implements Stoppable {
     private void inspectNode(ZToolAddress16 nwkAddress,
             ZToolAddress64 ieeeAddress) {
 
-        int nwk =  nwkAddress.get16BitValue();
+        int nwk = nwkAddress.get16BitValue();
         final String ieee = IEEEAddress.toString(ieeeAddress.getLong());
         ZigBeeNodeImpl node = null;
         boolean isNew = false, correctlyInspected = false;
@@ -333,25 +330,42 @@ public class DeviceBuilderThread implements Stoppable {
             logger.warn(
                     "The device {} has been found again with a new network address {} ",
                     node, nwkAddress.get16BitValue());
-            /*
-             * TODO
-             * 1 - Verify that it is actually the same device: ieee matches
-             * and all the endpoints contained are not changed
-             * 		1.1 - If it is true ( we assume that it is always true, only during firmware
-             * 				development of device the device can change the on board
-             * 				endpoints), then we have to update the network address for the services
-             *
-             * 		1.2 - If it is false (very rare and not handled) we should remove all the service and inspect
-             * 				again the device NOT HANDLED AT THE MOMENT
-             */
-            updateNetworkAddress(node, nwk);
-            if ( Activator.devices.get(node.getIEEEAddress()) == null ) {
+
+            switch (Activator.getCurrentConfiguration()
+                    .getDiscoveryDuplicateMacPolicy()) {
+            case IGNORE:
+                logger.debug(
+                        "We are going to use the old network address for the EndPoint as specified by the current {} configuration",
+                        ConfigurationProperties.DISCOVERY_DUPLICATE_MAC_KEY);
+                break;
+            case REGISTER:
+                logger.error("The policy {} has not been implemented yet, so we fall back to {} policy", DuplicateMacPolicy.REGISTER, DuplicateMacPolicy.UPDATE);
+            case UPDATE:
+                logger.debug("We are going to update the network address for all the ZigBeeDevice serive host by this node");
+                /*
+                 * TODO 1 - Verify that it is actually the same device: ieee
+                 * matches and all the endpoints contained are not changed 1.1 -
+                 * If it is true ( we assume that it is always true, only during
+                 * firmware development of device the device can change the on
+                 * board endpoints), then we have to update the network address
+                 * for the services
+                 *
+                 * 1.2 - If it is false (very rare and not handled) we should
+                 * remove all the service and inspect again the device NOT
+                 * HANDLED AT THE MOMENT
+                 */
+                updateNetworkAddress(node, nwk);
+                break;
+            }
+
+            if (Activator.devices.get(node.getIEEEAddress()) == null) {
                 /*
                  * No previous device inspection completed successfully, so we
                  * should try to inspect the device again
                  */
                 inspectDeviceOfNode(nwk, node);
             }
+
         }
     }
 
@@ -385,11 +399,12 @@ public class DeviceBuilderThread implements Stoppable {
             registrations = Activator.devices.get(node.getIEEEAddress());
         }
         if (registrations == null) {
-            logger.error("No registered service to update, but we thought that it was a clashing because " +
-                    "we identified a network address changing");
+            logger.error("No registered service to update, but we thought that it was a clashing because "
+                    + "we identified a network address changing");
             return;
         }
-        ServiceRegistration[] regs = registrations.getValues(new ServiceRegistration[]{});
+        ServiceRegistration[] regs = registrations
+                .getValues(new ServiceRegistration[] {});
         for (int i = 0; i < regs.length; i++) {
             ServiceReference ref = regs[i].getReference();
             final ZigBeeDeviceImpl device = (ZigBeeDeviceImpl) Activator
