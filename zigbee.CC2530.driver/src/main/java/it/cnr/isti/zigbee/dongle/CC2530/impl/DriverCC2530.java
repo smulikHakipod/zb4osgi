@@ -276,7 +276,7 @@ public class DriverCC2530 implements Runnable, SimpleDriver {
 
     public DriverCC2530(String serialPort, int bitRate) throws ZToolException {
 
-        this(serialPort, bitRate, NetworkMode.Coordinator, 0, 19, false);
+        this(serialPort, bitRate, NetworkMode.COORDINATOR, 0, 19, false);
     }
 
     public DriverCC2530(String serialPort, int bitRate, NetworkMode mode,
@@ -1058,11 +1058,11 @@ public class DriverCC2530 implements Runnable, SimpleDriver {
         createCustomDevicesOnDongle();
 
         switch (mode) {
-            case Coordinator :
+            case COORDINATOR :
                 return doCoordinatorCreateNetwork();
-            case Router :
+            case ROUTER :
                 return doRouterCreateNetwok();
-            case EndDevice :
+            case END_DEVICE :
                 return doEndDeviceCreateNetwok();
         }
 

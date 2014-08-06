@@ -195,7 +195,7 @@ public class DriverEZ430_RF2480 implements Runnable, SimpleDriver{
     }
 
     public DriverEZ430_RF2480(String serialPort, int bitrate) throws ZToolException {
-        this(serialPort,bitrate,NetworkMode.Coordinator,0,19, false);
+        this(serialPort,bitrate,NetworkMode.COORDINATOR,0,19, false);
     }
 
     public DriverEZ430_RF2480(
@@ -906,12 +906,12 @@ public class DriverEZ430_RF2480 implements Runnable, SimpleDriver{
             logger.debug("Dongle has already been reset so no endpoint registered");
         }
         switch (mode) {
-        case Coordinator:
+        case COORDINATOR:
             return doCoordinatorCreateNetwork();
-        case Router:
+        case ROUTER:
             //TODO Implements start up as Router
             return false;
-        case EndDevice:
+        case END_DEVICE:
             return doEndDeviceCreateNetwok();
         }
 
