@@ -179,12 +179,11 @@ public class ConfigurationService implements ManagedService {
                             ConfigurationProperties.COM_NAME_KEY,
                             getSerialPortName()));
 
-            //TODO Implement a sort of getEnum
             isChanged |= setNetworkMode(
                     ConfigurationProperties.NETWORK_MODE_KEY,
-                    NetworkMode.valueOf(helper.getString(
+                    helper.getEnum(
                             ConfigurationProperties.NETWORK_MODE_KEY,
-                            getNetworkMode().toString())));
+                            getNetworkMode()));
             isChanged |= setBoolean(ConfigurationProperties.NETWORK_FLUSH_KEY,
                     helper.getBoolean(
                             ConfigurationProperties.NETWORK_FLUSH_KEY,
@@ -205,12 +204,11 @@ public class ConfigurationService implements ManagedService {
                             ConfigurationProperties.APPLICATION_MSG_TIMEOUT_KEY,
                             getZigBeeTimeout()));
 
-            //TODO Implement a sort of getEnum
             setDiscoveryDuplicateMac(
                     ConfigurationProperties.DISCOVERY_DUPLICATE_MAC_KEY,
-                    DuplicateMacPolicy.valueOf(helper.getString(
+                    helper.getEnum(
                             ConfigurationProperties.DISCOVERY_DUPLICATE_MAC_KEY,
-                            getDiscoveryDuplicateMacPolicy().toString())));
+                            getDiscoveryDuplicateMacPolicy()));
 
             setLong(ConfigurationProperties.NETWORK_BROWSING_PERIOD_KEY,
                     helper.getLong(
