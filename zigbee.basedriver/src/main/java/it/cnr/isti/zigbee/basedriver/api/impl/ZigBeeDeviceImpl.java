@@ -568,7 +568,7 @@ public class ZigBeeDeviceImpl
             }
         }
 
-        if (msg.getSrcAddr() != node.getNetworkAddress())
+        if ( ( msg.getSrcAddr() & 0xFFFF ) != node.getNetworkAddress())
             return;
         if (msg.getSrcEndpoint() != endPointAddress)
             return;
