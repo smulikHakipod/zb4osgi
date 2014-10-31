@@ -156,11 +156,12 @@ public class ZigBeeDeviceImpl
      * Generates the UUID from the actual value of the variables
      */
     private String generateUUID() {
-        StringBuffer sb_uuid = new StringBuffer().append(profileId).append(":")
-                .append(deviceId).append(":").append(deviceVersion).append("@")
-                .append(node.getIEEEAddress()).append(":")
-                .append(endPointAddress);
-        return sb_uuid.toString();
+		StringBuffer sb_uuid = new StringBuffer().append(profileId & 0xFFFF)
+				.append(":").append(deviceId & 0xFFFF).append(":")
+				.append(deviceVersion & 0xFF).append("@")
+				.append(node.getIEEEAddress()).append(":")
+				.append(endPointAddress & 0xFF);
+		return sb_uuid.toString();
     }
 
     /**
