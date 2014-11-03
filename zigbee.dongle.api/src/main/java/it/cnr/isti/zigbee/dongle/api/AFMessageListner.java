@@ -26,7 +26,7 @@ package it.cnr.isti.zigbee.dongle.api;
 import com.itaca.ztool.api.af.AF_INCOMING_MSG;
 
 /**
- * This class reppresent the callback invoked by the {@link SimpleDriver} whenever a message<br>
+ * This class represent the callback invoked by the {@link SimpleDriver} whenever a message<br>
  * that belongs to the <i>Application Framework</i> arrives from the <i>ZigBee Network</i>
  * 
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi - ISTI-CNR

@@ -547,10 +547,19 @@ public class ZigBeeDeviceImpl
 
     public void notify(AF_INCOMING_MSG msg) {
         // THINK Do the notification in a separated Thread?
-        // THINK Should consume messages only if they were sent from this
-        // device?!?!
-        if (msg.isError())
+        if (msg.isError()) {
+        	logger.debug("AF_INCOMING_MSG arrived but it is an error packet so IGNORING it");
+            return;        	
+        }
+        if ( ( msg.getSrcAddr() & 0xFFFF ) != node.getNetworkAddress()) {
+        	logger.debug("AF_INCOMING_MSG arrived but NETWORK ADDRESS does not match so IGNORING it");
             return;
+        }
+        if (msg.getSrcEndpoint() != endPointAddress) {
+        	logger.debug("AF_INCOMING_MSG arrived ENDPOINT does not match so IGNORING it");
+			return;
+		}
+        
         logger.debug("AF_INCOMING_MSG arrived for {} message is {}", uuid, msg);
         ArrayList<AFMessageConsumer> localConsumers = null;
         synchronized (consumers) {
@@ -559,19 +568,13 @@ public class ZigBeeDeviceImpl
         logger.debug("Notifying {} AFMessageConsumer", localConsumers.size());
         for (AFMessageConsumer consumer : localConsumers) {
             if (consumer.consume(msg)) {
-                logger.debug("AF_INCOMING_MSG Consumed by {}", consumer
-                        .getClass().getName());
+                logger.debug("AF_INCOMING_MSG Consumed by {}", consumer.getClass().getName());
                 return;
             } else {
-                logger.debug("AF_INCOMING_MSG Ignored by {}", consumer
-                        .getClass().getName());
+                logger.debug("AF_INCOMING_MSG Ignored by {}", consumer.getClass().getName());
             }
         }
 
-        if ( ( msg.getSrcAddr() & 0xFFFF ) != node.getNetworkAddress())
-            return;
-        if (msg.getSrcEndpoint() != endPointAddress)
-            return;
         logger.debug("Notifying cluster listener for received by {}", uuid);
         notifyClusterListner(new ClusterImpl(msg.getData(), msg.getClusterId()));
     }
