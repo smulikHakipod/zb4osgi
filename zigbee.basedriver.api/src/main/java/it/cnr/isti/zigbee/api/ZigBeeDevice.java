@@ -164,7 +164,22 @@ public interface ZigBeeDevice {
 	 */
 	public ZigBeeNode getPhysicalNode();
 	
-	/**
+	/** 
+	 * 
+	 * It returns a {@link String} that contains data and it aims at uniquely identifies the device
+	 * on the Framework.<br>
+	 * The format of the {@link String} is:
+	 * <pre>
+	 * [Profile Id]:[Device Id]:[Device Version]@[IEEE Address]:[EndPoint Address]
+	 * </pre>
+	 * All the values the number are represented as 32 bit integer, while the IEEE Address is represented
+	 * with a colon notation.<br>
+	 * 
+	 * <b>EXAMPLE</b>:<br>
+	 * 260:258:0@00:00:00:00:00:AA:200<br>
+	 * The above string represent a Home Automation Profile device (ProfileId = 260 / 0x104 ), of type
+	 * Color Dimmable Light ( DeviceId = 258 / 0x102 ) version 0 that is running on node 
+	 * with IEEE Address = 00:00:00:00:00:AA on the End Point = 200
 	 * 
 	 * @return a {@link String} the represent an URI of device. The same as property {@link #UUID}
 	 * @since 0.5.0
