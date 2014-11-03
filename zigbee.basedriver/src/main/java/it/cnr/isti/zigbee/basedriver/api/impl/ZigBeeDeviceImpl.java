@@ -551,6 +551,11 @@ public class ZigBeeDeviceImpl
         	logger.debug("AF_INCOMING_MSG arrived but it is an error packet so IGNORING it");
             return;        	
         }
+        /*
+         *  //XXX BE AWARE:
+         *  The following two check must be in case that we find a cluster that answer by means of
+         *  broadcast or groupcast response to unicast request 
+         */
         if ( ( msg.getSrcAddr() & 0xFFFF ) != node.getNetworkAddress()) {
         	logger.debug("AF_INCOMING_MSG arrived but NETWORK ADDRESS does not match so IGNORING it");
             return;
