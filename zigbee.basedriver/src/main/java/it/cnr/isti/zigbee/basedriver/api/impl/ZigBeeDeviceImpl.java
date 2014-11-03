@@ -423,7 +423,7 @@ public class ZigBeeDeviceImpl
                                 .getDeviceId()));
         if (response == null || response.Status != 0) {
             logger.debug(
-                    "ZDO_BIND_REQ failed, unable to un-bind from device {} to {} for cluster {}",
+                    "ZDO_UNBIND_REQ failed, unable to un-bind from device {} to {} for cluster {}",
                     new Object[]{getUniqueIdenfier(),
                             device.getUniqueIdenfier(), new Integer(clusterId)});
             return false;
@@ -472,7 +472,7 @@ public class ZigBeeDeviceImpl
                         (byte) endPointAddress, driver.getIEEEAddress(),
                         (byte) dstEP));
         if (response == null || response.Status != 0) {
-            logger.debug("ZDO_BIND_REQ failed, unable to unbind");
+            logger.debug("ZDO_UNBIND_REQ failed, unable to unbind");
             return false;
         }
         boundCluster.remove(clusterId);
