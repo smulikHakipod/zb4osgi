@@ -67,16 +67,11 @@ import com.itaca.ztool.api.zdo.ZDO_UNBIND_RSP;
  * @since 0.1.0
  *
  */
-public class ZigBeeDeviceImpl
-        implements
-            ZigBeeDevice,
-            AFMessageListner,
-            AFMessageProducer {
+public class ZigBeeDeviceImpl implements ZigBeeDevice, AFMessageListner, AFMessageProducer {
 
     private static long TIMEOUT;
     private static final long DEFAULT_TIMEOUT = 5000;
-    private static final Logger logger = LoggerFactory
-            .getLogger(ZigBeeDeviceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(ZigBeeDeviceImpl.class);
 
     private final int[] inputs;
     private final int[] outputs;
@@ -125,21 +120,16 @@ public class ZigBeeDeviceImpl
 
         setPhysicalNode(n);
 
-        properties.put(ZigBeeDevice.PROFILE_ID,
-                Integer.toString((profileId & 0xFFFF)));
-        properties.put(ZigBeeDevice.DEVICE_ID,
-                Integer.toString((deviceId & 0xFFFF)));
-        properties.put(ZigBeeDevice.DEVICE_VERSION,
-                Integer.toString((deviceVersion & 0xFF)));
-        properties.put(ZigBeeDevice.ENDPOINT,
-                Integer.toString((endPointAddress & 0xFF)));
+        properties.put(ZigBeeDevice.PROFILE_ID, Integer.toString((profileId & 0xFFFF)));
+        properties.put(ZigBeeDevice.DEVICE_ID, Integer.toString((deviceId & 0xFFFF)));
+        properties.put(ZigBeeDevice.DEVICE_VERSION, Integer.toString((deviceVersion & 0xFF)));
+        properties.put(ZigBeeDevice.ENDPOINT, Integer.toString((endPointAddress & 0xFF)));
         properties.put(ZigBeeDevice.CLUSTERS_INPUT_ID, inputs);
         properties.put(ZigBeeDevice.CLUSTERS_OUTPUT_ID, outputs);
         properties.put(ZigBeeDevice.ZIGBEE_IMPORT, drv.getClass());
         properties.put(ZigBeeDevice.IEEE_ADDRESS, node.getIEEEAddress());
 
-        properties.put(Constants.DEVICE_CATEGORY,
-                new String[]{ZigBeeDevice.DEVICE_CATEGORY});
+        properties.put(Constants.DEVICE_CATEGORY, new String[]{ZigBeeDevice.DEVICE_CATEGORY});
 
         try {
             TIMEOUT = Long.parseLong(Activator.getBundleContext().getProperty(
@@ -219,34 +209,27 @@ public class ZigBeeDeviceImpl
         ZDO_SIMPLE_DESC_RSP result = null;
 
         while (i <= Activator.getCurrentConfiguration().getMessageRetryCount()) {
-            logger.info("Inspecting ZigBee EndPoint <{},{}>", nwkAddress,
-                    endPointAddress);
-            result = driver
-                    .sendZDOSimpleDescriptionRequest(new ZDO_SIMPLE_DESC_REQ(
-                            nwk, endPointAddress));
+            logger.info("Inspecting ZigBee EndPoint <{},{}>", nwkAddress, endPointAddress);
+            result = driver.sendZDOSimpleDescriptionRequest(new ZDO_SIMPLE_DESC_REQ(nwk, endPointAddress));
             if (result == null) {
                 // long waiting = (long) (Math.random() * (double)
                 // Activator.getCurrentConfiguration().getMessageRetryDelay())
-                final long waiting = Activator.getCurrentConfiguration()
-                        .getMessageRetryDelay();
+                final long waiting = Activator.getCurrentConfiguration().getMessageRetryDelay();
                 ThreadUtils.waitNonPreemptive(waiting);
                 i++;
-                logger.debug(
-                        "Inspecting ZigBee EndPoint <{},{}> failed during it {}-th attempts. "
-                                + "Waiting for {}ms before retrying",
-                        new Object[]{nwkAddress, endPointAddress, i, waiting});
-
+                logger.debug("Inspecting ZigBee EndPoint <{},{}> failed during it {}-th attempts. "
+                		+ "Waiting for {}ms before retrying", 
+                		new Object[]{nwkAddress, endPointAddress, i, waiting}
+        		);
             } else {
                 break;
             }
         }
 
         if (result == null) {
-            logger.error(
-                    "Unable to receive a ZDO_SIMPLE_DESC_RSP for endpoint {} on node {}",
-                    NetworkAddress.toString(nwk), endPointAddress);
-            throw new ZigBeeBasedriverException(
-                    "Unable to receive a ZDO_SIMPLE_DESC_RSP from endpoint");
+            logger.error("Unable to receive a ZDO_SIMPLE_DESC_RSP for endpoint {} on node {}",
+            		NetworkAddress.toString(nwk), endPointAddress);
+            throw new ZigBeeBasedriverException("Unable to receive a ZDO_SIMPLE_DESC_RSP from endpoint");
         }
 
         return result;
