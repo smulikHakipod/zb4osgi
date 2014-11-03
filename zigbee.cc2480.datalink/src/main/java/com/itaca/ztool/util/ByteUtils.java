@@ -184,9 +184,15 @@ public class ByteUtils {
 	}
 	
 	/**
+	 * This method convert string that matches the following formats:<ul>
+	 * <li>0xfe 0x19 0x44 0x81 0x00</li> 
+	 * <li>fe 19 44 81 00</li>
+	 * </ul>
+	 * to the following array of int<br>
+	 * [ 254, 25, 68, 129, 00 ]
 	 * 
-	 * @param bytes the String representing the bytes in hex form
-	 * @return the formatted bytes
+	 * @param bytes the {@link String} representing the bytes in hex form (as described above)
+	 * @return the int array parsed from the argument
 	 * @since 0.6.0 - Revision 60
 	 */
 	public static int[] fromBase16toIntArray(String bytes){
