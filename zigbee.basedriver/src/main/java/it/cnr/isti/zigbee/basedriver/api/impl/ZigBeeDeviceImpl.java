@@ -422,18 +422,15 @@ public class ZigBeeDeviceImpl
                                         .getIEEEAddress()), (byte) device
                                 .getDeviceId()));
         if (response == null || response.Status != 0) {
-            logger.debug(
-                    "ZDO_UNBIND_REQ failed, unable to un-bind from device {} to {} for cluster {}",
-                    new Object[]{getUniqueIdenfier(),
-                            device.getUniqueIdenfier(), new Integer(clusterId)});
+            logger.debug( "ZDO_UNBIND_REQ failed, unable to un-bind from device {} to {} for cluster {}",
+                    new Object[]{ getUniqueIdenfier(), device.getUniqueIdenfier(), new Integer(clusterId)} );
             return false;
         }
         return true;
     }
 
     public boolean bind(int clusterId) throws ZigBeeBasedriverException {
-        logger.debug("Binding from cluster {} of device {}", clusterId,
-                getUniqueIdenfier());
+        logger.debug("Binding from cluster {} of device {}", clusterId, getUniqueIdenfier());
         if (boundCluster.contains(clusterId)) {
             logger.debug("Cluster already bound");
             return true;
@@ -455,25 +452,29 @@ public class ZigBeeDeviceImpl
     }
 
     public boolean unbind(int clusterId) throws ZigBeeBasedriverException {
-        logger.debug("Unbinding from cluster {} of device {}", clusterId,
-                getUniqueIdenfier());
+        logger.debug("Unbinding from cluster {} of device {}", clusterId, getUniqueIdenfier());
         if (!boundCluster.contains(clusterId)) {
-            logger.debug("Cluster already unbound");
+            logger.debug("No cluster bound");
             return true;
         }
 
-        byte dstEP = AFLayer.getAFLayer(driver).getSendingEndpoint(this,
-                clusterId);
+        byte dstEP = AFLayer.getAFLayer(driver).getSendingEndpoint(this, clusterId);
 
-        final ZDO_UNBIND_RSP response = driver
-                .sendZDOUnbind(new ZDO_UNBIND_REQ((short) getPhysicalNode()
-                        .getNetworkAddress(), (short) clusterId, IEEEAddress
-                        .fromColonNotation(getPhysicalNode().getIEEEAddress()),
-                        (byte) endPointAddress, driver.getIEEEAddress(),
-                        (byte) dstEP));
-        if (response == null || response.Status != 0) {
-            logger.debug("ZDO_UNBIND_REQ failed, unable to unbind");
-            return false;
+        final ZDO_UNBIND_RSP response = driver.sendZDOUnbind(
+        		new ZDO_UNBIND_REQ(
+    				(short) getPhysicalNode().getNetworkAddress(), (short) clusterId, 
+    				IEEEAddress.fromColonNotation(getPhysicalNode().getIEEEAddress()),
+                    (byte) endPointAddress, driver.getIEEEAddress(), (byte) dstEP
+        		)
+		);
+        if (response == null || response.Status != 0 ) {
+        	if ( response.Status == ZDO_UNBIND_RSP.ZDO_STATUS.ZDP_NO_ENTRY ) {
+        		logger.debug("ZDO_UNBIND_REQ failed due to a misaligment between device status and base driver,"
+        				+ " no bound for cluster {} so RECOVERING by considering the unbind as SUCCEED", clusterId);
+        	} else {
+        		logger.debug("ZDO_UNBIND_REQ failed, unable to unbind");
+                return false;
+        	}
         }
         boundCluster.remove(clusterId);
         return true;
