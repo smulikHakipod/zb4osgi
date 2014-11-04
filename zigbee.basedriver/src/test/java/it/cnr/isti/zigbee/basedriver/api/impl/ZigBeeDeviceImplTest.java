@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import it.cnr.isti.primitvetypes.util.Integers;
 import it.cnr.isti.zigbee.api.Cluster;
 import it.cnr.isti.zigbee.api.ZigBeeDevice;
 import it.cnr.isti.zigbee.basedriver.Activator;
@@ -84,7 +85,7 @@ public class ZigBeeDeviceImplTest {
         try {
             expect(stub.getServiceReferences(anyObject(String.class),anyObject(String.class)))
             	.andReturn(null).anyTimes();
-            expect(stub.getProperty("org.aaloa.zb4osgi.zigbee.basedriver.timeout")).andReturn("500");
+            expect(stub.getProperty("org.aaloa.zb4osgi.zigbee.basedriver.timeout")).andReturn("10000").anyTimes();
         } catch (InvalidSyntaxException ex) {
         }
         replay(stub);
@@ -125,7 +126,7 @@ public class ZigBeeDeviceImplTest {
      * and a end point address greater then 127
      */
 	@Test
-	public void testInvoke() {
+	public void testInvokeOnNegativeNwkAddress() {
 		final HashSet<AFMessageListner> listeners = new HashSet<AFMessageListner>();
 		final ArrayList<ZigBeeDeviceImpl> network = new ArrayList<ZigBeeDeviceImpl>();
 		try {
@@ -212,4 +213,131 @@ public class ZigBeeDeviceImplTest {
 		}
 	}
 
+	
+    /**
+     * This test verify the dispatching to multiple {@link ZigBeeDevice} of response from the network and 
+     * it verify that messages are consumed only by the expected {@link ZigBeeDevice}
+     */
+	@Test
+	public void testInvokeOnMultipleDevice() {
+		final HashSet<AFMessageListner> listeners = new HashSet<AFMessageListner>();
+		final ArrayList<ZigBeeDeviceImpl> network = new ArrayList<ZigBeeDeviceImpl>();
+		final ArrayList<ZDO_SIMPLE_DESC_RSP> devices = new ArrayList<ZDO_SIMPLE_DESC_RSP>();
+		final ArrayList<AF_INCOMING_MSG> responses = new ArrayList<AF_INCOMING_MSG>();
+		try {
+			SimpleDriver drv = createMock(SimpleDriver.class);
+			final int[] descriptionRequest = new int[]{-1};
+			devices.add(new ZDO_SIMPLE_DESC_RSP(new int[]{
+					0x9C, 0x40,										//16-bit Source Address
+					0x00,											//Status
+					0x9C, 0x40,										//16-bit Network Address
+					0x00,											//Length
+					0xC8,											//End Point Address
+					0x04, 0x01,										//Profile Id
+					0x02, 0x01,										//Device Id
+					0x00,											//Device Version
+					0x04,											//Input Cluster Count
+					0x00, 0x10, 0x10, 0x00, 0x00, 0x80, 0xF0, 0xFA, //Input Cluster List				
+					0x04,											//Output Cluster Count
+					0x00, 0x10, 0x10, 0x00, 0x00, 0x80, 0xF0, 0xFA, //Output Cluster List				
+			}));		
+			devices.add(new ZDO_SIMPLE_DESC_RSP(new int[]{
+					0x00, 0x40,										//16-bit Source Address
+					0x00,											//Status
+					0x00, 0x40,										//16-bit Network Address
+					0x00,											//Length
+					0x28,											//End Point Address
+					0x04, 0x01,										//Profile Id
+					0x00, 0x01,										//Device Id
+					0x00,											//Device Version
+					0x04,											//Input Cluster Count
+					0x00, 0x10, 0x10, 0x00, 0x00, 0x80, 0xF0, 0xFA, //Input Cluster List				
+					0x04,											//Output Cluster Count
+					0x00, 0x10, 0x10, 0x00, 0x00, 0x80, 0xF0, 0xFA, //Output Cluster List				
+			}));		
+			AF_REGISTER_SRSP successRegister = new AF_REGISTER_SRSP(new int[]{0});
+			expect(drv.sendZDOSimpleDescriptionRequest(anyObject(ZDO_SIMPLE_DESC_REQ.class))).andAnswer(
+					new IAnswer<ZDO_SIMPLE_DESC_RSP>() {
+						public ZDO_SIMPLE_DESC_RSP answer() throws Throwable {
+							int idx = ( descriptionRequest[0] + 1 ) % devices.size();
+							descriptionRequest[0] = idx;
+							return devices.get(idx);
+						}
+					}
+			).anyTimes();
+			expect(drv.sendAFRegister(anyObject(AF_REGISTER.class))).andReturn(successRegister).anyTimes();
+			expect(drv.sendAFDataRequest(anyObject(AF_DATA_REQUEST.class))).andAnswer(new IAnswer<AF_DATA_CONFIRM>() {
+
+				public AF_DATA_CONFIRM answer() throws Throwable {
+					//pushResponse(getCurrentArguments()[0]);
+					/*
+					String answer = "0xfe " //SOF
+							+ "0x19 " //LEN
+							+ "0x44 0x81 " //CMD
+							+ "0x00 0x00 " //GroupId
+							+ "0x00 0x01 " //ClusterId
+							+ "0x9c 0x40 " //Source Network Address
+							+ "0xc8 0x01 " //Source & Destination End Point
+							+ "0x00 0x46 0x00 " //Broadcast, Link, Security flags
+							+ "0xc5 0x9f 0x04 0x00 " //Timestamp
+							+ "0x00 " //Transaction Sequence Number
+							+ "0x08 " //Payload Length
+							+ "0x08 0x00 0x01 0x00 0x00 0x00 0x20 0x02 " //Payload
+							+ "0x47"; //FCS
+					*/
+					AF_DATA_REQUEST request = (AF_DATA_REQUEST) getCurrentArguments()[0];
+					short dstNwk = request.getDstAddress();
+					byte dstEP = request.getDstEndpoint();
+					short cluster = request.getClusterId();
+					String answer = ""
+							+ "0x00 0x00 " //GroupId
+							+ ByteUtils.toBase16(cluster & 0xFF) + " " + ByteUtils.toBase16((cluster >> 8 ) & 0xFF) + " "//ClusterId
+							+ ByteUtils.toBase16(dstNwk & 0xFF) + " " + ByteUtils.toBase16((dstNwk >> 8 ) & 0xFF) + " " //Source Network Address
+							+ ByteUtils.toBase16(dstEP) + " 0x01 " //Source & Destination End Point
+							+ "0x00 0x46 0x00 " //Broadcast, Link, Security flags
+							+ "0xc5 0x9f 0x04 0x00 " //Timestamp
+							+ "0x00 " //Transaction Sequence Number
+							+ "0x08 " //Payload Length
+							+ "0x08 0x00 0x01 0x00 0x00 0x00 0x20 0x02 " //Payload
+					;
+					int[] packet = ByteUtils.fromBase16toIntArray(answer);
+					AF_INCOMING_MSG currentResponse = new AF_INCOMING_MSG(packet);
+					responses.add(currentResponse);
+					for (ZigBeeDeviceImpl dev : network) {
+						for (AF_INCOMING_MSG response : responses) {
+							dev.notify(response);							
+						}
+					}
+					AF_DATA_CONFIRM dataSuccess = new AF_DATA_CONFIRM(0,0,0);
+					return dataSuccess;
+				}
+			}).anyTimes();
+			
+			expect(drv.addAFMessageListner(anyObject(AFMessageListner.class))).andAnswer(new IAnswer<Boolean>() {
+
+				public Boolean answer() throws Throwable {
+					return listeners.add( (AFMessageListner) getCurrentArguments()[0] );
+				}
+			}).anyTimes();
+			expect(drv.removeAFMessageListener(anyObject(AFMessageListner.class))).andAnswer(new IAnswer<Boolean>() {
+
+				public Boolean answer() throws Throwable {
+					return listeners.remove((AFMessageListner) getCurrentArguments()[0] );
+				}
+			}).anyTimes();
+			replay(drv);
+			ZigBeeDeviceImpl dimmable = new ZigBeeDeviceImpl(drv, new ZigBeeNodeImpl(40000, "00:00:00:00:00:AA", (short) 1), (byte) 200);
+			ZigBeeDeviceImpl onOff = new ZigBeeDeviceImpl(drv, new ZigBeeNodeImpl(4096, "11:00:00:00:00:11", (short) 1), (byte) 96);
+			network.add(dimmable);
+			network.add(onOff);
+			for (ZigBeeDeviceImpl device : network) {
+				System.out.println(device.getUniqueIdenfier()+" over "+device.getPhysicalNode().getNetworkAddress());
+				Cluster response = device.invoke(new ClusterImpl(new byte[]{0x00,0x01,0x0a,0x20},(short) 0x100));
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+			fail(ex.getMessage());
+		}
+	}
+	
 }
