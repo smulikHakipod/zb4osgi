@@ -38,31 +38,40 @@ import com.itaca.ztool.util.DoubleByte;
 public class AF_DATA_REQUEST extends ZToolPacket/* implements IREQUEST,IAF*/{
     /// <name>TI.ZPI2.AF_DATA_REQUEST.ClusterID</name>
         /// <summary>specifies the cluster ID</summary>
-        public DoubleByte ClusterID;
+        @Deprecated
+        protected DoubleByte ClusterID;
         /// <name>TI.ZPI2.AF_DATA_REQUEST.Data</name>
         /// <summary>Dynamic array, requires memory allocation.  Variable length field of size 'Len' and is the transaction data frame</summary>
-        public int[] Data;
+        @Deprecated
+        protected int[] Data;
         /// <name>TI.ZPI2.AF_DATA_REQUEST.DestEndpoint</name>
         /// <summary>specifies the endpoint of the device</summary>
-        public int DestEndpoint;
+        @Deprecated
+        protected int DestEndpoint;
         /// <name>TI.ZPI2.AF_DATA_REQUEST.DstAddr</name>
         /// <summary>the address of the destination device</summary>
-        public ZToolAddress16 DstAddr;
+        @Deprecated
+        protected ZToolAddress16 DstAddr;
         /// <name>TI.ZPI2.AF_DATA_REQUEST.Len</name>
         /// <summary>specifies the length of the TransactionData field</summary>
-        public int Len;
+        @Deprecated
+        protected int Len;
         /// <name>TI.ZPI2.AF_DATA_REQUEST.Options</name>
         /// <summary>consists of the AF Tx Options bit fields; zero for none</summary>
-        public int Options;
+        @Deprecated
+        protected int Options;
         /// <name>TI.ZPI2.AF_DATA_REQUEST.Radius</name>
         /// <summary>the number of hops allowed to deliver the message; usually use 7</summary>
-        public int Radius;
+        @Deprecated
+        protected int Radius;
         /// <name>TI.ZPI2.AF_DATA_REQUEST.SrcEndpoint</name>
         /// <summary>specifies the endpoint of the device</summary>
-        public int SrcEndpoint;
+        @Deprecated
+        protected int SrcEndpoint;
         /// <name>TI.ZPI2.AF_DATA_REQUEST.TransID</name>
         /// <summary>specifies the transaction Id of the device</summary>
-        public int TransID;
+        @Deprecated
+        protected int TransID;
 
         /// <name>TI.ZPI2.AF_DATA_REQUEST</name>
         /// <summary>Constructor</summary>
@@ -73,6 +82,7 @@ public class AF_DATA_REQUEST extends ZToolPacket/* implements IREQUEST,IAF*/{
 
         /// <name>TI.ZPI2.AF_DATA_REQUEST</name>
         /// <summary>Constructor</summary>
+        @Deprecated
         public AF_DATA_REQUEST(ZToolAddress16 num1, int num2, int num3, DoubleByte num4, int num5, int num6, int num7, int num8, int[] buffer1)
         {
             this.DstAddr = num1;
@@ -136,4 +146,22 @@ public class AF_DATA_REQUEST extends ZToolPacket/* implements IREQUEST,IAF*/{
 			
 		}
 
+		public short getDstAddress() {
+			return 	(short)((super.packet[ZToolPacket.PAYLOAD_START_INDEX + 1]<<8)
+		             +(super.packet[ZToolPacket.PAYLOAD_START_INDEX + 0]));
+		}
+		
+		public byte getDstEndpoint() {
+			return 	(byte) super.packet[ZToolPacket.PAYLOAD_START_INDEX + 2];
+		}
+		
+		public byte getSrcEndpoint() {
+			return 	(byte) super.packet[ZToolPacket.PAYLOAD_START_INDEX + 3];
+		}
+		
+		public short getClusterId() {
+			return 	(short)((super.packet[ZToolPacket.PAYLOAD_START_INDEX + 5]<<8)
+		             +(super.packet[ZToolPacket.PAYLOAD_START_INDEX + 4]));
+		}
+		
 }
