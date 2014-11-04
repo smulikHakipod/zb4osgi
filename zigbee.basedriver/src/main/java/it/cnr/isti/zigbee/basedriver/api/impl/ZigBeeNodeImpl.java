@@ -29,6 +29,9 @@ import it.cnr.isti.zigbee.util.IEEEAddress;
 import java.util.Dictionary;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.itaca.ztool.api.ZToolAddress64;
 
 /**
@@ -42,6 +45,8 @@ import com.itaca.ztool.api.ZToolAddress64;
  */
 public class ZigBeeNodeImpl implements ZigBeeNode {
 
+	private final static Logger logger = LoggerFactory.getLogger(ZigBeeNodeImpl.class);
+	
     private int nwkAddress;
     final private String ieeeAddress;
     final private Properties description;
@@ -62,7 +67,7 @@ public class ZigBeeNodeImpl implements ZigBeeNode {
         description = new Properties();
         description.put(ZigBeeNode.IEEE_ADDRESS, ieee);
         description.put(ZigBeeNode.NWK_ADDRESS, nwk);
-        description.put(ZigBeeNode.PAN_ID, pan);
+        description.put(ZigBeeNode.PAN_ID, pan & 0xFFFF);
     }
 
     /**
@@ -82,7 +87,10 @@ public class ZigBeeNodeImpl implements ZigBeeNode {
         description.put(ZigBeeNode.IEEE_ADDRESS, ieee);
         description.put(ZigBeeNode.PAN_ID, Activator.getCurrentConfiguration()
                 .getPanId());
-        setNetworkAddress(nwk);
+        if ( nwk < 0 ) {
+        	logger.debug("Recieved a negative Network Address, but we are normalizing it as positive value");
+        }
+        setNetworkAddress(nwk & 0xFFFF);
     }
 
     public Dictionary getDescription() {
