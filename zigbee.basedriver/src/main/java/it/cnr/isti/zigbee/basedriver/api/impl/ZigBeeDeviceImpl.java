@@ -541,11 +541,13 @@ public class ZigBeeDeviceImpl implements ZigBeeDevice, AFMessageListner, AFMessa
          *  broadcast or groupcast response to unicast request 
          */
         if ( ( msg.getSrcAddr() & 0xFFFF ) != node.getNetworkAddress()) {
-        	logger.debug("AF_INCOMING_MSG arrived but NETWORK ADDRESS does not match so IGNORING it");
+        	logger.debug("AF_INCOMING_MSG arrived but NETWORK ADDRESS does not match so IGNORING it: "
+        			+ "recieved {} but expecting {} ", msg.getSrcAddr() & 0xFFFF, node.getNetworkAddress());
             return;
         }
         if (msg.getSrcEndpoint() != endPointAddress) {
-        	logger.debug("AF_INCOMING_MSG arrived ENDPOINT does not match so IGNORING it");
+        	logger.debug("AF_INCOMING_MSG arrived ENDPOINT does not match so IGNORING it: "
+        			+ "received {} but expecting {}", msg.getSrcEndpoint(), endPointAddress);
 			return;
 		}
         
