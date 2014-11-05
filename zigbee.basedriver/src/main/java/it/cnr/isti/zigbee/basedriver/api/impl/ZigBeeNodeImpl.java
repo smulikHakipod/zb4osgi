@@ -59,14 +59,13 @@ public class ZigBeeNodeImpl implements ZigBeeNode {
      * @since 0.6.0 - Revision 67
      */
     public ZigBeeNodeImpl(int nwk, String ieee, short pan) {
-        this.nwkAddress = nwk;
+        description = new Properties();
+        setNetworkAddress(nwk);
         this.ieeeAddress = ieee;
         IEEEAddress.fromColonNotation(ieee); // Only for checking the IEEE
                                                 // format
 
-        description = new Properties();
         description.put(ZigBeeNode.IEEE_ADDRESS, ieee);
-        description.put(ZigBeeNode.NWK_ADDRESS, nwk);
         description.put(ZigBeeNode.PAN_ID, pan & 0xFFFF);
     }
 
@@ -90,7 +89,7 @@ public class ZigBeeNodeImpl implements ZigBeeNode {
         if ( nwk < 0 ) {
         	logger.debug("Recieved a negative Network Address, but we are normalizing it as positive value");
         }
-        setNetworkAddress(nwk & 0xFFFF);
+        setNetworkAddress(nwk);
     }
 
     public Dictionary getDescription() {
@@ -109,7 +108,7 @@ public class ZigBeeNodeImpl implements ZigBeeNode {
      * @since 0.6.0 - Revision 74
      */
     public void setNetworkAddress(int nwk) {
-        nwkAddress = nwk;
+        nwkAddress = nwk & 0xFFFF;
         description.put(ZigBeeNode.NWK_ADDRESS, nwk);
     }
 
