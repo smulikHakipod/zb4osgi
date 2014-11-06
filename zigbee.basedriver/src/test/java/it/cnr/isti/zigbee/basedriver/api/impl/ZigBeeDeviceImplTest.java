@@ -205,7 +205,6 @@ public class ZigBeeDeviceImplTest {
 			ZigBeeNodeImpl node = new ZigBeeNodeImpl(40000, "00:00:00:00:00:AA", (short) 1);
 			ZigBeeDeviceImpl device = new ZigBeeDeviceImpl(drv, node, (byte) 200);
 			network.add(device);
-			System.out.println(device.getUniqueIdenfier()+" over "+device.getPhysicalNode().getNetworkAddress());
 			Cluster response = device.invoke(new ClusterImpl(new byte[]{0x00,0x01,0x0a,0x20},(short) 0x100));
 		}catch(Exception ex){
 			ex.printStackTrace();
@@ -331,7 +330,6 @@ public class ZigBeeDeviceImplTest {
 			network.add(dimmable);
 			network.add(onOff);
 			for (ZigBeeDeviceImpl device : network) {
-				System.out.println(device.getUniqueIdenfier()+" over "+device.getPhysicalNode().getNetworkAddress());
 				Cluster response = device.invoke(new ClusterImpl(new byte[]{0x00,0x01,0x0a,0x20},(short) 0x100));
 			}
 		}catch(Exception ex){
