@@ -200,33 +200,22 @@ public class DeviceBuilderThread implements Stoppable {
         return true;
     }
 
-    private void doUpdateZigBeeDeviceService(ZigBeeNode node, byte ep) {
-        {
-
-            final ZigBeeNetwork network = AFLayer.getAFLayer(driver)
-                    .getZigBeeNetwork();
-
-            try {
-                ZigBeeDeviceImpl device = new ZigBeeDeviceImpl(driver, node, ep);
-                if (network.removeDevice(node, ep) && network.addDevice(device)) {
-                    synchronized (Activator.devices) {
-                        TByteObjectHashMap<ServiceRegistration> nodeServices = Activator.devices
-                                .get(node.getIEEEAddress());
-                        ServiceRegistration endpointService = nodeServices
-                                .get(ep);
-                        ((ZigBeeNodeImpl) endpointService)
-                                .setNetworkAddress(node.getNetworkAddress());
-
-                    }
-                }
-
-            } catch (ZigBeeBasedriverException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-        }
-    }
+	private void doUpdateZigBeeDeviceService(ZigBeeNode node, byte ep) {
+		final ZigBeeNetwork network = AFLayer.getAFLayer(driver).getZigBeeNetwork();
+		try {
+			ZigBeeDeviceImpl device = new ZigBeeDeviceImpl(driver, node, ep);
+			if (network.removeDevice(node, ep) && network.addDevice(device)) {
+				synchronized (Activator.devices) {
+					TByteObjectHashMap<ServiceRegistration> nodeServices = Activator.devices.get(node.getIEEEAddress());
+					ServiceRegistration endpointService = nodeServices.get(ep);
+					// FIX the line below should be throw a ClassCastException but it is not tested by any TestUnit
+					((ZigBeeNodeImpl) endpointService).setNetworkAddress(node.getNetworkAddress());
+				}
+			}
+		} catch (ZigBeeBasedriverException e) {
+			e.printStackTrace();
+		}
+	}
 
     private void doRemoveZigBeeDeviceService(ZigBeeNode node, byte ep) {
 
