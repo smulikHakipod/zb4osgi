@@ -29,6 +29,8 @@ import java.util.Iterator;
 
 import it.cnr.isti.primitvetypes.util.Integers;
 import it.cnr.isti.zigbee.api.Cluster;
+import it.cnr.isti.zigbee.api.ZigBeeBasedriverException;
+import it.cnr.isti.zigbee.api.ZigBeeBasedriverTimeOutException;
 import it.cnr.isti.zigbee.api.ZigBeeDevice;
 import it.cnr.isti.zigbee.basedriver.Activator;
 import it.cnr.isti.zigbee.basedriver.configuration.ConfigurationService;
@@ -119,11 +121,114 @@ public class ZigBeeDeviceImplTest {
 
         return stub;
     }
-	
+
+    /**
+     * This test verify if any pending {@link AFMessageConsumer} also known as {@link WaitForClusterResponse} is left 
+     * when the invoke fails
+     * @See <a href="http://zb4o.aaloa.org/redmine/issues/273">Redmine issue #273</a>
+     */
+	@Test
+	public void testFailedInvoked() {
+		final HashSet<AFMessageListner> listeners = new HashSet<AFMessageListner>();
+		final ArrayList<ZigBeeDeviceImpl> network = new ArrayList<ZigBeeDeviceImpl>();
+		ZigBeeNodeImpl node = null;
+		ZigBeeDeviceImpl device = null;
+		Cluster response = null;
+		try {
+			SimpleDriver drv = createMock(SimpleDriver.class);
+			ZDO_SIMPLE_DESC_RSP dsc = new ZDO_SIMPLE_DESC_RSP(new int[]{
+					0x9C, 0x40,										//16-bit Source Address
+					0x00,											//Status
+					0x9C, 0x40,										//16-bit Network Address
+					0x00,											//Length
+					0xC8,											//End Point Address
+					0x04, 0x01,										//Profile Id
+					0x02, 0x01,										//Device Id
+					0x00,											//Device Version
+					0x04,											//Input Cluster Count
+					0x00, 0x10, 0x10, 0x00, 0x00, 0x80, 0xF0, 0xFA, //Input Cluster List				
+					0x04,											//Output Cluster Count
+					0x00, 0x10, 0x10, 0x00, 0x00, 0x80, 0xF0, 0xFA, //Output Cluster List				
+			});		
+			AF_REGISTER_SRSP successRegister = new AF_REGISTER_SRSP(new int[]{0});
+			expect(drv.sendZDOSimpleDescriptionRequest(anyObject(ZDO_SIMPLE_DESC_REQ.class))).andReturn(dsc).anyTimes();
+			expect(drv.sendAFRegister(anyObject(AF_REGISTER.class))).andReturn(successRegister).anyTimes();
+			expect(drv.sendAFDataRequest(anyObject(AF_DATA_REQUEST.class))).andAnswer(new IAnswer<AF_DATA_CONFIRM>() {
+
+				final String FIRST_TEST = "Test AF_DATA_CONFIRM with a faiulre status code";
+				final String SECOND_TEST = "Test no AF_DATA_CONFIRM";
+				final String THIRD_TEST = "Test AF_DATA_CONFIRM with a succes status code but no AF_INCOMING_DATA";
+				String[] scenarios = new String[]{FIRST_TEST,SECOND_TEST,THIRD_TEST};
+				int currentScanario = 0;
+				public AF_DATA_CONFIRM answer() throws Throwable {
+					if ( scenarios[currentScanario] == FIRST_TEST ){
+						currentScanario++;
+						return new AF_DATA_CONFIRM(AF_DATA_CONFIRM.AF_STATUS.FAILED, 0, 0);
+					}
+					if ( scenarios[currentScanario] == SECOND_TEST ){
+						currentScanario++;
+						return null;
+					}
+					if ( scenarios[currentScanario] == THIRD_TEST){
+						currentScanario++;
+						return new AF_DATA_CONFIRM(0, 0, 0);
+					}
+					fail("Too many test and no scenario defined");
+					return null;
+				}
+			}).anyTimes();
+			
+			expect(drv.addAFMessageListner(anyObject(AFMessageListner.class))).andAnswer(new IAnswer<Boolean>() {
+
+				public Boolean answer() throws Throwable {
+					return listeners.add( (AFMessageListner) getCurrentArguments()[0] );
+				}
+			}).anyTimes();
+			expect(drv.removeAFMessageListener(anyObject(AFMessageListner.class))).andAnswer(new IAnswer<Boolean>() {
+
+				public Boolean answer() throws Throwable {
+					return listeners.remove((AFMessageListner) getCurrentArguments()[0] );
+				}
+			}).anyTimes();
+			replay(drv);
+			node = new ZigBeeNodeImpl(40000, "00:00:00:00:00:AA", (short) 1);
+			device = new ZigBeeDeviceImpl(drv, node, (byte) 200);
+			network.add(device);
+			response = device.invoke(new ClusterImpl(new byte[]{0x00,0x01,0x0a,0x20},(short) 0x100));
+			fail("We were expecting a failure exception");
+		}catch(Exception ex){
+			System.out.println(ex.getMessage());
+			assertTrue("We were expecting a failure exception", ex instanceof ZigBeeBasedriverException);
+		}
+		assertEquals("Expecting no pending consumers", 0, device.getAFConsumers().size() );
+
+		try {
+			response = device.invoke(new ClusterImpl(new byte[]{0x00,0x01,0x0a,0x20},(short) 0x100));
+			fail("We were expecting a failure exception");
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+			assertTrue("We were expecting a failure exception", ex instanceof ZigBeeBasedriverException);
+		}
+		assertEquals("Expecting no pending consumers", 0, device.getAFConsumers().size() );
+		
+		try {
+			response = device.invoke(new ClusterImpl(new byte[]{0x00,0x01,0x0a,0x20},(short) 0x100));
+			fail("We were expecting a failure exception");
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+			assertTrue("We were expecting a timeout exception", ex instanceof ZigBeeBasedriverTimeOutException);
+		}
+		assertEquals("Expecting no pending consumers", 0, device.getAFConsumers().size() );
+		
+	}
+    
+    
     /**
      * This test verify the dispatching of response from the network to OSGi service that proxying 
      * it (the {@link ZigBeeDevice} ) when the {@link ZigBeeDevice} has network address greater then 32767
      * and a end point address greater then 127
+     * 
+     * @See <a href="http://zb4o.aaloa.org/redmine/issues/264">Redmine issue #264</a>
      */
 	@Test
 	public void testInvokeOnNegativeNwkAddress() {
@@ -216,6 +321,8 @@ public class ZigBeeDeviceImplTest {
     /**
      * This test verify the dispatching to multiple {@link ZigBeeDevice} of response from the network and 
      * it verify that messages are consumed only by the expected {@link ZigBeeDevice}
+     * 
+     * @See <a href="http://zb4o.aaloa.org/redmine/issues/264">Redmine issue #264</a>
      */
 	@Test
 	public void testInvokeOnMultipleDevice() {

@@ -575,6 +575,18 @@ public class ZigBeeDeviceImpl implements ZigBeeDevice, AFMessageListner, AFMessa
             return consumers.add(consumer);
         }
     }
+    
+    /**
+     * This method is only for test unit purpose
+     * 
+     * @return the copy of the current list of {@link AFMessageConsumer}
+     * @since 0.8.0
+     */
+    ArrayList<AFMessageConsumer> getAFConsumers(){
+    	synchronized (consumers) {
+    		return new ArrayList<AFMessageConsumer>(consumers);
+		}
+    }
 
     public boolean removeAFMessageConsumer(AFMessageConsumer consumer) {
         synchronized (consumers) {
