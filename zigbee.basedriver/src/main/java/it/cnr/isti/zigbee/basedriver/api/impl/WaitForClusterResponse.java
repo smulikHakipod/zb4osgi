@@ -25,6 +25,7 @@ package it.cnr.isti.zigbee.basedriver.api.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.itaca.ztool.api.af.AF_DATA_CONFIRM;
 import com.itaca.ztool.api.af.AF_INCOMING_MSG;
 
 /**
@@ -48,7 +49,6 @@ public class WaitForClusterResponse implements AFMessageConsumer{
 	private short clusterId;
 	private long timeout = -1;
 	private AF_INCOMING_MSG response = null;
-	private AFMessageProducer producer;
 
 	private final Thread waiter;
 
@@ -58,12 +58,10 @@ public class WaitForClusterResponse implements AFMessageConsumer{
 	 * @param timeout the maximum number of milliseconds to wait for. The value -1 means unlimited waiting time. 
 	 * @since  0.4.0
 	 */
-	public WaitForClusterResponse(final AFMessageProducer producer, final byte transaction, 
+	public WaitForClusterResponse(final byte transaction, 
 			final short id, final long timeout, final Thread thread) {
 		
 		synchronized (this) {
-			this.producer = producer;
-			this.producer.addAFMessageConsumer(this);
 			this.timeout = timeout;
 			this.waiter = thread;
 			response = null;
@@ -77,20 +75,28 @@ public class WaitForClusterResponse implements AFMessageConsumer{
 	 * 
 	 * @param timeout the maximum number of milliseconds to wait for. The value -1 means unlimited waiting time. 
 	 */
-	public WaitForClusterResponse(final AFMessageProducer producer, final byte transaction, 
+	public WaitForClusterResponse(final byte transaction, 
 			final short id, final long timeout) {
 		
-		this(producer,transaction, id, timeout, Thread.currentThread());
+		this(transaction, id, timeout, Thread.currentThread());
 	}
 	
 	public boolean consume(AF_INCOMING_MSG msg) {
+		if ( response != null ) {
+			/*
+			 * We already recieved our response so nothing more should be done, someone else is going to consume 
+			 * the AF_INCOMING_MSG
+			 */
+			logger.debug("SKIPPED AF_INCOMING_MSG: the one that we were waiting for has been already recieved");
+			return false;
+		}
 		//THINK  Is the following matching algorithm correct?!?!?		
 		if ( msg.getClusterId() != clusterId ) {
-			logger.debug("Unable to consume AF_INCOMING_MSG, because cluster {} != {}", msg.getClusterId(), clusterId);
+			logger.debug("SKIPPED AF_INCOMING_MSG: the cluster do not matches {} != {}", msg.getClusterId(), clusterId);
 			return false;
 		}
 		if ( msg.getTransId() != transId ) {
-			logger.debug("Unable to consume AF_INCOMING_MSG, because transaction {} != {}", msg.getTransId(), transId);
+			logger.debug("SKIPPED AF_INCOMING_MSG: the transaction do not matches {} != {}", msg.getTransId(), transId);
 			return false;
 		}
 		logger.debug(
@@ -103,8 +109,6 @@ public class WaitForClusterResponse implements AFMessageConsumer{
 			response = msg;
 			notify();		
 		}
-		//We wait for a cluster at the time
-		producer.removeAFMessageConsumer(this);
 		return true;
 	}
 	
@@ -118,7 +122,6 @@ public class WaitForClusterResponse implements AFMessageConsumer{
 	 */ 	
 	public AF_INCOMING_MSG getResponse(){
 		final long wakeUpTime = System.currentTimeMillis() + timeout;
-		AF_INCOMING_MSG msg = null;
 		
 		synchronized (this) {
 			while(response == null && (timeout > 0 && wakeUpTime > System.currentTimeMillis())){
@@ -127,11 +130,8 @@ public class WaitForClusterResponse implements AFMessageConsumer{
 				} catch (InterruptedException ignored) {
 				}
 			}
-			msg = response;
-			response = null;
-			producer.removeAFMessageConsumer(this);
 		}
-		return msg;
+		return response;
 	}
 	
 }

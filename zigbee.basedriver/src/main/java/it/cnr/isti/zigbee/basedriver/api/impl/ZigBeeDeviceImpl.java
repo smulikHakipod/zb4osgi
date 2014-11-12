@@ -298,49 +298,54 @@ public class ZigBeeDeviceImpl implements ZigBeeDevice, AFMessageListner, AFMessa
         final AFLayer af = AFLayer.getAFLayer(driver);
         final byte sender = af.getSendingEndpoint(this, input);
         /*
-         * //FIX Removed because transaction is always 0 for the response due to
-         * a bug of CC2480 final byte transaction =
-         * af.getNextTransactionId(sender); the next line is a workaround for
-         * the problem
+         * //FIX Removed because transaction is always 0 for the response due to a bug of CC2480 
+         * 
+         * final byte transaction = af.getNextTransactionId(sender); 
+         * the next line is a workaround for the problem
          */
         final byte transaction = 0;
         final byte[] msg = input.getClusterMsg();
 
         m_addAFMessageListener();
 
-        // Registering the waiter before sending the message, so that they will
-        // be captured
-        WaitForClusterResponse waiter = new WaitForClusterResponse(this,
-                transaction, input.getId(), TIMEOUT);
+        //Registering the waiter before sending the message, so that they will be captured
+        WaitForClusterResponse waiter = new WaitForClusterResponse(transaction, input.getId(), TIMEOUT);
+        addAFMessageConsumer(waiter);
 
-        // TODO Create radius and options according to the current configuration
-        AF_DATA_CONFIRM response = driver
-                .sendAFDataRequest(new AF_DATA_REQUEST((short) node
-                        .getNetworkAddress(), (byte) endPointAddress, sender,
-                        input.getId(), transaction, (byte) 0 /* options */,
-                        (byte) 0 /* radius */, msg));
-
+        //TODO Create radius and options according to the current configuration
+        AF_DATA_CONFIRM response = driver.sendAFDataRequest( new AF_DATA_REQUEST(
+				(short) node.getNetworkAddress(), 
+				(byte) endPointAddress, 
+				sender,
+	            input.getId(), 
+	            transaction, 
+	            (byte) 0 /* options */,
+	            (byte) 0 /* radius */, 
+	            msg
+		) );
+        
         if (response == null) {
+        	removeAFMessageConsumer(waiter);
             m_removeAFMessageListener();
             throw new ZigBeeBasedriverException(
-                    "Unable to send cluster on the ZigBee network due to general error - is the device sleeping?");
+            		"Unable to send cluster on the ZigBee network due to general error - is the device sleeping?"
+    		);
         } else if (response.getStatus() != 0) {
+        	removeAFMessageConsumer(waiter);
             m_removeAFMessageListener();
             throw new ZigBeeBasedriverException(
-                    "Unable to send cluster on the ZigBee network:"
-                            + response.getErrorMsg());
+            		"Unable to send cluster on the ZigBee network:" + response.getErrorMsg()
+    		);
         } else {
-            // FIX Can't be singleton because only a the invoke method can be
-            // invoked by multiple-thread
-            // FIX Can't be singleton because the invoke method can be invoked
-            // by multiple-thread
+            //FIX Can't be singleton because only a the invoke method can be invoked by multiple-thread
+            //FIX Can't be singleton because the invoke method can be invoked by multiple-thread
             AF_INCOMING_MSG incoming = waiter.getResponse();
+        	removeAFMessageConsumer(waiter);
             m_removeAFMessageListener();
             if (incoming == null) {
                 throw new ZigBeeBasedriverTimeOutException();
             }
-            Cluster result = new ClusterImpl(incoming.getData(),
-                    incoming.getClusterId());
+            Cluster result = new ClusterImpl(incoming.getData(), incoming.getClusterId());
             return result;
         }
     }
