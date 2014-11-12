@@ -27,6 +27,7 @@ import it.cnr.isti.cc2480.high.HWHighLevelDriver;
 import it.cnr.isti.cc2480.high.SynchrounsCommandListner;
 import it.cnr.isti.cc2480.low.HWLowLevelDriver;
 import it.cnr.isti.cc2480.low.PacketListener;
+import it.cnr.isti.cc2480.zic.WaitForCommand;
 import it.cnr.isti.primitvetypes.util.Integers;
 import it.cnr.isti.zigbee.dongle.api.AFMessageListner;
 import it.cnr.isti.zigbee.dongle.api.AnnounceListner;
@@ -615,58 +616,6 @@ public class DriverEZ430_RF2480 implements Runnable, SimpleDriver{
                 }
             }
             return isNetworkReady();
-        }
-    }
-
-    private class WaitForCommand implements AsynchrounsCommandListener{
-
-        final ZToolPacket[] result = new ZToolPacket[]{null};
-        final int waitFor;
-        final HWHighLevelDriver driver;
-
-        public WaitForCommand(int waitFor, HWHighLevelDriver driver) {
-            this.waitFor = waitFor;
-            this.driver = driver;
-            driver.addAsynchrounsCommandListener(this);
-        }
-
-
-
-        public void receivedAsynchrounsCommand(ZToolPacket packet) {
-            logger4Waiter.info("Recieved a packet {} and waiting for {}", packet.getCMD(), waitFor);
-            logger4Waiter.debug("Recieved {} {}", packet.getClass(), packet.toString());
-            if( packet.isError() ) return;
-            if( packet.getCMD().get16BitValue() != waitFor) return;
-            synchronized (result) {
-                result[0]=packet;
-                logger4Waiter.info("Recieved packet that we were waiting for");
-                cleanup();
-            }
-        }
-
-        public ZToolPacket getCommand(final long timeout){
-            synchronized (result) {
-                final long wakeUpTime = System.currentTimeMillis() + timeout;
-                while(result[0] == null && wakeUpTime > System.currentTimeMillis()){
-                    try {
-                        result.wait(wakeUpTime-System.currentTimeMillis());
-                    } catch (InterruptedException ignored) {
-                    }
-
-                }
-            }
-            if( result[0] == null ){
-                logger4Waiter.warn("Timeout {} expired and not packet with {} recieved", timeout, waitFor);
-            }
-            cleanup();
-            return result[0];
-        }
-
-        public void cleanup(){
-            synchronized (result) {
-                driver.removeAsynchrounsCommandListener(this);
-                result.notify();
-            }
         }
     }
 
