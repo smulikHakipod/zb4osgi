@@ -1,5 +1,5 @@
 /*
-   Copyright 2008-2013 CNR-ISTI, http://isti.cnr.it
+   Copyright 2014-2014 CNR-ISTI, http://isti.cnr.it
    Institute of Information Science and Technologies
    of the Italian National Research Council
 
@@ -25,30 +25,20 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 
-import it.cnr.isti.primitvetypes.util.Integers;
 import it.cnr.isti.zigbee.api.Cluster;
+import it.cnr.isti.zigbee.api.ClusterFilter;
+import it.cnr.isti.zigbee.api.ClusterListner;
 import it.cnr.isti.zigbee.api.ZigBeeBasedriverException;
 import it.cnr.isti.zigbee.api.ZigBeeBasedriverTimeOutException;
 import it.cnr.isti.zigbee.api.ZigBeeDevice;
-import it.cnr.isti.zigbee.basedriver.Activator;
-import it.cnr.isti.zigbee.basedriver.configuration.ConfigurationService;
-import it.cnr.isti.zigbee.basedriver.discovery.DeviceBuilderThreadTest;
+import it.cnr.isti.zigbee.basedriver.api.test.ZigBeeBaseDriverTestUnitBase;
 import it.cnr.isti.zigbee.dongle.api.AFMessageListner;
-import it.cnr.isti.zigbee.dongle.api.DuplicateMacPolicy;
 import it.cnr.isti.zigbee.dongle.api.SimpleDriver;
 
 import org.easymock.IAnswer;
-import org.junit.Before;
-import org.junit.Test;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.InvalidSyntaxException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.junit.*;
 
-import com.itaca.ztool.api.ZToolPacket;
-import com.itaca.ztool.api.ZToolPacketStream;
 import com.itaca.ztool.api.af.AF_DATA_CONFIRM;
 import com.itaca.ztool.api.af.AF_DATA_REQUEST;
 import com.itaca.ztool.api.af.AF_INCOMING_MSG;
@@ -62,65 +52,12 @@ import static org.easymock.EasyMock.*;
 
 
 /**
-*
-* @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
-* @version $LastChangedRevision$ ($LastChangedDate$ )
-*
-*/
-public class ZigBeeDeviceImplTest {
-
-    private ConfigurationService cs = null;
-    private BundleContext bc = null;
-
-    private BundleContext stub;
-
-    @Before
-    public void createActivatorStub() {
-        cs = createConfigurationServiceStub();
-        bc = createBundleContextStub();
-        Activator.setStubObjectes(cs, bc);
-    }
-
-    public BundleContext createBundleContextStub() {
-        stub = createMock(BundleContext.class);
-
-        try {
-            expect(stub.getServiceReferences(anyObject(String.class),anyObject(String.class)))
-            	.andReturn(null).anyTimes();
-            expect(stub.getProperty("org.aaloa.zb4osgi.zigbee.basedriver.timeout")).andReturn("10000").anyTimes();
-        } catch (InvalidSyntaxException ex) {
-        }
-        replay(stub);
-
-        return stub;
-    }
-
-    public ConfigurationService createConfigurationServiceStub() {
-        ConfigurationService stub = createMock(ConfigurationService.class);
-        int messageRetryCount = 10;
-        expect(stub.getFirstFreeEndPoint()).andReturn(new Integer(2))
-                .anyTimes();
-
-        expect(stub.getDeviceInspectionPeriod()).andReturn(new Long(250))
-                .anyTimes();
-
-        expect(stub.getMessageRetryCount()).andReturn(messageRetryCount)
-                .anyTimes();
-
-        expect(stub.getMessageRetryDelay()).andReturn(new Integer(100))
-                .anyTimes();
-
-        expect(stub.getPanId()).andReturn(new Short((short) 13531)).anyTimes();
-
-        expect(stub.getDiscoveryDuplicateMacPolicy())
-                .andReturn(DuplicateMacPolicy.IGNORE).times(1)
-                .andReturn(DuplicateMacPolicy.UPDATE).times(1)
-                .andReturn(DuplicateMacPolicy.REGISTER).times(1);
-
-        replay(stub);
-
-        return stub;
-    }
+ *
+ * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
+ * @version $LastChangedRevision$ ($LastChangedDate$ )
+ *
+ */
+public class ZigBeeDeviceImplTest extends ZigBeeBaseDriverTestUnitBase {
 
     /**
      * This test verify if any pending {@link AFMessageConsumer} also known as {@link WaitForClusterResponse} is left 
@@ -221,7 +158,79 @@ public class ZigBeeDeviceImplTest {
 		assertEquals("Expecting no pending consumers", 0, device.getAFConsumers().size() );
 		
 	}
-    
+
+	
+    /**
+     * This verify that @
+     * @See <a href="http://zb4o.aaloa.org/redmine/issues/273">Redmine issue #273</a>
+     */
+	@Test
+	public void testRegisteringAFMessageListener() {
+		final HashSet<AFMessageListner> listeners = new HashSet<AFMessageListner>();
+		final ArrayList<ZigBeeDeviceImpl> network = new ArrayList<ZigBeeDeviceImpl>();
+		ZigBeeNodeImpl node = null;
+		ZigBeeDeviceImpl device = null;
+		try {
+			SimpleDriver drv = createMock(SimpleDriver.class);
+			ZDO_SIMPLE_DESC_RSP dsc = new ZDO_SIMPLE_DESC_RSP(new int[]{
+					0x9C, 0x40,										//16-bit Source Address
+					0x00,											//Status
+					0x9C, 0x40,										//16-bit Network Address
+					0x00,											//Length
+					0xC8,											//End Point Address
+					0x04, 0x01,										//Profile Id
+					0x02, 0x01,										//Device Id
+					0x00,											//Device Version
+					0x04,											//Input Cluster Count
+					0x00, 0x10, 0x10, 0x00, 0x00, 0x80, 0xF0, 0xFA, //Input Cluster List				
+					0x04,											//Output Cluster Count
+					0x00, 0x10, 0x10, 0x00, 0x00, 0x80, 0xF0, 0xFA, //Output Cluster List				
+			});		
+			AF_REGISTER_SRSP successRegister = new AF_REGISTER_SRSP(new int[]{0});
+			expect(drv.sendZDOSimpleDescriptionRequest(anyObject(ZDO_SIMPLE_DESC_REQ.class))).andReturn(dsc).anyTimes();
+			expect(drv.sendAFRegister(anyObject(AF_REGISTER.class))).andReturn(successRegister).anyTimes();
+			
+			expect(drv.addAFMessageListner(anyObject(AFMessageListner.class))).andAnswer(new IAnswer<Boolean>() {
+
+				public Boolean answer() throws Throwable {
+					return listeners.add( (AFMessageListner) getCurrentArguments()[0] );
+				}
+			}).once();
+			replay(drv);
+			node = new ZigBeeNodeImpl(40000, "00:00:00:00:00:AA", (short) 1);
+			device = new ZigBeeDeviceImpl(drv, node, (byte) 200);
+			device.addClusterListener(new ClusterListner() {
+				
+				public void setClusterFilter(ClusterFilter filter) {
+				}
+				
+				public void handleCluster(ZigBeeDevice device, Cluster cluster) {
+				}
+				
+				public ClusterFilter getClusterFilter() {
+					return null;
+				}
+			});
+			device.addClusterListener(new ClusterListner() {
+				
+				public void setClusterFilter(ClusterFilter filter) {
+				}
+				
+				public void handleCluster(ZigBeeDevice device, Cluster cluster) {
+				}
+				
+				public ClusterFilter getClusterFilter() {
+					return null;
+				}
+			});
+			verify(drv);
+			//response = device.invoke(new ClusterImpl(new byte[]{0x00,0x01,0x0a,0x20},(short) 0x100));
+		}catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+		
+	}
+	
     
     /**
      * This test verify the dispatching of response from the network to OSGi service that proxying 

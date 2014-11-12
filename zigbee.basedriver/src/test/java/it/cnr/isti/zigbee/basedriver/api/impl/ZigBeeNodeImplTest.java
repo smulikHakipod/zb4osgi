@@ -1,48 +1,36 @@
+/*
+   Copyright 2014-2014 CNR-ISTI, http://isti.cnr.it
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
+
+
+   See the NOTICE file distributed with this work for additional
+   information regarding copyright ownership
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+ */
 package it.cnr.isti.zigbee.basedriver.api.impl;
 
-import static org.easymock.EasyMock.anyObject;
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
-import it.cnr.isti.zigbee.basedriver.Activator;
-import it.cnr.isti.zigbee.basedriver.configuration.ConfigurationService;
-import it.cnr.isti.zigbee.dongle.api.DuplicateMacPolicy;
+import it.cnr.isti.zigbee.basedriver.api.test.ZigBeeBaseDriverTestUnitBase;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.InvalidSyntaxException;
+import org.junit.*;
+
 
 import com.itaca.ztool.api.ZToolAddress64;
 
-public class ZigBeeNodeImplTest {
-
-    private ConfigurationService cs = null;
-    private BundleContext bc = null;
-
-    private BundleContext stub;
-
-    @Before
-    public void createActivatorStub() {
-        cs = createConfigurationServiceStub();
-        bc = createBundleContextStub();
-        Activator.setStubObjectes(cs, bc);
-    }
-
-    public BundleContext createBundleContextStub() {
-        stub = createMock(BundleContext.class);
-        return stub;
-    }
-
-    public ConfigurationService createConfigurationServiceStub() {
-        ConfigurationService stub = createMock(ConfigurationService.class);
-        expect(stub.getPanId()).andReturn(new Short((short) 13531)).anyTimes();
-
-        replay(stub);
-
-        return stub;
-    }
+public class ZigBeeNodeImplTest extends ZigBeeBaseDriverTestUnitBase {
     
     /**
      * This test verify that any negative value assigned as network address is translated 
