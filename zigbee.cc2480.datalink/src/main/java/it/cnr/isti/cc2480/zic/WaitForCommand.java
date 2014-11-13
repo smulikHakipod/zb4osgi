@@ -27,7 +27,9 @@ import org.slf4j.LoggerFactory;
 import it.cnr.isti.cc2480.high.AsynchrounsCommandListener;
 import it.cnr.isti.cc2480.high.HWHighLevelDriver;
 
+import com.itaca.ztool.api.ZToolException;
 import com.itaca.ztool.api.ZToolPacket;
+import com.itaca.ztool.api.ZToolTimeoutException;
 
 /**
 *
@@ -47,7 +49,9 @@ public class WaitForCommand implements AsynchrounsCommandListener {
     public WaitForCommand(int waitFor, HWHighLevelDriver driver) {
         this.waitFor = waitFor;
         this.driver = driver;
-        driver.addAsynchrounsCommandListener(this);
+        if ( driver.addAsynchrounsCommandListener(this) == false ) {
+        	throw new ZICRuntimeException("Failed to register a listener");
+        };
     }
 
     public void receivedAsynchrounsCommand(ZToolPacket packet) {

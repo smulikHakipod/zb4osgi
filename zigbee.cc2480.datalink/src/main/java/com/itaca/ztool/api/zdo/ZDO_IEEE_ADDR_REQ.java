@@ -54,7 +54,10 @@ public class ZDO_IEEE_ADDR_REQ extends ZToolPacket /*implements IREQUEST,IZDo*/ 
 
     /// <name>TI.ZPI1.ZDO_IEEE_ADDR_REQ</name>
     /// <summary>Constructor</summary>
-    public ZDO_IEEE_ADDR_REQ() {
+	/**
+	 * @deprecated
+	 */
+    ZDO_IEEE_ADDR_REQ() {
     }
     
     public short getShortAddress(){

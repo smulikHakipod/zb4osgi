@@ -41,9 +41,10 @@ public class ZDO_MGMT_LQI_REQ extends ZToolPacket /*implements IREQUEST,IZDO*/ {
     /// <summary>Where to start.  The result can be more networks than can be reported, so this field allows a user to ask for more.</summary>
     public int StartIndex;
 
-    /// <name>TI.ZPI1.ZDO_MGMT_LQI_REQ</name>
-    /// <summary>Constructor</summary>
-    public ZDO_MGMT_LQI_REQ() {
+    /**
+     * @deprecated
+     */
+    ZDO_MGMT_LQI_REQ() {
     }
 
     /// <name>TI.ZPI1.ZDO_MGMT_LQI_REQ</name>
