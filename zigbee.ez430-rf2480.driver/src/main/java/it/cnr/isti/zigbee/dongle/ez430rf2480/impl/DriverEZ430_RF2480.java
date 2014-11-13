@@ -424,6 +424,7 @@ public class DriverEZ430_RF2480 implements Runnable, SimpleDriver{
         synchronized ( conversation3Way ) {
             requestor = conversation3Way.get( clz );
             conversation3Way.put( clz, null );
+            conversation3Way.notifyAll();
         }
         if( requestor == null ){
             logger.error("LOCKING BROKEN SOMEONE RELEASE LOCK WITHOU LOCKING IN ADVANCE for {}", clz);
