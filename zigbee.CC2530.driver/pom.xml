@@ -25,7 +25,7 @@
 	<version>0.3.0-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 
-	<name>ZIC for CC253x devices</name>
+	<name>ZIC for CC2530/CC2531 chipset dongle</name>
 	<url>http://zb4osgi.aaloa.org/</url>
 	<description><![CDATA[
   Implementation of the ZigBee Controller Interface API for a CC2530/CC2531 chip based devices.
