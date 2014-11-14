@@ -443,6 +443,14 @@ public class ZigBeeDeviceImpl implements ZigBeeDevice, AFMessageListner, AFMessa
     public boolean unbind(int clusterId) throws ZigBeeBasedriverException {
         logger.debug("Unbinding from cluster {} of device {}", clusterId, getUniqueIdenfier());
         if (!boundCluster.contains(clusterId)) {
+        	/*
+        	 * //XXX Think that we may want to send ZDO_UNBIND_REQ and expect ZDO_UNBIND_RSP.ZDO_STATUS.ZDP_NO_ENTRY
+        	 *  to ensure that eventual left-over binding are removed. Left-over binding may happen in the following
+        	 *  scenario: the application bind to this device and later the whole ZB4O is restart, due to the lack of
+        	 *  persistence the ZigBee Base Driver is not aware of existing binding 
+        	 *  
+        	 *  //TODO Provide a Test Unit for binding disalignment
+        	 */
             logger.debug("No cluster bound");
             return true;
         }
@@ -458,6 +466,11 @@ public class ZigBeeDeviceImpl implements ZigBeeDevice, AFMessageListner, AFMessa
 		);
         if (response == null || response.Status != 0 ) {
         	if ( response.Status == ZDO_UNBIND_RSP.ZDO_STATUS.ZDP_NO_ENTRY ) {
+        		/*
+        		 * This scenario may happen by restarting the remote ZigBee device, if the device does not store the
+        		 * binding table among rebooting. This is quite rare scenario because if the device is recognized as
+        		 * new device then a new ZigBeeDevice service will be created
+        		 */
         		logger.debug("ZDO_UNBIND_REQ failed due to a misaligment between device status and base driver,"
         				+ " no bound for cluster {} so RECOVERING by considering the unbind as SUCCEED", clusterId);
         	} else {
