@@ -48,6 +48,7 @@ import org.osgi.service.device.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.itaca.ztool.api.ZToolAddress16;
 import com.itaca.ztool.api.af.AF_DATA_CONFIRM;
 import com.itaca.ztool.api.af.AF_DATA_REQUEST;
 import com.itaca.ztool.api.af.AF_INCOMING_MSG;
@@ -540,16 +541,18 @@ public class ZigBeeDeviceImpl implements ZigBeeDevice, AFMessageListner, AFMessa
         	logger.debug("AF_INCOMING_MSG arrived but it is an error packet so IGNORING it");
             return;        	
         }
-        /*
-         *  //XXX BE AWARE:
-         *  The following two check must be in case that we find a cluster that answer by means of
-         *  broadcast or groupcast response to unicast request 
-         */
-        if ( ( msg.getSrcAddr() & 0xFFFF ) != node.getNetworkAddress()) {
+        
+        if ( ( msg.getSrcAddr() & 0xFFFF ) != node.getNetworkAddress() ) {
+        	/*
+        	 * The source address must always match the node.getNetworkAddress() regardless if the message is sent
+        	 * as unicast, groupcast, or broadcast. In fact, in case of broadcast and groupcast message, only the
+        	 * destination Network Address would not match the Network Address of the dongle
+        	 */
         	logger.debug("AF_INCOMING_MSG arrived but NETWORK ADDRESS does not match so IGNORING it: "
         			+ "recieved {} but expecting {} ", msg.getSrcAddr() & 0xFFFF, node.getNetworkAddress());
             return;
         }
+        
         if (msg.getSrcEndpoint() != endPointAddress) {
         	logger.debug("AF_INCOMING_MSG arrived ENDPOINT does not match so IGNORING it: "
         			+ "received {} but expecting {}", msg.getSrcEndpoint(), endPointAddress);

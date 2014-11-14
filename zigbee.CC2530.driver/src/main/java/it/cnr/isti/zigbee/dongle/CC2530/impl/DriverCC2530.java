@@ -259,13 +259,7 @@ public class DriverCC2530 implements Runnable, SimpleDriver {
                     localCopy = new ArrayList<AFMessageListner>(listners);
                 }
                 for (AFMessageListner l : localCopy) {
-                    // if( l.match(
-                    // msg.getClusterId(), msg.getSrcAddr(),
-                    // msg.getSrcEndpoint(), msg.getDstEndpoint(),
-                    // msg.getTransId()
-                    // ) ) {
                     l.notify(msg);
-                    // }
                 }
             }
         }

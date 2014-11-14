@@ -182,13 +182,7 @@ public class DriverEZ430_RF2480 implements Runnable, SimpleDriver{
                     localCopy = new ArrayList<AFMessageListner>(listners);
                 }
                 for ( AFMessageListner l : localCopy){
-                    //					if( l.match(
-                    //							msg.getClusterId(), msg.getSrcAddr(),
-                    //							msg.getSrcEndpoint(), msg.getDstEndpoint(),
-                    //							msg.getTransId()
-                    //					) ) {
                     l.notify(msg);
-                    //					}
                 }
             }
         }
