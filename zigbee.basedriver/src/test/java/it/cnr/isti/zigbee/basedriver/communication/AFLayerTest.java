@@ -22,18 +22,39 @@
 
 package it.cnr.isti.zigbee.basedriver.communication;
 
+import static org.easymock.EasyMock.anyObject;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.getCurrentArguments;
 import static org.easymock.EasyMock.replay;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import it.cnr.isti.zigbee.api.Cluster;
+import it.cnr.isti.zigbee.api.ZigBeeBasedriverException;
 import it.cnr.isti.zigbee.basedriver.Activator;
+import it.cnr.isti.zigbee.basedriver.api.impl.ClusterImpl;
+import it.cnr.isti.zigbee.basedriver.api.impl.ZigBeeDeviceImpl;
+import it.cnr.isti.zigbee.basedriver.api.impl.ZigBeeNodeImpl;
+import it.cnr.isti.zigbee.basedriver.api.test.ZigBeeBaseDriverTestUnitBase;
 import it.cnr.isti.zigbee.basedriver.communication.AFLayer.SenderIdentifier;
 import it.cnr.isti.zigbee.basedriver.configuration.ConfigurationService;
+import it.cnr.isti.zigbee.dongle.api.AFMessageListner;
+import it.cnr.isti.zigbee.dongle.api.ConfigurationProperties;
 import it.cnr.isti.zigbee.dongle.api.DuplicateMacPolicy;
+import it.cnr.isti.zigbee.dongle.api.SimpleDriver;
 
+import org.easymock.IAnswer;
 import org.junit.Before;
 import org.junit.Test;
+import org.osgi.service.cm.ConfigurationException;
+
+import com.itaca.ztool.api.af.AF_DATA_CONFIRM;
+import com.itaca.ztool.api.af.AF_DATA_REQUEST;
+import com.itaca.ztool.api.af.AF_REGISTER;
+import com.itaca.ztool.api.af.AF_REGISTER_SRSP;
+import com.itaca.ztool.api.zdo.ZDO_SIMPLE_DESC_REQ;
+import com.itaca.ztool.api.zdo.ZDO_SIMPLE_DESC_RSP;
 
 
 /**
@@ -43,33 +64,9 @@ import org.junit.Test;
  * @version $LastChangedRevision$ ($LastChangedDate$)
  *
  */
-public class AFLayerTest {
+public class AFLayerTest extends ZigBeeBaseDriverTestUnitBase {
 
-    private ConfigurationService cs = null;
-
-    @Before
-    public void createActivatorStub() {
-        cs = createConfigurationServiceStub();
-        Activator.setStubObjectes(cs, null);
-    }
-
-    public ConfigurationService createConfigurationServiceStub() {
-        ConfigurationService stub = createMock(ConfigurationService.class);
-
-        expect(stub.getFirstFreeEndPoint())
-        .andReturn( new Integer(2) )
-        .anyTimes();
-
-        expect(stub.getDiscoveryDuplicateMacPolicy())
-        .andReturn( DuplicateMacPolicy.IGNORE  )
-        .anyTimes();
-
-        replay(stub);
-
-        return stub;
-    }
-
-
+	
     @Test
     public void getSendingEndpointZigBeeDeviceCluster(){
         AFLayer layer = AFLayer.getAFLayer(null);

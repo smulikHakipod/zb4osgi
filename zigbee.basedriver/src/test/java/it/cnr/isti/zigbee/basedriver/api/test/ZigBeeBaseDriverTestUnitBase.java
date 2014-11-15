@@ -23,6 +23,7 @@ package it.cnr.isti.zigbee.basedriver.api.test;
 
 import static org.easymock.EasyMock.*;
 
+import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.Properties;
 
@@ -85,6 +86,10 @@ public class ZigBeeBaseDriverTestUnitBase {
 			String key = (String) keys.nextElement();
 			contextProperties.setProperty(key, update.getProperty(key));
 		}
+	}
+
+	protected Properties getBundleContextProperties() {
+		return (Properties) contextProperties.clone();
 	}
 	
 }
