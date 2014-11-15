@@ -166,26 +166,28 @@ public class AFLayer {
 			}
 			logger.warn( "Following the list of filtered cluster that we are going to register: {} ", clusters );
 		} 
+		/*
+		 * //TODO We should provide a workaround for the maximum number of registered EndPoint
+		 * For example, with the CC2480 we could reset the dongle
+		 */			
 		AF_REGISTER_SRSP result = null;
 		int retry = 0;
 		do {
-			result = driver.sendAFRegister(new AF_REGISTER(
-				endPoint, si.profileId, (short)0, (byte)0,
-				clusters,clusters						
-			));
-			//FIX We should retry only when Status != 0xb8  ( ZApsDuplicateEntry )
-			if( result.getStatus() != 0 ){
-				if ( retry < Activator.getCurrentConfiguration().getAutomaticFreeEndPointRetry() ) {
-					endPoint = getFreeEndPoint();
+			result = driver.sendAFRegister( new AF_REGISTER(
+				endPoint, si.profileId, (short) 0, (byte) 0, clusters, clusters						
+			) );
+			
+			if ( result != null && result.getStatus() == 0 ) {
+				break;
+			}
+			if ( retry >= Activator.getCurrentConfiguration().getAutomaticFreeEndPointRetry() ) {
+				if ( result == null ) {
+					throw new IllegalStateException("No answer to AF_REGISTER command");			
 				} else {
-					/*
-					 * //TODO We should provide a workaround for the maximum number of registered EndPoint
-					 * For example, with the CC2480 we could reset the dongle
-					 */			
 					throw new IllegalStateException("Unable create a new Endpoint. AF_REGISTER command failed with "+result.getStatus()+":"+result.getErrorMsg());			
 				}
 			} else {
-				break;
+				retry++;
 			}
 		} while( true );
 		logger.debug("Registered endpoint {} with clusters: {}", endPoint, clusters);
