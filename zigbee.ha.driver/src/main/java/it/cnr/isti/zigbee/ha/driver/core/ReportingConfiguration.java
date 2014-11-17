@@ -22,6 +22,8 @@
 
 package it.cnr.isti.zigbee.ha.driver.core;
 
+import it.cnr.isti.zigbee.zcl.library.api.core.ReportListener;
+
 import org.osgi.framework.Constants;
 import org.osgi.service.cm.ManagedService;
 
@@ -96,6 +98,12 @@ public interface ReportingConfiguration extends ManagedService {
 
 	public abstract double getReportingChange();
 
+	/**
+	 * If the method return <code>false</code> then no reporting configuration will be configured as long as
+	 * there are active {@link ReportListener}, otherwise the configuration will be always overwritten 
+	 * 
+	 * @return true if the reporting should overwrite pre-existing configuration
+	 */
 	public abstract boolean getReportingOverwrite();
 
 }
