@@ -212,7 +212,7 @@ public abstract class SubscriptionBase implements Subscription {
 
     public boolean isActive() {
         synchronized (listeners) {
-            return listeners.size() == 0;
+            return listeners.size() != 0;
         }
     }
 
