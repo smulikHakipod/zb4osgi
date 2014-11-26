@@ -241,8 +241,8 @@
 				<version>2.0.4-1</version> <scope>provided</scope> </dependency> -->
 			<dependency>
 				<groupId>org.aaloa.zb4osgi.bundle</groupId>
-				<artifactId>org.aaloa.zb4osgi.bundle.rxtx</artifactId>
-				<version>2.1.7-3</version>
+				<artifactId>org.aaloa.zb4osgi.externals.rxtx</artifactId>
+				<version>2.1.7-5</version>
 				<scope>provided</scope>
 			</dependency>
 			<!-- OSGi Runtime -->

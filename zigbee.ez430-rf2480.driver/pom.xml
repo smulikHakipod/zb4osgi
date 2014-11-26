@@ -78,7 +78,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.aaloa.zb4osgi.bundle</groupId>
-			<artifactId>org.aaloa.zb4osgi.bundle.rxtx</artifactId>
+			<artifactId>org.aaloa.zb4osgi.externals.rxtx</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.aaloa.zb4osgi</groupId>
