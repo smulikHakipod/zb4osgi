@@ -4,7 +4,7 @@
 --profiles=log,config
 --executor=script
 --org.ops4j.pax.runner.platform.downloadFeedback=false
---vmOptions= -Xdebug -Dorg.osgi.framework.processor=x86_64 -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005 -Dgnu.io.rxtx.SerialPorts=/dev/ttyACM0:/dev/ttyUSB0:/dev/ttyUSB1:/dev/ttyUSB2:/dev/ttyUSB3
+--vmOptions= -Xdebug  -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005 -Dgnu.io.rxtx.SerialPorts=/dev/ttyACM0:/dev/ttyUSB0:/dev/ttyUSB1:/dev/ttyUSB2:/dev/ttyUSB3
 
 #
 # BUNDLE LIST
