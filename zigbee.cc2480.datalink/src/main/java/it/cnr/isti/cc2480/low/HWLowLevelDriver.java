@@ -25,6 +25,7 @@ package it.cnr.isti.cc2480.low;
 import it.cnr.isti.cc2480.sniffer.FilePacketSniffer;
 import it.cnr.isti.cc2480.sniffer.GUIPacketSniffer;
 import it.cnr.isti.cc2480.sniffer.SnifferInterface;
+import it.cnr.isti.cc2480.virtual.Emulator;
 import it.cnr.isti.thread.ThreadUtils;
 
 import java.io.IOException;
@@ -79,11 +80,10 @@ public class HWLowLevelDriver
     public static final String PACKET_SNIFFER_DEFAULT = "";
 
     /**
-     * The name of the system properties which contains the full qualify class name of the {@link SnifferInterface}
+     * The name of the system properties which contains the full qualify class name of the {@link SerialHandler}
      * implementation that MUST be loaded by this class.<br>
-     * If the value is an <code>""</code> no {@link SnifferInterface} are loaded.<br>
-     * If property is not set, the default value is {@link HWLowLevelDriver#PACKET_SNIFFER_DEFAULT} See also:
-     * {@link GUIPacketSniffer}, {@link FilePacketSniffer}
+     * If the value is an <code>""</code> no {@link SerialHandler} are loaded.<br>
+     * If property is not set, the default value is {@link RealSerialComm} See also: {@link Emulator}
      */
     public static final String SERIAL_HANLDER_KEY = "it.cnr.isti.cc2480.low.serial_handler";
 
