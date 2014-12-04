@@ -192,10 +192,10 @@ public class DefaultDeserializer implements ZBDeserializer {
     }
 
     public Object readZigBeeType(ZigBeeType type) {
-        Object[] value = new Object[1];
+        Object value = null;
         switch (type) {
         case Boolean:
-            value[0] = readBoolean();
+            value = readBoolean();
             break;
         case Data8bit:
         case Bitmap8bit:
@@ -204,9 +204,9 @@ public class DefaultDeserializer implements ZBDeserializer {
         case SignedInteger8bit:
             byte b = read_byte();
             if (type == ZigBeeType.UnsignedInteger8bit) {
-                value[0] = new Integer(b & 0xFF);
+                value = new Integer(b & 0xFF);
             } else {
-                value[0] = new Integer(b);
+                value = new Integer(b);
             }
             break;
         case Data16bit:
@@ -216,9 +216,9 @@ public class DefaultDeserializer implements ZBDeserializer {
         case SignedInteger16bit:
             short s = read_short();
             if (type == ZigBeeType.UnsignedInteger16bit) {
-                value[0] = new Integer(s & 0xFFFF);
+                value = new Integer(s & 0xFFFF);
             } else {
-                value[0] = new Integer(s);
+                value = new Integer(s);
             }
             break;
         case Data24bit:
@@ -227,9 +227,9 @@ public class DefaultDeserializer implements ZBDeserializer {
         case SignedInteger24bit:
             int i = read_int24bit();
             if (type == ZigBeeType.UnsignedInteger32bit) {
-                value[0] = new Long(i & 0xFFFFFFFF);
+                value = new Long(i & 0xFFFFFFFF);
             } else {
-                value[0] = new Integer(i);
+                value = new Integer(i);
             }
             break;
         case Data32bit:
@@ -237,45 +237,45 @@ public class DefaultDeserializer implements ZBDeserializer {
         case UnsignedInteger32bit:
         case SignedInteger32bit:
             int i24 = read_int24bit();
-            value[0] = new Integer(i24);
+            value = new Integer(i24);
             break;
         case UnsignedInteger40bit:
         case SignedInteger40bit:
-            value[0] = read_long(5);
+            value = read_long(5);
             break;
         case UnsignedInteger48bit:
         case SignedInteger48bit:
-            value[0] = read_long(6);
+            value = read_long(6);
             break;
         case UnsignedInteger56bit:
         case SignedInteger56bit:
-            value[0] = read_long(7);
+            value = read_long(7);
             break;
         case SignedInteger64bit:
-            value[0] = read_long();
+            value = read_long();
             break;
         case CharacterString:
         case OctectString: {
             int size = read_byte();
-            value[0] = readString(size);
+            value = readString(size);
         }
             break;
         case LongCharacterString:
         case LongOctectString: {
             int size = read_short();
-            value[0] = readString(size);
+            value = readString(size);
         }
             break;
         case SemiPrecision: {
-            value[0] = readSemiPrecision();
+            value = readSemiPrecision();
         }
             break;
         case SinglePrecision: {
-            value[0] = readSinglePrecision();
+            value = readSinglePrecision();
         }
             break;
         case DoublePrecision: {
-            value[0] = readDoublePrecision();
+            value = readDoublePrecision();
         }
             break;
         default:
@@ -283,7 +283,7 @@ public class DefaultDeserializer implements ZBDeserializer {
                     + ZBDeserializer.class.getName() + " for "
                     + type.toString() + " (" + type.getId() + ")");
         }
-        return value[0];
+        return value;
     }
 
     public int read_int24bit() {
