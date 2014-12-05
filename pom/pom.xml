@@ -125,7 +125,7 @@
 				<artifactId>maven-pax-plugin</artifactId>
 				<version>1.4</version>
 				<configuration>
-					<runner>1.4.0</runner>
+					<runner>1.8.6</runner>
 					<args>${pax.args.file}</args>
 				</configuration>
 			</plugin>
