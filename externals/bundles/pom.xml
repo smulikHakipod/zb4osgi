@@ -17,7 +17,6 @@
 
   <modules>
     <module>rxtx</module>
-    <module>trove4j</module>
   </modules>
 
 </project>

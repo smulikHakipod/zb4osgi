@@ -176,7 +176,7 @@
 
 		<!-- INTRA PROJECT DEPENDENCIES -->
 		<dependencies>
-		<dependency>
+			<dependency>
 				<groupId>org.aaloa.zb4osgi.bundle</groupId>
 				<artifactId>org.aaloa.zb4osgi.externals.rxtx</artifactId>
 				<version>2.1.8-SNAPSHOT</version>
@@ -235,17 +235,18 @@
 				<artifactId>org.aaloa.zb4osgi.zigbee.se.zcl.library</artifactId>
 				<version>0.1.0-SNAPSHOT</version>
 				<scope>provided</scope>
-			</dependency>		
+			</dependency>
 			<dependency>
 				<groupId>net.sf.trove4j</groupId>
 				<artifactId>trove4j</artifactId>
-				<version>2.0.2</version>
-				<!-- <scope>provided</scope> -->
+				<version>2.1.0</version>
 			</dependency>
+			<!-- <scope>provided</scope> -->
+
 			<!-- WRAPPED BUNDLE -->
 			<!--<dependency> <groupId>org.aaloa.zb4osgi.bundle</groupId> <artifactId>org.aaloa.zb4osgi.bundle.net.sf.trove4j</artifactId> 
 				<version>2.0.4-1</version> <scope>provided</scope> </dependency> -->
-			
+
 			<!-- OSGi Runtime -->
 			<dependency>
 				<groupId>org.ops4j.pax.logging</groupId>
