@@ -12,13 +12,13 @@
   <properties>
     <pkgArtifactId>rxtx</pkgArtifactId>
     <pkgVersion>2.1.7</pkgVersion>
-    <pomVersion>5-SNAPSHOT</pomVersion>
+    <pomVersion>6-SNAPSHOT</pomVersion>
     <osgiVersion>${pkgVersion}</osgiVersion>
   </properties>
 
   <groupId>org.aaloa.zb4osgi.bundle</groupId>
   <artifactId>org.aaloa.zb4osgi.externals.rxtx</artifactId>
-  <version>2.1.8-SNAPSHOT</version>
+  <version>2.1.7-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <name>${pkgArtifactId} Bundle Wrapper</name>
   <description>

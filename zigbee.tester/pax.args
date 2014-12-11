@@ -18,7 +18,7 @@ mvn:org.osgi/org.osgi.compendium/4.2.0
 
 
 # ZigBee Stack General Dependencies & Tool
-mvn:org.aaloa.zb4osgi.bundle/org.aaloa.zb4osgi.externals.rxtx/2.1.8-SNAPSHOT
+mvn:org.aaloa.zb4osgi.bundle/org.aaloa.zb4osgi.externals.rxtx/2.1.7-SNAPSHOT
 wrap:mvn:net.sf.trove4j/trove4j/2.1.0
 
 # ZigBee Hardware Access Layer 
