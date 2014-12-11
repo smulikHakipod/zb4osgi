@@ -178,7 +178,7 @@ as defined by the ZigBee OSGi Base Driver, using the OSGi Device Access Specific
               com.itaca.ztool.util
             </Private-Package>
             <Export-Package>
-              it.cnr.isti.zigbee.hc.*;version=${pom.version},
+              it.cnr.isti.zigbee.hc.*;version=${project.version},
             </Export-Package>
             <Import-Package>
               !com.itaca.ztool.api.*,

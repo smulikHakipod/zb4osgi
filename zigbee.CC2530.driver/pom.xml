@@ -168,8 +168,8 @@
               Michele Girolami <michele.girolami@isti.cnr.it>,
               Manlio Bacco <manlio.bacco@isti.cnr.it>
             ]]></Bundle-Author>
-						<Bundle-Name>${pom.name}</Bundle-Name>
-						<Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
+						<Bundle-Name>${project.name}</Bundle-Name>
+						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-Activator>it.cnr.isti.zigbee.dongle.CC2530.Activator</Bundle-Activator>
 						<Private-Package>
 							it.cnr.isti.zigbee.dongle.CC2530.*

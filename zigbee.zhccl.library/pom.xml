@@ -160,8 +160,8 @@ A set of Java classes reppresenting the Cluster defined by the ZigBee Health Car
               org.slf4j; provider=paxlogging
             </Import-Package>
             <Export-Package>
-              it.cnr.isti.zigbee.hc.zcl.library.api.*;version=${pom.version},
-              it.cnr.isti.zigbee.hc.zcl.library.impl.*;version=${pom.version}
+              it.cnr.isti.zigbee.hc.zcl.library.api.*;version=${project.version},
+              it.cnr.isti.zigbee.hc.zcl.library.impl.*;version=${project.version}
             </Export-Package>
           </instructions>
         </configuration>

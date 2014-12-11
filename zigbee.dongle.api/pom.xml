@@ -130,7 +130,7 @@
             <Private-Package>
             </Private-Package>
             <Export-Package>
-              it.cnr.isti.zigbee.dongle.api.*;version=${pom.version}
+              it.cnr.isti.zigbee.dongle.api.*;version=${project.version}
             </Export-Package>
           </instructions>
         </configuration>

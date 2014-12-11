@@ -189,8 +189,8 @@
               org.slf4j.*; provider=paxlogging
             </Import-Package>
             <Export-Package>
-              com.itaca.ztool.*;version=${pom.version},
-              it.cnr.isti.cc2480.*;version=${pom.version}
+              com.itaca.ztool.*;version=${project.version},
+              it.cnr.isti.cc2480.*;version=${project.version}
             </Export-Package>
           </instructions>
         </configuration>

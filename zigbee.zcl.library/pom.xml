@@ -181,8 +181,8 @@ A set of Java classes reppresenting the ZigBee Common Cluster library
               org.slf4j; provider=paxlogging
             </Import-Package>
             <Export-Package>
-              it.cnr.isti.zigbee.zcl.library.api.*;version=${pom.version},
-              it.cnr.isti.zigbee.zcl.library.impl.*;version=${pom.version}
+              it.cnr.isti.zigbee.zcl.library.api.*;version=${project.version},
+              it.cnr.isti.zigbee.zcl.library.impl.*;version=${project.version}
             </Export-Package>
           </instructions>
         </configuration>

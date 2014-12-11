@@ -120,8 +120,8 @@
 						<Import-Package>
 						</Import-Package>
 						<Export-Package>
-							org.aaloa.zb4osgi.api.*;version=${pom.version},
-							it.cnr.isti.zigbee.api.*;version=${pom.version}
+							org.aaloa.zb4osgi.api.*;version=${project.version},
+							it.cnr.isti.zigbee.api.*;version=${project.version}
 						</Export-Package>
 					</instructions>
 				</configuration>

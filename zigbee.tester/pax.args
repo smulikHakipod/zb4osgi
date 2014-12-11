@@ -12,8 +12,8 @@
 
 # OSGi Tool 
 mvn:org.apache.felix/org.apache.felix.configadmin/1.2.4
-mvn:org.ops4j.pax.confman/pax-confman-propsloader/0.2.2
-mvn:org.apache.felix/org.apache.felix.fileinstall/3.2.6
+mvn:org.ops4j.pax.confman/pax-confman-propsloader/0.2.3
+mvn:org.apache.felix/org.apache.felix.fileinstall/3.4.2
 mvn:org.osgi/org.osgi.compendium/4.2.0
 
 

@@ -111,10 +111,6 @@ as defined by the ZigBee OSGi Base Driver, using the OSGi Device Access Specific
 		</dependency>
 		<dependency>
 			<groupId>org.aaloa.zb4osgi</groupId>
-			<artifactId>org.aaloa.zb4osgi.zigbee.zcl.library</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.aaloa.zb4osgi</groupId>
 			<artifactId>org.aaloa.zb4osgi.zigbee.se.zcl.library</artifactId>
 		</dependency>
 		<dependency>
