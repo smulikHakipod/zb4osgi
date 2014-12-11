@@ -41,7 +41,6 @@
   </description>
 
   <modules>
-    <module>bundles/trove4j</module>
     <module>bundles/rxtx</module>
   </modules>
 
