@@ -21,11 +21,15 @@
  */
 package it.cnr.isti.zigbee.basedriver.api.impl;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-
+import static org.easymock.EasyMock.anyObject;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.getCurrentArguments;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import it.cnr.isti.zigbee.api.Cluster;
 import it.cnr.isti.zigbee.api.ClusterFilter;
 import it.cnr.isti.zigbee.api.ClusterListner;
@@ -36,8 +40,11 @@ import it.cnr.isti.zigbee.basedriver.api.test.ZigBeeBaseDriverTestUnitBase;
 import it.cnr.isti.zigbee.dongle.api.AFMessageListner;
 import it.cnr.isti.zigbee.dongle.api.SimpleDriver;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 import org.easymock.IAnswer;
-import org.junit.*;
+import org.junit.Test;
 
 import com.itaca.ztool.api.af.AF_DATA_CONFIRM;
 import com.itaca.ztool.api.af.AF_DATA_REQUEST;
@@ -47,8 +54,6 @@ import com.itaca.ztool.api.af.AF_REGISTER_SRSP;
 import com.itaca.ztool.api.zdo.ZDO_SIMPLE_DESC_REQ;
 import com.itaca.ztool.api.zdo.ZDO_SIMPLE_DESC_RSP;
 import com.itaca.ztool.util.ByteUtils;
-
-import static org.easymock.EasyMock.*;
 
 
 /**

@@ -21,10 +21,11 @@
 
 package com.itaca.ztool.api.zdo;
 
+import it.cnr.isti.primitvetypes.util.Integers;
+
 import com.itaca.ztool.api.ZToolCMD;
 import com.itaca.ztool.api.ZToolPacket;
 import com.itaca.ztool.util.DoubleByte;
-import it.cnr.isti.primitvetypes.util.Integers;
 
 /**
  * Request to switch channel or change PAN ID.

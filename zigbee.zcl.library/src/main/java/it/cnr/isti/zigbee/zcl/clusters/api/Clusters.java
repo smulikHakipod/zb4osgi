@@ -25,6 +25,7 @@ import it.cnr.isti.zigbee.zcl.library.api.general.Alarms;
 import it.cnr.isti.zigbee.zcl.library.api.general.AnalogInput;
 import it.cnr.isti.zigbee.zcl.library.api.general.Basic;
 import it.cnr.isti.zigbee.zcl.library.api.general.Commissioning;
+import it.cnr.isti.zigbee.zcl.library.api.general.Debug;
 import it.cnr.isti.zigbee.zcl.library.api.general.DeviceTemperatureConfiguration;
 import it.cnr.isti.zigbee.zcl.library.api.general.Groups;
 import it.cnr.isti.zigbee.zcl.library.api.general.Identify;
@@ -81,6 +82,8 @@ public interface Clusters {
     public static final String IAS_ZONE = "1280";
     
     public static final String ANALOG_INPUT = "12";
+    //debug cluster
+    public static final String DEBUG = "1000";
   //  public static final String METERING = "1794";
 
     public static final String[][] cluster_impl = {
@@ -111,6 +114,7 @@ public interface Clusters {
     	
         
         new String[]{ANALOG_INPUT, AnalogInput.class.getName()},
+        new String[]{DEBUG, Debug.class.getName()}
      	};
     
     

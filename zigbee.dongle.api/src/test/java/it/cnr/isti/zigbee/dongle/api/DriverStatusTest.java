@@ -1,6 +1,6 @@
 package it.cnr.isti.zigbee.dongle.api;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 

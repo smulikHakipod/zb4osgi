@@ -27,9 +27,7 @@ import gnu.trove.TShortObjectHashMap;
 import gnu.trove.TShortObjectIterator;
 import it.cnr.isti.zigbee.api.ZigBeeDevice;
 import it.cnr.isti.zigbee.api.ZigBeeNode;
-import it.cnr.isti.zigbee.basedriver.Activator;
 import it.cnr.isti.zigbee.basedriver.api.impl.ZigBeeNodeImpl;
-import it.cnr.isti.zigbee.dongle.api.DuplicateMacPolicy;
 
 import java.util.ArrayList;
 import java.util.Collection;

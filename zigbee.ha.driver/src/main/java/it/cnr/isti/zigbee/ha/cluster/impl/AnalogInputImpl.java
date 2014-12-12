@@ -25,7 +25,6 @@ package it.cnr.isti.zigbee.ha.cluster.impl;
 import it.cnr.isti.zigbee.api.ZigBeeDevice;
 import it.cnr.isti.zigbee.ha.Activator;
 import it.cnr.isti.zigbee.ha.cluster.glue.general.AnalogInput;
-import it.cnr.isti.zigbee.ha.cluster.glue.general.event.BinaryPresentValueListener;
 import it.cnr.isti.zigbee.ha.cluster.glue.general.event.AnalogPresentValueListener;
 import it.cnr.isti.zigbee.ha.cluster.impl.event.AnalogPresentValueBridgeListeners;
 import it.cnr.isti.zigbee.ha.driver.core.ZigBeeHAException;

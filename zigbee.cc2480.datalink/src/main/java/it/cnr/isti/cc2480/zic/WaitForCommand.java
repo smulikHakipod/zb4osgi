@@ -21,15 +21,13 @@
  */
 package it.cnr.isti.cc2480.zic;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import it.cnr.isti.cc2480.high.AsynchrounsCommandListener;
 import it.cnr.isti.cc2480.high.HWHighLevelDriver;
 
-import com.itaca.ztool.api.ZToolException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.itaca.ztool.api.ZToolPacket;
-import com.itaca.ztool.api.ZToolTimeoutException;
 
 /**
 *

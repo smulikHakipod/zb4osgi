@@ -60,6 +60,7 @@ import it.cnr.isti.zigbee.zcl.library.api.general.AnalogInput;
 import it.cnr.isti.zigbee.zcl.library.api.general.Basic;
 import it.cnr.isti.zigbee.zcl.library.api.general.BinaryInput;
 import it.cnr.isti.zigbee.zcl.library.api.general.Commissioning;
+import it.cnr.isti.zigbee.zcl.library.api.general.Debug;
 import it.cnr.isti.zigbee.zcl.library.api.general.DeviceTemperatureConfiguration;
 import it.cnr.isti.zigbee.zcl.library.api.general.Groups;
 import it.cnr.isti.zigbee.zcl.library.api.general.Identify;
@@ -125,7 +126,7 @@ public class  HAProfile {
 	public static final int APPLIANCE_STATISTICS = ApplianceStatistics.ID; 
 	public static final int METER_IDENTIFICATION = MeterIdentification.ID; 
 	public static final int POWER_PROFILE = PowerProfile.ID; 
-	
+	public static final int DEBUG = Debug.ID;
 	
 	
 	
@@ -173,6 +174,8 @@ public class  HAProfile {
 	public static final int IAS_CONTROL_INDICATING_EQUIPMENT = IASControlAndIndicatingEquipment.DEVICE_ID;
 	public static final int IASZONE = IAS_Zone.DEVICE_ID;
 	public static final int IAS_WARNING_DEVICE = IAS_Warning.DEVICE_ID;
+
+
 
 
 	

@@ -23,7 +23,6 @@ package it.cnr.isti.zigbee.dongle.ez430rf2480;
 
 import it.cnr.isti.osgi.util.OSGiProperties;
 import it.cnr.isti.zigbee.dongle.api.ConfigurationProperties;
-import it.cnr.isti.zigbee.dongle.api.NetworkMode;
 import it.cnr.isti.zigbee.dongle.api.SimpleDriver;
 import it.cnr.isti.zigbee.dongle.ez430rf2480.impl.DriverEZ430_RF2480;
 

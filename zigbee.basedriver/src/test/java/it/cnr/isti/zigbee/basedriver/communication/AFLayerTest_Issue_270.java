@@ -22,24 +22,23 @@
 
 package it.cnr.isti.zigbee.basedriver.communication;
 
-import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
-import it.cnr.isti.zigbee.api.Cluster;
-import it.cnr.isti.zigbee.api.ZigBeeBasedriverException;
+import static org.easymock.EasyMock.anyObject;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import it.cnr.isti.zigbee.basedriver.Activator;
 import it.cnr.isti.zigbee.basedriver.api.impl.ClusterImpl;
 import it.cnr.isti.zigbee.basedriver.api.impl.ZigBeeDeviceImpl;
 import it.cnr.isti.zigbee.basedriver.api.impl.ZigBeeNodeImpl;
 import it.cnr.isti.zigbee.basedriver.api.test.ZigBeeBaseDriverTestUnitBase;
-import it.cnr.isti.zigbee.basedriver.communication.AFLayer.SenderIdentifier;
 import it.cnr.isti.zigbee.basedriver.configuration.ConfigurationService;
 import it.cnr.isti.zigbee.dongle.api.AFMessageListner;
 import it.cnr.isti.zigbee.dongle.api.ConfigurationProperties;
-import it.cnr.isti.zigbee.dongle.api.DuplicateMacPolicy;
 import it.cnr.isti.zigbee.dongle.api.SimpleDriver;
 
 import org.easymock.IAnswer;
-import org.junit.Before;
 import org.junit.Test;
 import org.osgi.service.cm.ConfigurationException;
 

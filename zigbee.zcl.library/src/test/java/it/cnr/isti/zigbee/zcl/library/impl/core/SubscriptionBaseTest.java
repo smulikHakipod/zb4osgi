@@ -21,11 +21,14 @@
 */
 package it.cnr.isti.zigbee.zcl.library.impl.core;
 
-import static org.junit.Assert.*;
-import static org.easymock.EasyMock.*;
-
-import java.util.Dictionary;
-
+import static org.easymock.EasyMock.anyInt;
+import static org.easymock.EasyMock.anyObject;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import it.cnr.isti.zigbee.api.ClusterListner;
 import it.cnr.isti.zigbee.api.ZigBeeBasedriverException;
 import it.cnr.isti.zigbee.api.ZigBeeDevice;
@@ -33,6 +36,8 @@ import it.cnr.isti.zigbee.zcl.library.api.core.Attribute;
 import it.cnr.isti.zigbee.zcl.library.api.core.ReportListener;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZCLCluster;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeClusterException;
+
+import java.util.Dictionary;
 
 import org.junit.Test;
 

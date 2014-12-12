@@ -19,29 +19,32 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-package it.cnr.isti.zigbee.zcl.library.impl.general;
 
-import static org.junit.Assert.assertEquals;
+package it.cnr.isti.zigbee.zcl.library.api.general;
+
 import it.cnr.isti.zigbee.zcl.library.api.core.Attribute;
-import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeType;
+import it.cnr.isti.zigbee.zcl.library.api.core.ZCLCluster;
 
-import org.junit.Test;
+public interface Debug extends ZCLCluster {
+
+    public static final short  ID = 0x03E8;
+    static final String NAME = "Debug";
+    static final String DESCRIPTION = "Debug cluster";
 
 
-/**
-*
-* @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
-* @version $LastChangedRevision$ ($LastChangedDate$)
-* @since 0.9.0
-*
-*/
-public class AnalogInputClusterTest {
+    public Attribute getAttributeUint24();
+    public Attribute getAttributeUint32();
+    public Attribute getAttributeUint40();
+    public Attribute getAttributeUint48();
+    public Attribute getAttributeUint56();
+    public Attribute getAttributeUint64();
+    public Attribute getAttributeSint24();
+    public Attribute getAttributeSint32();
+    public Attribute getAttributeSint40();
+    public Attribute getAttributeSint48();
+    public Attribute getAttributeSint56();
+    public Attribute getAttributeSint64();
+  
 
-    @Test
-    public void testGetAttributePresentValue() {
-        Attribute attribute = new AnalogInputCluster(null).getAttributePresentValue();
-        assertEquals("Wrong definition of the deta type for PresentValue",
-                ZigBeeType.SinglePrecision, attribute.getZigBeeType());
-    }
 
 }

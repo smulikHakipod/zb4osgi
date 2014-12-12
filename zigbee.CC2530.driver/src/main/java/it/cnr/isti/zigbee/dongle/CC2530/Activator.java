@@ -24,7 +24,6 @@ package it.cnr.isti.zigbee.dongle.CC2530;
 import it.cnr.isti.osgi.util.OSGiProperties;
 import it.cnr.isti.zigbee.dongle.CC2530.impl.DriverCC2530;
 import it.cnr.isti.zigbee.dongle.api.ConfigurationProperties;
-import it.cnr.isti.zigbee.dongle.api.NetworkMode;
 import it.cnr.isti.zigbee.dongle.api.SimpleDriver;
 
 import java.util.Properties;

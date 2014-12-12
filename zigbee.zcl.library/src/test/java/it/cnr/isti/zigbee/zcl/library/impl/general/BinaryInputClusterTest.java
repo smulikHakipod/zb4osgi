@@ -21,7 +21,7 @@
 */
 package it.cnr.isti.zigbee.zcl.library.impl.general;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import it.cnr.isti.zigbee.zcl.library.api.core.Attribute;
 import it.cnr.isti.zigbee.zcl.library.api.core.ZigBeeType;
 

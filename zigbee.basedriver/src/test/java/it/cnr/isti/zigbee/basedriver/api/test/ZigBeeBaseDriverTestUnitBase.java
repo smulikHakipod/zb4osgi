@@ -21,19 +21,20 @@
  */
 package it.cnr.isti.zigbee.basedriver.api.test;
 
-import static org.easymock.EasyMock.*;
+import static org.easymock.EasyMock.anyObject;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.getCurrentArguments;
+import static org.easymock.EasyMock.replay;
+import it.cnr.isti.zigbee.basedriver.Activator;
+import it.cnr.isti.zigbee.basedriver.configuration.ConfigurationService;
 
-import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.Properties;
 
-import org.easymock.*;
-import org.junit.*;
+import org.easymock.IAnswer;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.InvalidSyntaxException;
-
-import it.cnr.isti.zigbee.basedriver.Activator;
-import it.cnr.isti.zigbee.basedriver.configuration.ConfigurationService;
 
 /**
 *

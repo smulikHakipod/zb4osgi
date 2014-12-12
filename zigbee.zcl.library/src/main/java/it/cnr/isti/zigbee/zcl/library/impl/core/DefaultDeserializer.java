@@ -226,7 +226,7 @@ public class DefaultDeserializer implements ZBDeserializer {
         case UnsignedInteger24bit:
         case SignedInteger24bit:
             int i = read_int24bit();
-            if (type == ZigBeeType.UnsignedInteger32bit) {
+            if (type == ZigBeeType.SignedInteger24bit) {
                 value = new Long(i & 0xFFFFFFFF);
             } else {
                 value = new Integer(i);

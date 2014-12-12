@@ -21,12 +21,10 @@
  */
 package it.cnr.isti.zigbee.basedriver.api.impl;
 
-import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import it.cnr.isti.zigbee.basedriver.api.test.ZigBeeBaseDriverTestUnitBase;
 
-import org.junit.*;
-
+import org.junit.Test;
 
 import com.itaca.ztool.api.ZToolAddress64;
 

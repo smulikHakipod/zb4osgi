@@ -28,6 +28,7 @@ import it.cnr.isti.zigbee.ha.cluster.impl.BasicImpl;
 import it.cnr.isti.zigbee.ha.cluster.impl.BinaryInputImpl;
 import it.cnr.isti.zigbee.ha.cluster.impl.ColorControlImpl;
 import it.cnr.isti.zigbee.ha.cluster.impl.CommissioningImpl;
+import it.cnr.isti.zigbee.ha.cluster.impl.DebugImpl;
 import it.cnr.isti.zigbee.ha.cluster.impl.DeviceTemperatureConfigurationImpl;
 import it.cnr.isti.zigbee.ha.cluster.impl.DoorLockImpl;
 import it.cnr.isti.zigbee.ha.cluster.impl.FanControlImpl;
@@ -133,8 +134,9 @@ public class HAClustersFactory extends ClusterFactoryBase {
     final static String METER_IDENTIFICATION_KEY = HAProfile.ID + ":"+ HAProfile.METER_IDENTIFICATION;
     final static String POWER_PROFILE_KEY = HAProfile.ID + ":"+ HAProfile.POWER_PROFILE;
    
-	
-
+	//debug
+    final static String DEBUG_KEY = HAProfile.ID + ":"+ HAProfile.DEBUG;
+    
     public HAClustersFactory(BundleContext ctx){
         super(ctx);
 
@@ -202,6 +204,9 @@ public class HAClustersFactory extends ClusterFactoryBase {
         //Lighting
         addCluster(COLOR_CONTROL_KEY, ColorControlImpl.class);
    
+        //debug
+        addCluster(DEBUG_KEY, DebugImpl.class);
+        
       
     }
 

@@ -25,7 +25,6 @@ package it.cnr.isti.zigbee.basedriver.api.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.itaca.ztool.api.af.AF_DATA_CONFIRM;
 import com.itaca.ztool.api.af.AF_INCOMING_MSG;
 
 /**
