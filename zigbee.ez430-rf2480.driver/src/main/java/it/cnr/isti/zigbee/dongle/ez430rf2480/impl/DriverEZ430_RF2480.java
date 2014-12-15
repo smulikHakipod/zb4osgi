@@ -28,7 +28,7 @@ import it.cnr.isti.cc2480.high.SynchrounsCommandListner;
 import it.cnr.isti.cc2480.low.HWLowLevelDriver;
 import it.cnr.isti.cc2480.low.PacketListener;
 import it.cnr.isti.cc2480.zic.WaitForCommand;
-import it.cnr.isti.primitvetypes.util.Integers;
+import it.cnr.isti.primitivetypes.util.Integers;
 import it.cnr.isti.zigbee.dongle.api.AFMessageListner;
 import it.cnr.isti.zigbee.dongle.api.AnnounceListner;
 import it.cnr.isti.zigbee.dongle.api.ConfigurationProperties;

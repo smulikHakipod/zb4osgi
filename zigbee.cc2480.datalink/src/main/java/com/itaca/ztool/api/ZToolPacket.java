@@ -29,7 +29,7 @@
 
 package com.itaca.ztool.api;
 
-import it.cnr.isti.primitvetypes.util.Integers;
+import it.cnr.isti.primitivetypes.util.Integers;
 
 import com.itaca.ztool.util.ByteUtils;
 import com.itaca.ztool.util.DoubleByte;

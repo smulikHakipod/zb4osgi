@@ -20,7 +20,7 @@
    limitations under the License.
  */
 
-package it.cnr.isti.primitvetypes.util;
+package it.cnr.isti.primitivetypes.util;
 
 /**
  * An utility class that contains method for:<br>

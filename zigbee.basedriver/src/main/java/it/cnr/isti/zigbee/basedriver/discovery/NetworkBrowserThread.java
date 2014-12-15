@@ -23,7 +23,7 @@
 package it.cnr.isti.zigbee.basedriver.discovery;
 
 import gnu.trove.TShortObjectHashMap;
-import it.cnr.isti.primitvetypes.util.Integers;
+import it.cnr.isti.primitivetypes.util.Integers;
 import it.cnr.isti.thread.RunnableThread;
 import it.cnr.isti.thread.ThreadUtils;
 import it.cnr.isti.zigbee.api.ZigBeeNode;

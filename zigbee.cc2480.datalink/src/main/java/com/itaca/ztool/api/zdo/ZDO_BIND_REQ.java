@@ -27,7 +27,7 @@
 
 package com.itaca.ztool.api.zdo;
 
-import it.cnr.isti.primitvetypes.util.Integers;
+import it.cnr.isti.primitivetypes.util.Integers;
 
 import com.itaca.ztool.api.ZToolAddress16;
 import com.itaca.ztool.api.ZToolAddress64;
