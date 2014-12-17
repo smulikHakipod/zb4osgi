@@ -2,8 +2,7 @@
 	name="zb4o">
 	<feature name="zb4o-base" version="${project.version}">
 		<!-- Deps -->
-		<bundle>mvn:org.aaloa.zb4osgi.bundle/org.aaloa.zb4osgi.externals.trove4j/2.0.4-3-SNAPSHOT
-		</bundle>
+		<bundle>wrap:mvn:net.sf.trove4j/trove4j/2.1.0</bundle>
 		<!-- ZB4O modules -->
 		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.common/0.6.0-SNAPSHOT
 		</bundle>
@@ -69,7 +68,7 @@
 	</feature>
 	
 	<feature name="zb4o-rxtx" version="${project.version}">
-		<bundle>mvn:org.aaloa.zb4osgi.bundle/org.aaloa.zb4osgi.externals.rxtx/2.1.7-5-SNAPSHOT
+		<bundle>mvn:org.aaloa.zb4osgi.bundle/org.aaloa.zb4osgi.externals.rxtx/2.1.7-SNAPSHOT
 		</bundle>
 	</feature>
 </features>
