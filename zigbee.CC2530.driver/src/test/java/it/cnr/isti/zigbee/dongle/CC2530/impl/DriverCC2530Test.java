@@ -35,21 +35,27 @@ import org.junit.Test;
 public class DriverCC2530Test {
 
     @Test
-    public void testOpen() {
+    public void testIsResendOnlyOnException() {
         DriverCC2530 d = null;
         try {
+
+            assertNull(System.getProperty(DriverCC2530.RESEND_ONLY_EXCEPTION_KEY));
+            d = new DriverCC2530("COMX", 115200);
+            assertTrue(d.isResendOnlyOnException());
+
             System.setProperty(DriverCC2530.RESEND_ONLY_EXCEPTION_KEY, "pippo");
             d = new DriverCC2530("COMX", 115200);
             assertFalse(d.isResendOnlyOnException());
-            System.setProperty(DriverCC2530.RESEND_ONLY_EXCEPTION_KEY, null);
-            d = new DriverCC2530("COMX", 115200);
-            assertTrue(d.isResendOnlyOnException());
+
+
             System.setProperty(DriverCC2530.RESEND_ONLY_EXCEPTION_KEY, "");
             d = new DriverCC2530("COMX", 115200);
             assertFalse(d.isResendOnlyOnException());
+
             System.setProperty(DriverCC2530.RESEND_ONLY_EXCEPTION_KEY, "tRue");
             d = new DriverCC2530("COMX", 115200);
             assertTrue(d.isResendOnlyOnException());
+
         } catch (Exception e) {
             e.printStackTrace();
             fail("Exception thrown");
