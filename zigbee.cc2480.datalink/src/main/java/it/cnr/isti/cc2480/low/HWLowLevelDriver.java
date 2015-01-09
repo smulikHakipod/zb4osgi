@@ -1,10 +1,10 @@
 /*
    Copyright 2008-2013 CNR-ISTI, http://isti.cnr.it
-   Institute of Information Science and Technologies 
-   of the Italian National Research Council 
+   Institute of Information Science and Technologies
+   of the Italian National Research Council
 
 
-   See the NOTICE file distributed with this work for additional 
+   See the NOTICE file distributed with this work for additional
    information regarding copyright ownership
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,19 +42,19 @@ import com.itaca.ztool.api.ZToolPacket;
 import com.itaca.ztool.api.ZToolPacketHandler;
 
 /**
- * 
+ *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @version $LastChangedRevision$ ($LastChangedDate$)
  * @since 0.1.0
- * 
+ *
  */
 public class HWLowLevelDriver
     implements ZToolPacketHandler {
 
-	public enum HWLowLevelDriverState {
-		LOADED, OPENING, OPENED, CLOSING, CLOSED
-	}
-	
+    public enum HWLowLevelDriverState {
+        LOADED, OPENING, OPENED, CLOSING, CLOSED
+    }
+
     private final static Logger logger = LoggerFactory.getLogger( HWLowLevelDriver.class );
 
     private final static Logger profiler = LoggerFactory.getLogger( "profiling." + HWLowLevelDriver.class.getName() );
@@ -87,8 +87,8 @@ public class HWLowLevelDriver
      */
     public static final String SERIAL_HANLDER_KEY = "it.cnr.isti.cc2480.low.serial_handler";
 
-    public static final String SERIAL_HANLDER_DEFAULT = "it.cnr.isti.cc2480.low.RealSerialComm"; 
-    
+    public static final String SERIAL_HANLDER_DEFAULT = "it.cnr.isti.cc2480.low.RealSerialComm";
+
     private List<Throwable> errorList = new ArrayList<Throwable>();
 
     private final HashSet<PacketListener> listeners = new HashSet<PacketListener>();
@@ -108,39 +108,39 @@ public class HWLowLevelDriver
     //private final byte[] buffer = new byte[256];
 
     public void open( String port, int baudRate) throws ZToolException {
-    	
-    	if ( ! ( status == HWLowLevelDriverState.LOADED || status == HWLowLevelDriverState.CLOSED ) ) {
-    		throw new IllegalStateException("Driver already opened, current status is " + status);
-    	}
-    	
-    	status = HWLowLevelDriverState.OPENING;
+
+        if ( ! ( status == HWLowLevelDriverState.LOADED || status == HWLowLevelDriverState.CLOSED ) ) {
+            throw new IllegalStateException("Driver already opened, current status is " + status);
+        }
+
+        status = HWLowLevelDriverState.OPENING;
         logger.debug( "Opening {} ", this.getClass() );
         serialName = port;
         rate = baudRate;
-        milliSecondsPerPacket = Long.parseLong( 
-        		System.getProperty( MILLISECONDS_PER_PACKET_KEY, MILLISECONDS_PER_PACKET_DEFAULT ) 
+        milliSecondsPerPacket = Long.parseLong(
+                System.getProperty( MILLISECONDS_PER_PACKET_KEY, MILLISECONDS_PER_PACKET_DEFAULT )
         );
 
         createSniffer();
         createSerialHandler();
-        
+
         logger.debug( "Opening port {}@{}", serialName, rate );
         serialHandler.open( serialName, rate, this );
         logger.debug( "Opened port {}@{}", serialName, rate );
         logger.debug( "Opened {}", this );
-        
-    	status = HWLowLevelDriverState.OPENED;
-    } 
+
+        status = HWLowLevelDriverState.OPENED;
+    }
 
     /**
-     * @throws ZToolException 
-	 * 
-	 */
-	private void createSerialHandler() throws ZToolException {
-		if( serialHandler != null ) {
-			logger.info("Serial Handler already specified, using {}", serialHandler.getClass().getName());
-			return;
-		}
+     * @throws ZToolException
+     *
+     */
+    private void createSerialHandler() throws ZToolException {
+        if( serialHandler != null ) {
+            logger.info("Serial Handler already specified, using {}", serialHandler.getClass().getName());
+            return;
+        }
         String claz = System.getProperty( SERIAL_HANLDER_KEY, SERIAL_HANLDER_DEFAULT );
         try {
             logger.debug( "Loading serial handler {}", claz );
@@ -149,9 +149,9 @@ public class HWLowLevelDriver
             logger.error( "Unable to laod the selected SerialHandler " + claz + " due to exception", e );
             throw new ZToolException("Unable to laod SerialHandler", e);
         }
-	}
+    }
 
-	private void createSniffer() {
+    private void createSniffer() {
         String claz = System.getProperty( PACKET_SNIFFER_KEY, PACKET_SNIFFER_DEFAULT );
         if ( "".equals( claz ) == false ) {
             try {
@@ -168,12 +168,12 @@ public class HWLowLevelDriver
                 sniffer = null;
             }
         } else {
-        	logger.info("SNIFFER Disabled: No sniffer class specified");
+            logger.info("SNIFFER Disabled: No sniffer class specified");
         }
     }
 
     /**
-     * 
+     *
      * @return the number of milliseconds that the driver wait before sending a new frame to the dongle
      * @since 0.6.0
      */
@@ -181,58 +181,58 @@ public class HWLowLevelDriver
         return milliSecondsPerPacket;
     }
 
-    
-    
+
+
     /**
-     * 
+     *
      * @param packetSniffer
      * @since 0.6.0
      */
     public void setZToolPacketSniffer(SnifferInterface packetSniffer){
-    	if ( packetSniffer == null ) {
-    		logger.debug("Disabling packet sniffing");
-    	} else if ( sniffer != null ) {
-    		logger.debug("Replaceing sniffer {} with {}", sniffer, packetSniffer);
-    	} else {
-    		logger.debug("Enabling packet sniffing with {}", packetSniffer);
-    	}
-		sniffer = packetSniffer;
+        if ( packetSniffer == null ) {
+            logger.debug("Disabling packet sniffing");
+        } else if ( sniffer != null ) {
+            logger.debug("Replaceing sniffer {} with {}", sniffer, packetSniffer);
+        } else {
+            logger.debug("Enabling packet sniffing with {}", packetSniffer);
+        }
+        sniffer = packetSniffer;
     }
-    
+
     /**
-     * 
+     *
      * @return
      * @since 0.6.0
      */
     public SnifferInterface getZToolPacketSniffer() {
-    	return sniffer;
+        return sniffer;
     }
-    
+
     /**
-     * 
+     *
      * @return
      * @since 0.6.0
      */
     public SerialHandler getSerialHandler() {
-    	return serialHandler;
+        return serialHandler;
     }
 
     /**
-     * 
+     *
      * @param handler
      * @since 0.6.0
      */
     public void setSerialHandler(SerialHandler handler) {
-    	if ( ! ( status == HWLowLevelDriverState.LOADED || status == HWLowLevelDriverState.CLOSED ) ) {
-    		throw new IllegalStateException("SerailHandler cannot be changed when driver is active, current state is " + status);
-    	}
-    	serialHandler = handler;
+        if ( ! ( status == HWLowLevelDriverState.LOADED || status == HWLowLevelDriverState.CLOSED ) ) {
+            throw new IllegalStateException("SerailHandler cannot be changed when driver is active, current state is " + status);
+        }
+        serialHandler = handler;
     }
-    
-    
+
+
     /**
      * Set the number of milliseconds that must elapse before sending a new frame to the dongle
-     * 
+     *
      * @param milliSecondsPerPacket the number of milliseconds, zero or negative values disable this check
      * @since 0.6.0
      */
@@ -333,14 +333,14 @@ public class HWLowLevelDriver
      * Shuts down RXTX and input stream threads
      */
     public void close() {
-    	status = HWLowLevelDriverState.CLOSING;    	
+        status = HWLowLevelDriverState.CLOSING;
         logger.debug( "Closing {} ", this.getClass().getName() );
         serialHandler.close();
         logger.debug( "Closed {} ", this.getClass().getName() );
         if ( sniffer != null ) {
             sniffer.finalize();
-        }        
-    	status = HWLowLevelDriverState.CLOSED;    	
+        }
+        status = HWLowLevelDriverState.CLOSED;
     }
 
     public String toString() {
