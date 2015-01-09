@@ -33,6 +33,7 @@
   </description>
 
   <modules>
+    <module>pom</module>
     <module>zigbee.cc2480.datalink</module>
     <module>zigbee.CC2530.driver</module>
     <module>zigbee.ez430-rf2480.driver</module>
