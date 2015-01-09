@@ -314,14 +314,14 @@ public class DriverCC2530 implements Runnable, SimpleDriver {
         }
         RESEND_MAX_RETRY = aux;
 
-	String p = System.getProperty(RESEND_ONLY_EXCEPTION_KEY);
-	if(p != null){
-		RESEND_ONLY_EXCEPTION = Boolean.parseBoolean(p);
-		logger.debug("Using RESEND_ONLY_EXCEPTION set from environment {}", RESEND_ONLY_EXCEPTION);
-	} else {
-		RESEND_ONLY_EXCEPTION = RESEND_ONLY_EXCEPTION_DEFAULT;
-		logger.debug("Using RESEND_ONLY_EXCEPTION set as DEFAULT {}", RESEND_ONLY_EXCEPTION);
-	}
+        String p = System.getProperty(RESEND_ONLY_EXCEPTION_KEY);
+        if (p != null) {
+            RESEND_ONLY_EXCEPTION = Boolean.parseBoolean(p);
+            logger.debug("Using RESEND_ONLY_EXCEPTION set from environment {}", RESEND_ONLY_EXCEPTION);
+        } else {
+            RESEND_ONLY_EXCEPTION = RESEND_ONLY_EXCEPTION_DEFAULT;
+            logger.debug("Using RESEND_ONLY_EXCEPTION set as DEFAULT {}", RESEND_ONLY_EXCEPTION);
+        }
 
         state = DriverStatus.CLOSED;
         this.cleanStatus = cleanNetworkStatus;
@@ -1761,5 +1761,9 @@ public class DriverCC2530 implements Runnable, SimpleDriver {
         }
 
         return false;
+    }
+
+    public boolean isResendOnlyOnException() {
+        return RESEND_ONLY_EXCEPTION;
     }
 }
