@@ -9,13 +9,14 @@
 	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
 	OF ANY KIND, either express or implied. See the License for the specific 
 	language governing permissions and limitations under the License. -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.aaloa.zb4osgi</groupId>
 	<artifactId>org.aaloa.zb4osgi.pom</artifactId>
 	<packaging>pom</packaging>
-	<version>10</version>
+	<version>10-SNAPSHOT</version>
 
 	<name>Suite of bundle for integrating ZigBee device in OSGi</name>
 	<url>http://zb4osgi.aaloa.org/</url>
@@ -43,9 +44,9 @@
 	</mailingLists>
 
 	<scm>
-		<connection>scm:svn:https://svn.aaloa.org/projects/zb4osgi/releases/org.aaloa.zb4osgi.pom-10</connection>
-		<developerConnection>scm:svn:https://svn.aaloa.org/projects/zb4osgi/releases/org.aaloa.zb4osgi.pom-10</developerConnection>
-		<url>scm:svn:https://svn.aaloa.org/projects/zb4osgi/releases/org.aaloa.zb4osgi.pom-10</url>
+		<connection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/pom</connection>
+		<developerConnection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/pom</developerConnection>
+		<url>http://zb4osgi.aaloa.org/projects/zb4osgi/repository/show/trunk/pom</url>
 	</scm>
 
 	<repositories>
