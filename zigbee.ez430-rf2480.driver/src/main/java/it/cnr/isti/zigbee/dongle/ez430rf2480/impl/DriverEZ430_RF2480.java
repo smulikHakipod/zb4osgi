@@ -231,14 +231,14 @@ public class DriverEZ430_RF2480 implements Runnable, SimpleDriver{
         }
         RESEND_MAX_RETRY = aux;
 
-        boolean b = RESEND_ONLY_EXCEPTION_DEFAULT;
-        try{
-            b = Boolean.parseBoolean(System.getProperty(RESEND_ONLY_EXCEPTION_KEY));
-            logger.debug("Using {} set from enviroment {}", RESEND_ONLY_EXCEPTION_KEY, b);
-        }catch(NumberFormatException ex){
-            logger.debug("Using {} set as DEFAULT {}", RESEND_ONLY_EXCEPTION_KEY, b);
+        String p = System.getProperty(RESEND_ONLY_EXCEPTION_KEY);
+        if (p != null) {
+            RESEND_ONLY_EXCEPTION = Boolean.parseBoolean(p);
+            logger.debug("Using RESEND_ONLY_EXCEPTION set from environment {}", RESEND_ONLY_EXCEPTION);
+        } else {
+            RESEND_ONLY_EXCEPTION = RESEND_ONLY_EXCEPTION_DEFAULT;
+            logger.debug("Using RESEND_ONLY_EXCEPTION set as DEFAULT {}", RESEND_ONLY_EXCEPTION);
         }
-        RESEND_ONLY_EXCEPTION = b;
 
 
         state = DriverStatus.CLOSED;
@@ -1419,5 +1419,9 @@ public class DriverEZ430_RF2480 implements Runnable, SimpleDriver{
             String arg3, String arg4, String arg5) {
         // TODO Auto-generated method stub
 
+    }
+
+    public boolean isResendOnlyOnException() {
+        return RESEND_ONLY_EXCEPTION;
     }
 }
