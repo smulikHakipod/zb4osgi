@@ -184,7 +184,8 @@
               it.cnr.isti.thread,
               it.cnr.isti.io,
               it.cnr.isti.collections,
-              it.cnr.isti.primitvetypes.util, it.cnr.isti.osgi.util,
+              it.cnr.isti.primitivetypes.util,
+              it.cnr.isti.osgi.util,
               gnu.io.*, javax.swing.*,
               org.slf4j.*; provider=paxlogging
             </Import-Package>

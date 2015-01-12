@@ -191,7 +191,7 @@ as defined by the ZigBee OSGi Base Driver, using the OSGi Device Access Specific
 							it.cnr.isti.zigbee.eh.zcl.library.api
 						</Import-Package>
 						<Private-Package>
-							it.cnr.isti.primitvetypes.util,
+							it.cnr.isti.primitivetypes.util,
 							com.itaca.ztool.util
 						</Private-Package>
 						<Export-Package>

@@ -153,7 +153,7 @@ A set of Java classes reppresenting the Cluster defined by the ZigBee Health Car
               com.itaca.ztool.util
             </Private-Package>
             <Import-Package>
-              it.cnr.isti.primitvetypes.util,
+              it.cnr.isti.primitivetypes.util,
               it.cnr.isti.zigbee.api,
               it.cnr.isti.zigbee.zcl.library.api.*,
               it.cnr.isti.zigbee.zcl.library.impl.*,

@@ -174,7 +174,7 @@ as defined by the ZigBee OSGi Base Driver, using the OSGi Device Access Specific
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Bundle-Activator>it.cnr.isti.zigbee.hc.Activator</Bundle-Activator>
             <Private-Package>
-              it.cnr.isti.primitvetypes.util,
+              it.cnr.isti.primitivetypes.util,
               com.itaca.ztool.util
             </Private-Package>
             <Export-Package>

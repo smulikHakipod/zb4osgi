@@ -175,7 +175,7 @@
 							it.cnr.isti.zigbee.api.*,
 							it.cnr.isti.zigbee.dongle.api*,
 							com.itaca.ztool.*,
-							it.cnr.isti.primitvetypes.util,
+							it.cnr.isti.primitivetypes.util,
 							it.cnr.isti.osgi.util,
 							it.cnr.isti.thread.*,
 							gnu.trove.*,

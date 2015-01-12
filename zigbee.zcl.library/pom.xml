@@ -176,7 +176,7 @@ A set of Java classes reppresenting the ZigBee Common Cluster library
               com.itaca.ztool.util
             </Private-Package>
             <Import-Package>
-              it.cnr.isti.primitvetypes.util,
+              it.cnr.isti.primitivetypes.util,
               it.cnr.isti.zigbee.api,
               org.slf4j; provider=paxlogging
             </Import-Package>

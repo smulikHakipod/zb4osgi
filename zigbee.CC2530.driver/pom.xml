@@ -185,7 +185,7 @@
               com.itaca.ztool.*,
               it.cnr.isti.zigbee.dongle.api*,
               it.cnr.isti.cc2480.*, javax.swing,
-              it.cnr.isti.primitvetypes.util, it.cnr.isti.osgi.util,
+              it.cnr.isti.primitivetypes.util, it.cnr.isti.osgi.util,
               org.slf4j.*; provider=paxlogging
             </Import-Package>
             <Export-Package>
