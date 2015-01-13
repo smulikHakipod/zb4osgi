@@ -17,7 +17,7 @@
 
   <groupId>org.aaloa.zb4osgi.bundle</groupId>
   <artifactId>org.aaloa.zb4osgi.externals.rxtx</artifactId>
-  <version>2.1.7-${osgiPackaging}-SNAPSHOT</version>
+  <version>2.1.7-2</version>
   <packaging>bundle</packaging>
   <name>${pkgArtifactId} Bundle Wrapper</name>
   <description>
@@ -97,9 +97,9 @@ on the JAR package of this artifact.
   </build>
 
   <scm>
-    <connection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/externals/bundles/rxtx</connection>
-    <developerConnection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/externals/bundles/rxtx</developerConnection>
-    <url>http://zb4osgi.aaloa.org/projects/zb4osgi/repository/show/trunk/externals/bundles/rxtx</url>
+    <connection>scm:svn:https://svn.aaloa.org/projects/zb4osgi/releases/org.aaloa.zb4osgi.externals.rxtx-2.1.7-2</connection>
+    <developerConnection>scm:svn:https://svn.aaloa.org/projects/zb4osgi/releases/org.aaloa.zb4osgi.externals.rxtx-2.1.7-2</developerConnection>
+    <url>scm:svn:https://svn.aaloa.org/projects/zb4osgi/releases/org.aaloa.zb4osgi.externals.rxtx-2.1.7-2</url>
   </scm>
 
 </project>
