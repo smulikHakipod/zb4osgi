@@ -161,6 +161,25 @@ public class DefaultDeserializer implements ZBDeserializer {
         return result;
     }
 
+    public float readSinglePrecision() {
+        throw new UnsupportedOperationException("readSinglePrecision:Please implement it");
+        /*
+         * The fowllowing code was proposed as solution for converting semi-precision but it will
+         * always the BufferUnderflowException because ZigBeeType.SinglePrecision.getLength() = 2
+         * but ByteBuffer.getFloat() expect to read 4 bytes
+         *
+         *  We should integreate the code found on Stackoverflow:
+         *  http://stackoverflow.com/questions/6162651/half-precision-floating-point-in-java
+         *
+         *
+            float result = ByteBuffer
+                    .wrap(payload, index, ZigBeeType.SinglePrecision.getLength())
+                    .order(ByteOrder.LITTLE_ENDIAN).getFloat();
+            index += 4;
+            return result;
+         */
+    }
+
     public float readSemiPrecision() {
 
         float result = ByteBuffer
@@ -171,21 +190,11 @@ public class DefaultDeserializer implements ZBDeserializer {
 
     }
 
-    public float readSinglePrecision() {
+    public double readDoublePrecision() {
 
-        float result = ByteBuffer
-                .wrap(payload, index, ZigBeeType.SinglePrecision.getLength())
-                .order(ByteOrder.LITTLE_ENDIAN).getFloat();
-        index += 4;
-        return result;
-
-    }
-
-    public float readDoublePrecision() {
-
-        float result = ByteBuffer
+        double result = ByteBuffer
                 .wrap(payload, index, ZigBeeType.DoublePrecision.getLength())
-                .order(ByteOrder.LITTLE_ENDIAN).getFloat();
+                .order(ByteOrder.LITTLE_ENDIAN).getDouble();
         index += 8;
         return result;
 
@@ -291,5 +300,6 @@ public class DefaultDeserializer implements ZBDeserializer {
         index += 3;
         return value;
     }
+
 
 }

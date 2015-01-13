@@ -18,7 +18,7 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-*/
+ */
 
 package it.cnr.isti.zigbee.zcl.library.api.core;
 
@@ -29,7 +29,8 @@ package it.cnr.isti.zigbee.zcl.library.api.core;
  *
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
- * @version $LastChangedRevision$ ($LastChangedDate$)
+ * @version $LastChangedRevision$ ($LastChangedDate: 2014-08-05 02:29:01
+ *          +0200 (Tue, 05 Aug 2014) $)
  * @since 0.1.0
  *
  */
@@ -39,21 +40,23 @@ public interface ZBDeserializer {
      *
      * @return true if and only if no byte left to read from the payload
      * @since 0.8.0
-    */
+     */
     public boolean endOfStream();
 
     /**
      *
-     * @param the {@link ZigBeeType} to use for parsing the data
+     * @param the
+     *            {@link ZigBeeType} to use for parsing the data
      * @return the parsed {@link Object}
      * @since 0.4.0
      */
     public Object readZigBeeType(ZigBeeType type);
 
-
     /**
-     * Parse a {@link String} from the stream considering the first byte as the length of the<br>
-     * String itself as specified by the <b>ZigBee Cluster Library</b> (<i>Document 075123r01ZB</i>
+     * Parse a {@link String} from the stream considering the first byte as the
+     * length of the<br>
+     * String itself as specified by the <b>ZigBee Cluster Library</b>
+     * (<i>Document 075123r01ZB</i>
      *
      * @return the parsed {@link String}
      * @since 0.4.0
@@ -61,26 +64,37 @@ public interface ZBDeserializer {
      */
     public String readString();
 
-
     /**
-     * Since version <b>0.4.0</b> the method must not used, use {@link #readZigBeeType(ZigBeeType)} instead.<br>
-     * This method has a conceptual bug in respect to the parsing of 8, 16, or 24 bit long data, in fact<br>
+     * Since version <b>0.4.0</b> the method must not used, use
+     * {@link #readZigBeeType(ZigBeeType)} instead.<br>
+     * This method has a conceptual bug in respect to the parsing of 8, 16, or
+     * 24 bit long data, in fact<br>
      * the methods can only fail in such cases.
      *
-     * @param clazz the {@link Class} used to select the proper parsing
-     * @return the parse {@link Object} from the stream depending the {@link Class} specified
+     * @param clazz
+     *            the {@link Class} used to select the proper parsing
+     * @return the parse {@link Object} from the stream depending the
+     *         {@link Class} specified
      * @deprecated Use {@link #readZigBeeType(ZigBeeType)} instead
      */
     public Object readObject(Class<?> clazz);
+
     public Boolean readBoolean();
+
     public Byte readByte();
+
     public Short readShort();
+
     public Integer readInteger();
+
     public Long readLong();
 
     public boolean read_boolean();
+
     public byte read_byte();
+
     public short read_short();
+
     public int read_int();
 
     /**
@@ -89,17 +103,20 @@ public interface ZBDeserializer {
      * @since 0.8.0
      */
     public short read_uint8bit();
+
     /**
      *
      * @return the 24bit parsed
      * @since 0.4.0
      */
     public int read_int24bit();
+
     public long read_long();
 
     /**
      *
-     * @param size the size in bytes of the long data to read
+     * @param size
+     *            the size in bytes of the long data to read
      * @return 0.9.0
      */
     public long read_long(int size);
@@ -118,12 +135,35 @@ public interface ZBDeserializer {
      */
     public void skip(int n);
 
-
     /**
      *
      * @return an integer read from a 16bit
      * @since 0.8.0
      */
     public int read_uint16bit();
+
+    /**
+     *
+     * @return a decoded Semi Precision Data from the stream ( 2 byte floating
+     *         data ) as float
+     * @since 0.9.0
+     */
+    public float readSemiPrecision();
+
+    /**
+     *
+     * @return a decoded Single Precision Data from the stream ( 4 byte floating
+     *         data ) as float
+     * @since 0.9.0
+     */
+    public float readSinglePrecision();
+
+    /**
+     *
+     * @return a decoded Double Precision Data from the stream ( 8 byte floating
+     *         data ) as double
+     * @since 0.9.0
+     */
+    public double readDoublePrecision();
 
 }
