@@ -22,6 +22,9 @@
 
 package it.cnr.isti.primitivetypes.util;
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+
 /**
  * An utility class that contains method for:<br>
  * - creating <b>long</b>, <b>int</b>, and <b>short</b> from <code>int[]</code><br>
@@ -32,6 +35,7 @@ package it.cnr.isti.primitivetypes.util;
  * @version $LastChangedRevision$ ($LastChangedDate: 2013-08-06 18:00:05
  *          +0200 (mar, 06 ago 2013) $)
  * @since 0.1.0
+ * @deprecated
  *
  */
 public class Integers {
@@ -350,11 +354,19 @@ public class Integers {
 	}
 
 	final public static int writeInt(byte[] dest, int pos, int data) {
-		dest[pos] = (byte) (data >> 24);
-		dest[pos + 1] = (byte) ((data << 8) >> 24);
-		dest[pos + 2] = (byte) ((data << 16) >> 24);
-		dest[pos + 3] = (byte) ((data << 24) >> 24);
+		
+		
+		ByteBuffer.wrap(dest, pos, 4)
+				.order(ByteOrder.LITTLE_ENDIAN).putInt(data);
 		return 4;
+		
+		/*
+		dest[pos + 3] = (byte) (data >> 24);
+		dest[pos + 2] = (byte) ((data << 8) >> 24);
+		dest[pos + 1] = (byte) ((data << 16) >> 24);
+		dest[pos + 0] = (byte) ((data << 24) >> 24);
+		return 4;
+		*/
 	}
 
 	final public static int writeLongObject(byte[] dest, int pos, Long data) {
@@ -363,7 +375,7 @@ public class Integers {
 
 	final public static int writeLong(byte[] dest, int pos, long data, int size) {
 		long val = 0;
-		for (int i = 0; i < size; i++) {
+		for (int i = size-1; i > -1; i--) {
 			dest[pos + i] = (byte) (data >> 56);
 			data = data << 8;
 		}
@@ -418,10 +430,10 @@ public class Integers {
 	}
 
 	public static int readInt(byte[] src, int pos) {
-		return ((src[pos] & 0x000000FF) << 24)
-				+ ((src[pos + 1] & 0x000000FF) << 16)
-				+ ((src[pos + 2] & 0x000000FF) << 8)
-				+ ((src[pos + 3] & 0x000000FF));
+
+		int result = ByteBuffer.wrap(src, pos, 4)
+				.order(ByteOrder.LITTLE_ENDIAN).getInt();
+		return result;
 
 	}
 
