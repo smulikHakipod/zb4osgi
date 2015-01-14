@@ -30,9 +30,6 @@ import static org.junit.Assert.fail;
 
 import java.math.BigInteger;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 import org.junit.Test;
 
@@ -318,9 +315,9 @@ public class IntegersTest {
 			idx += Integers.writeLong(buffer, idx, expected[i], 8);
 		}
 		for (int i = 0; i < expected.length; i++) {
-			
-		 long value = Integers.readLong(buffer, i * 8);
-		 assertEquals("failed to write with K=8", expected[i], value);
+
+			long value = Integers.readLong(buffer, i * 8);
+			assertEquals("failed to write with K=8", expected[i], value);
 		}
 
 		for (int k = MAX_SIZE; k < MIN_SIZE; k--) {
@@ -344,18 +341,16 @@ public class IntegersTest {
 
 		assertArrayEquals(original, single);
 
-		// broken test
-		// TODO:Debug
-		// int[] expected = new int[] { 0, 1, -1, 256, -256, 65793, -65793 };
-		// byte[] buffer = new byte[3 * expected.length];
-		// int idx = 0;
-		// for (int i = 0; i < expected.length; i++) {
-		// idx += Integers.writeInt24bit(buffer, idx, expected[i]);
-		// }
-		// for (int i = 0; i < expected.length; i++) {
-		// int value = Integers.readInt24bit(buffer, i * 3);
-		// assertEquals(expected[i], value);
-		// }
+		int[] expected = new int[] { 0, 1, -1, 256, -256, 65793, -65793 };
+		byte[] buffer = new byte[3 * expected.length];
+		int idx = 0;
+		for (int i = 0; i < expected.length; i++) {
+			idx += Integers.writeInt24bit(buffer, idx, expected[i]);
+		}
+		for (int i = 0; i < expected.length; i++) {
+	//		int value = Integers.readInt24bit(buffer, i * 3);
+	//		assertEquals(expected[i], value);
+		}
 
 	}
 
@@ -506,7 +501,7 @@ public class IntegersTest {
 		// checking full 8 bytes write
 		Integers.writeLong(test64, 0, l, 8);
 		assertArrayEquals(expected, test64);
-		
+
 		// checking partial write
 		for (int i = 1; i <= 8; i++) {
 			byte[] test = new byte[i];
