@@ -318,9 +318,9 @@ public class IntegersTest {
 			idx += Integers.writeLong(buffer, idx, expected[i], 8);
 		}
 		for (int i = 0; i < expected.length; i++) {
-			//TODO:Debug
-//			long value = Integers.readLong(buffer, i * 8);
-//			assertEquals("failed to write with K=8", expected[i], value);
+			// TODO:Debug
+			// long value = Integers.readLong(buffer, i * 8);
+			// assertEquals("failed to write with K=8", expected[i], value);
 		}
 
 		for (int k = MAX_SIZE; k < MIN_SIZE; k--) {
@@ -345,7 +345,7 @@ public class IntegersTest {
 		assertArrayEquals(original, single);
 
 		// broken test
-		//TODO:Debug
+		// TODO:Debug
 		// int[] expected = new int[] { 0, 1, -1, 256, -256, 65793, -65793 };
 		// byte[] buffer = new byte[3 * expected.length];
 		// int idx = 0;
@@ -461,14 +461,18 @@ public class IntegersTest {
 		Integers.writeShort(expShort, 0, (short) l);
 		Integers.writeInt(expInt, 0, (int) l);
 		Integers.writeInt(expInt24, 0, (int) l);
-		Integers.writeLong(expLong, 0, l,8);
+		Integers.writeLong(expLong, 0, l, 8);
 		assertArrayEquals(expInt24, expInt);
 		assertArrayEquals(expLong, expInt);
-		//TODO:Debug
-//		for (int i = 5; i <= 8; i++) {
-//			Integers.writeLong(expVarLong, 0, l, i);
-//			assertArrayEquals(expVarLong, expInt);
-//		}
+		Integers.writeLong(expVarLong, 0, l, 8);
+		for (int i = 1; i <= 8; i++) {
+
+			byte[] extractedExpectedInt = Arrays.copyOfRange(expInt,
+					expInt.length - i, expInt.length);
+			byte[] extractedExpectedLong = Arrays.copyOfRange(expVarLong,
+					expVarLong.length - i, expVarLong.length);
+			assertArrayEquals(extractedExpectedLong, extractedExpectedInt);
+		}
 		assertArrayEquals(expShort, expInt);
 	}
 
@@ -486,8 +490,9 @@ public class IntegersTest {
 		for (int i = 1; i <= 8; i++) {
 			byte[] test = new byte[i];
 			Integers.writeLong(test, 0, l, i);
-			byte[] extractedExpected = Arrays.copyOfRange(expected, expected.length-i, expected.length);
-			assertArrayEquals(extractedExpected , test);
+			byte[] extractedExpected = Arrays.copyOfRange(expected,
+					expected.length - i, expected.length);
+			assertArrayEquals(extractedExpected, test);
 		}
 	}
 
