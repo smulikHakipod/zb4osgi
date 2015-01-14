@@ -426,12 +426,29 @@ public class Integers {
 	}
 
 	public static long readLong(byte[] src, int pos, int size) {
-		long val = 0;
-		for (int i = size - 1; i > -1; i--) {
-			val = (src[pos + i] & 0x00000000000000FF) + (val << 8);
+
+		byte[] resultByteArray = new byte[8];
+		ByteBuffer bb = ByteBuffer.wrap(src, pos, size);
+
+		for (int i = 0; i < size; i++)
+
+		{
+			byte temp = bb.get();
+			resultByteArray[size - i - 1] = temp;
 
 		}
-		return val;
+
+		ByteBuffer buffer = ByteBuffer.wrap(resultByteArray).order(
+				ByteOrder.LITTLE_ENDIAN);
+		return buffer.getLong();
+
+		//
+		// long val = 0;
+		// for (int i = size - 1; i > -1; i--) {
+		// val = (src[pos + i] & 0x00000000000000FF) + (val << 8);
+		//
+		// }
+		// return val;
 
 	}
 
@@ -455,10 +472,10 @@ public class Integers {
 
 		int[] buffer = new int[3];
 		ByteBuffer b = ByteBuffer.wrap(src);
-		buffer[0] = b.get(pos+2);
-		buffer[1] = b.get(pos+1);
+		buffer[0] = b.get(pos + 2);
+		buffer[1] = b.get(pos + 1);
 		buffer[2] = b.get(pos);
-			
+
 		int result = ((buffer[0] << 24) | (buffer[1] << 16) | (buffer[2] << 8)) >> 8;
 
 		return result;
@@ -478,17 +495,15 @@ public class Integers {
 	 * @since 0.2.0
 	 */
 	public static int writeInt24bit(byte[] dest, int pos, int data) {
-		
-		
+
 		ByteBuffer b = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN);
-		b.putInt(data);		
-		byte[] result = b.array();		
-		
-		
-		 dest[pos] = (byte) ((result[1] & 0xFF0000) >> 16);
-	        dest[pos + 1] = (byte) ((result[2] & 0x00FF00) >> 8);
-	        dest[pos + 2] = (byte) ((result[3] & 0x0000FF));
-	    
+		b.putInt(data);
+		byte[] result = b.array();
+
+		dest[pos] = (byte) ((result[1] & 0xFF0000) >> 16);
+		dest[pos + 1] = (byte) ((result[2] & 0x00FF00) >> 8);
+		dest[pos + 2] = (byte) ((result[3] & 0x0000FF));
+
 		return 3;
 	}
 
