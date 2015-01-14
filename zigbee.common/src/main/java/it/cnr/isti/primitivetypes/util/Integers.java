@@ -354,19 +354,16 @@ public class Integers {
 	}
 
 	final public static int writeInt(byte[] dest, int pos, int data) {
-		
-		
-		ByteBuffer.wrap(dest, pos, 4)
-				.order(ByteOrder.LITTLE_ENDIAN).putInt(data);
+
+		ByteBuffer.wrap(dest, pos, 4).order(ByteOrder.LITTLE_ENDIAN)
+				.putInt(data);
 		return 4;
-		
+
 		/*
-		dest[pos + 3] = (byte) (data >> 24);
-		dest[pos + 2] = (byte) ((data << 8) >> 24);
-		dest[pos + 1] = (byte) ((data << 16) >> 24);
-		dest[pos + 0] = (byte) ((data << 24) >> 24);
-		return 4;
-		*/
+		 * dest[pos + 3] = (byte) (data >> 24); dest[pos + 2] = (byte) ((data <<
+		 * 8) >> 24); dest[pos + 1] = (byte) ((data << 16) >> 24); dest[pos + 0]
+		 * = (byte) ((data << 24) >> 24); return 4;
+		 */
 	}
 
 	final public static int writeLongObject(byte[] dest, int pos, Long data) {
@@ -375,7 +372,7 @@ public class Integers {
 
 	final public static int writeLong(byte[] dest, int pos, long data, int size) {
 		long val = 0;
-		for (int i = size-1; i > -1; i--) {
+		for (int i = size - 1; i > -1; i--) {
 			dest[pos + i] = (byte) (data >> 56);
 			data = data << 8;
 		}
@@ -383,15 +380,8 @@ public class Integers {
 	}
 
 	final public static int writeLong(byte[] dest, int pos, long data) {
-		dest[pos] = (byte) (data >> 56);
-		dest[pos + 1] = (byte) ((data << 8) >> 56);
-		dest[pos + 2] = (byte) ((data << 16) >> 56);
-		dest[pos + 3] = (byte) ((data << 24) >> 56);
-		dest[pos + 4] = (byte) ((data << 32) >> 56);
-		dest[pos + 5] = (byte) ((data << 40) >> 56);
-		dest[pos + 6] = (byte) ((data << 48) >> 56);
-		dest[pos + 7] = (byte) ((data << 56) >> 56);
-		return 8;
+		return writeLong(dest, pos, data, 8);
+
 	}
 
 	public static Object readBooleanObject(byte[] src, int pos) {
