@@ -318,9 +318,9 @@ public class IntegersTest {
 			idx += Integers.writeLong(buffer, idx, expected[i], 8);
 		}
 		for (int i = 0; i < expected.length; i++) {
-			// TODO:Debug
-			// long value = Integers.readLong(buffer, i * 8);
-			// assertEquals("failed to write with K=8", expected[i], value);
+			
+		 long value = Integers.readLong(buffer, i * 8);
+		 assertEquals("failed to write with K=8", expected[i], value);
 		}
 
 		for (int k = MAX_SIZE; k < MIN_SIZE; k--) {
@@ -506,13 +506,7 @@ public class IntegersTest {
 		// checking full 8 bytes write
 		Integers.writeLong(test64, 0, l, 8);
 		assertArrayEquals(expected, test64);
-
-		// checking partial writes
-		// byte[] test = new byte[1];
-		// byte[] partial = new byte[]{expected[7]};
-		// Integers.writeLong(test, 0, l, 1);
-		// assertArrayEquals(partial, test);
-
+		
 		// checking partial write
 		for (int i = 1; i <= 8; i++) {
 			byte[] test = new byte[i];

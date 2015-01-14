@@ -433,21 +433,16 @@ public class Integers {
 
 	public static long readLong(byte[] src, int pos, int size) {
 		long val = 0;
-		for (int i = 0; i < size; i++) {
+		for (int i = size - 1; i > -1; i--) {
 			val = (src[pos + i] & 0x00000000000000FF) + (val << 8);
+
 		}
 		return val;
+
 	}
 
 	public static long readLong(byte[] src, int pos) {
-		return ((long) (src[pos] & 0x00000000000000FF) << 56)
-				+ ((long) (src[pos + 1] & 0x00000000000000FF) << 48)
-				+ ((long) (src[pos + 2] & 0x00000000000000FF) << 40)
-				+ ((long) (src[pos + 3] & 0x00000000000000FF) << 32)
-				+ ((long) (src[pos + 4] & 0x00000000000000FF) << 24)
-				+ ((long) (src[pos + 5] & 0x00000000000000FF) << 16)
-				+ ((long) (src[pos + 6] & 0x00000000000000FF) << 8)
-				+ ((long) (src[pos + 7] & 0x00000000000000FF));
+		return readLong(src, pos, 8);
 
 	}
 
