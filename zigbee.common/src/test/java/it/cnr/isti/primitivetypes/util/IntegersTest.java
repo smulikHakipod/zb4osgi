@@ -29,6 +29,8 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -348,8 +350,8 @@ public class IntegersTest {
 			idx += Integers.writeInt24bit(buffer, idx, expected[i]);
 		}
 		for (int i = 0; i < expected.length; i++) {
-	//		int value = Integers.readInt24bit(buffer, i * 3);
-	//		assertEquals(expected[i], value);
+			// int value = Integers.readInt24bit(buffer, i * 3);
+			// assertEquals(expected[i], value);
 		}
 
 	}
@@ -446,29 +448,64 @@ public class IntegersTest {
 	}
 
 	@Test
-	public void testShortIntLongToBytes() {
-		long l = 0x1234L;
-		byte[] expShort = new byte[8];
-		byte[] expInt24 = new byte[8];
-		byte[] expInt = new byte[8];
-		byte[] expLong = new byte[8];
-		byte[] expVarLong = new byte[8];
-		Integers.writeShort(expShort, 0, (short) l);
-		Integers.writeInt(expInt, 0, (int) l);
-		Integers.writeInt(expInt24, 0, (int) l);
-		Integers.writeLong(expLong, 0, l, 8);
-		assertArrayEquals(expInt24, expInt);
-		assertArrayEquals(expLong, expInt);
-		Integers.writeLong(expVarLong, 0, l, 8);
-		for (int i = 1; i <= 8; i++) {
+	public void testSerializeAndDeserialize() {
 
-			byte[] extractedExpectedInt = Arrays.copyOfRange(expInt,
-					expInt.length - i, expInt.length);
-			byte[] extractedExpectedLong = Arrays.copyOfRange(expVarLong,
-					expVarLong.length - i, expVarLong.length);
-			assertArrayEquals(extractedExpectedLong, extractedExpectedInt);
-		}
-		assertArrayEquals(expShort, expInt);
+		long originalNumber8bit = 0x12;
+		long originalNumber16bit = 0x1234;
+		long originalNumber24bit = 0x123456;
+		long originalNumber32bit = 0x12345678;
+		long originalNumber40bit = 0x1234567890L;
+		long originalNumber48bit = 0x1234567890ABL;
+		long originalNumber56bit = 0x1234567890ABCDL;
+		long originalNumber64bit = 0x1234567890ABCDEFL;
+
+		// 1 byte array for short number representation
+		byte[] byteRepresentation = new byte[1];
+		// 2 byte array for short number representation
+		byte[] shortRepresentation = new byte[2];
+		// 3 byte array for short number representation
+		byte[] int24Representation = new byte[3];
+		// 4 byte array for short number representation
+		byte[] intRepresentation = new byte[4];
+		// 5 byte array for 40 long number representation
+		byte[] long40Representation = new byte[5];
+		// 6 byte array for 48 long number representation
+		byte[] long48Representation = new byte[6];
+		// 7 byte array for 56 long number representation
+		byte[] long56Representation = new byte[7];
+		// 8 byte array for 64 long number representation
+		byte[] long64Representation = new byte[8];
+
+		// filling respective arrays with "LITTLE ENDIAN" representation
+		Integers.writeByte(byteRepresentation, 0, (byte) originalNumber8bit);
+		Integers.writeShort(shortRepresentation, 0, (short) originalNumber16bit);
+		Integers.writeInt24bit(int24Representation, 0,
+				(int) originalNumber24bit);
+		Integers.writeInt(intRepresentation, 0, (int) originalNumber32bit);
+		Integers.writeLong(long40Representation, 0, originalNumber40bit, 5);
+		Integers.writeLong(long48Representation, 0, originalNumber48bit, 6);
+		Integers.writeLong(long56Representation, 0, originalNumber56bit, 7);
+		Integers.writeLong(long64Representation, 0, originalNumber64bit, 8);
+
+		// reading from earlier filled arrays and storing in a java type
+		byte readByte = Integers.readByte(byteRepresentation, 0);
+		short readShort = Integers.readShort(shortRepresentation, 0);
+		int readInt24bit = Integers.readInt24bit(int24Representation, 0);
+		int readInt = (int) Integers.readLong(intRepresentation, 0, 4);
+		long read40Long = Integers.readLong(long40Representation, 0, 5);
+		long read48Long = Integers.readLong(long48Representation, 0, 6);
+		long read56Long = Integers.readLong(long56Representation, 0, 7);
+		long read64Long = Integers.readLong(long64Representation, 0, 8);
+
+		assertEquals(originalNumber8bit, readByte);
+		assertEquals(originalNumber16bit, readShort);
+		assertEquals(originalNumber24bit, readInt24bit);
+		assertEquals(originalNumber32bit, readInt);
+		assertEquals(originalNumber40bit, read40Long);
+		assertEquals(originalNumber48bit, read48Long);
+		assertEquals(originalNumber56bit, read56Long);
+		assertEquals(originalNumber64bit, read64Long);
+
 	}
 
 	@Test
@@ -485,9 +522,7 @@ public class IntegersTest {
 		for (int i = 1; i <= 8; i++) {
 			byte[] test = new byte[i];
 			Integers.writeLong(test, 0, l, i);
-			byte[] extractedExpected = Arrays.copyOfRange(expected,
-					expected.length - i, expected.length);
-			assertArrayEquals(extractedExpected, test);
+			assertArrayEquals(Arrays.copyOfRange(expected, 0, i), test);
 		}
 	}
 
@@ -502,15 +537,32 @@ public class IntegersTest {
 		Integers.writeLong(test64, 0, l, 8);
 		assertArrayEquals(expected, test64);
 
-		// checking partial write
+		// checking partial writes
 		for (int i = 1; i <= 8; i++) {
 			byte[] test = new byte[i];
 			Integers.writeLong(test, 0, l, i);
-			byte[] extractedExpected = Arrays.copyOfRange(expected,
-					expected.length - i, expected.length);
-			assertArrayEquals(extractedExpected, test);
+			assertArrayEquals(Arrays.copyOfRange(expected, 0, i), test);
 		}
-
 	}
 
+	public void testShortIntLongToBytes() {
+		long l = 0x1234;
+		byte[] expShort = new byte[8];
+		byte[] expInt24 = new byte[8];
+		byte[] expInt = new byte[8];
+		byte[] expLong = new byte[8];
+		Integers.writeShort(expShort, 6, (short) l);
+		Integers.writeInt(expInt, 4, (int) l);
+		Integers.writeInt(expInt24, 4, (int) l);
+		Integers.writeLong(expLong, 0, l);
+		assertArrayEquals(expInt24, expInt);
+		assertArrayEquals(expLong, expInt);
+		for (int i = 5; i <= 8; i++) {
+			expLong[0] = 0;
+			expLong[1] = 0;
+			Integers.writeLong(expLong, (8 - i), l, i);
+			assertArrayEquals(expLong, expInt);
+		}
+		assertArrayEquals(expShort, expInt);
+	}
 }

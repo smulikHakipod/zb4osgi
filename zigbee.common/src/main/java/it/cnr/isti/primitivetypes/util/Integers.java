@@ -365,11 +365,16 @@ public class Integers {
 	}
 
 	final public static int writeLong(byte[] dest, int pos, long data, int size) {
-		long val = 0;
-		for (int i = size - 1; i > -1; i--) {
-			dest[pos + i] = (byte) (data >> 56);
-			data = data << 8;
+
+		ByteBuffer bb = ByteBuffer.wrap(dest, pos, size);
+		byte[] bytes = ByteBuffer.allocate(8).putLong(data).array();
+		for (int i = 0; i < size; i++)
+
+		{
+			bb.put(i + pos, bytes[8 - 1 - i]);
+
 		}
+
 		return size;
 	}
 
@@ -434,21 +439,12 @@ public class Integers {
 
 		{
 			byte temp = bb.get();
-			resultByteArray[size - i - 1] = temp;
+			resultByteArray[8 - i - 1] = temp;
 
 		}
 
-		ByteBuffer buffer = ByteBuffer.wrap(resultByteArray).order(
-				ByteOrder.LITTLE_ENDIAN);
+		ByteBuffer buffer = ByteBuffer.wrap(resultByteArray);
 		return buffer.getLong();
-
-		//
-		// long val = 0;
-		// for (int i = size - 1; i > -1; i--) {
-		// val = (src[pos + i] & 0x00000000000000FF) + (val << 8);
-		//
-		// }
-		// return val;
 
 	}
 
@@ -500,9 +496,9 @@ public class Integers {
 		b.putInt(data);
 		byte[] result = b.array();
 
-		dest[pos] = (byte) ((result[1] & 0xFF0000) >> 16);
-		dest[pos + 1] = (byte) ((result[2] & 0x00FF00) >> 8);
-		dest[pos + 2] = (byte) ((result[3] & 0x0000FF));
+		dest[pos] = (byte) ((result[0]));
+		dest[pos + 1] = (byte) ((result[1]));
+		dest[pos + 2] = (byte) ((result[2]));
 
 		return 3;
 	}
@@ -515,4 +511,5 @@ public class Integers {
 		dest[pos + 3] = (byte) ((bits >> 24) & 0xff);
 		return 4;
 	}
+
 }
