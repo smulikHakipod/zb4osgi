@@ -491,7 +491,7 @@ public class IntegersTest {
 		byte readByte = Integers.readByte(byteRepresentation, 0);
 		short readShort = Integers.readShort(shortRepresentation, 0);
 		int readInt24bit = Integers.readInt24bit(int24Representation, 0);
-		int readInt = (int) Integers.readLong(intRepresentation, 0, 4);
+		int readInt = Integers.readInt(intRepresentation, 0);
 		long read40Long = Integers.readLong(long40Representation, 0, 5);
 		long read48Long = Integers.readLong(long48Representation, 0, 6);
 		long read56Long = Integers.readLong(long56Representation, 0, 7);
