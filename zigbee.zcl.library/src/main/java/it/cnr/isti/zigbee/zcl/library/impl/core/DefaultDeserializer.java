@@ -162,8 +162,19 @@ public class DefaultDeserializer implements ZBDeserializer {
 	}
 
 	public float readSinglePrecision() {
+
+		float result = ByteBuffer
+				.wrap(payload, index, ZigBeeType.SinglePrecision.getLength())
+				.order(ByteOrder.LITTLE_ENDIAN).getFloat();
+		index += 4;
+		return result;
+	
+	}
+
+	public float readSemiPrecision() {
 		throw new UnsupportedOperationException(
 				"readSinglePrecision:Please implement it");
+
 		/*
 		 * The fowllowing code was proposed as solution for converting
 		 * semi-precision but it will always the BufferUnderflowException
@@ -176,19 +187,10 @@ public class DefaultDeserializer implements ZBDeserializer {
 		 * 
 		 * 
 		 * float result = ByteBuffer .wrap(payload, index,
-		 * ZigBeeType.SinglePrecision.getLength())
-		 * .order(ByteOrder.LITTLE_ENDIAN).getFloat(); index += 4; return
+		 * ZigBeeType.SemiPrecision.getLength())
+		 * .order(ByteOrder.LITTLE_ENDIAN).getFloat(); index += 2; return
 		 * result;
 		 */
-	}
-
-	public float readSemiPrecision() {
-
-		float result = ByteBuffer
-				.wrap(payload, index, ZigBeeType.SemiPrecision.getLength())
-				.order(ByteOrder.LITTLE_ENDIAN).getFloat();
-		index += 2;
-		return result;
 
 	}
 
