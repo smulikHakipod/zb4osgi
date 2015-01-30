@@ -68,7 +68,7 @@
 	</feature>
 	
 	<feature name="zb4o-rxtx" version="${project.version}">
-		<bundle>mvn:org.aaloa.zb4osgi.bundle/org.aaloa.zb4osgi.externals.rxtx/2.1.7-1-SNAPSHOT
+		<bundle>mvn:org.aaloa.zb4osgi.bundle/org.aaloa.zb4osgi.externals.rxtx/2.1.7-2
 		</bundle>
 	</feature>
 </features>
