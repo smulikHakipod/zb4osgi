@@ -168,12 +168,12 @@ public class DefaultDeserializer implements ZBDeserializer {
 				.order(ByteOrder.LITTLE_ENDIAN).getFloat();
 		index += 4;
 		return result;
-	
+
 	}
 
 	public float readSemiPrecision() {
 		throw new UnsupportedOperationException(
-				"readSinglePrecision:Please implement it");
+				"ReadSemiPrecision: Please implement it!!!!!");
 
 		/*
 		 * The fowllowing code was proposed as solution for converting
