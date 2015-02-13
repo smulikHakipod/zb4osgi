@@ -4,53 +4,53 @@
 		<!-- Deps -->
 		<bundle>wrap:mvn:net.sf.trove4j/trove4j/2.1.0</bundle>
 		<!-- ZB4O modules -->
-		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.common/0.6.0-SNAPSHOT
+		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.common/${project.version}
 		</bundle>
-		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.basedriver.api/0.7.0-SNAPSHOT
+		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.basedriver.api/${project.version}
 		</bundle>
-		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.basedriver/0.8.0-SNAPSHOT
+		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.basedriver/${project.version}
 		</bundle>
-		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.ha.driver/0.8.0-SNAPSHOT
+		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.ha.driver/${project.version}
 		</bundle>
-		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.hc.driver/0.1.0-SNAPSHOT
+		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.hc.driver/${project.version}
 		</bundle>
-		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.eh.driver/0.1.0-SNAPSHOT
+		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.eh.driver/${project.version}
 		</bundle>
-		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.zcl.library/0.9.0-SNAPSHOT
+		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.zcl.library/${project.version}
 		</bundle>
-		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.zhccl.library/0.1.0-SNAPSHOT
+		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.zhccl.library/${project.version}
 		</bundle>
-		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.se.zcl.library/0.1.0-SNAPSHOT
+		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.se.zcl.library/${project.version}
 		</bundle>
-		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.eh.zcl.library/0.1.0-SNAPSHOT
+		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.eh.zcl.library/${project.version}
 		</bundle>
-		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.cc2480.datalink/0.9.0-SNAPSHOT
+		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.cc2480.datalink/${project.version}
 		</bundle>
-		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.dongle.api/0.8.0-SNAPSHOT
+		<bundle>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.dongle.api/${project.version}
 		</bundle>
 	</feature>
 	<feature name="zb4o-driver-stub" version="${project.version}"> <!-- OK -->
 		<feature version="${project.version}">zb4o-base</feature>
 		<feature version="${project.version}">zb4o-tester</feature>
-		<bundle start='false'>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.basedriver.stub/0.2.0-SNAPSHOT
+		<bundle start='false'>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.basedriver.stub/${project.version}
 		</bundle>
 	</feature>
 	<feature name="zb4o-driver-CC2530" version="${project.version}">
 		<feature version="${project.version}">zb4o-base</feature>
 		<feature version="${project.version}">zb4o-rxtx</feature>
-		<bundle start='false'>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.CC2530.driver/0.3.0-SNAPSHOT
+		<bundle start='false'>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.CC2530.driver/${project.version}
 		</bundle>
 
 	</feature>
 	<feature name="zb4o-driver-EZ430" version="${project.version}">
 		<feature version="${project.version}">zb4o-base</feature>
 		<feature version="${project.version}">zb4o-rxtx</feature>
-		<bundle start='false'>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.ez430-rf2480.driver/0.8.0-SNAPSHOT
+		<bundle start='false'>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.ez430-rf2480.driver/${project.version}
 		</bundle>
 	</feature>
 	<feature name="zb4o-tester" version="${project.version}">
 		<feature version="${project.version}">zb4o-base</feature>
-		<bundle start='true'>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.tester/0.5.0-SNAPSHOT
+		<bundle start='true'>mvn:org.aaloa.zb4osgi/org.aaloa.zb4osgi.zigbee.tester/${project.version}
 		</bundle>
 	</feature>
 	<feature name="zb4o" version="${project.version}">
@@ -68,7 +68,7 @@
 	</feature>
 	
 	<feature name="zb4o-rxtx" version="${project.version}">
-		<bundle>mvn:org.aaloa.zb4osgi.bundle/org.aaloa.zb4osgi.externals.rxtx/2.1.7-2
+		<bundle>mvn:org.aaloa.zb4osgi.bundle/org.aaloa.zb4osgi.externals.rxtx/${project.version}
 		</bundle>
 	</feature>
 </features>

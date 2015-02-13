@@ -202,7 +202,8 @@ public class ZToolPacketStream
         return response;
     }
 
-    public ZToolPacket parsePacket()
+    @SuppressWarnings("unused")
+	public ZToolPacket parsePacket()
         throws IOException {
 
         ErrorType error = null;

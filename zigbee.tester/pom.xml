@@ -15,7 +15,7 @@
 	<parent>
 		<groupId>org.aaloa.zb4osgi</groupId>
 		<artifactId>org.aaloa.zb4osgi.pom</artifactId>
-		<version>10-SNAPSHOT</version>
+		<version>1.0.0</version>
 		<relativePath>../pom/pom.xml</relativePath>
 	</parent>
 
@@ -23,7 +23,7 @@
 
 
 	<artifactId>org.aaloa.zb4osgi.zigbee.tester</artifactId>
-	<version>0.5.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>bundle</packaging>
 
 	<name>Zigbee Tester</name>
@@ -65,8 +65,15 @@
 			<organizationUrl>http://www.isti.cnr.it/</organizationUrl>
 			<timezone>+1</timezone>
 		</developer>
+		<developer>
+			<id>giancarlo.riolo</id>
+			<name>Giancarlo Riolo</name>
+			<email>giancarlo.riolo@isti.cnr.it</email>
+			<organization>Institute of Information Science and Technologies of the Italian National Research Council</organization>
+			<organizationUrl>http://www.isti.cnr.it/</organizationUrl>
+			<timezone>+1</timezone>
+		</developer>
 	</developers>
-
 	<scm>
 		<connection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.tester</connection>
 		<developerConnection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.tester</developerConnection>
@@ -88,7 +95,8 @@
       Stefano "Kismet" Lenzi <stefano.lenzi@isti.cnr.it>
             ]]></Bundle-Author>
 						<Bundle-Description>
-							OSGi Generic Control Point to control ZigBeeDevice services
+							OSGi Generic Control Point to control
+							ZigBeeDevice services
 						</Bundle-Description>
 						<Bundle-SymbolicName>org.aal-persona.zigbee.tester</Bundle-SymbolicName>
 						<Bundle-Activator>org.persona.zigbee.tester.Activator</Bundle-Activator>

@@ -16,7 +16,7 @@
 	<groupId>org.aaloa.zb4osgi</groupId>
 	<artifactId>org.aaloa.zb4osgi.pom</artifactId>
 	<packaging>pom</packaging>
-	<version>10-SNAPSHOT</version>
+	<version>1.0.0</version>
 
 	<name>Suite of bundle for integrating ZigBee device in OSGi</name>
 	<url>http://zb4osgi.aaloa.org/</url>
@@ -191,61 +191,61 @@
 			<dependency>
 				<groupId>org.aaloa.zb4osgi.bundle</groupId>
 				<artifactId>org.aaloa.zb4osgi.externals.rxtx</artifactId>
-				<version>2.1.7-2</version>
+				<version>${project.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.aaloa.zb4osgi</groupId>
 				<artifactId>org.aaloa.zb4osgi.zigbee.common</artifactId>
-				<version>0.6.0-SNAPSHOT</version>
+				<version>${project.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.aaloa.zb4osgi</groupId>
 				<artifactId>org.aaloa.zb4osgi.zigbee.basedriver.api</artifactId>
-				<version>0.7.0-SNAPSHOT</version>
+				<version>${project.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.aaloa.zb4osgi</groupId>
 				<artifactId>org.aaloa.zb4osgi.zigbee.dongle.api</artifactId>
-				<version>0.8.0-SNAPSHOT</version>
+				<version>${project.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.aaloa.zb4osgi</groupId>
 				<artifactId>org.aaloa.zb4osgi.zigbee.cc2480.datalink</artifactId>
-				<version>0.9.0-SNAPSHOT</version>
+				<version>${project.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.aaloa.zb4osgi</groupId>
 				<artifactId>org.aaloa.zb4osgi.zigbee.zcl.library</artifactId>
-				<version>0.9.0-SNAPSHOT</version>
+				<version>${project.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.aaloa.zb4osgi</groupId>
 				<artifactId>org.aaloa.zb4osgi.zigbee.ha.driver</artifactId>
-				<version>0.8.0-SNAPSHOT</version>
+				<version>${project.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.aaloa.zb4osgi</groupId>
 				<artifactId>org.aaloa.zb4osgi.zigbee.eh.driver</artifactId>
-				<version>0.8.0-SNAPSHOT</version>
+				<version>${project.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.aaloa.zb4osgi</groupId>
 				<artifactId>org.aaloa.zb4osgi.zigbee.eh.zcl.library</artifactId>
-				<version>0.1.0-SNAPSHOT</version>
+				<version>${project.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.aaloa.zb4osgi</groupId>
 				<artifactId>org.aaloa.zb4osgi.zigbee.se.zcl.library</artifactId>
-				<version>0.1.0-SNAPSHOT</version>
+				<version>${project.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
@@ -253,12 +253,6 @@
 				<artifactId>trove4j</artifactId>
 				<version>2.1.0</version>
 			</dependency>
-			<!-- <scope>provided</scope> -->
-
-			<!-- WRAPPED BUNDLE -->
-			<!--<dependency> <groupId>org.aaloa.zb4osgi.bundle</groupId> <artifactId>org.aaloa.zb4osgi.bundle.net.sf.trove4j</artifactId> 
-				<version>2.0.4-1</version> <scope>provided</scope> </dependency> -->
-
 			<!-- OSGi Runtime -->
 			<dependency>
 				<groupId>org.ops4j.pax.logging</groupId>
@@ -310,6 +304,12 @@
 				<version>3.2</version>
 				<scope>test</scope>
 			</dependency>
+			<dependency>
+	<groupId>org.codehaus.mojo</groupId>
+	<artifactId>license-maven-plugin</artifactId>
+	<version>1.8</version>
+</dependency>
+			
 		</dependencies>
 	</dependencyManagement>
 

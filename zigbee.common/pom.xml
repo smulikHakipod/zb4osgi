@@ -16,13 +16,13 @@
   <parent>
     <groupId>org.aaloa.zb4osgi</groupId>
     <artifactId>org.aaloa.zb4osgi.pom</artifactId>
-    <version>10-SNAPSHOT</version>
+    <version>1.0.0</version>
     <relativePath>../pom/pom.xml</relativePath>
   </parent>
 
 
   <artifactId>org.aaloa.zb4osgi.zigbee.common</artifactId>
-  <version>0.6.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <packaging>bundle</packaging>
 
   <name>OSGi and Primitive Types Utility</name>
