@@ -1,0 +1,41 @@
+#
+# PAX-RUNNER OPTIONS
+#
+--profiles=log,config
+--executor=script
+--org.ops4j.pax.runner.platform.downloadFeedback=false
+--vmOptions= -Xdebug  -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005 -Dgnu.io.rxtx.SerialPorts=/dev/ttyACM0:/dev/ttyUSB0:/dev/ttyUSB1:/dev/ttyUSB2:/dev/ttyUSB3
+
+#
+# BUNDLE LIST
+#
+
+# OSGi Tool 
+mvn:org.apache.felix/org.apache.felix.configadmin/1.2.4
+mvn:org.ops4j.pax.confman/pax-confman-propsloader/0.2.3
+mvn:org.apache.felix/org.apache.felix.fileinstall/3.4.2
+mvn:org.osgi/org.osgi.compendium/4.2.0
+
+
+# ZigBee Stack General Dependencies & Tool
+mvn:org.aaloa.zb4o/externals-rxtx/1.0.0
+wrap:mvn:net.sf.trove4j/trove4j/2.1.0
+
+# ZigBee Hardware Access Layer 
+mvn:org.aaloa.zb4o/zb4o-dongle-api/1.0.0
+mvn:org.aaloa.zb4o/zb4o-cc2530-driver/1.0.0@nostart
+mvn:org.aaloa.zb4o/zb4o-ez430-rf2480-driver/1.0.0@nostart
+mvn:org.aaloa.zb4o/zb4o-cc2480-datalink/1.0.0
+mvn:org.aaloa.zb4o/zb4o-common/1.0.0
+
+# ZigBee Base Driver 
+mvn:org.aaloa.zb4o/zb4o-basedriver/1.0.0
+mvn:org.aaloa.zb4o/zb4o-basedriver-stub/1.0.0@nostart
+
+# ZigBee Refinement Architecture 
+mvn:org.aaloa.zb4o/zb4o-ha-driver/1.0.0
+mvn:org.aaloa.zb4o/zb4o-hc-driver/1.0.0
+mvn:org.aaloa.zb4o/zb4o-eh-driver/1.0.0
+mvn:org.aaloa.zb4o/zb4o-hc-zcl-library/1.0.0
+mvn:org.aaloa.zb4o/zb4o-se-zcl-library/1.0.0
+mvn:org.aaloa.zb4o/zb4o-eh-zcl-library/1.0.0
