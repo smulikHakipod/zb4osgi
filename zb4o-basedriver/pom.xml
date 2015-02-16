@@ -86,9 +86,9 @@
 	</developers>
 
 	<scm>
-		<connection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.basedriver</connection>
-		<developerConnection>scm:svn:svn://svn.aaloa.org/projects/zb4osgi/trunk/zigbee.basedriver</developerConnection>
-		<url>http://zb4osgi.aaloa.org/projects/zb4osgi/repository/show/trunk/zigbee.basedriver</url>
+		<connection>scm:svn:https://svn.aaloa.org/projects/zb4osgi/releases/zb4o-builder-1.0.0/zigbee.basedriver</connection>
+		<developerConnection>scm:svn:https://svn.aaloa.org/projects/zb4osgi/releases/zb4o-builder-1.0.0/zigbee.basedriver</developerConnection>
+		<url>scm:svn:https://svn.aaloa.org/projects/zb4osgi/releases/zb4o-builder-1.0.0/zigbee.basedriver</url>
 	</scm>
 
 	<repositories>
