@@ -15,7 +15,7 @@
 	<parent>
 		<groupId>org.aaloa.zb4o</groupId>
 		<artifactId>pom</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1-SNAPSHOT</version>
 		<relativePath>../pom/pom.xml</relativePath>
 	</parent>
 
@@ -160,5 +160,5 @@
 		</plugins>
 	</reporting>
 
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 </project>

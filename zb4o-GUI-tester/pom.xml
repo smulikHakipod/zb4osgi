@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.aaloa.zb4o</groupId>
 		<artifactId>pom</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1-SNAPSHOT</version>
 		<relativePath>../pom/pom.xml</relativePath>
 	</parent>
 
@@ -202,6 +202,6 @@
 	<properties>
 		<bundles.configuration.location>../configurations</bundles.configuration.location>
 	</properties>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 </project>
 
