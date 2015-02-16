@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <features xmlns="http://karaf.apache.org/xmlns/features/v1.2.0"
 	name="zb4o">
 	<feature name="zb4o-base" version="${project.version}">
@@ -20,9 +21,9 @@
 		</bundle>
 		<bundle>mvn:org.aaloa.zb4o/zb4o-hc-zcl-library/${project.version}
 		</bundle>
-		<bundle>mvn:org.aaloa.zb4o/zb4o-se.zcl-library/${project.version}
+		<bundle>mvn:org.aaloa.zb4o/zb4o-se-zcl-library/${project.version}
 		</bundle>
-		<bundle>mvn:org.aaloa.zb4o/zb4o-eh.zcl-library/${project.version}
+		<bundle>mvn:org.aaloa.zb4o/zb4o-eh-zcl-library/${project.version}
 		</bundle>
 		<bundle>mvn:org.aaloa.zb4o/zb4o-cc2480-datalink/${project.version}
 		</bundle>
@@ -31,7 +32,7 @@
 	</feature>
 	<feature name="zb4o-driver-stub" version="${project.version}"> <!-- OK -->
 		<feature version="${project.version}">zb4o-base</feature>
-		<feature version="${project.version}">zb4o-tester</feature>
+		<feature version="${project.version}">zb4o-GUI-tester</feature>
 		<bundle start='false'>mvn:org.aaloa.zb4o/zb4o-basedriver-stub/${project.version}
 		</bundle>
 	</feature>
@@ -54,21 +55,21 @@
 		</bundle>
 	</feature>
 	<feature name="zb4o" version="${project.version}">
-		<feature version="${project.version}">zb4o-base</feature>		
-		<feature version="${project.version}">zb4o-driver-cc2530</feature>		
-		<feature version="${project.version}">zb4o-tester</feature>
+		<feature version="${project.version}">zb4o-base</feature>
+		<feature version="${project.version}">zb4o-driver-cc2530</feature>
+		<feature version="${project.version}">zb4o-GUI-tester</feature>
 	</feature>
-	
+
 	<feature name="zb4o-dev" version="${project.version}">
 		<feature version="${project.version}">zb4o-base</feature>
 		<feature version="${project.version}">zb4o-driver-stub</feature>
 		<feature version="${project.version}">zb4o-driver-cc2530</feature>
 		<feature version="${project.version}">zb4o-driver-ez430</feature>
-		<feature version="${project.version}">zb4o-tester</feature>
+		<feature version="${project.version}">zb4o-GUI-tester</feature>
 	</feature>
-	
+
 	<feature name="zb4o-rxtx" version="${project.version}">
-		<bundle>mvn:org.aaloa.zb4o/externals.rxtx/${project.version}
+		<bundle>mvn:org.aaloa.zb4o/externals-rxtx/${project.version}
 		</bundle>
 	</feature>
 </features>
