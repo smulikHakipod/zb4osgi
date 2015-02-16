@@ -180,4 +180,5 @@ A set of Java classes reppresenting the Smart Energy v.1 ZigBee Cluster library
 			</plugin>
 		</plugins>
 	</reporting>
+	<version>1.0.0</version>
 </project>

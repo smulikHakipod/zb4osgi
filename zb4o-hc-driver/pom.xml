@@ -215,4 +215,5 @@ as defined by the ZigBee OSGi Base Driver, using the OSGi Device Access Specific
 		</plugins>
 	</reporting>
 
+	<version>1.0.0</version>
 </project>

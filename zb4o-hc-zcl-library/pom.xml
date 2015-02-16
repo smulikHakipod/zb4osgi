@@ -187,4 +187,5 @@ A set of Java classes reppresenting the Cluster defined by the ZigBee Health Car
 			</plugin>
 		</plugins>
 	</reporting>
+	<version>1.0.0</version>
 </project>

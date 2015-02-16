@@ -207,4 +207,5 @@ A set of Java classes reppresenting the ZigBee Common Cluster library
 			</plugin>
 		</plugins>
 	</reporting>
+	<version>1.0.0</version>
 </project>

@@ -202,5 +202,6 @@
 	<properties>
 		<bundles.configuration.location>../configurations</bundles.configuration.location>
 	</properties>
+	<version>1.0.0</version>
 </project>
 

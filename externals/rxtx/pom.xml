@@ -117,4 +117,5 @@ on the JAR package of this artifact.
 		<url>scm:svn:https://svn.aaloa.org/projects/zb4osgi/releases/zb4o-builder-1.0.0/bundles/rxtx</url>
 	</scm>
 
+	<version>1.0.0</version>
 </project>
