@@ -4,12 +4,12 @@
 	<parent>
 		<groupId>org.aaloa.zb4o</groupId>
 		<artifactId>pom</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.0.0</version>
 		<relativePath>../pom/pom.xml</relativePath>
 	</parent>
 
 	<artifactId>zb4o-features</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.0</version>
 	<name>Karaf Features</name>
 	<packaging>pom</packaging>
 
