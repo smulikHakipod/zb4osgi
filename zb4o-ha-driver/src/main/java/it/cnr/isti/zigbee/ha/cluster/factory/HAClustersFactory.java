@@ -134,8 +134,11 @@ public class HAClustersFactory extends ClusterFactoryBase {
     final static String METER_IDENTIFICATION_KEY = HAProfile.ID + ":"+ HAProfile.METER_IDENTIFICATION;
     final static String POWER_PROFILE_KEY = HAProfile.ID + ":"+ HAProfile.POWER_PROFILE;
    
-	//debug
+  //debug
     final static String DEBUG_KEY = HAProfile.ID + ":"+ HAProfile.DEBUG;
+    
+  //proprietary
+    final static String PROPRIETARY_KEY = HAProfile.ID + ":"+ HAProfile.PROPRIETARY;
     
     public HAClustersFactory(BundleContext ctx){
         super(ctx);

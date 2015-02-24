@@ -22,7 +22,6 @@
 
 package it.cnr.isti.zigbee.ha.driver.core;
 
-
 import it.cnr.isti.zigbee.eh.zcl.library.api.ApplianceControl;
 import it.cnr.isti.zigbee.eh.zcl.library.api.ApplianceEventsAndAlert;
 import it.cnr.isti.zigbee.eh.zcl.library.api.ApplianceIdentification;
@@ -69,6 +68,7 @@ import it.cnr.isti.zigbee.zcl.library.api.general.OnOff;
 import it.cnr.isti.zigbee.zcl.library.api.general.OnOffSwitchConfiguration;
 import it.cnr.isti.zigbee.zcl.library.api.general.Partition;
 import it.cnr.isti.zigbee.zcl.library.api.general.PowerConfiguration;
+import it.cnr.isti.zigbee.zcl.library.api.general.Proprietary;
 import it.cnr.isti.zigbee.zcl.library.api.general.Scenes;
 import it.cnr.isti.zigbee.zcl.library.api.general.Time;
 import it.cnr.isti.zigbee.zcl.library.api.lighting.ColorControl;
@@ -83,35 +83,34 @@ import it.cnr.isti.zigbee.zcl.library.api.security_safety.IASACE;
 import it.cnr.isti.zigbee.zcl.library.api.security_safety.IASWD;
 import it.cnr.isti.zigbee.zcl.library.api.security_safety.IASZone;
 
-
-
 /**
  * @author <a href="mailto:stefano.lenzi@isti.cnr.it">Stefano "Kismet" Lenzi</a>
  * @author <a href="mailto:francesco.furfari@isti.cnr.it">Francesco Furfari</a>
  * @author <a href="mailto:giancarlo.riolo@isti.cnr.it">Giancarlo Riolo</a>
  * @author <a href="mailto:h.alink1@chello.nl">Han Alink</a>
- * @version $LastChangedRevision$ ($LastChangedDate$)
+ * @version $LastChangedRevision$ ($LastChangedDate: 2014-12-12 16:08:14
+ *          +0100 (ven, 12 dic 2014) $)
  * @since 0.4.0
  *
  */
-public class  HAProfile {
+public class HAProfile {
 
 	public static final int ID = 260;
 
-	//CLUSTERS
-	//Generic
+	// CLUSTERS
+	// Generic
 	public static final int BASIC = Basic.ID;
 	public static final int POWER_CONFIGURATION = PowerConfiguration.ID;
 	public static final int DEVICE_TEMPERATURE_CONFIGURATION = DeviceTemperatureConfiguration.ID;
 	public static final int IDENTIFY = Identify.ID;
 	public static final int GROUPS = Groups.ID;
 	public static final int SCENES = Scenes.ID;
-	public static final int ON_OFF = OnOff.ID;		
+	public static final int ON_OFF = OnOff.ID;
 	public static final int ON_OFF_SWITCH_CONFIGURATION = OnOffSwitchConfiguration.ID;
 	public static final int LEVEL_CONTROL = LevelControl.ID;
 	public static final int ALARMS = Alarms.ID;
 	public static final int BINARY_INPUT = BinaryInput.ID;
-	//fuori specifica
+	// fuori specifica
 	public static final int TIME = Time.ID;
 	public static final int ANALOG_INPUT = AnalogInput.ID;
 	public static final int COMMISSIONING = Commissioning.ID;
@@ -119,40 +118,39 @@ public class  HAProfile {
 	public static final int PRICE = Price.ID;
 	public static final int DEMAND_RESPONSE_AND_LOAD_CONTROL = DemandResponseAndLoadControlServer.ID;
 	public static final int MESSAGING = Messaging.ID;
-	public static final int METERING = Metering.ID; 
-	public static final int APPLIANCE_CONTROL = ApplianceControl.ID; 
-	public static final int APPLIANCE_EVENTS_AND_ALERT = ApplianceEventsAndAlert.ID; 
-	public static final int APPLIANCE_IDENTIFICATION = ApplianceIdentification.ID; 
-	public static final int APPLIANCE_STATISTICS = ApplianceStatistics.ID; 
-	public static final int METER_IDENTIFICATION = MeterIdentification.ID; 
-	public static final int POWER_PROFILE = PowerProfile.ID; 
+	public static final int METERING = Metering.ID;
+	public static final int APPLIANCE_CONTROL = ApplianceControl.ID;
+	public static final int APPLIANCE_EVENTS_AND_ALERT = ApplianceEventsAndAlert.ID;
+	public static final int APPLIANCE_IDENTIFICATION = ApplianceIdentification.ID;
+	public static final int APPLIANCE_STATISTICS = ApplianceStatistics.ID;
+	public static final int METER_IDENTIFICATION = MeterIdentification.ID;
+	public static final int POWER_PROFILE = PowerProfile.ID;
 	public static final int DEBUG = Debug.ID;
-	
-	
-	
-	//Closures
-	public static final int SHADE_CONFIGURATION = ShadeConfiguration.ID;    										
-	public static final int DOOR_LOCK 		= DoorLock.ID;    								
-	public static final int WINDOW_COVERING 	= WindowCovering.ID;
-	//HVAC
-	public static final int PUMP_CONFIGURATION_AND_CONTROL 		= PumpConfigurationAndControl.ID;    						
-	public static final int THERMOSTAT			= Thermostat.ID;    										
-	public static final int FAN_CONTROL			= FanControl.ID; 
-	public static final int THERMOSTAT_USER_INTERFACE_CONFIGURATION		= ThermostatUserInterfaceConfiguration.ID;    				
+	public static final int PROPRIETARY = Proprietary.ID;
+
+	// Closures
+	public static final int SHADE_CONFIGURATION = ShadeConfiguration.ID;
+	public static final int DOOR_LOCK = DoorLock.ID;
+	public static final int WINDOW_COVERING = WindowCovering.ID;
+	// HVAC
+	public static final int PUMP_CONFIGURATION_AND_CONTROL = PumpConfigurationAndControl.ID;
+	public static final int THERMOSTAT = Thermostat.ID;
+	public static final int FAN_CONTROL = FanControl.ID;
+	public static final int THERMOSTAT_USER_INTERFACE_CONFIGURATION = ThermostatUserInterfaceConfiguration.ID;
 	// Lighting
-	public static final int COLOR_CONTROL = ColorControl.ID;						
-	//Measureament & Sensing
-	public static final int PRESSURE_MEASUREMENT =   PressureMeasurement.ID; 	
-	public static final int ILLUMINANCE_MEASUREMENT = IlluminanceMeasurement.ID; 		
-	public static final int ILLUMINANCE_LEVEL_SENSING= IlluminanceLevelSensing.ID; 						
+	public static final int COLOR_CONTROL = ColorControl.ID;
+	// Measureament & Sensing
+	public static final int PRESSURE_MEASUREMENT = PressureMeasurement.ID;
+	public static final int ILLUMINANCE_MEASUREMENT = IlluminanceMeasurement.ID;
+	public static final int ILLUMINANCE_LEVEL_SENSING = IlluminanceLevelSensing.ID;
 	public static final int TEMPERATURE_MEASUREMENT = TemperatureMeasurement.ID;
-	public static final int FLOW_MEASUREMENT	= FlowMeasurement.ID;								
+	public static final int FLOW_MEASUREMENT = FlowMeasurement.ID;
 	public static final int RELATIVE_HUMIDITY_MEASUREMENT = RelativeHumidityMeasurement.ID;
 	public static final int OCCUPANCY_SENSING = OccupancySensing.ID;
 	// Security & Safety
-	public static final int IAS_ZONE = IASZone.ID;										
-	public static final int IAS_ACE = IASACE.ID;										
-	public static final int IAS_WD = IASWD.ID;											
+	public static final int IAS_ZONE = IASZone.ID;
+	public static final int IAS_ACE = IASACE.ID;
+	public static final int IAS_WD = IASWD.ID;
 
 	// devices
 	// GENERIC 0x0000 - 0x00FF
@@ -175,195 +173,162 @@ public class  HAProfile {
 	public static final int IASZONE = IAS_Zone.DEVICE_ID;
 	public static final int IAS_WARNING_DEVICE = IAS_Warning.DEVICE_ID;
 
+	public String getDeviceName(String deviceID) {
 
+		try {
 
-
-	
-	
-
-	public String getDeviceName(String deviceID){
-
-		try{
-			
 			/*
-			 int id = Integer.parseInt(deviceID);
-	        switch (id) {
-	        case HAProfile.ONOFF_SWITCH: 
-            	return OnOffSwitch.NAME;
-                break;
-	        case HAProfile.LEVELCONTROL: 
-            	return OnOffSwitch.NAME;
-                break;
-	        case HAProfile.ONOFF_OUTPUT: 
-            	return OnOffSwitch.NAME;
-                break;
-	        case HAProfile.MAINS_POWER_OUTLET: 
-            	return OnOffSwitch.NAME;
-                break;
-	        case HAProfile.SIMPLE_SENSOR: 
-            	return OnOffSwitch.NAME;
-                break;
-	        case HAProfile.ONOFF_LIGHT: 
-            	return OnOffSwitch.NAME;
-                break;
-	        case HAProfile.DIMMABLE_LIGHT: 
-            	return OnOffSwitch.NAME;
-                break;
-	        case HAProfile.ONOFF_LIGHT_SWITCH: 
-            	return OnOffSwitch.NAME;
-                break;
-	        case HAProfile.LIGHT_SENSOR: 
-            	return OnOffSwitch.NAME;
-                break;
-	        case HAProfile.OCCUPANCY_SENSOR: 
-            	return OnOffSwitch.NAME;
-                break;
-	        case HAProfile.TEMPERATURE_SENSOR: 
-            	return OnOffSwitch.NAME;
-                break;
-	        case HAProfile.IAS_CONTROL_INDICATING_EQUIPMENT: 
-            	return OnOffSwitch.NAME;
-                break;
-	        case HAProfile.temperature_sensor: 
-            	return OnOffSwitch.NAME;
-                break;
-	        case HAProfile.TEMPERATURE_SENSOR: 
-            	return OnOffSwitch.NAME;
-                break;
-	        case HAProfile.TEMPERATURE_SENSOR: 
-            	return OnOffSwitch.NAME;
-                break;
-	           
-	            default: 
-	                     break;
-	        }
-			
-			
-			
-			
-			
-		*/	
-			
-			
+			 * int id = Integer.parseInt(deviceID); switch (id) { case
+			 * HAProfile.ONOFF_SWITCH: return OnOffSwitch.NAME; break; case
+			 * HAProfile.LEVELCONTROL: return OnOffSwitch.NAME; break; case
+			 * HAProfile.ONOFF_OUTPUT: return OnOffSwitch.NAME; break; case
+			 * HAProfile.MAINS_POWER_OUTLET: return OnOffSwitch.NAME; break;
+			 * case HAProfile.SIMPLE_SENSOR: return OnOffSwitch.NAME; break;
+			 * case HAProfile.ONOFF_LIGHT: return OnOffSwitch.NAME; break; case
+			 * HAProfile.DIMMABLE_LIGHT: return OnOffSwitch.NAME; break; case
+			 * HAProfile.ONOFF_LIGHT_SWITCH: return OnOffSwitch.NAME; break;
+			 * case HAProfile.LIGHT_SENSOR: return OnOffSwitch.NAME; break; case
+			 * HAProfile.OCCUPANCY_SENSOR: return OnOffSwitch.NAME; break; case
+			 * HAProfile.TEMPERATURE_SENSOR: return OnOffSwitch.NAME; break;
+			 * case HAProfile.IAS_CONTROL_INDICATING_EQUIPMENT: return
+			 * OnOffSwitch.NAME; break; case HAProfile.temperature_sensor:
+			 * return OnOffSwitch.NAME; break; case
+			 * HAProfile.TEMPERATURE_SENSOR: return OnOffSwitch.NAME; break;
+			 * case HAProfile.TEMPERATURE_SENSOR: return OnOffSwitch.NAME;
+			 * break;
+			 * 
+			 * default: break; }
+			 */
+
 			String id = Integer.toHexString((Integer.parseInt(deviceID)));
 
-			if(id.equals(Integer.toHexString(HAProfile.ONOFF_SWITCH)))
+			if (id.equals(Integer.toHexString(HAProfile.ONOFF_SWITCH)))
 				return OnOffSwitch.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.LEVELCONTROL)))
+			else if (id.equals(Integer.toHexString(HAProfile.LEVELCONTROL)))
 				return LevelControlSwitch.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.ONOFF_OUTPUT)))
+			else if (id.equals(Integer.toHexString(HAProfile.ONOFF_OUTPUT)))
 				return OnOffOutput.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.MAINS_POWER_OUTLET)))
+			else if (id.equals(Integer
+					.toHexString(HAProfile.MAINS_POWER_OUTLET)))
 				return MainsPowerOutlet.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.SIMPLE_SENSOR)))
+			else if (id.equals(Integer.toHexString(HAProfile.SIMPLE_SENSOR)))
 				return SimpleSensor.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.ONOFF_LIGHT)))
+			else if (id.equals(Integer.toHexString(HAProfile.ONOFF_LIGHT)))
 				return OnOffLight.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.DIMMABLE_LIGHT)))
+			else if (id.equals(Integer.toHexString(HAProfile.DIMMABLE_LIGHT)))
 				return DimmableLight.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.ONOFF_LIGHT_SWITCH)))
+			else if (id.equals(Integer
+					.toHexString(HAProfile.ONOFF_LIGHT_SWITCH)))
 				return OnOffLightSwitch.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.LIGHT_SENSOR)))
+			else if (id.equals(Integer.toHexString(HAProfile.LIGHT_SENSOR)))
 				return LightSensor.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.OCCUPANCY_SENSOR)))
+			else if (id.equals(Integer.toHexString(HAProfile.OCCUPANCY_SENSOR)))
 				return OccupancySensor.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.TEMPERATURE_SENSOR)))
+			else if (id.equals(Integer
+					.toHexString(HAProfile.TEMPERATURE_SENSOR)))
 				return TemperatureSensor.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.IAS_CONTROL_INDICATING_EQUIPMENT)))
+			else if (id.equals(Integer
+					.toHexString(HAProfile.IAS_CONTROL_INDICATING_EQUIPMENT)))
 				return IASControlAndIndicatingEquipment.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.PRESSURE_MEASUREMENT)))
+			else if (id.equals(Integer
+					.toHexString(HAProfile.PRESSURE_MEASUREMENT)))
 				return PressureMeasurement.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.FLOW_MEASUREMENT)))
+			else if (id.equals(Integer.toHexString(HAProfile.FLOW_MEASUREMENT)))
 				return FlowMeasurement.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.ILLUMINANCE_LEVEL_SENSING)))
+			else if (id.equals(Integer
+					.toHexString(HAProfile.ILLUMINANCE_LEVEL_SENSING)))
 				return IlluminanceLevelSensing.NAME;
-			
 
-
-			else return null;
-		}
-		catch(Exception ex){
+			else
+				return null;
+		} catch (Exception ex) {
 			return null;
 		}
 	}
 
-	public String getClusterName(String clusterID){
+	public String getClusterName(String clusterID) {
 
-		try{
+		try {
 			String id = Integer.toHexString((Integer.parseInt(clusterID)));
 
-			if(id.equals(Integer.toHexString(HAProfile.BASIC)))
+			if (id.equals(Integer.toHexString(HAProfile.BASIC)))
 				return Basic.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.POWER_CONFIGURATION)))
+			else if (id.equals(Integer
+					.toHexString(HAProfile.POWER_CONFIGURATION)))
 				return PowerConfiguration.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.DEVICE_TEMPERATURE_CONFIGURATION)))
+			else if (id.equals(Integer
+					.toHexString(HAProfile.DEVICE_TEMPERATURE_CONFIGURATION)))
 				return DeviceTemperatureConfiguration.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.IDENTIFY)))
+			else if (id.equals(Integer.toHexString(HAProfile.IDENTIFY)))
 				return Identify.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.GROUPS)))
+			else if (id.equals(Integer.toHexString(HAProfile.GROUPS)))
 				return Groups.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.SCENES)))
+			else if (id.equals(Integer.toHexString(HAProfile.SCENES)))
 				return Scenes.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.ON_OFF)))
+			else if (id.equals(Integer.toHexString(HAProfile.ON_OFF)))
 				return OnOff.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.ON_OFF_SWITCH_CONFIGURATION)))
+			else if (id.equals(Integer
+					.toHexString(HAProfile.ON_OFF_SWITCH_CONFIGURATION)))
 				return OnOffSwitchConfiguration.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.LEVEL_CONTROL)))
+			else if (id.equals(Integer.toHexString(HAProfile.LEVEL_CONTROL)))
 				return LevelControl.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.ALARMS)))
+			else if (id.equals(Integer.toHexString(HAProfile.ALARMS)))
 				return Alarms.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.TIME)))
+			else if (id.equals(Integer.toHexString(HAProfile.TIME)))
 				return Time.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.BINARY_INPUT)))
+			else if (id.equals(Integer.toHexString(HAProfile.BINARY_INPUT)))
 				return BinaryInput.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.COMMISSIONING)))
+			else if (id.equals(Integer.toHexString(HAProfile.COMMISSIONING)))
 				return Commissioning.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.COLOR_CONTROL)))
+			else if (id.equals(Integer.toHexString(HAProfile.COLOR_CONTROL)))
 				return ColorControl.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.ILLUMINANCE_MEASUREMENT)))
+			else if (id.equals(Integer
+					.toHexString(HAProfile.ILLUMINANCE_MEASUREMENT)))
 				return IlluminanceMeasurement.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.TEMPERATURE_MEASUREMENT)))
+			else if (id.equals(Integer
+					.toHexString(HAProfile.TEMPERATURE_MEASUREMENT)))
 				return TemperatureMeasurement.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.RELATIVE_HUMIDITY_MEASUREMENT)))
+			else if (id.equals(Integer
+					.toHexString(HAProfile.RELATIVE_HUMIDITY_MEASUREMENT)))
 				return RelativeHumidityMeasurement.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.OCCUPANCY_SENSING)))
+			else if (id
+					.equals(Integer.toHexString(HAProfile.OCCUPANCY_SENSING)))
 				return OccupancySensing.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.IAS_ZONE)))
+			else if (id.equals(Integer.toHexString(HAProfile.IAS_ZONE)))
 				return IASZone.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.IAS_ACE)))
+			else if (id.equals(Integer.toHexString(HAProfile.IAS_ACE)))
 				return IASACE.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.IAS_WD)))
+			else if (id.equals(Integer.toHexString(HAProfile.IAS_WD)))
 				return IASWD.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.ANALOG_INPUT)))
+			else if (id.equals(Integer.toHexString(HAProfile.ANALOG_INPUT)))
 				return AnalogInput.NAME;
-			else if(id.equals(Integer.toHexString(HAProfile.METERING)))
+			else if (id.equals(Integer.toHexString(HAProfile.METERING)))
 				return Metering.NAME;
 
-			else return null;
-		}
-		catch(Exception ex){
+			else
+				return null;
+		} catch (Exception ex) {
 			return null;
 		}
 	}
 
-	public String getCategoryDeviceName(String deviceID){
+	public String getCategoryDeviceName(String deviceID) {
 
-		try{
+		try {
 			String id = Integer.toHexString((Integer.parseInt(deviceID)));
-			if(id.startsWith("0"))
+			if (id.startsWith("0"))
 				return "Generic";
-			else if(id.startsWith("1"))
+			else if (id.startsWith("1"))
 				return "Lighting";
-			else if(id.startsWith("2"))
+			else if (id.startsWith("2"))
 				return "Closures";
-			else if(id.startsWith("3"))
+			else if (id.startsWith("3"))
 				return "HVAC";
-			else if(id.startsWith("4"))
+			else if (id.startsWith("4"))
 				return "IAS";
 			else
 				return null;
-		}
-		catch(Exception ex){
+		} catch (Exception ex) {
 			return null;
 		}
 	}
