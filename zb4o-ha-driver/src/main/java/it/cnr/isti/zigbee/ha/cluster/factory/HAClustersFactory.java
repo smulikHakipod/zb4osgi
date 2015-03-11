@@ -47,6 +47,7 @@ import it.cnr.isti.zigbee.ha.cluster.impl.OnOffSwitchConfigurationImpl;
 import it.cnr.isti.zigbee.ha.cluster.impl.PartitionImpl;
 import it.cnr.isti.zigbee.ha.cluster.impl.PowerConfigurationImpl;
 import it.cnr.isti.zigbee.ha.cluster.impl.PressureMeasurementImpl;
+import it.cnr.isti.zigbee.ha.cluster.impl.ProprietaryImpl;
 import it.cnr.isti.zigbee.ha.cluster.impl.PumpConfigurationAndControlImpl;
 import it.cnr.isti.zigbee.ha.cluster.impl.RelativeHumidityMeasurementImpl;
 import it.cnr.isti.zigbee.ha.cluster.impl.ScenesImpl;
@@ -209,6 +210,7 @@ public class HAClustersFactory extends ClusterFactoryBase {
    
         //debug
         addCluster(DEBUG_KEY, DebugImpl.class);
+        addCluster(PROPRIETARY_KEY, ProprietaryImpl.class);
         
       
     }
